@@ -5,14 +5,12 @@
 
 namespace bbm
 {
-  struct GameLoadingStateConfig
-  {
-  };
+  class GameManager;
 
-  class GameLoadingState : public IGamesState
+  class GameLoadingState : public IGameState
   {
   public:
-    GameLoadingState(GameManager& gameManager, const GameLoadingStateConfig& config);
+    GameLoadingState(GameManager& gameManager);
     ~GameLoadingState();
 
     void	initialize();
@@ -23,7 +21,14 @@ namespace bbm
     void	revealing();
 
   private:
-    GameState&			_gameState;
+    void	loadShader();
+    void	loadTexture();
+    void	loadSound();
+    void	loadModel();
+
+  private:
+    bool			_loading;
+    GameManager&			_manager;
   };
 };
 

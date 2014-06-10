@@ -16,6 +16,7 @@ namespace bbm
     _screen(glm::vec2(1024 * 1.5, 768 * 1.5), "Bomberman")
   {
     std::srand(std::time(0));
+<<<<<<< HEAD
     // A PAS FAIRE ICI MAIS DANS UN GAME STATE LOADING !!!!
     ShaderManager::getInstance()->addShader("default", "gdl/shaders/basic.vp",
 					    "gdl/shaders/basic.fp");
@@ -54,6 +55,8 @@ namespace bbm
 
     SoundManager::getInstance()->addSound("banzai", "assets/sound/banzai.mp3");
     //Marvin::initialize();
+=======
+>>>>>>> 94ee398fbde6f91669f53e3852a156872dbda903
   }
 
   Game::~Game()

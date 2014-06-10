@@ -1,6 +1,7 @@
 #include		"FileExplorer.hh"
 #include		"events/Input.hh"
 #include		"game/GameManager.hh"
+#include		"game/GameLoadingState.hh"
 #include		"graphic/Screen.hh"
 #include		"graphic/Camera.hh"
 #include		"graphic/ProjectionPerspective.hh"
@@ -586,6 +587,7 @@ namespace	bbm
       {
 	std::cout << "Serializer GameState Error : " << ex.what() << std::endl;
       }
+    GameLoadingState*	state = new GameLoadingState(this->_manager);
     this->_manager.push(state);
   }
 
