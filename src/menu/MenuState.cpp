@@ -574,19 +574,6 @@ namespace	bbm
 
   void		MenuState::launchNewGame()
   {
-    IGameState*	state = new GameState(this->_manager);
-    Serializer s = Serializer::create<JSONSerializer>();
-
-    try
-      {
-	s->deserializeFromFile("save1.json",
-			       *(reinterpret_cast<GameState*>(state)));
-	// s->serializeToFile("export1.json", *state);
-      }
-    catch (SerializerException& ex)
-      {
-	std::cout << "Serializer GameState Error : " << ex.what() << std::endl;
-      }
     GameLoadingState*	state = new GameLoadingState(this->_manager);
     this->_manager.push(state);
   }

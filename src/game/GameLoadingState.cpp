@@ -7,17 +7,51 @@
 #include "serializer/SerializerException.hh"
 #include "graphic/ShaderManager.hh"
 #include "graphic/TextureManager.hh"
+#include "graphic/Object.hh"
+#include "graphic/Camera.hh"
+#include "graphic/RenderState.hh"
+#include "graphic/ProjectionPerspective.hh"
+#include "graphic/Screen.hh"
 #include "sound/SoundManager.hh"
 #include "events/Input.hh"
 
 namespace bbm
 {
-  GameLoadingState::GameLoadingState(GameManager& gameManager) :  _manager(gameManager)
+  GameLoadingState::GameLoadingState(GameManager& gameManager) :
+    _manager(gameManager)
   {
+    _finish = false;
+    TextureManager::getInstance()->addTexture("load", "assets/game/Loading.tga");
+    TextureManager::getInstance()->addTexture("load2", "assets/game/LoadingFinish.tga");
+
+    _loading = new Object("load", "default", GL_QUADS);
+    _loading->pushVertex(glm::vec3(0, 0, 0));
+    _loading->pushVertex(glm::vec3(0, 1, 0));
+    _loading->pushVertex(glm::vec3(1, 1, 0));
+    _loading->pushVertex(glm::vec3(1, 0, 0));
+
+    _loading->pushUv(glm::vec2(0, 0));
+    _loading->pushUv(glm::vec2(0, 1));
+    _loading->pushUv(glm::vec2(1, 1));
+    _loading->pushUv(glm::vec2(1, 0));
+
+    _loadingFinished = new Object("load", "default", GL_QUADS);
+    _loadingFinished->pushVertex(glm::vec3(0, 0, 0));
+    _loadingFinished->pushVertex(glm::vec3(0, 1, 0));
+    _loadingFinished->pushVertex(glm::vec3(1, 1, 0));
+    _loadingFinished->pushVertex(glm::vec3(1, 0, 0));
+
+    _loadingFinished->pushUv(glm::vec2(0, 0));
+    _loadingFinished->pushUv(glm::vec2(0, 1));
+    _loadingFinished->pushUv(glm::vec2(1, 1));
+    _loadingFinished->pushUv(glm::vec2(1, 0));
+
+
     loadShader();
     loadTexture();
     loadSound();
     loadModel();
+    _finish = true;
   }
 
   GameLoadingState::~GameLoadingState()
@@ -96,6 +130,13 @@ namespace bbm
 
   void			GameLoadingState::draw(float time, Screen& context)
   {
+    Transform		cam = Camera(glm::vec3(0,0,1), glm::vec3(0,0,0), glm::vec3(0, 1, 0));
+    Transform		projection = ProjectionPerspective(60, 512 / 384, 1, 1000);
+
+    if (!_finish)
+      context.draw(*_loading, RenderState(projection, cam));
+    else
+      context.draw(*_loadingFinished, RenderState(projection, cam));
   }
 
   void			GameLoadingState::revealing()

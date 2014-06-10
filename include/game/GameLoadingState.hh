@@ -6,6 +6,7 @@
 namespace bbm
 {
   class GameManager;
+  class Object;
 
   class GameLoadingState : public IGameState
   {
@@ -27,7 +28,9 @@ namespace bbm
     void	loadModel();
 
   private:
-    bool			_loading;
+    bool				_finish;
+    Object*				_loading;
+    Object*				_loadingFinished;
     GameManager&			_manager;
   };
 };
