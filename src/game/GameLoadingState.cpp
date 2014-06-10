@@ -52,6 +52,7 @@ namespace bbm
 
   void			GameLoadingState::loadSound()
   {
+    SoundManager::getInstance()->addSound("menu", "assets/sound/Turning_tables.mp3");
     SoundManager::getInstance()->addSound("banzai", "assets/sound/banzai.mp3");
   }
 
