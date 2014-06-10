@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 16:43:06 2014 Manu
-// Last update Tue Jun 10 19:28:19 2014 Manu
+// Last update Tue Jun 10 21:02:13 2014 Manu
 //
 
 #ifndef		__MENUSTATE_HH__
@@ -44,10 +44,9 @@ namespace	bbm
     bool		_initializeOptionsMenu();
     bool		_initializeHighscoresMenu();
     bool		_initializePlayerSelectionMenu();
-    bool		_initializeIASelection1Menu();
-    bool		_initializeIASelection2Menu();
-    bool		_initializeIASelection3Menu();
-    bool		_initializeIASelection4Menu();
+
+    bool		_initializeIASelectionMenu();
+
     bool		_initializeLoadGameMenu();
     bool		_initializeOptionControlMenu();
     bool		_initializeOptionAudioMenu();
@@ -82,10 +81,7 @@ namespace	bbm
     virtual void	setOptionsControlMenu();
     virtual void	setNextFrame();
     virtual void	setPrevFrame();
-    virtual void	setIASelection1Menu();
-    virtual void	setIASelection2Menu();
-    virtual void	setIASelection3Menu();
-    virtual void	setIASelection4Menu();
+    virtual void	setIASelectionMenu();
     virtual void	launchNewGame();
     virtual void	setOptionControlPlayer1();
     virtual void	setOptionControlPlayer2();

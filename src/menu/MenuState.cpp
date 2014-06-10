@@ -72,7 +72,7 @@ namespace	bbm
     catch (FileLoadingException e)
       {
 	std::cerr << "In function " << __FUNCTION__ << " : "
-		  << e.what() << std::endl;
+		  << e.what() << ": Not found" << std::endl;
 	return (false);
       }
     menu->finalize();
@@ -80,19 +80,15 @@ namespace	bbm
     return (true);
   }
 
-  bool		MenuState::_initializeIASelection4Menu()
+  bool		MenuState::_initializeIASelectionMenu()
   {
-    Menu* menu = new Menu("iaselection4", this);
+    Menu* menu = new Menu("iaselection", this);
     if (!menu->initialize())
       return (false);
     try
       {
-	menu->createNewStateButton("lvl ia 4", NULL, 3,
-				   glm::vec4(1, 0, 1, 1), "easy");
-	menu->addStateToLastButton("medium");
-	menu->addStateToLastButton("hard");
-	menu->createNewStateButton("nb ia", NULL, 6,
-				   glm::vec4(1, 0, 1, 1), "0");
+	menu->createNewStateButton("number", NULL, 7,
+				   glm::vec4(1, 1, 1, 1), "0");
 	menu->addStateToLastButton("1");
 	menu->addStateToLastButton("2");
 	menu->addStateToLastButton("3");
@@ -104,6 +100,10 @@ namespace	bbm
 	menu->addStateToLastButton("25");
 	menu->addStateToLastButton("50");
 	menu->addStateToLastButton("100");
+	menu->createNewStateButton("enemies lvl", NULL, 2,
+				   glm::vec4(1, 1, 1, 1), "easy");
+	menu->addStateToLastButton("medium");
+	menu->addStateToLastButton("hard");
 	menu->createNewButton("play", &IMenuManager::launchNewGame,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setNewGameMenu,
@@ -112,132 +112,12 @@ namespace	bbm
     catch (FileLoadingException e)
       {
 	std::cerr << "In function " << __FUNCTION__ << " : "
-		  << e.what() << std::endl;
+		  << e.what() << ": Not found" << std::endl;
 	return (false);
       }
     menu->finalize();
     this->_menuList.push_back(menu);
     return (true);
-  }
-
-  bool		MenuState::_initializeIASelection3Menu()
-  {
-    Menu* menu = new Menu("iaselection3", this);
-    if (!menu->initialize())
-      return (false);
-    try
-      {
-	menu->createNewStateButton("lvl ia 3", NULL, 3,
-				   glm::vec4(1, 1, 0, 1), "easy");
-	menu->addStateToLastButton("medium");
-	menu->addStateToLastButton("hard");
-	menu->createNewStateButton("nb ia", NULL, 6,
-				   glm::vec4(1, 1, 0, 1), "0");
-	menu->addStateToLastButton("1");
-	menu->addStateToLastButton("2");
-	menu->addStateToLastButton("3");
-	menu->addStateToLastButton("4");
-	menu->addStateToLastButton("5");
-	menu->addStateToLastButton("10");
-	menu->addStateToLastButton("15");
-	menu->addStateToLastButton("20");
-	menu->addStateToLastButton("25");
-	menu->addStateToLastButton("50");
-	menu->addStateToLastButton("100");
-	menu->createNewButton("team 4", &IMenuManager::setIASelection4Menu,
-			      glm::vec4(0, 1, 0, 1));
-	menu->createNewButton("cancel", &IMenuManager::setNewGameMenu,
-			      glm::vec4(1, 0, 0, 1));
-      }
-    catch (FileLoadingException e)
-      {
-	std::cerr << "In function " << __FUNCTION__ << " : "
-		  << e.what() << std::endl;
-	return (false);
-      }
-    menu->finalize();
-    this->_menuList.push_back(menu);
-    return (this->_initializeIASelection4Menu());
-  }
-
-  bool		MenuState::_initializeIASelection2Menu()
-  {
-    Menu* menu = new Menu("iaselection2", this);
-    if (!menu->initialize())
-      return (false);
-    try
-      {
-    menu->createNewStateButton("lvl ia 2", NULL, 3,
-    			       glm::vec4(0, 1, 1, 1), "easy");
-    menu->addStateToLastButton("medium");
-    menu->addStateToLastButton("hard");
-    menu->createNewStateButton("nb ia", NULL, 6,
-			       glm::vec4(0, 1, 1, 1), "0");
-    menu->addStateToLastButton("1");
-    menu->addStateToLastButton("2");
-    menu->addStateToLastButton("3");
-    menu->addStateToLastButton("4");
-    menu->addStateToLastButton("5");
-    menu->addStateToLastButton("10");
-    menu->addStateToLastButton("15");
-    menu->addStateToLastButton("20");
-    menu->addStateToLastButton("25");
-    menu->addStateToLastButton("50");
-    menu->addStateToLastButton("100");
-    menu->createNewButton("team 3", &IMenuManager::setIASelection3Menu,
-			  glm::vec4(0, 1, 0, 1));
-    menu->createNewButton("cancel", &IMenuManager::setNewGameMenu,
-			  glm::vec4(1, 0, 0, 1));
-      }
-    catch (FileLoadingException e)
-      {
-	std::cerr << "In function " << __FUNCTION__ << " : "
-		  << e.what() << std::endl;
-	return (false);
-      }
-    menu->finalize();
-    this->_menuList.push_back(menu);
-    return (this->_initializeIASelection3Menu());
-  }
-
-  bool		MenuState::_initializeIASelection1Menu()
-  {
-    Menu* menu = new Menu("iaselection1", this);
-    if (!menu->initialize())
-      return (false);
-    try
-      {
-	menu->createNewStateButton("lvl ia 1", NULL, 3,
-				   glm::vec4(0, 0, 1, 1), "easy");
-	menu->addStateToLastButton("medium");
-	menu->addStateToLastButton("hard");
-	menu->createNewStateButton("nb ia", NULL, 6,
-				   glm::vec4(0, 0, 1, 1), "0");
-	menu->addStateToLastButton("1");
-	menu->addStateToLastButton("2");
-	menu->addStateToLastButton("3");
-	menu->addStateToLastButton("4");
-	menu->addStateToLastButton("5");
-	menu->addStateToLastButton("10");
-	menu->addStateToLastButton("15");
-	menu->addStateToLastButton("20");
-	menu->addStateToLastButton("25");
-	menu->addStateToLastButton("50");
-	menu->addStateToLastButton("100");
-	menu->createNewButton("team 2", &IMenuManager::setIASelection2Menu,
-			      glm::vec4(0, 1, 0, 1));
-	menu->createNewButton("cancel", &IMenuManager::setNewGameMenu,
-			      glm::vec4(1, 0, 0, 1));
-      }
-    catch (FileLoadingException e)
-      {
-	std::cerr << "In function " << __FUNCTION__ << " : "
-		  << e.what() << std::endl;
-	return (false);
-      }
-    menu->finalize();
-    this->_menuList.push_back(menu);
-    return (this->_initializeIASelection2Menu());
   }
 
   bool		MenuState::_initializePlayerSelectionMenu()
@@ -255,7 +135,7 @@ namespace	bbm
 	menu->addStateToLastButton("ok");
 	menu->createNewStateButton("player 4", NULL, 3, glm::vec4(1, 1, 0, 1), "x");
 	menu->addStateToLastButton("ok");
-	menu->createNewButton("next",&IMenuManager::setIASelection1Menu,
+	menu->createNewButton("next",&IMenuManager::setIASelectionMenu,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setMainMenu,
 			      glm::vec4(1, 0, 0, 1));
@@ -263,12 +143,12 @@ namespace	bbm
     catch (FileLoadingException e)
       {
 	std::cerr << "In function " << __FUNCTION__ << " : "
-		  << e.what() << std::endl;
+		  << e.what() << ": Not found" << std::endl;
 	return (false);
       }
     menu->finalize();
     this->_menuList.push_back(menu);
-    return (this->_initializeIASelection1Menu());
+    return (this->_initializeIASelectionMenu());
   }
 
   bool		MenuState::_initializeMapParamsMenu()
@@ -300,7 +180,7 @@ namespace	bbm
     catch (FileLoadingException e)
       {
 	std::cerr << "In function " << __FUNCTION__ << " : "
-		  << e.what() << std::endl;
+		  << e.what() << ": Not found" << std::endl;
 	return (false);
       }
     menu->finalize();
@@ -327,7 +207,7 @@ namespace	bbm
     catch (FileLoadingException e)
       {
 	std::cerr << "In function " << __FUNCTION__ << " : "
-		  << e.what() << std::endl;
+		  << e.what() << ": Not found" << std::endl;
 	return (false);
       }
     menu->finalize();
@@ -422,7 +302,7 @@ namespace	bbm
     catch (FileLoadingException e)
       {
 	std::cerr << "In function " << __FUNCTION__ << " : "
-		  << e.what() << std::endl;
+		  << e.what() << ": Not found" << std::endl;
 	return (false);
       }
     menu->finalize();
@@ -462,7 +342,7 @@ namespace	bbm
     catch (FileLoadingException e)
       {
 	std::cerr << "In function " << __FUNCTION__ << " : "
-		  << e.what() << std::endl;
+		  << e.what() << ": Not found" << std::endl;
 	return (false);
       }
     menu->finalize();
@@ -489,7 +369,7 @@ namespace	bbm
     catch (FileLoadingException e)
       {
 	std::cerr << "In function " << __FUNCTION__ << " : "
-		  << e.what() << std::endl;
+		  << e.what() << ": Not found" << std::endl;
 	return (false);
       }
     menu->finalize();
@@ -517,7 +397,7 @@ namespace	bbm
     catch (FileLoadingException e)
       {
 	std::cerr << "In function " << __FUNCTION__ << " : "
-		  << e.what() << std::endl;
+		  << e.what() << ": Not found" << std::endl;
 	return (false);
       }
     menu->finalize();
@@ -542,7 +422,7 @@ namespace	bbm
     catch (FileLoadingException e)
       {
 	std::cerr << "In function " << __FUNCTION__ << " : "
-		  << e.what() << std::endl;
+		  << e.what() << ": Not found" << std::endl;
 	return (false);
       }
     menu->finalize();
@@ -565,7 +445,7 @@ namespace	bbm
     catch (FileLoadingException e)
       {
 	std::cerr << "In function " << __FUNCTION__ << " : "
-		  << e.what() << std::endl;
+		  << e.what() << ": Not found" << std::endl;
       }
     menu->finalize();
     this->_menuList.push_back(menu);
@@ -599,6 +479,9 @@ namespace	bbm
       {
 	std::cerr << "Error initializing Skybox : " << e.what() << std::endl;
       }
+
+    // il faut throw des exceptions afin de ne pas lancer le menu si une initialization a fail
+
     if (!this->_initializeMainMenu())
       std::cerr << "Error initializing main menu" << std::endl;
     if (!this->_initializePlayMenu())
@@ -690,19 +573,19 @@ namespace	bbm
 
   void		MenuState::launchNewGame()
   {
-    GameState*	state = new GameState(this->_manager);
+    IGameState*	state = new GameState(this->_manager);
     Serializer s = Serializer::create<JSONSerializer>();
 
     try
       {
-	s->deserializeFromFile("save1.json", *state);
+	s->deserializeFromFile("save1.json",
+			       *(reinterpret_cast<GameState*>(state)));
 	// s->serializeToFile("export1.json", *state);
       }
     catch (SerializerException& ex)
       {
 	std::cout << "Serializer GameState Error : " << ex.what() << std::endl;
       }
-    this->_manager.pop();
     this->_manager.push(state);
   }
 
@@ -716,24 +599,9 @@ namespace	bbm
     this->_setNewCurrentMenu("playerselection");
   }
 
-  void		MenuState::setIASelection1Menu()
+  void		MenuState::setIASelectionMenu()
   {
-    this->_setNewCurrentMenu("iaselection1");
-  }
-
-  void		MenuState::setIASelection2Menu()
-  {
-    this->_setNewCurrentMenu("iaselection2");
-  }
-
-  void		MenuState::setIASelection3Menu()
-  {
-    this->_setNewCurrentMenu("iaselection3");
-  }
-
-  void		MenuState::setIASelection4Menu()
-  {
-    this->_setNewCurrentMenu("iaselection4");
+    this->_setNewCurrentMenu("iaselection");
   }
 
   void		MenuState::setContinueGameMenu()

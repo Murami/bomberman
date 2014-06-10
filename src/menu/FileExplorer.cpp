@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Wed Jun  4 22:38:54 2014 Manu
-// Last update Fri Jun  6 15:11:09 2014 Manu
+// Last update Tue Jun 10 20:15:13 2014 Manu
 //
 
 #include		"FileExplorer.hh"
@@ -26,9 +26,7 @@ namespace		bbm
   {
     if ((this->_dirp = opendir(SAVE_PATH.c_str())) == NULL)
       {
-	// THROW EXCEPTION
-	std::cerr << "Unable to opendir " << SAVE_PATH << std::endl;
-	return ;
+	throw (OpendirException(SAVE_PATH));
       }
     while ((this->_entry = readdir(this->_dirp)))
       {
@@ -36,13 +34,9 @@ namespace		bbm
 	  {
 	    std::string tmp(this->_entry->d_name);
 	    if (tmp.find(".tga") != std::string::npos)
-	      {
-		this->_iconeNames.push_back(tmp);
-	      }
+	      this->_iconeNames.push_back(tmp);
 	    else if (tmp.find(".json") != std::string::npos)
-	      {
-		this->_filenames.push_back(tmp);
-	      }
+	      this->_filenames.push_back(tmp);
 	  }
       }
   }

@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Wed Jun  4 22:38:50 2014 Manu
-// Last update Tue Jun 10 19:17:13 2014 Manu
+// Last update Tue Jun 10 20:15:19 2014 Manu
 //
 
 #ifndef		__FILEEXPLORER_HH__
@@ -16,7 +16,7 @@
 # include	<vector>
 # include	<sys/types.h>
 # include	<dirent.h>
-# include	"FileLoadingException.hh"
+# include	"OpendirException.hh"
 
 namespace	gdl
 {

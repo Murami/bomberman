@@ -77,6 +77,8 @@ SRC		=	main				\
 			menu/Image			\
 			menu/FileLoadingException	\
 			menu/PauseState			\
+			menu/OpendirException		\
+			sound/SoundManager		\
 
 SRC_EXT		=	.cpp
 
@@ -114,7 +116,7 @@ LIB		=	gdl_gl		\
 DLIB		=	gdl/libs	\
 			jsoncpp/libs
 
-LDFLAGS		=
+LDFLAGS		=	src/sound/libfmodex64-4.44.31.so
 
 ## RUNS
 
