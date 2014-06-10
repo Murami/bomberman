@@ -52,7 +52,7 @@ namespace bbm
     TextureManager::getInstance()->addTexture("randomBonus",
 					      "assets/game/bonus/random_bonus.tga");
 
-    SoundManager::getInstance()->addSound("banzai", "assets/sound/plufort.mp3");
+    SoundManager::getInstance()->addSound("banzai", "assets/sound/banzai.mp3");
   }
 
   Game::~Game()
