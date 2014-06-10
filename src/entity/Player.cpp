@@ -56,12 +56,12 @@ namespace bbm
 
   void			Player::pack(ISerializedNode & current) const
   {
-
+    (void) current;
   }
 
   void			Player::unpack(const ISerializedNode & current)
   {
-
+    (void) current;
   }
 
   void			Player::handleEvents(float time, const Input& input)
@@ -219,6 +219,7 @@ namespace bbm
 
   void			Player::interact(AEntity *entity)
   {
+    (void) entity;
   }
 
   bool			Player::collide(const glm::vec3& pos)

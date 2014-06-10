@@ -25,22 +25,21 @@ namespace bbm
 
   void		InputConfig::load(const std::string & file)
   {
-
+    (void) file;
   }
 
   void		InputConfig::save(const std::string & file)
   {
-
+    (void) file;
   }
 
   void		InputConfig::pack(ISerializedNode & current) const
   {
-
+    (void) current;
   }
 
   void		InputConfig::unpack(const ISerializedNode & current)
   {
-
+    (void) current;
   }
-
 }
