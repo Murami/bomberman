@@ -25,6 +25,9 @@ namespace bbm
     void		interact(AEntity *);
     bool		collide(const glm::vec3&);
 
+    void                        pack(ISerializedNode & current) const;
+    void                        unpack(const ISerializedNode & current);
+
   protected:
     void		draw(ARenderer& renderer, const RenderState& renderState);
 

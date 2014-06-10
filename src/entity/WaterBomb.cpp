@@ -25,6 +25,16 @@ namespace bbm
   {
   }
 
+  void			WaterBomb::pack(ISerializedNode & current) const
+  {
+    (void)current;
+  }
+
+  void			WaterBomb::unpack(const ISerializedNode & current)
+  {
+    (void)current;
+  }
+
   bool			WaterBomb::addExplode(float x, float y)
   {
     std::list<AEntity*>::iterator it;

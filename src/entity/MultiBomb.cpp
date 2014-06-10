@@ -25,6 +25,16 @@ namespace bbm
   {
   }
 
+  void			MultiBomb::pack(ISerializedNode & current) const
+  {
+    (void)current;
+  }
+
+  void			MultiBomb::unpack(const ISerializedNode & current)
+  {
+    (void)current;
+  }
+
   bool			MultiBomb::addExplode(float x, float y)
   {
     std::list<AEntity*>::iterator it;

@@ -21,6 +21,16 @@ namespace bbm
   {
   }
 
+  void			DarkBombExplode::pack(ISerializedNode & current) const
+  {
+    (void)current;
+  }
+
+  void			DarkBombExplode::unpack(const ISerializedNode & current)
+  {
+    (void)current;
+  }
+
   void			DarkBombExplode::update(float time)
   {
     _lifespan -= time;

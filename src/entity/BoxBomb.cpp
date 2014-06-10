@@ -25,6 +25,16 @@ namespace bbm
   {
   }
 
+  void			BoxBomb::pack(ISerializedNode & current) const
+  {
+    (void)current;
+  }
+
+  void			BoxBomb::unpack(const ISerializedNode & current)
+  {
+    (void)current;
+  }
+
   bool			BoxBomb::addExplode(float x, float y)
   {
     std::list<AEntity*>::iterator it;

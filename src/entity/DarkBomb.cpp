@@ -25,6 +25,16 @@ namespace bbm
   {
   }
 
+  void			DarkBomb::pack(ISerializedNode & current) const
+  {
+    (void)current;
+  }
+
+  void			DarkBomb::unpack(const ISerializedNode & current)
+  {
+    (void)current;
+  }
+
   bool			DarkBomb::addExplode(float x, float y)
   {
     std::list<AEntity*>::iterator it;

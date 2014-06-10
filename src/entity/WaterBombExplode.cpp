@@ -21,6 +21,16 @@ namespace bbm
   {
   }
 
+  void			WaterBombExplode::pack(ISerializedNode & current) const
+  {
+    (void)current;
+  }
+
+  void			WaterBombExplode::unpack(const ISerializedNode & current)
+  {
+    (void)current;
+  }
+
   void			WaterBombExplode::update(float time)
   {
     _lifespan -= time;
