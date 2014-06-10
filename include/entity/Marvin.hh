@@ -17,12 +17,13 @@ namespace bbm
     void	play();
     void	draw(ARenderer& renderer, const RenderState& renderState);
 
+    static void	initialize();
+    static void release();
   private:
     bool				_pause;
     gdl::BasicShader*			_shader;
     float				_elapsedTime;
     static std::vector<gdl::Model*>	_animations;
-    static bool				_initialized;
   };
 };
 

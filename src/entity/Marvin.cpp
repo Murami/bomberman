@@ -7,30 +7,35 @@
 
 namespace bbm
 {
-  bool				Marvin::_initialized = false;
   std::vector<gdl::Model*>	Marvin::_animations;
 
   Marvin::Marvin()
   {
     _animations.resize(54 - 38);
 
-    if (!_initialized)
-      {
-	_initialized = true;
-	for (int i = 38; i < 54; i++)
-	  {
-	    _animations[i - 38] = new gdl::Model;
-	    _animations[i - 38]->load("./gdl/assets/marvin.fbx");
-	    _animations[i - 38]->createSubAnim(0, "run", i, i + 1);
-	    _animations[i - 38]->setCurrentSubAnim("run", true);
-	  }
-      }
     _pause = true;
     _shader = ShaderManager::getInstance()->getShader("default");
   }
 
   Marvin::~Marvin()
   {
+  }
+
+  void	Marvin::initialize()
+  {
+    for (int i = 38; i < 54; i++)
+      {
+	_animations[i - 38] = new gdl::Model;
+	_animations[i - 38]->load("./gdl/assets/marvin.fbx");
+	_animations[i - 38]->createSubAnim(0, "run", i, i + 1);
+	_animations[i - 38]->setCurrentSubAnim("run", true);
+      }
+  }
+
+  void	Marvin::release()
+  {
+    for (int i = 38; i < 54; i++)
+      delete _animations[i - 38];
   }
 
   void	Marvin::update(float time)
