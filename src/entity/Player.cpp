@@ -34,7 +34,7 @@ namespace bbm
     _slow = false;
     _dark = false;
     _type = "Player";
-    _model.setCurrentAnimation("run", true);
+    // _model.setCurrentAnimation("run", true);
     _model.setPosition(glm::vec3(12 + 0.5, 12 + 0.5, 0));
     _model.setScale(glm::vec3(modelScaleFactor, modelScaleFactor, modelScaleFactor));
     _model.setRoll(90);

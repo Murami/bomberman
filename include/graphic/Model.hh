@@ -22,24 +22,23 @@ namespace bbm
 	  float speed);
     ~Model();
 
+    virtual void	update(float time);
+    virtual void	pause();
+    virtual void	play();
+
     void	setShader(const std::string& shader);
     void	setCurrentAnimation(const std::string& animation, bool loop);
-    void	pause();
-    void	play();
-    void	update(float time);
     void	setSpeed(float speed);
     float	getSpeed() const;
 
   protected:
-    void	draw(ARenderer& renderer, const RenderState& renderState);
+    virtual void	draw(ARenderer& renderer, const RenderState& renderState);
 
   protected:
     gdl::Model		_model;
-
-  private:
-    gdl::BasicShader*	_shader;
     float		_elapsedTime;
     float		_speed;
+    gdl::BasicShader*	_shader;
   };
 };
 

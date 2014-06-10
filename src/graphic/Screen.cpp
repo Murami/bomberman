@@ -35,7 +35,7 @@ namespace bbm
     shader->bind();
     shader->setUniform("view", renderState.camera.getMatrix());
     shader->setUniform("projection", renderState.projection.getMatrix());
-    model.draw(*shader, renderState.transform.getMatrix(), /*time*/ 0);
+    model.draw(*shader, renderState.transform.getMatrix(), time);
   }
 
   void	Screen::split(const glm::ivec2& position, const glm::ivec2& size) const
