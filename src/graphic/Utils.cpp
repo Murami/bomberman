@@ -1,4 +1,5 @@
-#include  <cmath>
+#include <cmath>
+#include <sstream>
 #include "graphic/Utils.hh"
 
 namespace bbm
