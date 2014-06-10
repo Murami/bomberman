@@ -554,10 +554,6 @@ namespace	bbm
 
   void		MenuState::launchNewGame()
   {
-<<<<<<< HEAD
-    IGameState*	state = new GameState(this->_manager);
-    //this->_manager.pop();
-=======
     GameState*	state = new GameState(this->_manager);
     Serializer s = Serializer::create<JSONSerializer>();
 
@@ -571,7 +567,6 @@ namespace	bbm
 	std::cout << "Serializer GameState Error : " << ex.what() << std::endl;
       }
     this->_manager.pop();
->>>>>>> 526a398256b21cf30d6e79b1ed64c2e894375da9
     this->_manager.push(state);
   }
 
