@@ -1,6 +1,7 @@
 #include		"FileExplorer.hh"
 #include		"events/Input.hh"
 #include		"game/GameManager.hh"
+#include		"game/GameLoadingState.hh"
 #include		"graphic/Screen.hh"
 #include		"graphic/Camera.hh"
 #include		"graphic/ProjectionPerspective.hh"
@@ -554,19 +555,7 @@ namespace	bbm
 
   void		MenuState::launchNewGame()
   {
-    GameState*	state = new GameState(this->_manager);
-    Serializer s = Serializer::create<JSONSerializer>();
-
-    try
-      {
-	s->deserializeFromFile("save1.json", *state);
-	// s->serializeToFile("export1.json", *state);
-      }
-    catch (SerializerException& ex)
-      {
-	std::cout << "Serializer GameState Error : " << ex.what() << std::endl;
-      }
-    this->_manager.pop();
+    GameLoadingState*	state = new GameLoadingState(this->_manager);
     this->_manager.push(state);
   }
 

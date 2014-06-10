@@ -29,6 +29,7 @@ SRC		=	main				\
 			game/Timer			\
 			game/FrameManager		\
 			game/Wall			\
+			game/GameLoadingState		\
 			entity/BonusFactory		\
 			entity/EntityFactory		\
 			entity/BombFactory		\
@@ -120,7 +121,7 @@ LDFLAGS		=	src/sound/libfmodex64-4.44.31.so
 
 ## RUNS
 
-CC		=	g++
+CC		=	clang++
 RM		=	rm -rf
 MD		=	mkdir -p
 
