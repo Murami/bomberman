@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 13:12:48 2014 Manu
-// Last update Fri Jun  6 18:04:55 2014 Manu
+// Last update Tue Jun 10 18:58:17 2014 Manu
 //
 
 #ifndef		__LETTER_HH__
@@ -20,6 +20,7 @@
 # include	"graphic/ARenderer.hh"
 # include	"graphic/RenderState.hh"
 # include	"graphic/ShaderManager.hh"
+# include	"FileLoadingException.hh"
 
 namespace	bbm
 {

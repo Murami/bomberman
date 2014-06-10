@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 02:39:57 2014 Manu
-// Last update Fri Jun  6 18:12:17 2014 Manu
+// Last update Tue Jun 10 19:14:28 2014 Manu
 //
 
 #ifndef		__FRAME_HH__
@@ -23,6 +23,7 @@
 # include	"FileExplorer.hh"
 # include	"Image.hh"
 # include	"Letter.hh"
+# include	"FileLoadingException.hh"
 
 namespace	gdl
 {

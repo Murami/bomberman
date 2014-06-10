@@ -61,7 +61,6 @@ SRC		=	main				\
 			serializer/JSONSerializer	\
 			serializer/Serializer		\
 			serializer/SerializerException	\
-			menu/AModel			\
 			menu/AObject			\
 			menu/Button			\
 			menu/Letter			\

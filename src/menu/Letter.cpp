@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 13:12:51 2014 Manu
-// Last update Sun Jun  8 03:49:04 2014 Manu
+// Last update Tue Jun 10 19:02:28 2014 Manu
 //
 
 #include		"LetterManager.hpp"
@@ -28,7 +28,11 @@ namespace	bbm
   {
     if (this->_le >= 'A' && this->_le <= 'Z')
       this->_le += 32;
-    this->_texture = *(LetterManager::getInstance()->getLetter(this->_le));
+    gdl::Texture* t;
+    t = LetterManager::getInstance()->getLetter(this->_le);
+    if (!t)
+      throw (FileLoadingException(std::string("Error while loading resource for letter ") + this->_le));
+    this->_texture = *t;
     this->_geom.setColor(this->_color);
     this->_geom.pushVertex(glm::vec3(0, -1, -1));
     this->_geom.pushVertex(glm::vec3(0, -1, 1));
