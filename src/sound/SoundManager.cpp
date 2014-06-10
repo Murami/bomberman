@@ -62,7 +62,7 @@ namespace bbm
 	_channels[name.c_str()] = NULL;
 	if (FMOD_System_PlaySound(_system, FMOD_CHANNEL_FREE, _sounds[name], 0, &_channels[name]) != FMOD_OK)
 	  {
-	    std::cerr << "Error : can't play " << name << std::cerr;
+	    std::cerr << "Error : can't play " << name << std::endl;
 	    return ;
 	  }
       }

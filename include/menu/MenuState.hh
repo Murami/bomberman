@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 16:43:06 2014 Manu
-// Last update Tue Jun 10 21:02:13 2014 Manu
+// Last update Tue Jun 10 23:58:11 2014 Manu
 //
 
 #ifndef		__MENUSTATE_HH__
@@ -36,6 +36,18 @@ namespace	bbm
     Skybox		_skybox;
     Menu*		_currentMenu;
     std::list<Menu*>	_menuList;
+
+  public :
+    struct		GameConfig
+    {
+      int		mapSizeX;
+      int		mapSizeY;
+      bool		player2;
+      bool		player3;
+      bool		player4;
+      int		numberIA;
+      int		level;
+    };
 
   private :
     bool		_initializeMainMenu();

@@ -53,6 +53,7 @@ namespace bbm
 					      "assets/game/bonus/random_bonus.tga");
 
     SoundManager::getInstance()->addSound("banzai", "assets/sound/banzai.mp3");
+    //Marvin::initialize();
   }
 
   Game::~Game()
