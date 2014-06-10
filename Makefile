@@ -62,7 +62,6 @@ SRC		=	main				\
 			serializer/JSONSerializer	\
 			serializer/Serializer		\
 			serializer/SerializerException	\
-			menu/AModel			\
 			menu/AObject			\
 			menu/Button			\
 			menu/Letter			\
@@ -79,7 +78,8 @@ SRC		=	main				\
 			menu/Image			\
 			menu/FileLoadingException	\
 			menu/PauseState			\
-			sound/SoundManager
+			menu/OpendirException		\
+			sound/SoundManager		\
 
 SRC_EXT		=	.cpp
 

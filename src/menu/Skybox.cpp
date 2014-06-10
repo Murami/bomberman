@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Mon Jun  2 13:10:45 2014 Manu
-// Last update Tue Jun 10 13:54:09 2014 Manu
+// Last update Tue Jun 10 19:56:19 2014 Manu
 //
 
 #include		"graphic/RenderState.hh"
@@ -22,7 +22,7 @@ namespace	bbm
   bool		Skybox::initialize()
   {
     if (!this->_texture.load("./assets/menu/images/violentdays.tga"))
-      return (false);
+      throw (FileLoadingException("Error while loading ./assets/menu/images/violentdays.tga"));
     this->_shader = ShaderManager::getInstance()->getShader("default");
     this->_geom.pushVertex(glm::vec3(-10, 10, -10));
     this->_geom.pushVertex(glm::vec3(-10, 10, 10));
