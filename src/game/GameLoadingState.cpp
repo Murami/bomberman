@@ -26,8 +26,6 @@ namespace bbm
 
   void			GameLoadingState::loadShader()
   {
-    ShaderManager::getInstance()->addShader("default", "gdl/shaders/basic.vp",
-					    "gdl/shaders/basic.fp");
   }
 
   void			GameLoadingState::loadTexture()
@@ -76,11 +74,10 @@ namespace bbm
 
   void			GameLoadingState::update(float time, const Input& input)
   {
-    if (input.getKeyDown(SDLK_ESCAPE))
+    if (input.getKeyDown(SDLK_SPACE))
       {
 	GameState*		state = new GameState(_manager);
 	Serializer		s = Serializer::create<JSONSerializer>();
-
 	try
 	  {
 	    s->deserializeFromFile("save1.json", *state);
@@ -100,5 +97,6 @@ namespace bbm
 
   void			GameLoadingState::revealing()
   {
+    _manager.pop();
   }
 };
