@@ -7,6 +7,7 @@
 #include "graphic/TextureManager.hh"
 #include "menu/MenuState.hh"
 #include "menu/PauseState.hh"
+#include "sound/SoundManager.hh"
 
 namespace bbm
 {
@@ -50,6 +51,8 @@ namespace bbm
 					      "assets/game/bonus/power_bonus.tga");
     TextureManager::getInstance()->addTexture("randomBonus",
 					      "assets/game/bonus/random_bonus.tga");
+
+    SoundManager::getInstance()->addSound("banzai", "assets/sound/banzai.mp3");
   }
 
   Game::~Game()
@@ -63,6 +66,7 @@ namespace bbm
 
     _manager.push(state);
 
+    SoundManager::getInstance()->play("banzai");
     frame.start();
     while (_manager.top())
       {
