@@ -13,7 +13,7 @@ namespace bbm
 {
   MultiBomb::MultiBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABomb(position, gameState, idPlayer),
-    _model("./models_bombs/WindBomb/WindBomb.obj", "default", 0)
+    _model("./assets/models_bomb/WindBomb/WindBomb.obj", "default", 0)
   {
     _type = "MultiBomb";
     _model.setRoll(90);
