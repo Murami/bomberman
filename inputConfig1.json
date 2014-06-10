@@ -1,0 +1,35 @@
+{
+    "input" : {
+
+	"0" : {
+	    "key" : "left",
+	    "event" : "SDLK_LEFT"
+	},
+
+	"1" : {
+	    "key" : "right",
+	    "event" : "SDLK_RIGHT"
+	},
+
+	"2" : {
+	    "key" : "up",
+	    "event" : "SDLK_UP"
+	},
+
+	"3" : {
+	    "key" : "down",
+	    "event" : "SDLK_DOWN"
+	}
+
+	"4" : {
+	    "key" : "bomb",
+	    "event" : "SDLK_SPACE"
+	}
+
+	"5" : {
+	    "key" : "bonb2",
+	    "event" : "SDLK_c"
+	}
+
+    }
+}
