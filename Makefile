@@ -29,6 +29,7 @@ SRC		=	main				\
 			game/Timer			\
 			game/FrameManager		\
 			game/Wall			\
+			game/GameLoadingState		\
 			entity/BonusFactory		\
 			entity/EntityFactory		\
 			entity/BombFactory		\
@@ -61,7 +62,6 @@ SRC		=	main				\
 			serializer/JSONSerializer	\
 			serializer/Serializer		\
 			serializer/SerializerException	\
-			menu/AModel			\
 			menu/AObject			\
 			menu/Button			\
 			menu/Letter			\
@@ -78,7 +78,8 @@ SRC		=	main				\
 			menu/Image			\
 			menu/FileLoadingException	\
 			menu/PauseState			\
-			sound/SoundManager
+			menu/OpendirException		\
+			sound/SoundManager		\
 
 SRC_EXT		=	.cpp
 
@@ -120,7 +121,7 @@ LDFLAGS		=	src/sound/libfmodex64-4.44.31.so
 
 ## RUNS
 
-CC		=	g++
+CC		=	clang++
 RM		=	rm -rf
 MD		=	mkdir -p
 
