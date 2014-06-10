@@ -52,7 +52,7 @@ namespace bbm
     TextureManager::getInstance()->addTexture("randomBonus",
 					      "assets/game/bonus/random_bonus.tga");
 
-    SoundManager::getInstance()->addSound("banzai", "assets/sound/banzai.mp3");
+    SoundManager::getInstance()->addSound("menu", "assets/sound/Turning_tables.mp3");
   }
 
   Game::~Game()
@@ -66,7 +66,7 @@ namespace bbm
 
     _manager.push(state);
 
-    SoundManager::getInstance()->play("banzai");
+    SoundManager::getInstance()->play("menu");
     frame.start();
     while (_manager.top())
       {
