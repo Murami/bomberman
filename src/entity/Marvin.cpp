@@ -11,8 +11,6 @@ namespace bbm
 
   Marvin::Marvin()
   {
-    _animations.resize(54 - 38);
-
     _pause = true;
     _shader = ShaderManager::getInstance()->getShader("default");
   }
@@ -23,6 +21,8 @@ namespace bbm
 
   void	Marvin::initialize()
   {
+    _animations.resize(54 - 38);
+
     for (int i = 38; i < 54; i++)
       {
 	_animations[i - 38] = new gdl::Model;
