@@ -4,6 +4,7 @@
 #include <iostream>
 #include <utility>
 #include <SDL.h>
+#include "game/Tile.hh"
 #include "game/GameState.hh"
 #include "game/GameManager.hh"
 
@@ -52,8 +53,23 @@ namespace bbm
 
   void			GameState::randomize(int x, int y)
   {
-    (void) x;
-    (void) y;
+    int			posx;
+    int			posy;
+
+    _tilemap.randomize(x, y);
+    for (posx = 1; posx < x - 1; posx++)
+      {
+	for(posy = 1; posy < y - 1; posy++)
+	  {
+	    if (_tilemap.getTileType(posx, posy) != Tile::Spawn &&
+		_tilemap.getTileType(posx + 1, posy) != Tile::Spawn &&
+		_tilemap.getTileType(posx - 1, posy) != Tile::Spawn &&
+		_tilemap.getTileType(posx, posy + 1) != Tile::Spawn &&
+		_tilemap.getTileType(posx, posy - 1) != Tile::Spawn &&
+		std::rand() % 2 == 1)
+	      addEntity(new GameBox(glm::vec2(posx, posy), *this));
+	  }
+      }
   }
 
   void			GameState::load(const std::string & file)
@@ -83,6 +99,7 @@ namespace bbm
 	throw SerializerException("Serializer GameState Error : "
 				  + std::string(ex.what()));
       }
+    _tilemap.save(_tilemapName);
   }
 
   void			GameState::pack(ISerializedNode & current) const
@@ -117,7 +134,6 @@ namespace bbm
     int			index;
 
     current.get("tilemap", _tilemapName);
-    _tilemap.load(_tilemapName);
     entityListNode = current.get("entity");
     size = entityListNode->size();
     for (index = 0; index < size; index++)

@@ -103,7 +103,7 @@ namespace bbm
     Marvin::initialize();
   }
 
-  void			GameLoadingState::loadGameState()
+  void			GameLoadingState::newGameState()
   {
     GameState*			state;
     PlayerConfig		playerConfig;
@@ -134,10 +134,21 @@ namespace bbm
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     state = new GameState(_manager, &gameStateConfig);
-    // faire le random de la map
-    // faire le random le la tailmap
+    // state->load("save1.json");
+    state->randomize(_config->mapSizeX, _config->mapSizeY);
+    _manager.push(state);
+  }
+
+  void                  GameLoadingState::loadGameState()
+  {
+
+    GameState*			state;
+    PlayerConfig		playerConfig;
+    GameState::GameStateConfig	gameStateConfig;
+
+
+    state = new GameState(_manager, &gameStateConfig);
     state->load("save1.json");
-    // state->randomize(_config->mapSizeX, _config->mapSizeY);
     _manager.push(state);
   }
 
@@ -174,7 +185,10 @@ namespace bbm
       }
     else if (input.getKeyDown(SDLK_SPACE))
       {
-	loadGameState();
+	// if (_config->newGame = true)
+	//   newGameState();
+	// else
+	newGameState();
       }
   }
 

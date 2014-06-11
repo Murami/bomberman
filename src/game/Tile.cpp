@@ -10,6 +10,16 @@ namespace bbm
 
   }
 
+
+  Tile::Tile(bool collide, const std::string & texture,
+       const std::string & shader, TileType type)
+  {
+    _collide = collide;
+    _texture = texture;
+    _shader = shader;
+    _type = type;
+  }
+
   Tile::Tile(IDrawable* drawable, bool collide) :
     _drawable(drawable),
     _collide(collide)
@@ -51,6 +61,11 @@ namespace bbm
   Tile::TileType     Tile::getType()
   {
     return (_type);
+  }
+
+  IDrawable*	     Tile::getDrawable()
+  {
+    return (_drawable);
   }
 
   void                Tile::setDrawable(IDrawable* drawable)

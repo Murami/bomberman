@@ -961,8 +961,8 @@ namespace	bbm
       {
 	std::stringstream ss;
 	ss << s2->getState();
-	ss >> this->_config.mapSizeX;
-	std::cout << "Map Y : " << this->_config.mapSizeX << std::endl;
+	ss >> this->_config.mapSizeY;
+	std::cout << "Map Y : " << this->_config.mapSizeY << std::endl;
       }
     this->_setNewCurrentMenu("playerselection");
   }

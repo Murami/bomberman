@@ -22,28 +22,67 @@ namespace bbm
 
   TileMap::TileMap(const glm::ivec2& size)
   {
-    // _size = size;
-    // _tiles.resize(_size.x * size.y, NULL);
-    // _object.setPrimitive(GL_QUADS);
-    // _object.setShader("default");
-    // _object.setTexture("fire");
-
-
-    // _object.pushVertex(glm::vec3(0, 0, 0));
-    // _object.pushVertex(glm::vec3(20, 0, 0));
-    // _object.pushVertex(glm::vec3(20, 20, 0));
-    // _object.pushVertex(glm::vec3(0, 20, 0));
-    // _object.pushUv(glm::vec2(0, 0));
-    // _object.pushUv(glm::vec2(1, 0));
-    // _object.pushUv(glm::vec2(1, 1));
-    // _object.pushUv(glm::vec2(0, 1));
-    // _object.build();
+    (void)size;
   }
 
   TileMap::~TileMap()
   {
   }
 
+  void	TileMap::randomize(int x, int y)
+  {
+
+    Tile*	tile;
+    int		i;
+    int		posx;
+    int		posy;
+
+    _size = glm::ivec2(x, y);
+    _tiles.resize(_size.x * _size.y, NULL);
+    _object.initialize("ground", "default", "GL_QUADS");
+    _object.pushVertex(glm::vec3(0, 0, 0));
+    _object.pushVertex(glm::vec3(x, 0, 0));
+    _object.pushVertex(glm::vec3(x, y, 0));
+    _object.pushVertex(glm::vec3(0, y, 0));
+    _object.pushUv(glm::vec2(0, 0));
+    _object.pushUv(glm::vec2(x / 10, 0));
+    _object.pushUv(glm::vec2(x / 10, y / 10));
+    _object.pushUv(glm::vec2(0, y / 10));
+    _object.build();
+
+    for (i = 0; i < x; i++)
+      {
+	tile = new Tile(true, "wall", "default", Tile::Wall);
+	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
+	setTile(i, 0, tile);
+      }
+    for (i = 0; i < x; i++)
+      {
+	tile = new Tile(true, "wall", "default", Tile::Wall);
+	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
+	setTile(i, y - 1, tile);
+      }
+    for (i = 0; i < y; i++)
+      {
+	tile = new Tile(true, "wall", "default", Tile::Wall);
+	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
+	setTile(0, i, tile);
+      }
+    for (i = 0; i < y; i++)
+      {
+	tile = new Tile(true, "wall", "default", Tile::Wall);
+	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
+	setTile(x - 1, i, tile);
+      }
+    for (i = 0; i < (x * y) / (((x * y) / 10) * 2); i++)
+      {
+	posx = (std::rand() % (x - 2)) + 1;
+	posy = (std::rand() % (y - 2)) + 1;
+	tile = new Tile(false, "", "", Tile::Spawn);
+	tile->setDrawable(NULL);
+	setTile(posx, posy, tile);
+      }
+  }
 
   void	TileMap::load(const std::string & file)
   {
@@ -60,13 +99,13 @@ namespace bbm
       }
 
     _object.pushVertex(glm::vec3(0, 0, 0));
-    _object.pushVertex(glm::vec3(20, 0, 0));
-    _object.pushVertex(glm::vec3(20, 20, 0));
-    _object.pushVertex(glm::vec3(0, 20, 0));
+    _object.pushVertex(glm::vec3(_size.x, 0, 0));
+    _object.pushVertex(glm::vec3(_size.x, _size.y, 0));
+    _object.pushVertex(glm::vec3(0, _size.y, 0));
     _object.pushUv(glm::vec2(0, 0));
-    _object.pushUv(glm::vec2(1, 0));
-    _object.pushUv(glm::vec2(1, 1));
-    _object.pushUv(glm::vec2(0, 1));
+    _object.pushUv(glm::vec2(_size.x / 10, 0));
+    _object.pushUv(glm::vec2(_size.x / 10, _size.y / 10));
+    _object.pushUv(glm::vec2(0, _size.y / 10));
     _object.build();
   }
 
@@ -177,6 +216,17 @@ namespace bbm
     return (_tiles[x + y * _size.x]);
   }
 
+  Tile::TileType TileMap::getTileType(int x, int y)
+  {
+    Tile *tile;
+
+    tile = getTile(x, y);
+    if (tile == NULL)
+      return (Tile::Void);
+    else
+      return (tile->getType());
+  }
+
   void		TileMap::draw(ARenderer& renderer, const RenderState& renderState)
   {
     RenderState	newState = renderState;
@@ -189,7 +239,7 @@ namespace bbm
 	    Tile*	tile;
 
 	    tile = getTile(x, y);
-	    if (tile)
+	    if (tile && tile->getDrawable() != NULL)
 	      {
 		newState.transform = transform;
 		newState.transform.translate(glm::vec3(x, y, 0));

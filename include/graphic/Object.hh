@@ -43,6 +43,9 @@ namespace bbm
     void		pushUv(const glm::vec2& uv);
     void		build();
 
+    void		initialize(const std::string& texture,
+				   const std::string& shader,
+				   const std::string& primitive);
     void		pack(ISerializedNode & current) const;
     void		unpack(const ISerializedNode & current);
 

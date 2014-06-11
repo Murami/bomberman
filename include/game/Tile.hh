@@ -18,12 +18,16 @@ namespace bbm
 
     typedef enum TileType
       {
+	Void = 0,
 	Box = 1,
-	Wall
+	Wall = 2,
+	Spawn = 3
       } TileType;
 
   public:
     Tile();
+    Tile(bool collide, const std::string & texture,
+	 const std::string & shader, TileType type);
     Tile(IDrawable* drawable, bool collide);
     Tile(const Tile& tile);
     ~Tile();
@@ -33,6 +37,7 @@ namespace bbm
     const std::string&	getTexture();
     const std::string&	getShader();
     TileType		getType();
+    IDrawable*		getDrawable();
 
     void		setDrawable(IDrawable* drawable);
 
