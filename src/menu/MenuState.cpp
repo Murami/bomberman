@@ -14,11 +14,14 @@
 
 namespace	bbm
 {
+  const std::string	MenuState::inputConfigPath = "./";
+
   MenuState::MenuState(GameManager& manager) : _manager(manager)
   {
     glEnable(GL_BLEND);
     glEnable(GL_ALPHA_TEST);
     glEnable(GL_DEPTH_TEST);
+    SDL_ShowCursor(SDL_DISABLE);
   }
 
   bool		MenuState::_initializeMainMenu()
@@ -259,7 +262,65 @@ namespace	bbm
       }
   }
 
+  ////////////////////////////////////////////////////////
+  // RAJOUTER LES BINDING POUR LES 2 DERNIERS KEYBOARDS //
+  ////////////////////////////////////////////////////////
+
   void		MenuState::_setBindingControlPlayer2(Menu* menu,
+						     const std::string& first)
+  {
+    static std::list<std::string> list;
+    if (list.size() == 0)
+      {
+	list.push_back("a");
+	list.push_back("z");
+	list.push_back("e");
+	list.push_back("r");
+	list.push_back("q");
+	list.push_back("s");
+	list.push_back("d");
+	list.push_back("f");
+	list.push_back("w");
+	list.push_back("x");
+	list.push_back("c");
+	list.push_back("v");
+      }
+    for (std::list<std::string>::iterator it = list.begin();
+	 it != list.end(); it++)
+      {
+	if ((*it) != first)
+	  menu->addStateToLastButton(*it);
+      }
+  }
+
+  void		MenuState::_setBindingControlPlayer3(Menu* menu,
+						     const std::string& first)
+  {
+    static std::list<std::string> list;
+    if (list.size() == 0)
+      {
+	list.push_back("a");
+	list.push_back("z");
+	list.push_back("e");
+	list.push_back("r");
+	list.push_back("q");
+	list.push_back("s");
+	list.push_back("d");
+	list.push_back("f");
+	list.push_back("w");
+	list.push_back("x");
+	list.push_back("c");
+	list.push_back("v");
+      }
+    for (std::list<std::string>::iterator it = list.begin();
+	 it != list.end(); it++)
+      {
+	if ((*it) != first)
+	  menu->addStateToLastButton(*it);
+      }
+  }
+
+  void		MenuState::_setBindingControlPlayer4(Menu* menu,
 						     const std::string& first)
   {
     static std::list<std::string> list;
@@ -336,23 +397,123 @@ namespace	bbm
       {
 	menu->createNewStateButton("up", NULL, 7,
 				   glm::vec4(1, 1, 1, 1), "z");
+				   // this->_inputConfigPlayer4->getKey("up"));
 	this->_setBindingControlPlayer2(menu, "z");
 	menu->createNewStateButton("down", NULL, 5,
 				   glm::vec4(1, 1, 1, 1), "s");
+				   // this->_inputConfigPlayer4->getKey("down"));
 	this->_setBindingControlPlayer2(menu, "s");
 	menu->createNewStateButton("left", NULL, 5,
 				   glm::vec4(1, 1, 1, 1), "q");
+				   // this->_inputConfigPlayer4->getKey("left"));
 	this->_setBindingControlPlayer2(menu, "q");
 	menu->createNewStateButton("right", NULL, 4,
 				   glm::vec4(1, 1, 1, 1), "d");
+				   // this->_inputConfigPlayer4->getKey("right"));
 	this->_setBindingControlPlayer2(menu, "d");
 	menu->createNewStateButton("bomb", NULL, 5,
 				   glm::vec4(1, 1, 1, 1), "x");
+				   // this->_inputConfigPlayer4->getKey("bomb"));
 	this->_setBindingControlPlayer2(menu, "x");
 	menu->createNewStateButton("bomb2", NULL, 4,
 				   glm::vec4(1, 1, 1, 1), "w");
+	//this->_inputConfigPlayer4->getKey("bomb2"));
 	this->_setBindingControlPlayer2(menu, "w");
-	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer2,
+	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer4,
+			      glm::vec4(0, 1, 0, 1));
+	menu->createNewButton("cancel", &IMenuManager::setOptionsControlMenu,
+			      glm::vec4(1, 0, 0, 1));
+      }
+    catch (FileLoadingException e)
+      {
+	std::cerr << "In function " << __FUNCTION__ << " : "
+		  << e.what() << ": Not found" << std::endl;
+	return (false);
+      }
+    menu->finalize();
+    this->_menuList.push_back(menu);
+    return (true);
+  }
+
+  bool		MenuState::_initializeControlPlayer3()
+  {
+    Menu* menu = new Menu("controlplayer3", this);
+    if (!menu->initialize())
+      return (false);
+    try
+      {
+	menu->createNewStateButton("up", NULL, 7,
+				   glm::vec4(1, 1, 1, 1), "z");
+				   // this->_inputConfigPlayer3->getKeyName(this->_inputConfigPlayer3->getKey("up")));
+	this->_setBindingControlPlayer2(menu, "z");
+	menu->createNewStateButton("down", NULL, 5,
+				   glm::vec4(1, 1, 1, 1), "s");
+				   // this->_inputConfigPlayer4->getKey("down"));
+	this->_setBindingControlPlayer2(menu, "s");
+	menu->createNewStateButton("left", NULL, 5,
+				   glm::vec4(1, 1, 1, 1), "q");
+				   // this->_inputConfigPlayer4->getKey("left"));
+	this->_setBindingControlPlayer2(menu, "q");
+	menu->createNewStateButton("right", NULL, 4,
+				   glm::vec4(1, 1, 1, 1), "d");
+				   // this->_inputConfigPlayer4->getKey("right"));
+	this->_setBindingControlPlayer2(menu, "d");
+	menu->createNewStateButton("bomb", NULL, 5,
+				   glm::vec4(1, 1, 1, 1), "x");
+				   // this->_inputConfigPlayer4->getKey("bomb"));
+	this->_setBindingControlPlayer2(menu, "x");
+	menu->createNewStateButton("bomb2", NULL, 4,
+				   glm::vec4(1, 1, 1, 1), "w");
+	//this->_inputConfigPlayer4->getKey("bomb2"));
+	this->_setBindingControlPlayer2(menu, "w");
+	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer4,
+			      glm::vec4(0, 1, 0, 1));
+	menu->createNewButton("cancel", &IMenuManager::setOptionsControlMenu,
+			      glm::vec4(1, 0, 0, 1));
+      }
+    catch (FileLoadingException e)
+      {
+	std::cerr << "In function " << __FUNCTION__ << " : "
+		  << e.what() << ": Not found" << std::endl;
+	return (false);
+      }
+    menu->finalize();
+    this->_menuList.push_back(menu);
+    return (true);
+  }
+
+  bool		MenuState::_initializeControlPlayer4()
+  {
+    Menu* menu = new Menu("controlplayer4", this);
+    if (!menu->initialize())
+      return (false);
+    try
+      {
+	menu->createNewStateButton("up", NULL, 7,
+				   glm::vec4(1, 1, 1, 1), "z");
+				   // this->_inputConfigPlayer4->getKey("up"));
+	this->_setBindingControlPlayer2(menu, "z");
+	menu->createNewStateButton("down", NULL, 5,
+				   glm::vec4(1, 1, 1, 1), "s");
+				   // this->_inputConfigPlayer4->getKey("down"));
+	this->_setBindingControlPlayer2(menu, "s");
+	menu->createNewStateButton("left", NULL, 5,
+				   glm::vec4(1, 1, 1, 1), "q");
+				   // this->_inputConfigPlayer4->getKey("left"));
+	this->_setBindingControlPlayer2(menu, "q");
+	menu->createNewStateButton("right", NULL, 4,
+				   glm::vec4(1, 1, 1, 1), "d");
+				   // this->_inputConfigPlayer4->getKey("right"));
+	this->_setBindingControlPlayer2(menu, "d");
+	menu->createNewStateButton("bomb", NULL, 5,
+				   glm::vec4(1, 1, 1, 1), "x");
+				   // this->_inputConfigPlayer4->getKey("bomb"));
+	this->_setBindingControlPlayer2(menu, "x");
+	menu->createNewStateButton("bomb2", NULL, 4,
+				   glm::vec4(1, 1, 1, 1), "w");
+	//this->_inputConfigPlayer4->getKey("bomb2"));
+	this->_setBindingControlPlayer2(menu, "w");
+	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer4,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setOptionsControlMenu,
 			      glm::vec4(1, 0, 0, 1));
@@ -375,10 +536,18 @@ namespace	bbm
       return (false);
     try
       {
-	menu->createNewButton("player 1", &IMenuManager::setOptionControlPlayer1,
+	menu->createNewButton("player 1",
+			      &IMenuManager::setOptionControlPlayer1,
 			      glm::vec4(0, 0, 1, 1));
-	menu->createNewButton("player 2", &IMenuManager::setOptionControlPlayer2,
+	menu->createNewButton("player 2",
+			      &IMenuManager::setOptionControlPlayer2,
 			      glm::vec4(0, 1, 1, 1));
+	menu->createNewButton("player 3",
+			      &IMenuManager::setOptionControlPlayer3,
+			      glm::vec4(1, 0, 1, 1));
+	menu->createNewButton("player 4",
+			      &IMenuManager::setOptionControlPlayer4,
+			      glm::vec4(1, 1, 0, 1));
 	menu->createNewButton("back", &IMenuManager::setOptionsMenu,
 			      glm::vec4(1, 0, 0, 1), true);
       }
@@ -391,7 +560,9 @@ namespace	bbm
     menu->finalize();
     this->_menuList.push_back(menu);
     if (!this->_initializeControlPlayer1() ||
-	!this->_initializeControlPlayer2())
+	!this->_initializeControlPlayer2() ||
+	!this->_initializeControlPlayer3() ||
+	!this->_initializeControlPlayer4())
       return (false);
     return (true);
   }
@@ -468,6 +639,23 @@ namespace	bbm
     return (true);
   }
 
+  bool		MenuState::_initializeInputConfig()
+  {
+    this->_inputConfigPlayer1 = new InputConfig();
+    this->_inputConfigPlayer1->load(inputConfigPath +
+				    std::string("inputConfig1.json"));
+    this->_inputConfigPlayer2 = new InputConfig();
+    this->_inputConfigPlayer1->load(inputConfigPath +
+				    std::string("inputConfig2.json"));
+    this->_inputConfigPlayer3 = new InputConfig();
+    this->_inputConfigPlayer1->load(inputConfigPath +
+				    std::string("inputConfig3.json"));
+    this->_inputConfigPlayer4 = new InputConfig();
+    this->_inputConfigPlayer1->load(inputConfigPath +
+				    std::string("inputConfig4.json"));
+    return (true);
+  }
+
   void		MenuState::_setNewCurrentMenu(const std::string& name)
   {
     std::list<Menu*>::iterator it = this->_menuList.begin();
@@ -487,6 +675,8 @@ namespace	bbm
 
   void		MenuState::initialize()
   {
+    memset(&this->_config, 0, sizeof(this->_config));
+    this->_initializeInputConfig();
     try
       {
 	this->_skybox.initialize();
@@ -551,17 +741,30 @@ namespace	bbm
   {
     std::list<AButton*> list = menu->getButtons();
     std::list<AButton*>::iterator it = list.begin();
+    int i = 0;
     while (it != list.end())
       {
 	ToggleButton* s = dynamic_cast<ToggleButton*>(*it);
 	if (s)
 	  {
-	    std::cout << std::boolalpha << s->isChecked() << std::endl;
+	    if (i == 0)
+	      this->_config.sound = s->isChecked();
+	    else
+	      this->_config.music = s->isChecked();
+	    i++;
 	  }
       	it++;
       }
     this->setOptionsMenu(menu);
   }
+
+  ////////////////////////////////
+  // INSTANCIER INPUTCONFIG //////
+  // INIT : INPUTCONFIG -> LOAD //
+  // SET DES STATES DES BUTTON ///
+  // LORS DU OK //////////////////
+  // SAVE L'INPUT CONFIG /////////
+  ////////////////////////////////
 
   void		MenuState::serializeBindingPlayer1(Menu* menu)
   {
@@ -572,6 +775,9 @@ namespace	bbm
 	StateButton* s = dynamic_cast<StateButton*>(*it);
 	if (s)
 	  {
+	    ///////////////////////////////
+	    // Serializer les inputs ici //
+	    ///////////////////////////////
 	    std::cout << std::string("SDLK_") + s->getState() << std::endl;
 	  }
       	it++;
@@ -595,6 +801,38 @@ namespace	bbm
     this->setOptionsControlMenu(menu);
   }
 
+  void		MenuState::serializeBindingPlayer3(Menu* menu)
+  {
+    std::list<AButton*> list = menu->getButtons();
+    std::list<AButton*>::iterator it = list.begin();
+    while (it != list.end())
+      {
+	StateButton* s = dynamic_cast<StateButton*>(*it);
+	if (s)
+	  {
+	    std::cout << std::string("SDLK_") + s->getState() << std::endl;
+	  }
+      	it++;
+      }
+    this->setOptionsControlMenu(menu);
+  }
+
+  void		MenuState::serializeBindingPlayer4(Menu* menu)
+  {
+    std::list<AButton*> list = menu->getButtons();
+    std::list<AButton*>::iterator it = list.begin();
+    while (it != list.end())
+      {
+	StateButton* s = dynamic_cast<StateButton*>(*it);
+	if (s)
+	  {
+	    std::cout << std::string("SDLK_") + s->getState() << std::endl;
+	  }
+      	it++;
+      }
+    this->setOptionsControlMenu(menu);
+  }
+
   void		MenuState::setOptionControlPlayer1(Menu*)
   {
     this->_setNewCurrentMenu("controlplayer1");
@@ -603,6 +841,16 @@ namespace	bbm
   void		MenuState::setOptionControlPlayer2(Menu*)
   {
     this->_setNewCurrentMenu("controlplayer2");
+  }
+
+  void		MenuState::setOptionControlPlayer3(Menu*)
+  {
+    this->_setNewCurrentMenu("controlplayer3");
+  }
+
+  void		MenuState::setOptionControlPlayer4(Menu*)
+  {
+    this->_setNewCurrentMenu("controlplayer4");
   }
 
   void		MenuState::setNextFrame(Menu*)
@@ -635,8 +883,29 @@ namespace	bbm
     this->_manager.pop();
   }
 
-  void		MenuState::launchNewGame(Menu*)
+  void		MenuState::launchNewGame(Menu* menu)
   {
+    std::list<AButton*> list = menu->getButtons();
+    std::list<AButton*>::iterator it = list.begin();
+    StateButton*	nbIAButton = dynamic_cast<StateButton*>(*it);
+    if (nbIAButton)
+      {
+	std::stringstream ss;
+	ss << nbIAButton->getState();
+	ss >> this->_config.numberIA;
+      }
+    it++;
+    StateButton*	level = dynamic_cast<StateButton*>(*it);
+    if (level)
+      {
+	std::string lvl = level->getState();
+	if (lvl == "easy")
+	  this->_config.level = 0;
+	else if (lvl == "medium")
+	  this->_config.level = 1;
+	else
+	  this->_config.level = 2;
+      }
     GameLoadingState*	state = new GameLoadingState(this->_manager,
 						     &this->_config);
     this->_manager.push(state);

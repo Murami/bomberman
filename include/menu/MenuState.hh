@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 16:43:06 2014 Manu
-// Last update Wed Jun 11 02:50:33 2014 Manu
+// Last update Wed Jun 11 05:55:42 2014 Manu
 //
 
 #ifndef		__MENUSTATE_HH__
@@ -24,6 +24,7 @@
 # include	"game/GameState.hh"
 # include	"menu/Skybox.hh"
 # include	"game/GameLoadingState.hh"
+# include	"events/InputConfig.hh"
 
 namespace	bbm
 {
@@ -32,12 +33,19 @@ namespace	bbm
 
   class		MenuState : public IGameState, IMenuManager
   {
+  public :
+    const static std::string		inputConfigPath;
+
   private :
     GameManager&			_manager;
     Skybox				_skybox;
     Menu*				_currentMenu;
     std::list<Menu*>			_menuList;
     GameLoadingState::GameConfig	_config;
+    InputConfig*			_inputConfigPlayer1;
+    InputConfig*			_inputConfigPlayer2;
+    InputConfig*			_inputConfigPlayer3;
+    InputConfig*			_inputConfigPlayer4;
 
   private :
     bool		_initializeMainMenu();
@@ -53,12 +61,17 @@ namespace	bbm
     bool		_initializeOptionVideoMenu();
     bool		_initializeControlPlayer1();
     bool		_initializeControlPlayer2();
+    bool		_initializeControlPlayer3();
+    bool		_initializeControlPlayer4();
     bool		_initializeMapParamsMenu();
+    bool		_initializeInputConfig();
 
   private :
     void		_setNewCurrentMenu(const std::string&);
     void		_setBindingControlPlayer1(Menu*, const std::string&);
     void		_setBindingControlPlayer2(Menu*, const std::string&);
+    void		_setBindingControlPlayer3(Menu*, const std::string&);
+    void		_setBindingControlPlayer4(Menu*, const std::string&);
 
   public :
     virtual void	initialize();
@@ -85,9 +98,13 @@ namespace	bbm
     virtual void	launchNewGame(Menu*);
     virtual void	setOptionControlPlayer1(Menu*);
     virtual void	setOptionControlPlayer2(Menu*);
+    virtual void	setOptionControlPlayer3(Menu*);
+    virtual void	setOptionControlPlayer4(Menu*);
     virtual void	setMapParamsMenu(Menu*);
     virtual void	serializeBindingPlayer1(Menu*);
     virtual void	serializeBindingPlayer2(Menu*);
+    virtual void	serializeBindingPlayer3(Menu*);
+    virtual void	serializeBindingPlayer4(Menu*);
     virtual void	serializeAudioSettings(Menu*);
 
   public :

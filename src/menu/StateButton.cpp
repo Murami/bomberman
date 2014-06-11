@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 17:43:53 2014 Manu
-// Last update Wed Jun 11 03:41:32 2014 Manu
+// Last update Wed Jun 11 05:04:33 2014 Manu
 //
 
 #include		"Letter.hh"
@@ -24,6 +24,18 @@ namespace		bbm
     this->_states.push_back(defaultState);
     this->_currentState = this->_states[0];
     this->_index = 0;
+  }
+
+  void			StateButton::setState(const std::string& state)
+  {
+    for (size_t i = 0; i < this->_states.size(); i++)
+      {
+	if (this->_states[i] == state)
+	  {
+	    this->_currentState = this->_states[i];
+	    this->_index = i;
+	  }
+      }
   }
 
   void			StateButton::removeState(const std::string& state)
