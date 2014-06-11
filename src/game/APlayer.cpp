@@ -124,12 +124,6 @@ namespace bbm
       }
   }
 
-  void			APlayer::update(float time)
-  {
-    managePhysics(time);
-    manageModel(time);
-  }
-
   bool			APlayer::expired() const
   {
     return (_alive);
