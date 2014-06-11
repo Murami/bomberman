@@ -16,6 +16,7 @@ SRC		=	main				\
 			graphic/RenderState		\
 			graphic/Screen			\
 			graphic/ShaderManager		\
+			graphic/ModelManager		\
 			graphic/TextureManager		\
 			graphic/Transform		\
 			graphic/Transformable		\

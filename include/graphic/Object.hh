@@ -15,7 +15,7 @@ namespace bbm
 
   class	Object : public IDrawable, public Transformable, public ISerializable
   {
-  public:
+  private:
     gdl::Geometry		_geometry;
     gdl::Texture*		_texture;
     gdl::BasicShader*		_shader;

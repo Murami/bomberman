@@ -20,8 +20,19 @@ namespace bbm
     _manager(gameManager),
     _config(config)
   {
-    TextureManager::getInstance()->addTexture("load", "assets/game/Loading.tga");
-    TextureManager::getInstance()->addTexture("load2", "assets/game/LoadingFinish.tga");
+    try
+      {
+	TextureManager::getInstance()->addTexture("load", "assets/game/Loading.tga");
+	TextureManager::getInstance()->addTexture("load2", "assets/game/LoadingFinish.tga");
+      }
+    catch (const std::exception& e)
+      {
+	TextureManager::getInstance()->delTexture("load");
+	TextureManager::getInstance()->delTexture("load2");
+	std::cout << e.what() << std::endl;
+	_manager.pop();
+	return;
+      }
 
     _loading = new Object("load", "default", GL_QUADS);
     _loading->pushVertex(glm::vec3(-0.5, -0.5, 0));
@@ -102,39 +113,31 @@ namespace bbm
       {
 	playerConfig.inputConfig = new InputConfig;
 	playerConfig.inputConfig->load("inputConfig1.json");
-	playerConfig.splitScreenPosition = glm::vec2(0, 0);
-	playerConfig.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     if (_config->player2)
       {
 	playerConfig.inputConfig = new InputConfig;
 	playerConfig.inputConfig->load("inputConfig2.json");
-	playerConfig.splitScreenPosition = glm::vec2(512 * 1.5, 0);
-	playerConfig.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     if (_config->player3)
       {
 	playerConfig.inputConfig = new InputConfig;
 	playerConfig.inputConfig->load("inputConfig3.json");
-	playerConfig.splitScreenPosition = glm::vec2(0, 384 * 1.5);
-	playerConfig.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     if (_config->player4)
       {
 	playerConfig.inputConfig = new InputConfig;
 	playerConfig.inputConfig->load("inputConfig4.json");
-	playerConfig.splitScreenPosition = glm::vec2(512 * 1.5, 384 * 1.5);
-	playerConfig.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     state = new GameState(_manager, &gameStateConfig);
     // faire le random de la map
     // faire le random le la tailmap
-    // state->load("save1.json");
-    state->randomize(_config->mapSizeX, _config->mapSizeY);
+    state->load("save1.json");
+    // state->randomize(_config->mapSizeX, _config->mapSizeY);
     _manager.push(state);
   }
 
@@ -155,10 +158,18 @@ namespace bbm
   {
     if (!_finish)
       {
-	loadShader();
-	loadTexture();
-	loadSound();
-	loadModel();
+	try
+	  {
+	    loadShader();
+	    loadTexture();
+	    loadSound();
+	    loadModel();
+	  }
+	catch (const std::exception& e)
+	  {
+	    std::cout << e.what() << std::endl;
+	    _manager.pop();
+	  }
 	_finish = true;
       }
     else if (input.getKeyDown(SDLK_SPACE))

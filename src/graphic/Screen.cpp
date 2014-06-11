@@ -38,20 +38,26 @@ namespace bbm
 		      gdl::BasicShader* shader, const RenderState& renderState,
 		      int primitive)
   {
-    texture->bind();
+    if (texture && shader)
+      {
+	texture->bind();
 
-    shader->bind();
-    shader->setUniform("view", renderState.camera.getMatrix());
-    shader->setUniform("projection", renderState.projection.getMatrix());
-    geometry.draw(*shader, renderState.transform.getMatrix(), primitive);
+	shader->bind();
+	shader->setUniform("view", renderState.camera.getMatrix());
+	shader->setUniform("projection", renderState.projection.getMatrix());
+	geometry.draw(*shader, renderState.transform.getMatrix(), primitive);
+      }
   }
 
   void	Screen::draw(gdl::Model& model, gdl::BasicShader* shader, const RenderState& renderState, float time)
   {
-    shader->bind();
-    shader->setUniform("view", renderState.camera.getMatrix());
-    shader->setUniform("projection", renderState.projection.getMatrix());
-    model.draw(*shader, renderState.transform.getMatrix(), time);
+    if (shader)
+      {
+	shader->bind();
+	shader->setUniform("view", renderState.camera.getMatrix());
+	shader->setUniform("projection", renderState.projection.getMatrix());
+	model.draw(*shader, renderState.transform.getMatrix(), time);
+      }
   }
 
   void	Screen::split(const glm::ivec2& position, const glm::ivec2& size) const

@@ -21,6 +21,7 @@ namespace bbm
   {
   public:
     TileMap();
+    TileMap(const glm::ivec2& size);
     ~TileMap();
 
     bool	collide(int x, int y);

@@ -52,7 +52,8 @@ namespace bbm
 
   void			GameState::randomize(int x, int y)
   {
-
+    (void) x;
+    (void) y;
   }
 
   void			GameState::load(const std::string & file)
@@ -90,7 +91,6 @@ namespace bbm
     ISerializedNode*			entityListNode;
     int					i;
 
-
     current.add("tilemap", _tilemapName);
     entityListNode = current.add("entity");
     for (i = 0, it = _entities.begin(); it != _entities.end(); ++it)
@@ -117,23 +117,24 @@ namespace bbm
     int			index;
 
     current.get("tilemap", _tilemapName);
+    _tilemap.load(_tilemapName);
     entityListNode = current.get("entity");
     size = entityListNode->size();
     for (index = 0; index < size; index++)
       {
     	std::stringstream	ss;
 
-	ss << index;
-	entityNode = entityListNode->get(ss.str());
-	entityNode->get("type", type);
-	entity = factory.create(type, *this);
-	if (entity != NULL)
-	  {
-	    entityListNode->get(ss.str(), *entity);
-	    addEntity(entity);
-	  }
-	else
-	  std::cout << "Serializer GameState Warning: unknown entity type" << std::endl;
+    	ss << index;
+    	entityNode = entityListNode->get(ss.str());
+    	entityNode->get("type", type);
+    	entity = factory.create(type, *this);
+    	if (entity != NULL)
+    	  {
+    	    entityListNode->get(ss.str(), *entity);
+    	    addEntity(entity);
+    	  }
+    	else
+    	  std::cout << "Serializer GameState Warning: unknown entity type" << std::endl;
       }
   }
 
@@ -148,9 +149,9 @@ namespace bbm
     std::vector<PlayerConfig>::iterator it;
 
     for(it = _config->playersConfigs.begin();
-	it != _config->playersConfigs.end(); ++it)
+    	it != _config->playersConfigs.end(); ++it)
       {
-	_players.push_back(new Player(*this, *it));
+    	_players.push_back(new Player(*this, *it));
       }
 
     // PlayerConfig	playerConfig;
@@ -232,10 +233,6 @@ namespace bbm
     Transform		projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
     Transform		cameraSky = Camera(glm::vec3(10, 0, -10), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     RenderState		stateSky(projection, cameraSky);
-
-    // std::cout << 1000 / time << std::endl;
-    ShaderManager::getInstance()->getShader("default")->bind();
-    ShaderManager::getInstance()->getShader("default")->setUniform("projection", projection.getMatrix());
 
     context.split(glm::ivec2(0, 0), glm::ivec2(context.getSize().x, context.getSize().y));
     context.clear();
@@ -326,8 +323,6 @@ namespace bbm
 	else
 	  it++;
       }
-
-    // _player.update(time);
     _skybox.update();
   }
 
@@ -338,12 +333,11 @@ namespace bbm
 
   Player&		GameState::getPlayer(unsigned int id)
   {
-    // a utiliser pour le multi
     std::list<Player*>::iterator	itPlayers;
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
       if ((*itPlayers)->getID() == id)
 	return (*(*itPlayers));
-    throw (std::runtime_error("Player not found"));
+    throw (std::runtime_error("player not found"));
   }
 
   std::list<AEntity*>&	GameState::getEntities()

@@ -20,6 +20,26 @@ namespace bbm
   {
   }
 
+  TileMap::TileMap(const glm::ivec2& size)
+  {
+    // _size = size;
+    // _tiles.resize(_size.x * size.y, NULL);
+    // _object.setPrimitive(GL_QUADS);
+    // _object.setShader("default");
+    // _object.setTexture("fire");
+
+
+    // _object.pushVertex(glm::vec3(0, 0, 0));
+    // _object.pushVertex(glm::vec3(20, 0, 0));
+    // _object.pushVertex(glm::vec3(20, 20, 0));
+    // _object.pushVertex(glm::vec3(0, 20, 0));
+    // _object.pushUv(glm::vec2(0, 0));
+    // _object.pushUv(glm::vec2(1, 0));
+    // _object.pushUv(glm::vec2(1, 1));
+    // _object.pushUv(glm::vec2(0, 1));
+    // _object.build();
+  }
+
   TileMap::~TileMap()
   {
   }
@@ -36,6 +56,7 @@ namespace bbm
     catch (SerializerException& ex)
       {
 	throw SerializerException("Deserializer TileMap Error : " + std::string(ex.what()));
+
       }
 
     _object.pushVertex(glm::vec3(0, 0, 0));
@@ -128,10 +149,10 @@ namespace bbm
 
   bool		TileMap::collide(int x, int y)
   {
-    Tile*	tile = _tiles[x + y * _size.x];
-
     if (x >= _size.x || x < 0 || y < 0 || y >= _size.y)
-      throw (std::runtime_error("Out of bounds of the map"));
+      throw (std::runtime_error("out of bounds"));
+
+    Tile*	tile = _tiles[x + y * _size.x];
     if (tile)
       return (tile->getCollide());
     return (false);
@@ -144,11 +165,15 @@ namespace bbm
 
   void		TileMap::setTile(int x, int y, Tile* tile)
   {
+    if (x >= _size.x || x < 0 || y < 0 || y >= _size.y)
+      throw (std::runtime_error("out of bounds"));
     _tiles[x + y * _size.x] = tile;
   }
 
   Tile*		TileMap::getTile(int x, int y)
   {
+    if (x >= _size.x || x < 0 || y < 0 || y >= _size.y)
+      throw (std::runtime_error("out of bounds"));
     return (_tiles[x + y * _size.x]);
   }
 
