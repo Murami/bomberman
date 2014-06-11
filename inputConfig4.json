@@ -22,7 +22,7 @@
       },
       "5" : {
          "action" : "up",
-         "key" : "SDLK_a"
+         "key" : "SDLK_e"
       }
    }
 }

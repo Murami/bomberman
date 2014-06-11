@@ -3,6 +3,8 @@
 
 namespace		bbm
 {
+  const std::string	PAUSE_BACKGROUND = "./assets/menu/pause_back.tga";
+
   PauseState::PauseState(GameManager& manager) : _manager(manager)
   {
     glEnable(GL_BLEND);
@@ -12,6 +14,8 @@ namespace		bbm
 
   void		PauseState::initialize()
   {
+    if (!this->_background.load(PAUSE_BACKGROUND))
+      throw (FileLoadingException(PAUSE_BACKGROUND));
   }
 
   void		PauseState::release()

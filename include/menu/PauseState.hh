@@ -1,10 +1,12 @@
 #ifndef		__PAUSESTATE_HH__
 # define	__PAUSESTATE_HH__
 
+# include	<Texture.hh>
 # include	"Menu.hh"
 # include	"IMenuManager.hh"
 # include	"game/IGameState.hh"
 # include	"game/GameState.hh"
+# include	"FileLoadingException.hh"
 
 namespace	bbm
 {
@@ -13,10 +15,15 @@ namespace	bbm
 
   class		PauseState : public IGameState, IMenuManager
   {
+  public :
+    static const std::string	PAUSE_BACKGROUND;
+
   private :
     GameManager&	_manager;
     Menu*		_currentMenu;
     std::list<Menu*>	_menuList;
+    gdl::Texture	_background;
+    gdl::Geometry	_geom;
 
   public :
     virtual void	initialize();

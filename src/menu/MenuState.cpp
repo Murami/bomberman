@@ -794,12 +794,21 @@ namespace	bbm
 	if (s)
 	  {
 	    if (s->getState()[0] >= '0' && s->getState()[0] <= '9')
-	      std::cout << std::string("SDLK_KP_") + s->getState() << std::endl;
+	      {
+	    	std::string key("SDLK_KP_");
+	    	key += s->getState();
+	    	this->_inputConfigPlayer1->bindKey(s->getLabel(), key);
+	      }
 	    else
-	      std::cout << std::string("SDLK_") + s->getState() << std::endl;
+	      {
+	    	std::string key("SDLK_");
+	    	key += s->getState();
+	    	this->_inputConfigPlayer1->bindKey(s->getLabel(), key);
+	      }
 	  }
       	it++;
       }
+    this->_inputConfigPlayer1->save(INPUT_CONFIG_P1);
     this->setOptionsControlMenu(menu);
   }
 
@@ -813,12 +822,21 @@ namespace	bbm
 	if (s)
 	  {
 	    if (s->getState()[0] >= '0' && s->getState()[0] <= '9')
-	      std::cout << std::string("SDLK_KP_") + s->getState() << std::endl;
+	      {
+	    	std::string key("SDLK_KP_");
+	    	key += s->getState();
+	    	this->_inputConfigPlayer2->bindKey(s->getLabel(), key);
+	      }
 	    else
-	      std::cout << std::string("SDLK_") + s->getState() << std::endl;
+	      {
+	    	std::string key("SDLK_");
+	    	key += s->getState();
+	    	this->_inputConfigPlayer2->bindKey(s->getLabel(), key);
+	      }
 	  }
       	it++;
       }
+    this->_inputConfigPlayer2->save(INPUT_CONFIG_P2);
     this->setOptionsControlMenu(menu);
   }
 
@@ -832,12 +850,21 @@ namespace	bbm
 	if (s)
 	  {
 	    if (s->getState()[0] >= '0' && s->getState()[0] <= '9')
-	      std::cout << std::string("SDLK_KP_") + s->getState() << std::endl;
+	      {
+	    	std::string key("SDLK_KP_");
+	    	key += s->getState();
+	    	this->_inputConfigPlayer3->bindKey(s->getLabel(), key);
+	      }
 	    else
-	      std::cout << std::string("SDLK_") + s->getState() << std::endl;
+	      {
+	    	std::string key("SDLK_");
+	    	key += s->getState();
+	    	this->_inputConfigPlayer3->bindKey(s->getLabel(), key);
+	      }
 	  }
       	it++;
       }
+    this->_inputConfigPlayer3->save(INPUT_CONFIG_P3);
     this->setOptionsControlMenu(menu);
   }
 
@@ -963,7 +990,6 @@ namespace	bbm
 	std::stringstream ss;
 	ss << s->getState();
 	ss >> this->_config.mapSizeX;
-	std::cout << "Map X : " << this->_config.mapSizeX << std::endl;
       }
     it++;
     StateButton* s2 = dynamic_cast<StateButton*>(*it);
@@ -972,7 +998,6 @@ namespace	bbm
 	std::stringstream ss;
 	ss << s2->getState();
 	ss >> this->_config.mapSizeY;
-	std::cout << "Map Y : " << this->_config.mapSizeY << std::endl;
       }
     this->_setNewCurrentMenu("playerselection");
   }
