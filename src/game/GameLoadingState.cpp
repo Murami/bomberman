@@ -3,6 +3,7 @@
 #include "game/GameState.hh"
 #include "graphic/ShaderManager.hh"
 #include "graphic/TextureManager.hh"
+#include "graphic/ModelManager.hh"
 #include "graphic/Object.hh"
 #include "graphic/Camera.hh"
 #include "graphic/RenderState.hh"
@@ -103,6 +104,18 @@ namespace bbm
   void			GameLoadingState::loadModel()
   {
     Marvin::initialize();
+    ModelManager::getInstance()->addModel("FireBomb",
+					    "assets/models_bomb/FireBomb/Bomb.obj");
+    ModelManager::getInstance()->addModel("WaterBomb",
+					    "assets/models_bomb/AquaBomb/AquaBomb.obj");
+    ModelManager::getInstance()->addModel("PowerBomb",
+					    "assets/models_bomb/PowerBomb2/Bomb.obj");
+    ModelManager::getInstance()->addModel("DarkBomb",
+					    "assets/models_bomb/DarkBomb/Bomb.obj");
+    ModelManager::getInstance()->addModel("BoxBomb",
+					    "assets/models_bomb/LightBomb/LightBomb.obj");
+    ModelManager::getInstance()->addModel("MultiBomb",
+					    "assets/models_bomb/WindBomb/WindBomb.obj");
   }
 
   void			GameLoadingState::loadGameState()

@@ -13,7 +13,7 @@ namespace bbm
 {
   FireBomb::FireBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABomb(position, gameState, idPlayer),
-    _model("./assets/models_bomb/FireBomb/Bomb.obj", "default", 0)
+    _model("FireBomb", "default", 0)
    {
     _type = "FireBomb";
     _model.setRoll(90);
