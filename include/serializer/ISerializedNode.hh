@@ -5,7 +5,7 @@
 // Login   <pinon_a@epitech.net>
 //
 // Started on  Wed May 21 15:37:24 2014 pinon
-// Last update Wed Jun  4 23:09:52 2014 pinon
+// Last update Tue Jun 10 20:32:52 2014 pinon
 //
 
 #ifndef		ISERIALIZEDNODE_HH
@@ -31,6 +31,7 @@ public:
   virtual void                  add(const std::string& index, const glm::vec4& value) = 0;
   virtual void			add(const std::string& index, const std::string& value) = 0;
   virtual void			add(const std::string& index, int value) = 0;
+  virtual void			add(const std::string& index, unsigned int value) = 0;
   virtual void			add(const std::string& index, double value) = 0;
   virtual void			add(const std::string& index, float value) = 0;
   virtual ISerializedNode*	add(const std::string& index) = 0;
@@ -46,6 +47,7 @@ public:
   virtual void                  get(const std::string& index, glm::vec4& value) const = 0;
   virtual void			get(const std::string& index, std::string& value) const = 0;
   virtual void			get(const std::string& index, int& value) const = 0;
+  virtual void			get(const std::string& index, unsigned int& value) const = 0;
   virtual void			get(const std::string& index, double& value) const = 0;
   virtual void			get(const std::string& index, float& value) const = 0;
   virtual void			get(const std::string& index, bool& value) const = 0;

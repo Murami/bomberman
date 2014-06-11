@@ -87,6 +87,11 @@ void			JsonNode::add(const std::string& index, int value)
   _current[index] = value;
 }
 
+void			JsonNode::add(const std::string& index, unsigned int value)
+{
+  _current[index] = value;
+}
+
 void			JsonNode::add(const std::string& index, double value)
 {
   _current[index] = value;
@@ -186,6 +191,15 @@ void			JsonNode::get(const std::string& index, int& value) const
     throw SerializerException("[" + index + "] doesn't exist");
   if (!_current[index].isInt() && !_current[index].isDouble())
     throw SerializerException("[" + index + "] is not an int type");
+  value = _current[index].asInt();
+}
+
+void			JsonNode::get(const std::string& index, unsigned int& value) const
+{
+  if (!_current.isMember(index))
+    throw SerializerException("[" + index + "] doesn't exist");
+  if (!_current[index].isUInt())
+    throw SerializerException("[" + index + "] is not an unsigned int type");
   value = _current[index].asInt();
 }
 

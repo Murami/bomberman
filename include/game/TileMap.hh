@@ -20,7 +20,7 @@ namespace bbm
   class	TileMap : public IDrawable, public ISerializable
   {
   public:
-    TileMap(const std::string& file);
+    TileMap();
     ~TileMap();
 
     bool	collide(int x, int y);
@@ -31,6 +31,8 @@ namespace bbm
 
     void	pack(ISerializedNode & current) const;
     void	unpack(const ISerializedNode & current);
+    void	load(const std::string & file);
+    void	save(const std::string & file);
 
   protected:
     void	draw(ARenderer& renderer, const RenderState& renderState);
