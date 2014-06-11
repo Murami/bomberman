@@ -34,6 +34,7 @@ namespace bbm
     _slow = false;
     _dark = false;
     _type = "Player";
+    _score = 0;
     // _model.setCurrentAnimation("run", true);
     _model.setPosition(glm::vec3(12 + 0.5, 12 + 0.5, 0));
     _model.setScale(glm::vec3(modelScaleFactor, modelScaleFactor, modelScaleFactor));
@@ -287,6 +288,16 @@ namespace bbm
   float			Player::getDelta() const
   {
     return (delta);
+  }
+
+  void			Player::die()
+  {
+    _alive = false;
+  }
+
+  void			Player::addScore(int score)
+  {
+    _score += score;
   }
 
   void			Player::setMove(const glm::vec2 & mov)
