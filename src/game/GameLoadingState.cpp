@@ -131,7 +131,10 @@ namespace bbm
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     state = new GameState(_manager, &gameStateConfig);
-    state->load("save1.json");
+    // faire le random de la map
+    // faire le random le la tailmap
+    // state->load("save1.json");
+    state->randomize(_config->mapSizeX, _config->mapSizeY);
     _manager.push(state);
   }
 

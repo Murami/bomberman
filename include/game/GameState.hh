@@ -42,6 +42,7 @@ namespace bbm
     void			update(float time, const Input& input);
     void			draw(float time, Screen& context);
 
+    void			randomize(int x, int y);
     void			load(const std::string & file);
     void			save(const std::string & file);
     void			pack(ISerializedNode & current) const;
@@ -59,6 +60,7 @@ namespace bbm
     std::list<AEntity*>		_entities;
     std::list<Player*>		_players;
     TileMap			_tilemap;
+    std::string			_tilemapName;
     GameManager&		_manager;
     GameStateConfig*		_config;
   };

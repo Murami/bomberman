@@ -44,11 +44,15 @@ namespace bbm
     _manager(manager),
     _config(config)
   {
-    _tilemap.load("map1.json");
   }
 
   GameState::~GameState()
   {
+  }
+
+  void			GameState::randomize(int x, int y)
+  {
+
   }
 
   void			GameState::load(const std::string & file)
@@ -63,6 +67,7 @@ namespace bbm
 	throw SerializerException("Deserializer GameState Error : "
 				  + std::string(ex.what()));
       }
+    _tilemap.load(_tilemapName);
   }
 
   void			GameState::save(const std::string & file)
@@ -85,6 +90,8 @@ namespace bbm
     ISerializedNode*			entityListNode;
     int					i;
 
+
+    current.add("tilemap", _tilemapName);
     entityListNode = current.add("entity");
     for (i = 0, it = _entities.begin(); it != _entities.end(); ++it)
       {
@@ -109,6 +116,7 @@ namespace bbm
     int			size;
     int			index;
 
+    current.get("tilemap", _tilemapName);
     entityListNode = current.get("entity");
     size = entityListNode->size();
     for (index = 0; index < size; index++)
