@@ -21,6 +21,7 @@ namespace	bbm
     glEnable(GL_BLEND);
     glEnable(GL_ALPHA_TEST);
     glEnable(GL_DEPTH_TEST);
+    SDL_ShowCursor(SDL_DISABLE);
   }
 
   bool		MenuState::_initializeMainMenu()
@@ -442,8 +443,8 @@ namespace	bbm
     try
       {
 	menu->createNewStateButton("up", NULL, 7,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_inputConfigPlayer3->getKeyName(this->_inputConfigPlayer3->getKey("up")));
+				   glm::vec4(1, 1, 1, 1), "z");
+				   // this->_inputConfigPlayer3->getKeyName(this->_inputConfigPlayer3->getKey("up")));
 	this->_setBindingControlPlayer2(menu, "z");
 	menu->createNewStateButton("down", NULL, 5,
 				   glm::vec4(1, 1, 1, 1), "s");
