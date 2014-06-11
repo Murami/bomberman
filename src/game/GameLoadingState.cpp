@@ -171,6 +171,7 @@ namespace bbm
 
   void			GameLoadingState::update(float time, const Input& input)
   {
+    (void) time;
     if (!_finish)
       {
 	try
@@ -195,6 +196,7 @@ namespace bbm
 
   void			GameLoadingState::draw(float time, Screen& context)
   {
+    (void) time;
     Transform		cam = Camera(glm::vec3(0,0,1), glm::vec3(0,0,0), glm::vec3(0, 1, 0));
     Transform		projection = ProjectionPerspective(60, 1600 / 900, 1, 1000);
 
