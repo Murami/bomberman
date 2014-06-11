@@ -73,6 +73,7 @@ namespace bbm
     float		getDelta() const;
     int			getPower() const;
     void		addScore(int);
+    bool		isDead() const;
     void		die();
     void		setTypeBomb(BombType);
     void		setSpeed(float);

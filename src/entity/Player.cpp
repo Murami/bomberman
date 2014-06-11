@@ -290,14 +290,21 @@ namespace bbm
     return (delta);
   }
 
+  bool			Player::isDead() const
+  {
+    return (_alive);
+  }
+
   void			Player::die()
   {
     _alive = false;
+    std::cout << "player numero " << getID() << " is dead" << std::endl;
   }
 
   void			Player::addScore(int score)
   {
     _score += score;
+    std::cout << "SCORE = " << _score << std::endl;
   }
 
   void			Player::setMove(const glm::vec2 & mov)
