@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 17:43:50 2014 Manu
-// Last update Wed Jun 11 02:23:20 2014 Manu
+// Last update Wed Jun 11 05:03:29 2014 Manu
 //
 
 #ifndef		__STATEBUTTON_HH__
@@ -35,6 +35,7 @@ namespace	bbm
     const std::string&		getState();
     void			addState(const std::string&);
     void			removeState(const std::string&);
+    void			setState(const std::string&);
 
   public :
     virtual bool		initialize();
