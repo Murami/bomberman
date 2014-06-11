@@ -83,6 +83,7 @@ SRC		=	main				\
 			menu/PauseState			\
 			menu/OpendirException		\
 			sound/SoundManager		\
+			lua/LuaBiche
 
 SRC_EXT		=	.cpp
 
@@ -98,7 +99,7 @@ DINC		=	include		\
 			template	\
 			gdl/includes	\
 			jsoncpp/include	\
-			include/menu	\
+			include/menu
 
 CFLAGS		=	-Wall		\
 			-Wextra
@@ -115,7 +116,8 @@ LIB		=	gdl_gl		\
 			pthread		\
 			dl		\
 			rt		\
-			json
+			json		\
+			lua
 
 DLIB		=	gdl/libs	\
 			jsoncpp/libs
@@ -136,7 +138,7 @@ MD		=	mkdir -p
 
 DBGBOOL		=	yes
 
-PROFILE		=	yes
+PROFILE		=	no
 
 DBG		=	-g3		\
 			-ggdb

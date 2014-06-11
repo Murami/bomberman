@@ -71,6 +71,7 @@ namespace bbm
     void		setDark(bool);
     void		slowSpeed();
     void		setPower(int);
+    bool		isDead() const;
     void		addPower();
     void		addSpeed();
     void		addBombs();

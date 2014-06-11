@@ -124,7 +124,13 @@ namespace bbm
       }
   }
 
+  //ATENTION AU REFERENCE VERS LE PLAYER !
   bool			APlayer::expired() const
+  {
+    return (false);
+  }
+
+  bool			APlayer::isDead() const
   {
     return (_alive);
   }
