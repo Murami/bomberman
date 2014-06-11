@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 #include "serializer/ISerializable.hh"
 #include "serializer/ISerializedNode.hh"
 

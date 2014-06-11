@@ -16,18 +16,26 @@
 
 namespace bbm
 {
-  TileMap::TileMap(const std::string& file)
+  TileMap::TileMap()
+  {
+  }
+
+  TileMap::~TileMap()
+  {
+  }
+
+
+  void	TileMap::load(const std::string & file)
   {
     Serializer s = Serializer::create<JSONSerializer>();
 
     try
       {
 	s->deserializeFromFile(file, *this);
-	s->serializeToFile("mapSave.json", *this);
       }
     catch (SerializerException& ex)
       {
-	std::cout << "Serializer TileMap Error : " << ex.what() << std::endl;
+	throw SerializerException("Deserializer TileMap Error : " + std::string(ex.what()));
       }
 
     _object.pushVertex(glm::vec3(0, 0, 0));
@@ -41,58 +49,21 @@ namespace bbm
     _object.build();
   }
 
-  TileMap::~TileMap()
+  void	TileMap::save(const std::string & file)
   {
-  }
 
-  bool		TileMap::collide(int x, int y)
-  {
-    Tile*	tile = _tiles[x + y * _size.x];
+    Serializer s = Serializer::create<JSONSerializer>();
 
-    if (x >= _size.x || x < 0 || y < 0 || y >= _size.y)
-      throw (std::runtime_error("Out of bounds of the map"));
-    if (tile)
-      return (tile->getCollide());
-    return (false);
-  }
-
-  glm::ivec2	TileMap::getSize()
-  {
-    return (_size);
-  }
-
-  void		TileMap::setTile(int x, int y, Tile* tile)
-  {
-    _tiles[x + y * _size.x] = tile;
-  }
-
-  Tile*		TileMap::getTile(int x, int y)
-  {
-    return (_tiles[x + y * _size.x]);
-  }
-
-  void		TileMap::draw(ARenderer& renderer, const RenderState& renderState)
-  {
-    RenderState	newState = renderState;
-    Transform	transform = renderState.transform;
-
-    for (int y = 0; y < _size.y; y++)
+    try
       {
-	for (int x = 0; x < _size.x; x++)
-	  {
-	    Tile*	tile;
-
-	    tile = getTile(x, y);
-	    if (tile)
-	      {
-		newState.transform = transform;
-		newState.transform.translate(glm::vec3(x, y, 0));
-		renderer.draw(*tile, newState);
-	      }
-	  }
+	s->serializeToFile(file, *this);
       }
-    renderer.draw(_object, renderState);
+    catch (SerializerException& ex)
+      {
+	throw SerializerException("Serializer TileMap Error : " + std::string(ex.what()));
+      }
   }
+
 
   void	TileMap::pack(ISerializedNode & current) const
   {
@@ -153,5 +124,54 @@ namespace bbm
 	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
 	setTile(x, y, tile);
       }
+  }
+
+  bool		TileMap::collide(int x, int y)
+  {
+    Tile*	tile = _tiles[x + y * _size.x];
+
+    if (x >= _size.x || x < 0 || y < 0 || y >= _size.y)
+      throw (std::runtime_error("Out of bounds of the map"));
+    if (tile)
+      return (tile->getCollide());
+    return (false);
+  }
+
+  glm::ivec2	TileMap::getSize()
+  {
+    return (_size);
+  }
+
+  void		TileMap::setTile(int x, int y, Tile* tile)
+  {
+    _tiles[x + y * _size.x] = tile;
+  }
+
+  Tile*		TileMap::getTile(int x, int y)
+  {
+    return (_tiles[x + y * _size.x]);
+  }
+
+  void		TileMap::draw(ARenderer& renderer, const RenderState& renderState)
+  {
+    RenderState	newState = renderState;
+    Transform	transform = renderState.transform;
+
+    for (int y = 0; y < _size.y; y++)
+      {
+	for (int x = 0; x < _size.x; x++)
+	  {
+	    Tile*	tile;
+
+	    tile = getTile(x, y);
+	    if (tile)
+	      {
+		newState.transform = transform;
+		newState.transform.translate(glm::vec3(x, y, 0));
+		renderer.draw(*tile, newState);
+	      }
+	  }
+      }
+    renderer.draw(_object, renderState);
   }
 };

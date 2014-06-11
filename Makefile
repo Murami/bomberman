@@ -119,7 +119,7 @@ LDFLAGS		=
 
 ## RUNS
 
-CC		=	clang++
+CC		=	clang++ -ferror-limit=100
 RM		=	rm -rf
 MD		=	mkdir -p
 

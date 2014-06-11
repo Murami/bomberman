@@ -39,9 +39,10 @@
 namespace bbm
 {
   GameState::GameState(GameManager& manager) :
-    _tilemap("map1.json"),
+    _tilemap(),
     _manager(manager)
   {
+    _tilemap.load("map1.json");
   }
 
   GameState::~GameState()
@@ -108,50 +109,30 @@ namespace bbm
 
     PlayerConfig	playerConfig;
     playerConfig.inputConfig = new InputConfig;
+    playerConfig.inputConfig->load("inputConfig1.json");
     playerConfig.splitScreenPosition = glm::vec2(0, 0);
     playerConfig.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
-    playerConfig.inputConfig->bindKey("left", SDLK_LEFT);
-    playerConfig.inputConfig->bindKey("right", SDLK_RIGHT);
-    playerConfig.inputConfig->bindKey("up", SDLK_UP);
-    playerConfig.inputConfig->bindKey("down", SDLK_DOWN);
-    playerConfig.inputConfig->bindKey("bomb", SDLK_KP_0);
-    playerConfig.inputConfig->bindKey("bomb2", SDLK_KP_1);
     _players.push_back(new Player(*this, playerConfig));
 
     PlayerConfig	playerConfig2;
     playerConfig2.inputConfig = new InputConfig;
+    playerConfig2.inputConfig->load("inputConfig2.json");
     playerConfig2.splitScreenPosition = glm::vec2(512 * 1.5, 0);
     playerConfig2.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
-    playerConfig2.inputConfig->bindKey("left", SDLK_q);
-    playerConfig2.inputConfig->bindKey("right", SDLK_d);
-    playerConfig2.inputConfig->bindKey("up", SDLK_z);
-    playerConfig2.inputConfig->bindKey("down", SDLK_s);
-    playerConfig2.inputConfig->bindKey("bomb", SDLK_e);
-    playerConfig2.inputConfig->bindKey("bomb2", SDLK_r);
     _players.push_back(new Player(*this, playerConfig2));
 
     PlayerConfig	playerConfig3;
     playerConfig3.inputConfig = new InputConfig;
+    playerConfig3.inputConfig->load("inputConfig3.json");
     playerConfig3.splitScreenPosition = glm::vec2(0, 384 * 1.5);
     playerConfig3.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
-    playerConfig3.inputConfig->bindKey("left", SDLK_KP_4);
-    playerConfig3.inputConfig->bindKey("right", SDLK_KP_6);
-    playerConfig3.inputConfig->bindKey("up", SDLK_KP_8);
-    playerConfig3.inputConfig->bindKey("down", SDLK_KP_2);
-    playerConfig3.inputConfig->bindKey("bomb", SDLK_KP_9);
-    playerConfig3.inputConfig->bindKey("bomb2", SDLK_KP_7);
     _players.push_back(new Player(*this, playerConfig3));
 
     PlayerConfig	playerConfig4;
     playerConfig4.inputConfig = new InputConfig;
+    playerConfig4.inputConfig->load("inputConfig4.json");
     playerConfig4.splitScreenPosition = glm::vec2(512 * 1.5, 384 * 1.5);
     playerConfig4.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
-    playerConfig4.inputConfig->bindKey("left", SDLK_q);
-    playerConfig4.inputConfig->bindKey("right", SDLK_d);
-    playerConfig4.inputConfig->bindKey("up", SDLK_z);
-    playerConfig4.inputConfig->bindKey("down", SDLK_s);
-    playerConfig4.inputConfig->bindKey("bomb", SDLK_e);
-    playerConfig4.inputConfig->bindKey("bomb2", SDLK_r);
     _players.push_back(new Player(*this, playerConfig4));
 
     // addEntity(new BombBonus(glm::vec2(5, 17)));

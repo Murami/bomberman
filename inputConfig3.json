@@ -1,0 +1,10 @@
+{
+    "input" : {
+	"0" : { "action" : "left", "key" : "SDLK_KP_4"},
+	"1" : { "action" : "right", "key" : "SDLK_KP_6"},
+	"2" : { "action" : "up", "key" : "SDLK_KP_8"},
+	"3" : { "action" : "down", "key" : "SDLK_KP_2"},
+	"4" : { "action" : "bomb", "key" : "SDLK_KP_9"},
+	"5" : { "action" : "bomb2", "key" : "SDLK_KP_7"}
+    }
+}

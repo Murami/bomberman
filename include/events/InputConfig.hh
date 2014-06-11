@@ -13,16 +13,26 @@ namespace bbm
     InputConfig();
     ~InputConfig();
 
+    typedef struct	s_data
+    {
+      int		key;
+      std::string	keyName;
+    }			t_data;
+
+    static const std::map<std::string, int> SDLKeyMap;
+
   public:
     unsigned int	getKey(const std::string &) const;
-    void		bindKey(const std::string & event, unsigned int key);
+    void		bindKey(const std::string & event,
+				const std::string & key);
+
     void		load(const std::string & file);
     void		save(const std::string & file);
     void		pack(ISerializedNode & current) const;
     void		unpack(const ISerializedNode & current);
 
   private:
-    std::map<std::string, unsigned int>	_keyMap;
+    std::map<std::string, t_data>	_keyMap;
   };
 };
 

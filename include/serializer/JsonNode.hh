@@ -21,6 +21,7 @@ public:
   void                  add(const std::string& index, const glm::vec4& value);
   void			add(const std::string& index, const std::string& value);
   void			add(const std::string& index, int value);
+  void			add(const std::string& index, unsigned int value);
   void			add(const std::string& index, double value);
   void			add(const std::string& index, float value);
   ISerializedNode*	add(const std::string& index);
@@ -34,6 +35,7 @@ public:
   void                  get(const std::string& index, glm::vec4& value) const;
   void			get(const std::string& index, std::string& value) const;
   void			get(const std::string& index, int& value) const;
+  void			get(const std::string& index, unsigned int& value) const;
   void			get(const std::string& index, double& value) const;
   void			get(const std::string& index, float& value) const;
   void                  get(const std::string& index, bool& value) const;
