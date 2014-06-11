@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 16:43:06 2014 Manu
-// Last update Wed Jun 11 02:17:58 2014 Manu
+// Last update Wed Jun 11 02:42:37 2014 Manu
 //
 
 #ifndef		__MENUSTATE_HH__
@@ -23,6 +23,7 @@
 # include	"game/IGameState.hh"
 # include	"game/GameState.hh"
 # include	"menu/Skybox.hh"
+# include	"game/GameLoadingState.hh"
 
 namespace	bbm
 {
@@ -32,22 +33,11 @@ namespace	bbm
   class		MenuState : public IGameState, IMenuManager
   {
   private :
-    GameManager&	_manager;
-    Skybox		_skybox;
-    Menu*		_currentMenu;
-    std::list<Menu*>	_menuList;
-
-  public :
-    struct		GameConfig
-    {
-      int		mapSizeX;
-      int		mapSizeY;
-      bool		player2;
-      bool		player3;
-      bool		player4;
-      int		numberIA;
-      int		level;
-    };
+    GameManager&			_manager;
+    Skybox				_skybox;
+    Menu*				_currentMenu;
+    std::list<Menu*>			_menuList;
+    GameLoadingState::GameConfig	_config;
 
   private :
     bool		_initializeMainMenu();
