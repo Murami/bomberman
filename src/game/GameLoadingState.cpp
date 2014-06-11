@@ -15,7 +15,7 @@
 #include "sound/SoundManager.hh"
 #include "events/Input.hh"
 
-const float scaleFactor = 1.2;
+const float scaleFactor = 1.0;
 
 namespace bbm
 {
@@ -139,8 +139,7 @@ namespace bbm
     Transform		cam = Camera(glm::vec3(0,0,1), glm::vec3(0,0,0), glm::vec3(0, 1, 0));
     Transform		projection = ProjectionPerspective(60, 1600 / 900, 1, 1000);
 
-    context.split(glm::ivec2(0, 0), glm::ivec2(1600, 900));
-    std::cout << "draw" << std::endl;
+    context.split(glm::ivec2(0, 0), glm::ivec2(context.getSize().x, context.getSize().y));
     context.clear();
     if (!_finish)
       context.draw(*_loading, RenderState(projection, cam));
