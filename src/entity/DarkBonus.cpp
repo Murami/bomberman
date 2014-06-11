@@ -81,7 +81,10 @@ namespace bbm
     if (entity->getType() == "Player")
       {
 	if (_used == false)
-	  dynamic_cast<Player*>(entity)->setTypeBomb(DARK);
+	  {
+	    dynamic_cast<Player*>(entity)->addScore(100);
+	    dynamic_cast<Player*>(entity)->setTypeBomb(DARK);
+	  }
 	_used = true;
       }
     if (entity->getType() == "FireBombExplode")

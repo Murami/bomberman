@@ -92,6 +92,17 @@ namespace bbm
 	    collide(glm::vec3(playerPosition.x  + delta, playerPosition.y + playerMove.y + delta, 0)))
 	  playerMove.y = 0;
 
+	if (collide(glm::vec3(playerPosition.x + 1 - delta, playerPosition.y  + 1 - delta, 0)) ||
+	    collide(glm::vec3(playerPosition.x + 1 - delta, playerPosition.y  + delta, 0)) ||
+	    collide(glm::vec3(playerPosition.x + delta, playerPosition.y  + 1 - delta, 0)) ||
+	    collide(glm::vec3(playerPosition.x + delta, playerPosition.y  + delta, 0)))
+	  {
+	    if (dynamic_cast<Player *>(entity)->isDead())
+	      {
+		_gameState.getPlayer(_idPlayer).addScore(1000);
+		dynamic_cast<Player *>(entity)->die();
+	      }
+	  }
 	player->setMove(playerMove);
       }
     if (entity->getType() == "FireBombExplode" || entity->getType() == "PowerBombExplode")
