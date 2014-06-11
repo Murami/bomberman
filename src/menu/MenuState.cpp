@@ -181,19 +181,19 @@ namespace	bbm
     try
       {
 	menu->createNewStateButton("map width", NULL, 4,
-				   glm::vec4(1, 1, 1, 1), "10");
-	menu->addStateToLastButton("15");
-	menu->addStateToLastButton("20");
+				   glm::vec4(1, 1, 1, 1), "20");
 	menu->addStateToLastButton("25");
 	menu->addStateToLastButton("50");
 	menu->addStateToLastButton("100");
+	menu->addStateToLastButton("200");
+	menu->addStateToLastButton("500");
 	menu->createNewStateButton("map height", NULL, 3,
-				   glm::vec4(1, 1, 1, 1), "10");
-	menu->addStateToLastButton("15");
-	menu->addStateToLastButton("20");
+				   glm::vec4(1, 1, 1, 1), "20");
 	menu->addStateToLastButton("25");
 	menu->addStateToLastButton("50");
 	menu->addStateToLastButton("100");
+	menu->addStateToLastButton("200");
+	menu->addStateToLastButton("500");
 	menu->createNewButton("next", &IMenuManager::setNewGameMenu,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setPlayMenu,
