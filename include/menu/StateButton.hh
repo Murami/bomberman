@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 17:43:50 2014 Manu
-// Last update Mon Jun  9 14:57:20 2014 Manu
+// Last update Wed Jun 11 02:23:20 2014 Manu
 //
 
 #ifndef		__STATEBUTTON_HH__
@@ -32,7 +32,7 @@ namespace	bbm
     size_t				_nbSpaces;
 
   public :
-    const std::string&		getState() const;
+    const std::string&		getState();
     void			addState(const std::string&);
     void			removeState(const std::string&);
 

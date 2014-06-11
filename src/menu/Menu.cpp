@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:03 2014 Manu
-// Last update Tue Jun 10 19:10:12 2014 Manu
+// Last update Wed Jun 11 01:49:50 2014 Manu
 //
 
 #include		"FileExplorer.hh"
@@ -19,6 +19,11 @@ namespace	bbm
     _title(title), _manager(manager)
   {
     this->_frame = NULL;
+  }
+
+  const std::list<AButton*>&	Menu::getButtons() const
+  {
+    return (this->_buttons);
   }
 
   bool		Menu::initialize()
@@ -81,7 +86,7 @@ namespace	bbm
   {
     if (input.getKeyDown(SDLK_RETURN))
       {
-	std::list<void (IMenuManager::*)()>::iterator it;
+	std::list<void (IMenuManager::*)(Menu*)>::iterator it;
 	it = this->_callbacks.begin();
 	for (int i = 0; i < this->_selected; i++)
 	  it++;
@@ -92,7 +97,7 @@ namespace	bbm
 	  {
 	    if ((*b)->useCallback())
 	      this->_selector->move(glm::vec3(0, -(static_cast<float>(this->_buttons.size()) / 2), 0));
-	    (this->_manager->*(*it))();
+	    (this->_manager->*(*it))(this);
 	  }
       }
   }
@@ -132,7 +137,7 @@ namespace	bbm
   }
 
   void		Menu::createNewStateButton(const std::string& label,
-					   void (IMenuManager::*func)(),
+					   void (IMenuManager::*func)(Menu*),
 					   size_t spaces,
 					   const glm::vec4& color,
 					   const std::string& defaultState)
@@ -144,7 +149,7 @@ namespace	bbm
   }
 
   void		Menu::createNewButton(const std::string& label,
-				      void (IMenuManager::*fPtr)(),
+				      void (IMenuManager::*fPtr)(Menu*),
 				      const glm::vec4& color,
 				      bool clickable)
   {
@@ -155,7 +160,7 @@ namespace	bbm
   }
 
   void		Menu::createNewToggleButton(const std::string& label,
-					    void (IMenuManager::*fPtr)(),
+					    void (IMenuManager::*fPtr)(Menu*),
 					    const glm::vec4& color, bool state)
   {
     AButton* button = new ToggleButton(label, color, state);

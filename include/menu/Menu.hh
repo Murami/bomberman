@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:00 2014 Manu
-// Last update Mon Jun  9 18:08:21 2014 Manu
+// Last update Wed Jun 11 01:48:58 2014 Manu
 //
 
 #ifndef		__MENU_HH__
@@ -37,16 +37,16 @@ namespace	bbm
   class		Menu : public IDrawable
   {
   private :
-    const std::string			_title;
-    IMenuManager*			_manager;
-    std::list<void (IMenuManager::*)()>	_callbacks;
-    std::list<void (IMenuManager::*)()>	_togglecallbacks;
-    std::list<AButton*>			_buttons;
-    AButton*				_frameTitle;
-    int					_selected;
-    Selector*				_selector;
-    Frame*				_frame;
-    std::list<Letter*>			_titleLetters;
+    const std::string				_title;
+    IMenuManager*				_manager;
+    std::list<void (IMenuManager::*)(Menu*)>	_callbacks;
+    std::list<void (IMenuManager::*)(Menu*)>	_togglecallbacks;
+    std::list<AButton*>				_buttons;
+    AButton*					_frameTitle;
+    int						_selected;
+    Selector*					_selector;
+    Frame*					_frame;
+    std::list<Letter*>				_titleLetters;
 
   private :
     void	_handleKeyDown(const Input&);
@@ -56,7 +56,8 @@ namespace	bbm
     void	_handleKeyLeft(const Input&);
 
   public :
-    const std::string&	getTitle() const;
+    const std::string&		getTitle() const;
+    const std::list<AButton*>&	getButtons() const;
 
   public :
     virtual void	draw(ARenderer&, const RenderState&);
@@ -67,17 +68,17 @@ namespace	bbm
 
   public :
     void	createNewButton(const std::string&,
-				void (IMenuManager::*)(),
+				void (IMenuManager::*)(Menu*),
 				const glm::vec4& v =
 				glm::vec4(1, 1, 1, 1),
 				bool clickable = false);
     void	createNewToggleButton(const std::string&,
-				      void (IMenuManager::*)(),
+				      void (IMenuManager::*)(Menu*),
 				      const glm::vec4& v =
 				      glm::vec4(1, 1, 1, 1),
 				      bool state = false);
     void	createNewStateButton(const std::string& label,
-				     void (IMenuManager::*)(),
+				     void (IMenuManager::*)(Menu*),
 				     size_t spaces = 2,
 				     const glm::vec4& color =
 				     glm::vec4(1, 1, 1, 1),

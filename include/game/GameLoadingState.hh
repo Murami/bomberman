@@ -21,6 +21,18 @@ namespace bbm
     void	draw(float time, Screen& context);
     void	revealing();
 
+  public :
+    struct		GameConfig
+    {
+      int		mapSizeX;
+      int		mapSizeY;
+      bool		player2;
+      bool		player3;
+      bool		player4;
+      int		numberIA;
+      int		level;
+    };
+
   private:
     void	loadShader();
     void	loadTexture();
