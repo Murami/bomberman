@@ -105,7 +105,8 @@ namespace bbm
 	  }
 	player->setMove(playerMove);
       }
-    if (entity->getType() == "FireBombExplode" || entity->getType() == "PowerBombExplode")
+    if (entity->getType() == "FireBombExplode" ||
+	entity->getType() == "PowerBombExplode")
       {
 	AEntity *bonus;
 

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <utility>
 #include <SDL.h>
+#include "game/Tile.hh"
 #include "game/GameState.hh"
 #include "game/GameManager.hh"
 
@@ -52,8 +53,23 @@ namespace bbm
 
   void			GameState::randomize(int x, int y)
   {
-    (void) x;
-    (void) y;
+    int			posx;
+    int			posy;
+
+    _tilemap.randomize(x, y);
+    for (posx = 1; posx < x - 1; posx++)
+      {
+	for(posy = 1; posy < y - 1; posy++)
+	  {
+	    if (_tilemap.getTileType(posx, posy) != Tile::Spawn &&
+		_tilemap.getTileType(posx + 1, posy) != Tile::Spawn &&
+		_tilemap.getTileType(posx - 1, posy) != Tile::Spawn &&
+		_tilemap.getTileType(posx, posy + 1) != Tile::Spawn &&
+		_tilemap.getTileType(posx, posy - 1) != Tile::Spawn &&
+		std::rand() % 2 == 1)
+	      addEntity(new GameBox(glm::vec2(posx, posy), -1, *this));
+	  }
+      }
   }
 
   void			GameState::load(const std::string & file)
@@ -83,6 +99,7 @@ namespace bbm
 	throw SerializerException("Serializer GameState Error : "
 				  + std::string(ex.what()));
       }
+    _tilemap.save(_tilemapName);
   }
 
   void			GameState::pack(ISerializedNode & current) const
@@ -117,7 +134,6 @@ namespace bbm
     int			index;
 
     current.get("tilemap", _tilemapName);
-    _tilemap.load(_tilemapName);
     entityListNode = current.get("entity");
     size = entityListNode->size();
     for (index = 0; index < size; index++)
@@ -153,6 +169,10 @@ namespace bbm
       {
     	_players.push_back(new Player(*this, *it));
       }
+
+    // INIT EN BRUT DES AI
+    // for (int i = 0; i != 1; i++)
+    //   _AIs.push_back(new AI(*this, glm::vec2(5, 5)));
 
     // PlayerConfig	playerConfig;
     // playerConfig.inputConfig = new InputConfig;
@@ -228,24 +248,22 @@ namespace bbm
   void			GameState::draw(float time, Screen& context)
   {
     (void) time;
-    EntitiesIt		entitiesIt;
-    PlayerIt		itPlayersCamera;
     Transform		projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
     Transform		cameraSky = Camera(glm::vec3(10, 0, -10), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+    PlayerIt		itPlayersCamera;
     RenderState		stateSky(projection, cameraSky);
 
     context.split(glm::ivec2(0, 0), glm::ivec2(context.getSize().x, context.getSize().y));
     context.clear();
     for (itPlayersCamera = _players.begin(); itPlayersCamera != _players.end(); itPlayersCamera++)
       {
-	PlayerIt	itPlayers;
 	Player&		currPlayer = *(*itPlayersCamera);
 	Transform	camera = Camera(glm::vec3(currPlayer.getPosition().x, currPlayer.getPosition().y - 2, 10),
 					glm::vec3(currPlayer.getPosition().x, currPlayer.getPosition().y, 0),
 					glm::vec3(0, 0, 1));
 	RenderState		state(projection, camera, Transform());
 
-	/// CA C'EST MOCHE C'EST A FAIRE A LA PUTAIN D'INIT DU GAME STATE !!!!
+	/// SPLIT SCREEN
 	if (_players.size() == 2)
 	  {
 	    if (std::distance(_players.begin(), itPlayersCamera) == 0)
@@ -288,11 +306,23 @@ namespace bbm
 	      context.split(glm::ivec2(context.getSize().x / 2, 0),
 			    glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
 	  }
+
 	context.draw(_tilemap, state);
+
+	//draw entities
+	EntitiesIt		entitiesIt;
 	for (entitiesIt = _entities.begin(); entitiesIt != _entities.end(); entitiesIt++)
 	  context.draw(*(*entitiesIt), state);
+
+	//draw players
+	PlayerIt	itPlayers;
 	for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
 	  context.draw(*(*itPlayers), state);
+
+	//draw AI
+	// std::list<AI*>::iterator	itAIs;
+	// for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
+	//   context.draw(*(*itAIs), state);
       }
     context.flush();
   }
@@ -307,12 +337,17 @@ namespace bbm
  	return;
       }
 
+    // Update all players and AI
     std::list<Player*>::iterator	itPlayers;
+    std::list<AI*>::iterator		itAIs;
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
       (*itPlayers)->handleEvents(time, input);
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
       (*itPlayers)->update(time);
+    // for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
+    //   (*itAIs)->update(time);
 
+    // Update all entities
     for (it = _entities.begin(); it != _entities.end(); it++)
       (*it)->update(time);
     it = _entities.begin();
