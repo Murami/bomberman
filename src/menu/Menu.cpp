@@ -5,11 +5,12 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:03 2014 Manu
-// Last update Wed Jun 11 03:42:51 2014 Manu
+// Last update Wed Jun 11 14:52:14 2014 Desabre Quentin
 //
 
 #include		"FileExplorer.hh"
 #include		"Frame.hh"
+#include		"graphic/ModelManager.hh"
 #include		"Menu.hh"
 
 namespace	bbm
@@ -28,6 +29,7 @@ namespace	bbm
 
   bool		Menu::initialize()
   {
+    ModelManager::getInstance()->addModel("arrow", "./assets/menu/models/arrow.obj");
     this->_selected = 0;
     this->_selector = new Selector();
     this->_selector->setRoll(90.0f);

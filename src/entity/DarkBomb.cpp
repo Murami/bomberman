@@ -13,7 +13,7 @@ namespace bbm
 {
   DarkBomb::DarkBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABomb(position, gameState, idPlayer),
-    _model("./assets/models_bomb/DarkBomb/Bomb.obj", "default", 0)
+    _model("DarkBomb", "default", 0)
   {
     _type = "DarkBomb";
     _model.setRoll(90);

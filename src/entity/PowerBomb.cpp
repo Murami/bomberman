@@ -13,7 +13,7 @@ namespace bbm
 {
   PowerBomb::PowerBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABomb(position, gameState, idPlayer),
-    _model("./assets/models_bomb/PowerBomb2/Bomb.obj", "default", 0)
+    _model("PowerBomb2", "default", 0)
   {
     _type = "PowerBomb";
     _model.setRoll(90);
