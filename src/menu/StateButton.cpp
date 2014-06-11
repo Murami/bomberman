@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 17:43:53 2014 Manu
-// Last update Mon Jun  9 15:07:11 2014 Manu
+// Last update Wed Jun 11 02:23:18 2014 Manu
 //
 
 #include		"Letter.hh"
@@ -134,7 +134,7 @@ namespace		bbm
     return (true);
   }
 
-  const std::string&	StateButton::getState() const
+  const std::string&	StateButton::getState()
   {
     return (this->_currentState);
   }

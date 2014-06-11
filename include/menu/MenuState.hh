@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 16:43:06 2014 Manu
-// Last update Tue Jun 10 23:58:11 2014 Manu
+// Last update Wed Jun 11 02:17:58 2014 Manu
 //
 
 #ifndef		__MENUSTATE_HH__
@@ -56,9 +56,7 @@ namespace	bbm
     bool		_initializeOptionsMenu();
     bool		_initializeHighscoresMenu();
     bool		_initializePlayerSelectionMenu();
-
     bool		_initializeIASelectionMenu();
-
     bool		_initializeLoadGameMenu();
     bool		_initializeOptionControlMenu();
     bool		_initializeOptionAudioMenu();
@@ -81,23 +79,26 @@ namespace	bbm
     virtual void	revealing();
 
   public :
-    virtual void	setPlayMenu();
-    virtual void	setOptionsMenu();
-    virtual void	setHighScoreMenu();
-    virtual void	exitGame();
-    virtual void	setNewGameMenu();
-    virtual void	setContinueGameMenu();
-    virtual void	setLoadGameMenu();
-    virtual void	setMainMenu();
-    virtual void	setOptionsAudioMenu();
-    virtual void	setOptionsControlMenu();
-    virtual void	setNextFrame();
-    virtual void	setPrevFrame();
-    virtual void	setIASelectionMenu();
-    virtual void	launchNewGame();
-    virtual void	setOptionControlPlayer1();
-    virtual void	setOptionControlPlayer2();
-    virtual void	setMapParamsMenu();
+    virtual void	setPlayMenu(Menu*);
+    virtual void	setOptionsMenu(Menu*);
+    virtual void	setHighScoreMenu(Menu*);
+    virtual void	exitGame(Menu*);
+    virtual void	setNewGameMenu(Menu*);
+    virtual void	setContinueGameMenu(Menu*);
+    virtual void	setLoadGameMenu(Menu*);
+    virtual void	setMainMenu(Menu*);
+    virtual void	setOptionsAudioMenu(Menu*);
+    virtual void	setOptionsControlMenu(Menu*);
+    virtual void	setNextFrame(Menu*);
+    virtual void	setPrevFrame(Menu*);
+    virtual void	setIASelectionMenu(Menu*);
+    virtual void	launchNewGame(Menu*);
+    virtual void	setOptionControlPlayer1(Menu*);
+    virtual void	setOptionControlPlayer2(Menu*);
+    virtual void	setMapParamsMenu(Menu*);
+    virtual void	serializeBindingPlayer1(Menu*);
+    virtual void	serializeBindingPlayer2(Menu*);
+    virtual void	serializeAudioSettings(Menu*);
 
   public :
     MenuState(GameManager&);
