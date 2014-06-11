@@ -185,7 +185,6 @@ namespace bbm
     std::map<std::string, t_data>::const_iterator	it;
     ISerializedNode*					inputMapNode;
     ISerializedNode*					inputNode;
-    int							index;
     int							i;
 
     inputMapNode = current.add("input");
@@ -226,6 +225,11 @@ namespace bbm
   unsigned int	InputConfig::getKey(const std::string & key) const
   {
     return (_keyMap.at(key).key);
+  }
+
+  const std::string&	InputConfig::getKeyName(const std::string & key) const
+  {
+    return (_keyMap.at(key).keyName);
   }
 
   void		InputConfig::bindKey(const std::string & event, const std::string& key)

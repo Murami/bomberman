@@ -23,6 +23,7 @@ namespace bbm
 
   public:
     unsigned int	getKey(const std::string &) const;
+    const std::string&  getKeyName(const std::string & key) const;
     void		bindKey(const std::string & event,
 				const std::string & key);
 

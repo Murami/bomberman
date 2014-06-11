@@ -42,12 +42,14 @@ namespace bbm
     void	loadTexture();
     void	loadSound();
     void	loadModel();
+    void        loadGameState();
 
   private:
     bool				_finish;
     Object*				_loading;
     Object*				_loadingFinished;
     GameManager&			_manager;
+    GameConfig*				_config;
   };
 };
 

@@ -1,10 +1,6 @@
 #include "game/GameLoadingState.hh"
 #include "game/GameManager.hh"
 #include "game/GameState.hh"
-#include "serializer/ISerializedNode.hh"
-#include "serializer/JSONSerializer.hh"
-#include "serializer/Serializer.hh"
-#include "serializer/SerializerException.hh"
 #include "graphic/ShaderManager.hh"
 #include "graphic/TextureManager.hh"
 #include "graphic/Object.hh"
@@ -21,7 +17,8 @@ namespace bbm
 {
   GameLoadingState::GameLoadingState(GameManager& gameManager,
 				     GameConfig* config) :
-    _manager(gameManager)
+    _manager(gameManager),
+    _config(config)
   {
     TextureManager::getInstance()->addTexture("load", "assets/game/Loading.tga");
     TextureManager::getInstance()->addTexture("load2", "assets/game/LoadingFinish.tga");
@@ -95,6 +92,49 @@ namespace bbm
     Marvin::initialize();
   }
 
+  void			GameLoadingState::loadGameState()
+  {
+    GameState*			state;
+    PlayerConfig		playerConfig;
+    GameState::GameStateConfig	gameStateConfig;
+
+    if (_config->player1)
+      {
+	playerConfig.inputConfig = new InputConfig;
+	playerConfig.inputConfig->load("inputConfig1.json");
+	playerConfig.splitScreenPosition = glm::vec2(0, 0);
+	playerConfig.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
+	gameStateConfig.playersConfigs.push_back(playerConfig);
+      }
+    if (_config->player2)
+      {
+	playerConfig.inputConfig = new InputConfig;
+	playerConfig.inputConfig->load("inputConfig2.json");
+	playerConfig.splitScreenPosition = glm::vec2(512 * 1.5, 0);
+	playerConfig.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
+	gameStateConfig.playersConfigs.push_back(playerConfig);
+      }
+    if (_config->player3)
+      {
+	playerConfig.inputConfig = new InputConfig;
+	playerConfig.inputConfig->load("inputConfig3.json");
+	playerConfig.splitScreenPosition = glm::vec2(0, 384 * 1.5);
+	playerConfig.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
+	gameStateConfig.playersConfigs.push_back(playerConfig);
+      }
+    if (_config->player4)
+      {
+	playerConfig.inputConfig = new InputConfig;
+	playerConfig.inputConfig->load("inputConfig4.json");
+	playerConfig.splitScreenPosition = glm::vec2(512 * 1.5, 384 * 1.5);
+	playerConfig.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
+	gameStateConfig.playersConfigs.push_back(playerConfig);
+      }
+    state = new GameState(_manager, &gameStateConfig);
+    state->load("save1.json");
+    _manager.push(state);
+  }
+
   void			GameLoadingState::initialize()
   {
   }
@@ -120,18 +160,7 @@ namespace bbm
       }
     else if (input.getKeyDown(SDLK_SPACE))
       {
-	GameState*		state = new GameState(_manager);
-	Serializer		s = Serializer::create<JSONSerializer>();
-	try
-	  {
-	    s->deserializeFromFile("save1.json", *state);
-	    // s->serializeToFile("export1.json", *state);
-	  }
-	catch (SerializerException& ex)
-	  {
-	    std::cout << "Serializer GameState Error : " << ex.what() << std::endl;
-	  }
-	_manager.push(state);
+	loadGameState();
       }
   }
 

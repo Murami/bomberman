@@ -22,11 +22,17 @@ namespace bbm
   class	GameState : public IGameState, public ISerializable
   {
   public:
+    struct				GameStateConfig
+    {
+      std::vector<PlayerConfig>		playersConfigs;
+    };
+
+  public:
     typedef std::list<AEntity*>::iterator	EntitiesIt;
     typedef std::list<Player*>::iterator	PlayerIt;
 
   public:
-    GameState(GameManager& manager);
+    GameState(GameManager& manager, GameStateConfig* config);
     ~GameState();
 
     void			initialize();
@@ -36,6 +42,8 @@ namespace bbm
     void			update(float time, const Input& input);
     void			draw(float time, Screen& context);
 
+    void			load(const std::string & file);
+    void			save(const std::string & file);
     void			pack(ISerializedNode & current) const;
     void			unpack(const ISerializedNode & current);
 
@@ -52,6 +60,7 @@ namespace bbm
     std::list<Player*>		_players;
     TileMap			_tilemap;
     GameManager&		_manager;
+    GameStateConfig*		_config;
   };
 };
 

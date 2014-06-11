@@ -38,15 +38,45 @@
 
 namespace bbm
 {
-  GameState::GameState(GameManager& manager) :
+  GameState::GameState(GameManager& manager,
+		       GameStateConfig* config) :
     _tilemap(),
-    _manager(manager)
+    _manager(manager),
+    _config(config)
   {
     _tilemap.load("map1.json");
   }
 
   GameState::~GameState()
   {
+  }
+
+  void			GameState::load(const std::string & file)
+  {
+    Serializer		s = Serializer::create<JSONSerializer>();
+    try
+      {
+	s->deserializeFromFile(file, *this);
+      }
+    catch (SerializerException& ex)
+      {
+	throw SerializerException("Deserializer GameState Error : "
+				  + std::string(ex.what()));
+      }
+  }
+
+  void			GameState::save(const std::string & file)
+  {
+    Serializer		s = Serializer::create<JSONSerializer>();
+    try
+      {
+	s->serializeToFile(file, *this);
+      }
+    catch (SerializerException& ex)
+      {
+	throw SerializerException("Serializer GameState Error : "
+				  + std::string(ex.what()));
+      }
   }
 
   void			GameState::pack(ISerializedNode & current) const
@@ -107,33 +137,41 @@ namespace bbm
     glEnable(GL_SCISSOR_TEST);
     glEnable(GL_DEPTH_TEST);
 
-    PlayerConfig	playerConfig;
-    playerConfig.inputConfig = new InputConfig;
-    playerConfig.inputConfig->load("inputConfig1.json");
-    playerConfig.splitScreenPosition = glm::vec2(0, 0);
-    playerConfig.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
-    _players.push_back(new Player(*this, playerConfig));
+    std::vector<PlayerConfig>::iterator it;
 
-    PlayerConfig	playerConfig2;
-    playerConfig2.inputConfig = new InputConfig;
-    playerConfig2.inputConfig->load("inputConfig2.json");
-    playerConfig2.splitScreenPosition = glm::vec2(512 * 1.5, 0);
-    playerConfig2.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
-    _players.push_back(new Player(*this, playerConfig2));
+    for(it = _config->playersConfigs.begin();
+	it != _config->playersConfigs.end(); ++it)
+      {
+	_players.push_back(new Player(*this, *it));
+      }
 
-    PlayerConfig	playerConfig3;
-    playerConfig3.inputConfig = new InputConfig;
-    playerConfig3.inputConfig->load("inputConfig3.json");
-    playerConfig3.splitScreenPosition = glm::vec2(0, 384 * 1.5);
-    playerConfig3.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
-    _players.push_back(new Player(*this, playerConfig3));
+    // PlayerConfig	playerConfig;
+    // playerConfig.inputConfig = new InputConfig;
+    // playerConfig.inputConfig->load("inputConfig1.json");
+    // playerConfig.splitScreenPosition = glm::vec2(0, 0);
+    // playerConfig.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
+    // _players.push_back(new Player(*this, playerConfig));
 
-    PlayerConfig	playerConfig4;
-    playerConfig4.inputConfig = new InputConfig;
-    playerConfig4.inputConfig->load("inputConfig4.json");
-    playerConfig4.splitScreenPosition = glm::vec2(512 * 1.5, 384 * 1.5);
-    playerConfig4.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
-    _players.push_back(new Player(*this, playerConfig4));
+    // PlayerConfig	playerConfig2;
+    // playerConfig2.inputConfig = new InputConfig;
+    // playerConfig2.inputConfig->load("inputConfig2.json");
+    // playerConfig2.splitScreenPosition = glm::vec2(512 * 1.5, 0);
+    // playerConfig2.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
+    // _players.push_back(new Player(*this, playerConfig2));
+
+    // PlayerConfig	playerConfig3;
+    // playerConfig3.inputConfig = new InputConfig;
+    // playerConfig3.inputConfig->load("inputConfig3.json");
+    // playerConfig3.splitScreenPosition = glm::vec2(0, 384 * 1.5);
+    // playerConfig3.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
+    // _players.push_back(new Player(*this, playerConfig3));
+
+    // PlayerConfig	playerConfig4;
+    // playerConfig4.inputConfig = new InputConfig;
+    // playerConfig4.inputConfig->load("inputConfig4.json");
+    // playerConfig4.splitScreenPosition = glm::vec2(512 * 1.5, 384 * 1.5);
+    // playerConfig4.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
+    // _players.push_back(new Player(*this, playerConfig4));
 
     // addEntity(new BombBonus(glm::vec2(5, 17)));
     // addEntity(new SpeedBonus(glm::vec2(5, 15)));
