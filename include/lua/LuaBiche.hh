@@ -71,7 +71,7 @@ private:
 };
 
 /* implementation des methodes templates */
-# include "template/LuaBiche.tpp"
-# include "template/RegClass.tpp"
+# include "lua/LuaBiche.tpp"
+# include "lua/RegClass.tpp"
 
 #endif /*!_LUABICHE_HH_*/

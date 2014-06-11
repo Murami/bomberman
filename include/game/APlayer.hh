@@ -71,10 +71,13 @@ namespace bbm
     void		setDark(bool);
     void		slowSpeed();
     void		setPower(int);
+    bool		isDead() const;
     void		addPower();
     void		addSpeed();
     void		addBombs();
     void		addBombsBonus();
+    void		addScore(int score);
+    void		die();
 
     virtual const std::string&	getType() const = 0;
     virtual void		update(float time) = 0;
@@ -105,6 +108,7 @@ namespace bbm
     BombType		_typeBomb;
     PlayerState		_state;
     GameState&		_gameState;
+    int			_score;
   };
 };
 

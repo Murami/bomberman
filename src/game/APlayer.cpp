@@ -124,7 +124,13 @@ namespace bbm
       }
   }
 
+  //ATENTION AU REFERENCE VERS LE PLAYER !
   bool			APlayer::expired() const
+  {
+    return (false);
+  }
+
+  bool			APlayer::isDead() const
   {
     return (_alive);
   }
@@ -249,6 +255,16 @@ namespace bbm
 	else
 	  _state = RIGHT;
       }
+  }
+
+  void	APlayer::addScore(int score)
+  {
+    _score += score;
+  }
+
+  void	APlayer::die()
+  {
+    _alive = false;
   }
 
 };
