@@ -13,8 +13,9 @@ namespace bbm
 {
   /// !! FICHIER DE CONFIG POUR LA RESOLUTION
   Game::Game() :
-    _screen(glm::vec2(1024 * 1.5, 768 * 1.5), "Bomberman")
+    _screen("Bomberman")
   {
+    std::srand(std::time(0));
     ShaderManager::getInstance()->addShader("default", "gdl/shaders/basic.vp",
 					    "gdl/shaders/basic.fp");
   }

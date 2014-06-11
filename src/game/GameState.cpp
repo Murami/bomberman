@@ -202,7 +202,7 @@ namespace bbm
     (void) time;
     EntitiesIt		entitiesIt;
     PlayerIt		itPlayersCamera;
-    Transform		projection = ProjectionPerspective(60, 512 / 384, 1, 1000);
+    Transform		projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
     Transform		cameraSky = Camera(glm::vec3(10, 0, -10), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     RenderState		stateSky(projection, cameraSky);
 
@@ -210,26 +210,60 @@ namespace bbm
     ShaderManager::getInstance()->getShader("default")->bind();
     ShaderManager::getInstance()->getShader("default")->setUniform("projection", projection.getMatrix());
 
-    context.split(glm::ivec2(0, 0), glm::ivec2(1024 * 1.5, 768 * 1.5));
+    context.split(glm::ivec2(0, 0), glm::ivec2(context.getSize().x, context.getSize().y));
     context.clear();
     for (itPlayersCamera = _players.begin(); itPlayersCamera != _players.end(); itPlayersCamera++)
       {
-	// if (std::distance(_players.begin(), itPlayersCamera) != 0)
-	//   break;
-
 	PlayerIt	itPlayers;
 	Player&		currPlayer = *(*itPlayersCamera);
 	Transform	camera = Camera(glm::vec3(currPlayer.getPosition().x, currPlayer.getPosition().y - 2, 10),
 					glm::vec3(currPlayer.getPosition().x, currPlayer.getPosition().y, 0),
 					glm::vec3(0, 0, 1));
 	RenderState		state(projection, camera, Transform());
-	// ShaderManager::getInstance()->getShader("default")->setUniform("view", camera.getMatrix());
 
-	context.split(currPlayer.getSplitScreenPosition(), currPlayer.getSplitScreenSize());
+	/// CA C'EST MOCHE C'EST A FAIRE A LA PUTAIN D'INIT DU GAME STATE !!!!
+	if (_players.size() == 2)
+	  {
+	    if (std::distance(_players.begin(), itPlayersCamera) == 0)
+	      context.split(glm::ivec2(0, 0),
+			    glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
 
-	// ShaderManager::getInstance()->getShader("default")->setUniform("view", cameraSky.getMatrix());
-	// context.draw(_skybox, stateSky);
-	// ShaderManager::getInstance()->getShader("default")->setUniform("view", camera.getMatrix());
+	    if (std::distance(_players.begin(), itPlayersCamera) == 1)
+	      context.split(glm::ivec2(context.getSize().x / 2, context.getSize().y / 2),
+			    glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
+	  }
+	else if (_players.size() == 3)
+	  {
+	    if (std::distance(_players.begin(), itPlayersCamera) == 0)
+	      context.split(glm::ivec2(0, context.getSize().y / 2),
+			    glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
+
+	    if (std::distance(_players.begin(), itPlayersCamera) == 1)
+	      context.split(glm::ivec2(context.getSize().x / 2, context.getSize().y / 2),
+			    glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
+
+	    if (std::distance(_players.begin(), itPlayersCamera) == 2)
+	      context.split(glm::ivec2(0, 0),
+			    glm::ivec2(context.getSize().x, context.getSize().y / 2));
+	  }
+	else if (_players.size() == 4)
+	  {
+	    if (std::distance(_players.begin(), itPlayersCamera) == 0)
+	      context.split(glm::ivec2(0, context.getSize().y / 2),
+			    glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
+
+	    if (std::distance(_players.begin(), itPlayersCamera) == 1)
+	      context.split(glm::ivec2(context.getSize().x / 2, context.getSize().y / 2),
+			    glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
+
+	    if (std::distance(_players.begin(), itPlayersCamera) == 2)
+	      context.split(glm::ivec2(0, 0),
+			    glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
+
+	    if (std::distance(_players.begin(), itPlayersCamera) == 3)
+	      context.split(glm::ivec2(context.getSize().x / 2, 0),
+			    glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
+	  }
 	context.draw(_tilemap, state);
 	for (entitiesIt = _entities.begin(); entitiesIt != _entities.end(); entitiesIt++)
 	  context.draw(*(*entitiesIt), state);
