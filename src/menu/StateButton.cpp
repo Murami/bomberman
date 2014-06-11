@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 17:43:53 2014 Manu
-// Last update Wed Jun 11 05:04:33 2014 Manu
+// Last update Wed Jun 11 14:59:43 2014 Manu
 //
 
 #include		"Letter.hh"

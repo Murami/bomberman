@@ -24,6 +24,7 @@ namespace bbm
       int		level;
       bool		music;
       bool		sound;
+      bool		newGame;
     };
 
   public:

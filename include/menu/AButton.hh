@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 11:51:04 2014 Manu
-// Last update Wed Jun 11 01:44:03 2014 Manu
+// Last update Wed Jun 11 14:56:52 2014 Manu
 //
 
 #ifndef		__ABUTTON_HH__
@@ -26,7 +26,7 @@ namespace	bbm
   class		AButton : public AObject
   {
   protected :
-    const std::string&	_label;
+    const std::string	_label;
     std::list<Letter*>	_letters;
     const glm::vec4&	_color;
     bool		_useCallback;
