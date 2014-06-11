@@ -13,7 +13,7 @@ namespace bbm
   class	FireBombExplode : public ABombExplode
   {
   public:
-    FireBombExplode(const glm::vec2& position, GameState& gameState);
+    FireBombExplode(const glm::vec2& position, GameState& gameState, unsigned int id);
     ~FireBombExplode();
 
     void			update(float time);
@@ -31,6 +31,7 @@ namespace bbm
     void			draw(ARenderer& renderer, const RenderState& renderState);
 
   private:
+    unsigned int		_idPlayer;
     std::string			_type;
     Wall		       	_wall;
   };

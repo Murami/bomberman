@@ -20,11 +20,6 @@ namespace bbm
   {
   }
 
-  TileMap::TileMap(const glm::ivec2& size)
-  {
-    (void)size;
-  }
-
   TileMap::~TileMap()
   {
   }

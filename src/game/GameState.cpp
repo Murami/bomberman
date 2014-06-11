@@ -67,7 +67,7 @@ namespace bbm
 		_tilemap.getTileType(posx, posy + 1) != Tile::Spawn &&
 		_tilemap.getTileType(posx, posy - 1) != Tile::Spawn &&
 		std::rand() % 2 == 1)
-	      addEntity(new GameBox(glm::vec2(posx, posy), *this));
+	      addEntity(new GameBox(glm::vec2(posx, posy), -1, *this));
 	  }
       }
   }

@@ -13,7 +13,7 @@ namespace bbm
 {
   PowerBomb::PowerBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABomb(position, gameState, idPlayer),
-    _model("./assets/models_bomb/PowerBomb2/Bomb.obj", "default", 0)
+    _model("PowerBomb2", "default", 0)
   {
     _type = "PowerBomb";
     _model.setRoll(90);
@@ -42,7 +42,7 @@ namespace bbm
     if (_gameState.getTileMap().collide(_position.x + x + 0.5, _position.y + y + 0.5))
       return (false);
 
-    _gameState.addEntity(new PowerBombExplode(glm::vec2(_position.x + x, _position.y + y), _gameState));
+    _gameState.addEntity(new PowerBombExplode(glm::vec2(_position.x + x, _position.y + y), _gameState, _idPlayer));
     for (it = _gameState.getEntities().begin(); it != _gameState.getEntities().end(); it++)
       {
 	if ((*it)->getType() == "GameBox" && (*it)->collide(glm::vec3(_position.x + x + 0.5, _position.y + y + 0.5, 0)))
@@ -69,7 +69,7 @@ namespace bbm
       {
 	_used = true;
 	_gameState.getPlayer(_idPlayer).addBombsBonus();
-	_gameState.addEntity(new PowerBombExplode(glm::vec2(_position.x, _position.y), _gameState));
+	_gameState.addEntity(new PowerBombExplode(glm::vec2(_position.x, _position.y), _gameState, _idPlayer));
 	for (int i = 1; i != 100 && addExplode(i, 0); i++);
 	for (int i = 1; i != 100 && addExplode(-i, 0); i++);
 	for (int i = 1; i != 100 && addExplode(0, i); i++);

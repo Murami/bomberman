@@ -19,7 +19,7 @@ namespace bbm
     if (_models.find(name) != _models.end())
       return;
     model = new gdl::Model;
-    if (model->load(pathname))
+    if (!model->load(pathname))
       throw (std::runtime_error("error loading model"));
     _models[name] = model;
   }

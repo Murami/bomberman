@@ -31,6 +31,8 @@ SRC		=	main				\
 			game/FrameManager		\
 			game/Wall			\
 			game/GameLoadingState		\
+			game/APlayer			\
+			game/AI				\
 			entity/BonusFactory		\
 			entity/EntityFactory		\
 			entity/BombFactory		\
@@ -81,6 +83,7 @@ SRC		=	main				\
 			menu/PauseState			\
 			menu/OpendirException		\
 			sound/SoundManager		\
+			lua/LuaBiche
 
 SRC_EXT		=	.cpp
 
@@ -97,6 +100,7 @@ DINC		=	include		\
 			gdl/includes	\
 			jsoncpp/include	\
 			include/menu	\
+			lua/include
 
 CFLAGS		=	-Wall		\
 			-Wextra
@@ -113,16 +117,18 @@ LIB		=	gdl_gl		\
 			pthread		\
 			dl		\
 			rt		\
-			json
+			json		\
+			lua
 
 DLIB		=	gdl/libs	\
-			jsoncpp/libs
+			jsoncpp/libs	\
+			lua/libs
 
 LDFLAGS		=	src/sound/libfmodex64-4.44.31.so
 
 ## RUNS
 
-CC		=	g++
+CC		=	g++ -fmax-errors=5
 RM		=	rm -rf
 MD		=	mkdir -p
 
@@ -134,7 +140,7 @@ MD		=	mkdir -p
 
 DBGBOOL		=	yes
 
-PROFILE		=	yes
+PROFILE		=	no
 
 DBG		=	-g3		\
 			-ggdb
@@ -185,7 +191,7 @@ endif
 CFLAGS		+=	$(CINC)
 LDFLAGS		+=	$(DLIB)			\
 			$(LIB)			\
-			-Wl,-rpath=./gdl/libs
+			-Wl,-rpath=./gdl/libs:./lua/libs
 
 ## MISC RULES
 

@@ -14,7 +14,10 @@
 
 namespace	bbm
 {
-  const std::string	MenuState::inputConfigPath = "./";
+  const std::string	MenuState::INPUT_CONFIG_P1 = "./inputConfig1.json";
+  const std::string	MenuState::INPUT_CONFIG_P2 = "./inputConfig2.json";
+  const std::string	MenuState::INPUT_CONFIG_P3 = "./inputConfig3.json";
+  const std::string	MenuState::INPUT_CONFIG_P4 = "./inputConfig4.json";
 
   MenuState::MenuState(GameManager& manager) : _manager(manager)
   {
@@ -520,28 +523,28 @@ namespace	bbm
     try
       {
 	menu->createNewStateButton("up", NULL, 7,
-				   glm::vec4(1, 1, 1, 1), "z");
-				   // this->_inputConfigPlayer4->getKey("up"));
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("up")));
 	this->_setBindingControlPlayer2(menu, "z");
 	menu->createNewStateButton("down", NULL, 5,
-				   glm::vec4(1, 1, 1, 1), "s");
-				   // this->_inputConfigPlayer4->getKey("down"));
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("down")));
 	this->_setBindingControlPlayer2(menu, "s");
 	menu->createNewStateButton("left", NULL, 5,
-				   glm::vec4(1, 1, 1, 1), "q");
-				   // this->_inputConfigPlayer4->getKey("left"));
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("left")));
 	this->_setBindingControlPlayer2(menu, "q");
 	menu->createNewStateButton("right", NULL, 4,
-				   glm::vec4(1, 1, 1, 1), "d");
-				   // this->_inputConfigPlayer4->getKey("right"));
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("right")));
 	this->_setBindingControlPlayer2(menu, "d");
 	menu->createNewStateButton("bomb", NULL, 5,
-				   glm::vec4(1, 1, 1, 1), "x");
-				   // this->_inputConfigPlayer4->getKey("bomb"));
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("bomb")));
 	this->_setBindingControlPlayer2(menu, "x");
 	menu->createNewStateButton("bomb2", NULL, 4,
-				   glm::vec4(1, 1, 1, 1), "w");
-	//this->_inputConfigPlayer4->getKey("bomb2"));
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("bomb2")));
 	this->_setBindingControlPlayer2(menu, "w");
 	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer4,
 			      glm::vec4(0, 1, 0, 1));
@@ -669,17 +672,13 @@ namespace	bbm
   bool		MenuState::_initializeInputConfig()
   {
     this->_inputConfigPlayer1 = new InputConfig();
-    this->_inputConfigPlayer1->load(inputConfigPath +
-				    std::string("inputConfig1.json"));
+    this->_inputConfigPlayer1->load(INPUT_CONFIG_P1);
     this->_inputConfigPlayer2 = new InputConfig();
-    this->_inputConfigPlayer2->load(inputConfigPath +
-				    std::string("inputConfig2.json"));
+    this->_inputConfigPlayer2->load(INPUT_CONFIG_P2);
     this->_inputConfigPlayer3 = new InputConfig();
-    this->_inputConfigPlayer3->load(inputConfigPath +
-				    std::string("inputConfig3.json"));
+    this->_inputConfigPlayer3->load(INPUT_CONFIG_P3);
     this->_inputConfigPlayer4 = new InputConfig();
-    this->_inputConfigPlayer4->load(inputConfigPath +
-				    std::string("inputConfig4.json"));
+    this->_inputConfigPlayer4->load(INPUT_CONFIG_P4);
     return (true);
   }
 
@@ -785,14 +784,6 @@ namespace	bbm
     this->setOptionsMenu(menu);
   }
 
-  ////////////////////////////////
-  // INSTANCIER INPUTCONFIG //////
-  // INIT : INPUTCONFIG -> LOAD //
-  // SET DES STATES DES BUTTON ///
-  // LORS DU OK //////////////////
-  // SAVE L'INPUT CONFIG /////////
-  ////////////////////////////////
-
   void		MenuState::serializeBindingPlayer1(Menu* menu)
   {
     std::list<AButton*> list = menu->getButtons();
@@ -802,10 +793,10 @@ namespace	bbm
 	StateButton* s = dynamic_cast<StateButton*>(*it);
 	if (s)
 	  {
-	    ///////////////////////////////
-	    // Serializer les inputs ici //
-	    ///////////////////////////////
-	    std::cout << std::string("SDLK_") + s->getState() << std::endl;
+	    if (s->getState()[0] >= '0' && s->getState()[0] <= '9')
+	      std::cout << std::string("SDLK_KP_") + s->getState() << std::endl;
+	    else
+	      std::cout << std::string("SDLK_") + s->getState() << std::endl;
 	  }
       	it++;
       }
@@ -821,7 +812,10 @@ namespace	bbm
 	StateButton* s = dynamic_cast<StateButton*>(*it);
 	if (s)
 	  {
-	    std::cout << std::string("SDLK_") + s->getState() << std::endl;
+	    if (s->getState()[0] >= '0' && s->getState()[0] <= '9')
+	      std::cout << std::string("SDLK_KP_") + s->getState() << std::endl;
+	    else
+	      std::cout << std::string("SDLK_") + s->getState() << std::endl;
 	  }
       	it++;
       }
@@ -837,7 +831,10 @@ namespace	bbm
 	StateButton* s = dynamic_cast<StateButton*>(*it);
 	if (s)
 	  {
-	    std::cout << std::string("SDLK_") + s->getState() << std::endl;
+	    if (s->getState()[0] >= '0' && s->getState()[0] <= '9')
+	      std::cout << std::string("SDLK_KP_") + s->getState() << std::endl;
+	    else
+	      std::cout << std::string("SDLK_") + s->getState() << std::endl;
 	  }
       	it++;
       }
@@ -853,10 +850,22 @@ namespace	bbm
 	StateButton* s = dynamic_cast<StateButton*>(*it);
 	if (s)
 	  {
-	    std::cout << std::string("SDLK_") + s->getState() << std::endl;
+	    if (s->getState()[0] >= '0' && s->getState()[0] <= '9')
+	      {
+	    	std::string key("SDLK_KP_");
+	    	key += s->getState();
+	    	this->_inputConfigPlayer4->bindKey(s->getLabel(), key);
+	      }
+	    else
+	      {
+	    	std::string key("SDLK_");
+	    	key += s->getState();
+	    	this->_inputConfigPlayer4->bindKey(s->getLabel(), key);
+	      }
 	  }
       	it++;
       }
+    this->_inputConfigPlayer4->save(INPUT_CONFIG_P4);
     this->setOptionsControlMenu(menu);
   }
 
@@ -933,6 +942,7 @@ namespace	bbm
 	else
 	  this->_config.level = 2;
       }
+    this->_config.newGame = true;
     GameLoadingState*	state = new GameLoadingState(this->_manager,
 						     &this->_config);
     this->_manager.push(state);

@@ -15,7 +15,7 @@ namespace bbm
   {
   public:
     GameBox(GameState& gameState);
-    GameBox(const glm::vec2& pos, GameState& gameState);
+    GameBox(const glm::vec2& pos, int idPLayer, GameState& gameState);
     ~GameBox();
 
     void			update(float time);
@@ -36,6 +36,7 @@ namespace bbm
     Wall			_wall;
     GameState&			_gameState;
     bool			_used;
+    int				_idPlayer;
   };
 };
 

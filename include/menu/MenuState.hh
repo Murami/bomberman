@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 16:43:06 2014 Manu
-// Last update Wed Jun 11 06:38:07 2014 Manu
+// Last update Wed Jun 11 16:03:08 2014 Manu
 //
 
 #ifndef		__MENUSTATE_HH__
@@ -34,7 +34,10 @@ namespace	bbm
   class		MenuState : public IGameState, IMenuManager
   {
   public :
-    const static std::string		inputConfigPath;
+    const static std::string		INPUT_CONFIG_P1;
+    const static std::string		INPUT_CONFIG_P2;
+    const static std::string		INPUT_CONFIG_P3;
+    const static std::string		INPUT_CONFIG_P4;
 
   private :
     GameManager&			_manager;
