@@ -6,8 +6,6 @@ namespace bbm
   struct PlayerConfig
   {
     InputConfig*	inputConfig;
-    glm::ivec2		splitScreenPosition;
-    glm::ivec2		splitScreenSize;
   };
 };
 

@@ -20,26 +20,6 @@ namespace bbm
   {
   }
 
-  TileMap::TileMap(const glm::ivec2& size)
-  {
-    // _size = size;
-    // _tiles.resize(_size.x * size.y, NULL);
-    // _object.setPrimitive(GL_QUADS);
-    // _object.setShader("default");
-    // _object.setTexture("fire");
-
-
-    // _object.pushVertex(glm::vec3(0, 0, 0));
-    // _object.pushVertex(glm::vec3(20, 0, 0));
-    // _object.pushVertex(glm::vec3(20, 20, 0));
-    // _object.pushVertex(glm::vec3(0, 20, 0));
-    // _object.pushUv(glm::vec2(0, 0));
-    // _object.pushUv(glm::vec2(1, 0));
-    // _object.pushUv(glm::vec2(1, 1));
-    // _object.pushUv(glm::vec2(0, 1));
-    // _object.build();
-  }
-
   TileMap::~TileMap()
   {
   }
