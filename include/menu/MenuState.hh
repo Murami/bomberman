@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 16:43:06 2014 Manu
-// Last update Wed Jun 11 05:55:42 2014 Manu
+// Last update Wed Jun 11 06:38:07 2014 Manu
 //
 
 #ifndef		__MENUSTATE_HH__
@@ -72,6 +72,7 @@ namespace	bbm
     void		_setBindingControlPlayer2(Menu*, const std::string&);
     void		_setBindingControlPlayer3(Menu*, const std::string&);
     void		_setBindingControlPlayer4(Menu*, const std::string&);
+    const std::string&	_getKeyFromSDLK(const std::string&);
 
   public :
     virtual void	initialize();
