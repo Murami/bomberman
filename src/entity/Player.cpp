@@ -1,21 +1,9 @@
 #include <iostream>
 #include <exception>
 #include <stdexcept>
-#include "entity/BombFactory.hh"
-#include "entity/Player.hh"
-#include "entity/BoxBomb.hh"
-#include "entity/FireBomb.hh"
-#include "entity/PowerBomb.hh"
-#include "entity/DarkBomb.hh"
-#include "entity/WaterBomb.hh"
-#include "entity/MultiBomb.hh"
 #include "events/Input.hh"
-#include "graphic/RenderState.hh"
-#include "graphic/ARenderer.hh"
 #include "game/GameState.hh"
-#include "serializer/ISerializedNode.hh"
-
-//#include "game/PlayerConfig.hh"
+#include "entity/BombFactory.hh"
 
 const float	maxSpeed = 0.01;
 const float	modelScaleFactor = 0.0020;
@@ -26,29 +14,10 @@ const float	deltaTile = 0.2;
 namespace bbm
 {
   Player::Player(GameState& gameState, const PlayerConfig& config) :
-    _collideBox("fire", "default"),
-    _gameState(gameState)
+    APlayer(gameState)
   {
     _playerConfig = config;
-    _alive = true;
-    _slow = false;
-    _dark = false;
     _type = "Player";
-    _score = 0;
-    // _model.setCurrentAnimation("run", true);
-    _model.setPosition(glm::vec3(12 + 0.5, 12 + 0.5, 0));
-    _model.setScale(glm::vec3(modelScaleFactor, modelScaleFactor, modelScaleFactor));
-    _model.setRoll(90);
-    _collideBox.setScale(glm::vec3(boxScale, boxScale, boxScale));
-    _collideBox.setPosition(glm::vec3(12, 12, 0));
-    _position = glm::vec2(12, 12);
-    _move = glm::vec2(0, 0);
-    _power = 3;
-    _typeBomb = FIRE;
-    _nbBombs = 1;
-    _nbBombsBonus = 1;
-    _speed = 0.005;
-    _state = IDLE;
   }
 
   Player::~Player()
@@ -63,6 +32,12 @@ namespace bbm
   void			Player::unpack(const ISerializedNode & current)
   {
     (void) current;
+  }
+
+  void			Player::update(float time)
+  {
+    managePhysics(time);
+    manageModel(time);
   }
 
   void			Player::handleEvents(float time, const Input& input)
@@ -83,7 +58,7 @@ namespace bbm
 	if (_nbBombs != 0)
 	  {
 	    _nbBombs--;
-	    _gameState.addEntity(new FireBomb(glm::vec2(_position.x, _position.y), _gameState, getID()));
+	    _gameState.addEntity(BombFactory::getInstance()->create(FIRE, glm::vec2(_position.x, _position.y), _gameState, getID()));
 	  }
       }
     if (input.getKeyDown(_playerConfig.inputConfig->getKey("bomb2")))
@@ -108,6 +83,7 @@ namespace bbm
       glm::normalize(_move);
   }
 
+<<<<<<< HEAD
   void			Player::updateState()
   {
     if (_move.x == 0 && _move.y == 0)
@@ -323,27 +299,10 @@ namespace bbm
   }
 
   const std::string &	Player::getType() const
+=======
+  const std::string&	Player::getType() const
+>>>>>>> 0aa5abcd1d36b5a5eb4c111a64a8c63f0c74c83e
   {
     return (_type);
-  }
-
-  const glm::vec2&	Player::getMove() const
-  {
-    return (_move);
-  }
-
-  const glm::vec2&	Player::getPosition() const
-  {
-    return (_position);
-  }
-
-  const glm::ivec2&	Player::getSplitScreenSize() const
-  {
-    return (_playerConfig.splitScreenSize);
-  }
-
-  const glm::ivec2&	Player::getSplitScreenPosition() const
-  {
-    return (_playerConfig.splitScreenPosition);
   }
 };

@@ -31,6 +31,8 @@ SRC		=	main				\
 			game/FrameManager		\
 			game/Wall			\
 			game/GameLoadingState		\
+			game/APlayer			\
+			game/AI				\
 			entity/BonusFactory		\
 			entity/EntityFactory		\
 			entity/BombFactory		\
@@ -122,7 +124,7 @@ LDFLAGS		=	src/sound/libfmodex64-4.44.31.so
 
 ## RUNS
 
-CC		=	g++
+CC		=	g++ -fmax-errors=5
 RM		=	rm -rf
 MD		=	mkdir -p
 
