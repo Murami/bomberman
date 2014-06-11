@@ -10,8 +10,24 @@ namespace bbm
 
   class GameLoadingState : public IGameState
   {
+  public :
+    struct		GameConfig
+    {
+      int		mapSizeX;
+      int		mapSizeY;
+      int		nbPlayers;
+      int		player1;
+      int		player2;
+      int		player3;
+      int		player4;
+      int		numberIA;
+      int		level;
+      bool		music;
+      bool		sound;
+    };
+
   public:
-    GameLoadingState(GameManager& gameManager);
+    GameLoadingState(GameManager& gameManager, GameConfig* config);
     ~GameLoadingState();
 
     void	initialize();
@@ -20,18 +36,6 @@ namespace bbm
     void	update(float time, const Input& input);
     void	draw(float time, Screen& context);
     void	revealing();
-
-  public :
-    struct		GameConfig
-    {
-      int		mapSizeX;
-      int		mapSizeY;
-      bool		player2;
-      bool		player3;
-      bool		player4;
-      int		numberIA;
-      int		level;
-    };
 
   private:
     void	loadShader();

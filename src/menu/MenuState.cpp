@@ -88,7 +88,7 @@ namespace	bbm
       return (false);
     try
       {
-	menu->createNewStateButton("number", NULL, 7,
+	menu->createNewStateButton("number", NULL, 9,
 				   glm::vec4(1, 1, 1, 1), "0");
 	menu->addStateToLastButton("1");
 	menu->addStateToLastButton("2");
@@ -101,7 +101,7 @@ namespace	bbm
 	menu->addStateToLastButton("25");
 	menu->addStateToLastButton("50");
 	menu->addStateToLastButton("100");
-	menu->createNewStateButton("enemies lvl", NULL, 2,
+	menu->createNewStateButton("enemies level", NULL, 2,
 				   glm::vec4(1, 1, 1, 1), "easy");
 	menu->addStateToLastButton("medium");
 	menu->addStateToLastButton("hard");
@@ -129,13 +129,28 @@ namespace	bbm
     try
       {
 	menu->createNewStateButton("player 1", NULL, 3,
-				   glm::vec4(0, 0, 1, 1), "ok");
-	menu->createNewStateButton("player 2", NULL, 3, glm::vec4(0, 1, 1, 1), "x");
-	menu->addStateToLastButton("ok");
-	menu->createNewStateButton("player 3", NULL, 3, glm::vec4(1, 0, 1, 1), "x");
-	menu->addStateToLastButton("ok");
-	menu->createNewStateButton("player 4", NULL, 3, glm::vec4(1, 1, 0, 1), "x");
-	menu->addStateToLastButton("ok");
+				   glm::vec4(0, 0, 1, 1), "keyboard gamepad1");
+	menu->addStateToLastButton("keyboard gamepad2");
+	menu->addStateToLastButton("keyboard gamepad3");
+	menu->addStateToLastButton("keyboard gamepad4");
+	menu->createNewStateButton("player 2", NULL, 3,
+				   glm::vec4(0, 1, 1, 1), "x");
+	menu->addStateToLastButton("keyboard gamepad1");
+	menu->addStateToLastButton("keyboard gamepad2");
+	menu->addStateToLastButton("keyboard gamepad3");
+	menu->addStateToLastButton("keyboard gamepad4");
+	menu->createNewStateButton("player 3", NULL, 3,
+				   glm::vec4(1, 0, 1, 1), "x");
+	menu->addStateToLastButton("keyboard gamepad1");
+	menu->addStateToLastButton("keyboard gamepad2");
+	menu->addStateToLastButton("keyboard gamepad3");
+	menu->addStateToLastButton("keyboard gamepad4");
+	menu->createNewStateButton("player 4", NULL, 3,
+				   glm::vec4(1, 1, 0, 1), "x");
+	menu->addStateToLastButton("keyboard gamepad1");
+	menu->addStateToLastButton("keyboard gamepad2");
+	menu->addStateToLastButton("keyboard gamepad3");
+	menu->addStateToLastButton("keyboard gamepad4");
 	menu->createNewButton("next",&IMenuManager::setIASelectionMenu,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setMainMenu,
@@ -360,9 +375,9 @@ namespace	bbm
       return (false);
     try
       {
-	menu->createNewButton("p1", &IMenuManager::setOptionControlPlayer1,
+	menu->createNewButton("player 1", &IMenuManager::setOptionControlPlayer1,
 			      glm::vec4(0, 0, 1, 1));
-	menu->createNewButton("p2", &IMenuManager::setOptionControlPlayer2,
+	menu->createNewButton("player 2", &IMenuManager::setOptionControlPlayer2,
 			      glm::vec4(0, 1, 1, 1));
 	menu->createNewButton("back", &IMenuManager::setOptionsMenu,
 			      glm::vec4(1, 0, 0, 1), true);
@@ -622,7 +637,8 @@ namespace	bbm
 
   void		MenuState::launchNewGame(Menu*)
   {
-    GameLoadingState*	state = new GameLoadingState(this->_manager);
+    GameLoadingState*	state = new GameLoadingState(this->_manager,
+						     &this->_config);
     this->_manager.push(state);
   }
 
@@ -635,20 +651,61 @@ namespace	bbm
   {
     std::list<AButton*> list = menu->getButtons();
     std::list<AButton*>::iterator it = list.begin();
+    StateButton* s = dynamic_cast<StateButton*>(*it);
+    if (s)
+      {
+	std::stringstream ss;
+	ss << s->getState();
+	ss >> this->_config.mapSizeX;
+	std::cout << "Map X : " << this->_config.mapSizeX << std::endl;
+      }
+    it++;
+    StateButton* s2 = dynamic_cast<StateButton*>(*it);
+    if (s2)
+      {
+	std::stringstream ss;
+	ss << s2->getState();
+	ss >> this->_config.mapSizeX;
+	std::cout << "Map Y : " << this->_config.mapSizeX << std::endl;
+      }
+    this->_setNewCurrentMenu("playerselection");
+  }
+
+  void		MenuState::setIASelectionMenu(Menu* menu)
+  {
+    int		tab[4];
+    this->_config.nbPlayers = 1;
+    tab[0] = 1;
+    tab[1] = tab[2] = tab[3] = 0;
+    std::list<AButton*> list = menu->getButtons();
+    std::list<AButton*>::iterator it = list.begin();
+    int i = 0;
     while (it != list.end())
       {
 	StateButton* s = dynamic_cast<StateButton*>(*it);
 	if (s)
 	  {
-	    std::cout << s->getState() << std::endl;
+	    std::stringstream ss;
+	    std::string state = s->getState();
+	    for (char c = '1'; c < '5'; c++)
+	      {
+		std::string tmp;
+		tmp += c;
+		if (state.find(tmp) != std::string::npos)
+		  {
+		    if (i > 0)
+		      this->_config.nbPlayers++;
+		    tab[i++] = c - 48;
+		    break;
+		  }
+	      }
 	  }
-      	it++;
+	it++;
       }
-    this->_setNewCurrentMenu("playerselection");
-  }
-
-  void		MenuState::setIASelectionMenu(Menu*)
-  {
+    this->_config.player1 = tab[0];
+    this->_config.player2 = tab[1];
+    this->_config.player3 = tab[2];
+    this->_config.player4 = tab[3];
     this->_setNewCurrentMenu("iaselection");
   }
 

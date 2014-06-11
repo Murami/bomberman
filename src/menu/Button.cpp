@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 11:33:46 2014 Manu
-// Last update Tue Jun 10 19:10:20 2014 Manu
+// Last update Wed Jun 11 03:39:08 2014 Manu
 //
 
 #include		"Button.hh"
@@ -45,7 +45,7 @@ namespace	bbm
 	 it++)
       {
 	(*it)->translate(glm::vec3(0, 0,
-				   static_cast<float>(4 -
+				   static_cast<float>(6 -
 						      static_cast<float>(i)/2)));
 	i++;
       }

@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 16:43:06 2014 Manu
-// Last update Wed Jun 11 02:42:37 2014 Manu
+// Last update Wed Jun 11 02:50:33 2014 Manu
 //
 
 #ifndef		__MENUSTATE_HH__

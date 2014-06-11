@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:03 2014 Manu
-// Last update Wed Jun 11 01:49:50 2014 Manu
+// Last update Wed Jun 11 03:42:51 2014 Manu
 //
 
 #include		"FileExplorer.hh"
@@ -33,7 +33,7 @@ namespace	bbm
     this->_selector->setRoll(90.0f);
     this->_selector->setYaw(-90.0f);
     this->_selector->setScale(glm::vec3(0.5f, 0.75f, 0.75f));
-    this->_selector->move(glm::vec3(0, 0, 5.0f));
+    this->_selector->move(glm::vec3(0, 0, 7.0f));
     if (this->_buttons.size())
       this->_selector->move(glm::vec3(0, (static_cast<float>(this->_buttons.
 							     size()) / 2), 0));
