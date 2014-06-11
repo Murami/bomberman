@@ -95,8 +95,10 @@ namespace bbm
 
   void			GameLoadingState::loadSound()
   {
-    SoundManager::getInstance()->addSound("menu", "assets/sound/Turning_tables.mp3");
+    SoundManager::getInstance()->addMusic("menu", "assets/sound/Turning_tables.mp3");
     SoundManager::getInstance()->addSound("banzai", "assets/sound/banzai.mp3");
+    SoundManager::getInstance()->addSound("bomb", "assets/sound/bomb_blow.wav");
+    SoundManager::getInstance()->addSound("aquaBomb", "assets/sound/aqua_bomb.wav");
   }
 
   void			GameLoadingState::loadModel()

@@ -3,6 +3,7 @@
 #include "graphic/ARenderer.hh"
 #include "graphic/RenderState.hh"
 #include "game/GameState.hh"
+#include "sound/SoundManager.hh"
 
 const float	scaleFactor = 1;
 
@@ -12,6 +13,7 @@ namespace bbm
     ABombExplode(position, gameState),
     _wall("fire", "default")
   {
+    SoundManager::getInstance()->play("bomb");
     _type = "FireBombExplode";
     _wall.setPosition(glm::vec3(_position.x, _position.y, _position.z));
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
