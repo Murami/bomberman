@@ -520,28 +520,28 @@ namespace	bbm
     try
       {
 	menu->createNewStateButton("up", NULL, 7,
-				   glm::vec4(1, 1, 1, 1), "z");
-				   // this->_inputConfigPlayer4->getKey("up"));
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("up")));
 	this->_setBindingControlPlayer2(menu, "z");
 	menu->createNewStateButton("down", NULL, 5,
-				   glm::vec4(1, 1, 1, 1), "s");
-				   // this->_inputConfigPlayer4->getKey("down"));
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("down")));
 	this->_setBindingControlPlayer2(menu, "s");
 	menu->createNewStateButton("left", NULL, 5,
-				   glm::vec4(1, 1, 1, 1), "q");
-				   // this->_inputConfigPlayer4->getKey("left"));
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("left")));
 	this->_setBindingControlPlayer2(menu, "q");
 	menu->createNewStateButton("right", NULL, 4,
-				   glm::vec4(1, 1, 1, 1), "d");
-				   // this->_inputConfigPlayer4->getKey("right"));
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("right")));
 	this->_setBindingControlPlayer2(menu, "d");
 	menu->createNewStateButton("bomb", NULL, 5,
-				   glm::vec4(1, 1, 1, 1), "x");
-				   // this->_inputConfigPlayer4->getKey("bomb"));
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("bomb")));
 	this->_setBindingControlPlayer2(menu, "x");
 	menu->createNewStateButton("bomb2", NULL, 4,
-				   glm::vec4(1, 1, 1, 1), "w");
-	//this->_inputConfigPlayer4->getKey("bomb2"));
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("bomb2")));
 	this->_setBindingControlPlayer2(menu, "w");
 	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer4,
 			      glm::vec4(0, 1, 0, 1));
@@ -805,7 +805,10 @@ namespace	bbm
 	    ///////////////////////////////
 	    // Serializer les inputs ici //
 	    ///////////////////////////////
-	    std::cout << std::string("SDLK_") + s->getState() << std::endl;
+	    if (s->getState()[0] >= '0' && s->getState()[0] <= '9')
+	      std::cout << std::string("SDLK_KP_") + s->getState() << std::endl;
+	    else
+	      std::cout << std::string("SDLK_") + s->getState() << std::endl;
 	  }
       	it++;
       }
@@ -821,7 +824,10 @@ namespace	bbm
 	StateButton* s = dynamic_cast<StateButton*>(*it);
 	if (s)
 	  {
-	    std::cout << std::string("SDLK_") + s->getState() << std::endl;
+	    if (s->getState()[0] >= '0' && s->getState()[0] <= '9')
+	      std::cout << std::string("SDLK_KP_") + s->getState() << std::endl;
+	    else
+	      std::cout << std::string("SDLK_") + s->getState() << std::endl;
 	  }
       	it++;
       }
@@ -837,7 +843,10 @@ namespace	bbm
 	StateButton* s = dynamic_cast<StateButton*>(*it);
 	if (s)
 	  {
-	    std::cout << std::string("SDLK_") + s->getState() << std::endl;
+	    if (s->getState()[0] >= '0' && s->getState()[0] <= '9')
+	      std::cout << std::string("SDLK_KP_") + s->getState() << std::endl;
+	    else
+	      std::cout << std::string("SDLK_") + s->getState() << std::endl;
 	  }
       	it++;
       }
@@ -853,10 +862,26 @@ namespace	bbm
 	StateButton* s = dynamic_cast<StateButton*>(*it);
 	if (s)
 	  {
-	    std::cout << std::string("SDLK_") + s->getState() << std::endl;
+	    if (s->getState()[0] >= '0' && s->getState()[0] <= '9')
+	      {
+		std::string key("SDLK_KP_");
+		std::cout << std::string("SDLK_KP_") + s->getState()
+			  << std::endl;
+		key += s->getState();
+		this->_inputConfigPlayer4->bindKey(s->getLabel(), key);
+	      }
+	    else
+	      {
+		std::string key("SDLK_");
+		std::cout << (*it)->getSize() << " : "
+		  << std::string("'SDLK_") + s->getState() << "'" << std::endl;
+		// key += s->getState();
+		// this->_inputConfigPlayer4->bindKey(s->getLabel(), key);
+	      }
 	  }
       	it++;
       }
+    //    this->_inputConfigPlayer4->save();
     this->setOptionsControlMenu(menu);
   }
 
@@ -933,6 +958,7 @@ namespace	bbm
 	else
 	  this->_config.level = 2;
       }
+    this->_config.newGame = true;
     GameLoadingState*	state = new GameLoadingState(this->_manager,
 						     &this->_config);
     this->_manager.push(state);
