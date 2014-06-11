@@ -28,7 +28,7 @@ namespace bbm
     _model.setPosition(glm::vec3(12 + 0.5, 12 + 0.5, 0));
     _model.setScale(glm::vec3(modelScaleFactor, modelScaleFactor, modelScaleFactor));
     _model.setRoll(90);
-    _position = glm::vec2(12, 12);
+    _position = glm::vec2(5, 5);
     _move = glm::vec2(0, 0);
     _power = 3;
     _typeBomb = FIRE;

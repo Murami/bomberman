@@ -33,6 +33,19 @@ namespace bbm
   {
   }
 
+
+  void Object::initialize(const std::string& texture,
+			  const std::string& shader,
+			  const std::string& primitive)
+  {
+    _textureName = texture;
+    _shaderName = shader;
+    _primitiveName = primitive;
+    setTexture(_textureName);
+    setShader(_shaderName);
+    _primitive = bbm::IDrawable::primitives.at(_primitiveName);
+  }
+
   void	Object::setPrimitive(int primitive)
   {
     _primitive = primitive;
@@ -94,7 +107,6 @@ namespace bbm
     current.get("texture", _textureName);
     current.get("shader", _shaderName);
     current.get("primitive", _primitiveName);
-    std::cout << _textureName << std::endl;
     setTexture(_textureName);
     setShader(_shaderName);
     _primitive = bbm::IDrawable::primitives.at(_primitiveName);

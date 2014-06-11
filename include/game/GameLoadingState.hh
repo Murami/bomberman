@@ -46,6 +46,7 @@ namespace bbm
     void	loadSound();
     void	loadModel();
     void        loadGameState();
+    void	newGameState();
 
   private:
     bool				_finish;
