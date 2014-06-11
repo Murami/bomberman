@@ -72,6 +72,8 @@ namespace bbm
     const glm::vec2 &	getMove() const;
     float		getDelta() const;
     int			getPower() const;
+    void		addScore(int);
+    void		die();
     void		setTypeBomb(BombType);
     void		setSpeed(float);
     void		setDark(bool);
@@ -107,6 +109,7 @@ namespace bbm
     int			_nbBombsBonus;
     float      		_speed;
     bool		_alive;
+    int			_score;
     bool		_slow;
     bool		_dark;
 
