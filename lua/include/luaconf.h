@@ -98,23 +98,16 @@
 		LUA_CDIR"?.dll;" LUA_CDIR"loadall.dll;" ".\\?.dll"
 
 #else			/* }{ */
-/* This defines DEB_HOST_MULTIARCH */
-#include "lua5.2-deb-multiarch.h"
+
 #define LUA_VDIR	LUA_VERSION_MAJOR "." LUA_VERSION_MINOR "/"
-#define LUA_ROOT	"/usr/local/"
-#define LUA_ROOT2	"/usr/"
+#define LUA_ROOT	"/usr/"
 #define LUA_LDIR	LUA_ROOT "share/lua/" LUA_VDIR
-#define LUA_LDIR2	LUA_ROOT2 "share/lua/" LUA_VDIR
-#define LUA_CDIR	LUA_ROOT "lib/lua/" LUA_VDIR
-#define LUA_CDIR2	LUA_ROOT2 "lib/" DEB_HOST_MULTIARCH "/lua/" LUA_VDIR
-#define LUA_CDIR3	LUA_ROOT2 "lib/lua/" LUA_VDIR
+#define LUA_CDIR	LUA_ROOT "lib64/lua/" LUA_VDIR
 #define LUA_PATH_DEFAULT  \
 		LUA_LDIR"?.lua;"  LUA_LDIR"?/init.lua;" \
-		LUA_CDIR"?.lua;"  LUA_CDIR"?/init.lua;" "./?.lua;" \
-		LUA_LDIR2"?.lua;"  LUA_LDIR2"?/init.lua;" "./?.lua"
+		LUA_CDIR"?.lua;"  LUA_CDIR"?/init.lua;" "./?.lua"
 #define LUA_CPATH_DEFAULT \
-		LUA_CDIR"?.so;"  LUA_CDIR2"?.so;" \
-		LUA_CDIR3"?.so;"  LUA_CDIR"loadall.so;" "./?.so"
+		LUA_CDIR"?.so;" LUA_CDIR"loadall.so;" "./?.so"
 #endif			/* } */
 
 
