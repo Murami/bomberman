@@ -16,7 +16,7 @@ namespace bbm
 
   }
 
-  GameBox::GameBox(const glm::vec2& pos, GameState& gameState) : _wall("gamebox", "default") , _gameState(gameState)
+  GameBox::GameBox(const glm::vec2& pos, int idPlayer, GameState& gameState) : _wall("gamebox", "default") , _gameState(gameState), _idPlayer(idPlayer)
   {
     _type = "GameBox";
     _pos = pos;

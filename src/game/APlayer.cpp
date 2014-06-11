@@ -257,4 +257,14 @@ namespace bbm
       }
   }
 
+  void	APlayer::addScore(int score)
+  {
+    _score += score;
+  }
+
+  void	Aplayer::die()
+  {
+    _alive = false;
+  }
+
 };
