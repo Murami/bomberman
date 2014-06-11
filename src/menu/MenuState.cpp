@@ -14,7 +14,10 @@
 
 namespace	bbm
 {
-  const std::string	MenuState::inputConfigPath = "./";
+  const std::string	MenuState::INPUT_CONFIG_P1 = "./inputConfig1.json";
+  const std::string	MenuState::INPUT_CONFIG_P2 = "./inputConfig2.json";
+  const std::string	MenuState::INPUT_CONFIG_P3 = "./inputConfig3.json";
+  const std::string	MenuState::INPUT_CONFIG_P4 = "./inputConfig4.json";
 
   MenuState::MenuState(GameManager& manager) : _manager(manager)
   {
@@ -669,17 +672,13 @@ namespace	bbm
   bool		MenuState::_initializeInputConfig()
   {
     this->_inputConfigPlayer1 = new InputConfig();
-    this->_inputConfigPlayer1->load(inputConfigPath +
-				    std::string("inputConfig1.json"));
+    this->_inputConfigPlayer1->load(INPUT_CONFIG_P1);
     this->_inputConfigPlayer2 = new InputConfig();
-    this->_inputConfigPlayer2->load(inputConfigPath +
-				    std::string("inputConfig2.json"));
+    this->_inputConfigPlayer2->load(INPUT_CONFIG_P2);
     this->_inputConfigPlayer3 = new InputConfig();
-    this->_inputConfigPlayer3->load(inputConfigPath +
-				    std::string("inputConfig3.json"));
+    this->_inputConfigPlayer3->load(INPUT_CONFIG_P3);
     this->_inputConfigPlayer4 = new InputConfig();
-    this->_inputConfigPlayer4->load(inputConfigPath +
-				    std::string("inputConfig4.json"));
+    this->_inputConfigPlayer4->load(INPUT_CONFIG_P4);
     return (true);
   }
 
@@ -785,14 +784,6 @@ namespace	bbm
     this->setOptionsMenu(menu);
   }
 
-  ////////////////////////////////
-  // INSTANCIER INPUTCONFIG //////
-  // INIT : INPUTCONFIG -> LOAD //
-  // SET DES STATES DES BUTTON ///
-  // LORS DU OK //////////////////
-  // SAVE L'INPUT CONFIG /////////
-  ////////////////////////////////
-
   void		MenuState::serializeBindingPlayer1(Menu* menu)
   {
     std::list<AButton*> list = menu->getButtons();
@@ -802,9 +793,6 @@ namespace	bbm
 	StateButton* s = dynamic_cast<StateButton*>(*it);
 	if (s)
 	  {
-	    ///////////////////////////////
-	    // Serializer les inputs ici //
-	    ///////////////////////////////
 	    if (s->getState()[0] >= '0' && s->getState()[0] <= '9')
 	      std::cout << std::string("SDLK_KP_") + s->getState() << std::endl;
 	    else
@@ -864,24 +852,20 @@ namespace	bbm
 	  {
 	    if (s->getState()[0] >= '0' && s->getState()[0] <= '9')
 	      {
-		std::string key("SDLK_KP_");
-		std::cout << std::string("SDLK_KP_") + s->getState()
-			  << std::endl;
-		key += s->getState();
-		this->_inputConfigPlayer4->bindKey(s->getLabel(), key);
+	    	std::string key("SDLK_KP_");
+	    	key += s->getState();
+	    	this->_inputConfigPlayer4->bindKey(s->getLabel(), key);
 	      }
 	    else
 	      {
-		std::string key("SDLK_");
-		std::cout << (*it)->getSize() << " : "
-		  << std::string("'SDLK_") + s->getState() << "'" << std::endl;
-		// key += s->getState();
-		// this->_inputConfigPlayer4->bindKey(s->getLabel(), key);
+	    	std::string key("SDLK_");
+	    	key += s->getState();
+	    	this->_inputConfigPlayer4->bindKey(s->getLabel(), key);
 	      }
 	  }
       	it++;
       }
-    //    this->_inputConfigPlayer4->save();
+    this->_inputConfigPlayer4->save(INPUT_CONFIG_P4);
     this->setOptionsControlMenu(menu);
   }
 
@@ -987,8 +971,8 @@ namespace	bbm
       {
 	std::stringstream ss;
 	ss << s2->getState();
-	ss >> this->_config.mapSizeX;
-	std::cout << "Map Y : " << this->_config.mapSizeX << std::endl;
+	ss >> this->_config.mapSizeY;
+	std::cout << "Map Y : " << this->_config.mapSizeY << std::endl;
       }
     this->_setNewCurrentMenu("playerselection");
   }
