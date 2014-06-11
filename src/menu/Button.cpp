@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 11:33:46 2014 Manu
-// Last update Sun Jun  8 01:24:11 2014 Manu
+// Last update Tue Jun 10 19:10:20 2014 Manu
 //
 
 #include		"Button.hh"
@@ -36,13 +36,7 @@ namespace	bbm
     for (size_t i = 0; i < this->_label.size(); i++)
       {
 	Letter* l = new Letter(this->_label[i], this->_color);
-	if (!l->initialize())
-	  {
-	    std::cerr << "Error while initializing letter " << this->_label[i];
-	    std::cerr << std::endl;
-	    throw (FileLoadingException("coucou"));
-	    return (false);
-	  }
+	l->initialize();
 	this->_letters.push_back(l);
       }
     size_t i = 0;

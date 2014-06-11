@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 02:47:32 2014 Manu
-// Last update Fri Jun  6 18:13:22 2014 Manu
+// Last update Tue Jun 10 19:17:32 2014 Manu
 //
 
 #include		"graphic/ARenderer.hh"
@@ -37,18 +37,10 @@ namespace		bbm
     this->_shader = ShaderManager::getInstance()->getShader("default");
     this->_geom.build();
     if (!this->_texture.load("./assets/menu/frame/frame.tga"))
-      return (false);
+      throw (FileLoadingException("Error while loading ./assets/menu/frame/frame.tga"));
     this->_explorer = new FileExplorer(FileExplorer::SAVE_PATH);
     this->_explorer->exploreSaves();
     this->_createIcone();
-
-    // this->_icone = new Image(FileExplorer::SAVE_PATH +
-    // 			     std::string("/") +
-    // 			     this->_explorer->getCurrentTexture());
-    // this->_icone->initialize();
-    // this->_icone->scale(glm::vec3(2, 3, 2));
-    // this->_icone->translate(glm::vec3(0.01f, 0.2f, -2));
-
     this->_createTitle();
     return (true);
   }

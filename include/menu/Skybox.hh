@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Mon Jun  2 13:10:42 2014 Manu
-// Last update Thu Jun  5 02:41:45 2014 Manu
+// Last update Tue Jun 10 19:56:43 2014 Manu
 //
 
 #ifndef		__SKYBOX_HH__
@@ -19,6 +19,7 @@
 # include	"Texture.hh"
 # include	"Geometry.hh"
 # include	"graphic/ARenderer.hh"
+# include	"FileLoadingException.hh"
 
 namespace	bbm
 {

@@ -6,11 +6,27 @@
 
 namespace bbm
 {
-  Screen::Screen(glm::vec2 size, const std::string& name)
+  Screen::Screen(const std::string& name)
   {
-    _size = size;
-    _context.start(size.x, size.y, name, SDL_INIT_VIDEO, SDL_WINDOW_OPENGL // | SDL_WINDOW_FULLSCREEN
-		   );
+    SDL_DisplayMode	current;
+
+
+    SDL_Init(SDL_INIT_VIDEO);
+    if (SDL_GetCurrentDisplayMode(0, &current) == 0)
+      {
+	_size.x = current.w;
+	_size.y = current.h;
+
+	_context.start(_size.x, _size.y, name, SDL_INIT_VIDEO, SDL_WINDOW_OPENGL | SDL_WINDOW_FULLSCREEN);
+      }
+    else
+      {
+	std::cout << SDL_GetError() << std::endl;
+	_size.x = 1600;
+	_size.y = 900;
+
+	_context.start(_size.x, _size.y, name, SDL_INIT_VIDEO, SDL_WINDOW_OPENGL);
+      }
   }
 
   Screen::~Screen()
@@ -35,7 +51,7 @@ namespace bbm
     shader->bind();
     shader->setUniform("view", renderState.camera.getMatrix());
     shader->setUniform("projection", renderState.projection.getMatrix());
-    model.draw(*shader, renderState.transform.getMatrix(), /*time*/ 0);
+    model.draw(*shader, renderState.transform.getMatrix(), time);
   }
 
   void	Screen::split(const glm::ivec2& position, const glm::ivec2& size) const
@@ -53,5 +69,10 @@ namespace bbm
   void	 Screen::flush()
   {
     _context.flush();
+  }
+
+  glm::vec2	Screen::getSize()
+  {
+    return (glm::vec2(_size.x, _size.y));
   }
 };

@@ -24,6 +24,7 @@ namespace		bbm
 
   void		PauseState::update(float time, const Input& input)
   {
+    (void) time;
     if (input.getKeyDown(SDLK_ESCAPE) || input.getEvent(SDL_QUIT))
       {
 	_manager.pop();
@@ -32,6 +33,8 @@ namespace		bbm
 
   void		PauseState::draw(float time, Screen& context)
   {
+    (void) time;
+    (void) context;
   }
 
   void		PauseState::revealing()

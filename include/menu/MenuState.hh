@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 16:43:06 2014 Manu
-// Last update Tue Jun 10 10:15:55 2014 Manu
+// Last update Tue Jun 10 23:58:11 2014 Manu
 //
 
 #ifndef		__MENUSTATE_HH__
@@ -37,6 +37,18 @@ namespace	bbm
     Menu*		_currentMenu;
     std::list<Menu*>	_menuList;
 
+  public :
+    struct		GameConfig
+    {
+      int		mapSizeX;
+      int		mapSizeY;
+      bool		player2;
+      bool		player3;
+      bool		player4;
+      int		numberIA;
+      int		level;
+    };
+
   private :
     bool		_initializeMainMenu();
     bool		_initializePlayMenu();
@@ -44,10 +56,9 @@ namespace	bbm
     bool		_initializeOptionsMenu();
     bool		_initializeHighscoresMenu();
     bool		_initializePlayerSelectionMenu();
-    bool		_initializeIASelection1Menu();
-    bool		_initializeIASelection2Menu();
-    bool		_initializeIASelection3Menu();
-    bool		_initializeIASelection4Menu();
+
+    bool		_initializeIASelectionMenu();
+
     bool		_initializeLoadGameMenu();
     bool		_initializeOptionControlMenu();
     bool		_initializeOptionAudioMenu();
@@ -82,10 +93,7 @@ namespace	bbm
     virtual void	setOptionsControlMenu();
     virtual void	setNextFrame();
     virtual void	setPrevFrame();
-    virtual void	setIASelection1Menu();
-    virtual void	setIASelection2Menu();
-    virtual void	setIASelection3Menu();
-    virtual void	setIASelection4Menu();
+    virtual void	setIASelectionMenu();
     virtual void	launchNewGame();
     virtual void	setOptionControlPlayer1();
     virtual void	setOptionControlPlayer2();

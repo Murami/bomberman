@@ -13,7 +13,7 @@ namespace bbm
 {
   WaterBomb::WaterBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABomb(position, gameState, idPlayer),
-    _model("./models_bombs/AquaBomb/AquaBomb.obj", "default", 0)
+    _model("./assets/models_bomb/AquaBomb/AquaBomb.obj", "default", 0)
   {
     _type = "WaterBomb";
     _model.setRoll(90);
