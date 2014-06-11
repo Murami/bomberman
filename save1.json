@@ -1,4 +1,5 @@
 {
+   "tilemap" : "map1.json",
    "entity" : {
       "0" : {
          "position" : {

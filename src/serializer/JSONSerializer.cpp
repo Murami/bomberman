@@ -5,7 +5,7 @@
 // Login   <pinon_a@epitech.net>
 //
 // Started on  Mon May 26 09:13:28 2014 pinon
-// Last update Mon Jun  2 17:58:40 2014 pinon
+// Last update Wed Jun 11 06:29:46 2014 pinon
 //
 
 #include <sstream>
@@ -30,6 +30,8 @@ void	JSONSerializer::serializeToFile(const std::string& filename, ISerializable 
   std::filebuf		fb;
 
   fb.open (filename.c_str(), std::ios::out | std::ios::trunc);
+  if (!fb.is_open())
+    throw SerializerException("Failed to open " + filename);
   std::ostream os(&fb);
 
   JsonNode		node(root);
@@ -54,6 +56,8 @@ void	JSONSerializer::deserializeFromFile(const std::string& filename, ISerializa
   std::filebuf	fb;
 
   fb.open (filename.c_str(), std::ios::in);
+  if (!fb.is_open())
+    throw SerializerException("Failed to open " + filename);
   std::istream is(&fb);
   bool parsingSuccessful = reader.parse( is, root, false );
   if ( !parsingSuccessful )
