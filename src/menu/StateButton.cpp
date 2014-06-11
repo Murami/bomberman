@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 17:43:53 2014 Manu
-// Last update Wed Jun 11 02:23:18 2014 Manu
+// Last update Wed Jun 11 03:41:32 2014 Manu
 //
 
 #include		"Letter.hh"
@@ -73,7 +73,7 @@ namespace		bbm
 	 it++)
       {
 	(*it)->translate(glm::vec3(0, 0,
-				   static_cast<float>(4 -
+				   static_cast<float>(6 -
 						      static_cast<float>(i)/2)));
 	i++;
       }
@@ -81,7 +81,7 @@ namespace		bbm
     size_t k = 0;
     while (k < this->_stateLetters[0].size())
       {
-	this->_stateLetters[0][k]->translate(glm::vec3(0, 0, static_cast<float>(4 - static_cast<float>(j)/2)));
+	this->_stateLetters[0][k]->translate(glm::vec3(0, 0, static_cast<float>(6 - static_cast<float>(j)/2)));
 	j++;
 	k++;
 	i++;
@@ -153,7 +153,7 @@ namespace		bbm
     size_t k = 0;
     while (k < this->_stateLetters[this->_stateLetters.size() - 1].size())
       {
-    	this->_stateLetters[this->_stateLetters.size() - 1][k]->translate(glm::vec3(0, 0, static_cast<float>(4 - static_cast<float>(j+k)/2)));
+    	this->_stateLetters[this->_stateLetters.size() - 1][k]->translate(glm::vec3(0, 0, static_cast<float>(6 - static_cast<float>(j+k)/2)));
     	k++;
       }
   }

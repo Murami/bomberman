@@ -19,7 +19,8 @@ const float scaleFactor = 1.0;
 
 namespace bbm
 {
-  GameLoadingState::GameLoadingState(GameManager& gameManager) :
+  GameLoadingState::GameLoadingState(GameManager& gameManager,
+				     GameConfig* config) :
     _manager(gameManager)
   {
     TextureManager::getInstance()->addTexture("load", "assets/game/Loading.tga");

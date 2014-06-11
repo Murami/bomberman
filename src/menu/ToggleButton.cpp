@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 10:37:03 2014 Manu
-// Last update Sun Jun  8 01:24:02 2014 Manu
+// Last update Wed Jun 11 03:41:03 2014 Manu
 //
 
 #include		"ToggleButton.hh"
@@ -86,7 +86,7 @@ namespace		bbm
 	 it++)
       {
 	(*it)->translate(glm::vec3(0, 0,
-				   static_cast<float>(4 -
+				   static_cast<float>(6 -
 						      static_cast<float>(i)/2)));
 	i++;
       }
@@ -95,7 +95,7 @@ namespace		bbm
 	 it != this->_on.end(); it++)
       {
 	(*it)->translate(glm::vec3(0, 0,
-				   static_cast<float>(4 -
+				   static_cast<float>(6 -
 						      static_cast<float>(j)/2)));
 	j++;
       }
@@ -104,7 +104,7 @@ namespace		bbm
 	 it != this->_off.end(); it++)
       {
 	(*it)->translate(glm::vec3(0, 0,
-				   static_cast<float>(4 -
+				   static_cast<float>(6 -
 						      static_cast<float>(j)/2)));
 	j++;
       }
