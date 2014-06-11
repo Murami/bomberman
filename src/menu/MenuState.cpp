@@ -515,12 +515,12 @@ namespace	bbm
 
   void		MenuState::draw(float, Screen& context)
   {
-    Transform	perspective = ProjectionPerspective(60, 1024/768, 1.0f, 1000);
+    Transform	perspective = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1.0f, 1000);
     Transform	camera = Camera(glm::vec3(10, 0, 0),
 				glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     RenderState state(perspective, camera);
 
-    context.split(glm::ivec2(0, 0), glm::ivec2(1024 * 1.5, 768 * 1.5));
+    context.split(glm::ivec2(0, 0), glm::ivec2(context.getSize().x, context.getSize().y));
     context.clear();
     context.draw(this->_skybox, state);
     context.draw(*this->_currentMenu, state);
