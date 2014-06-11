@@ -99,7 +99,8 @@ DINC		=	include		\
 			template	\
 			gdl/includes	\
 			jsoncpp/include	\
-			include/menu
+			include/menu	\
+			lua/include
 
 CFLAGS		=	-Wall		\
 			-Wextra
@@ -120,7 +121,8 @@ LIB		=	gdl_gl		\
 			lua
 
 DLIB		=	gdl/libs	\
-			jsoncpp/libs
+			jsoncpp/libs	\
+			lua/libs
 
 LDFLAGS		=	src/sound/libfmodex64-4.44.31.so
 

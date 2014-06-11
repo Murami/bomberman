@@ -262,7 +262,7 @@ namespace bbm
     _score += score;
   }
 
-  void	Aplayer::die()
+  void	APlayer::die()
   {
     _alive = false;
   }

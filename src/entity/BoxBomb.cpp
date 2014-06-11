@@ -47,7 +47,7 @@ namespace bbm
 	if ((*it)->getType() == "GameBox" && (*it)->collide(glm::vec3(_position.x + x + 0.5, _position.y + y + 0.5, 0)))
 	  return (false);
       }
-    _gameState.addEntity(new GameBox(glm::vec2(_position.x + x, _position.y + y), _gameState));
+    _gameState.addEntity(new GameBox(glm::vec2(_position.x + x, _position.y + y), _idPlayer, _gameState));
     return (true);
   }
 
@@ -68,7 +68,7 @@ namespace bbm
       {
 	_used = true;
 	_gameState.getPlayer(_idPlayer).addBombsBonus();
-	_gameState.addEntity(new GameBox(glm::vec2(_position.x, _position.y), _gameState));
+	_gameState.addEntity(new GameBox(glm::vec2(_position.x, _position.y), _idPlayer, _gameState));
 	for (int i = 1; i !=  _gameState.getPlayer(_idPlayer).getPower()
 	       && addExplode(i, 0); i++);
 	for (int i = 1; i !=  _gameState.getPlayer(_idPlayer).getPower()
