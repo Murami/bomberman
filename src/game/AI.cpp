@@ -2,11 +2,23 @@
 
 namespace bbm
 {
-  AI::AI(GameState& gameState) :
-    APlayer(gameState)
-  {
-    _type = "AI";
-  }
+  // std::vector<ILuaHeir<AI> >::t_MethodPtr>	make_method_list()
+  // {
+  //   std::vector<ILuaHeir<AI> >::t_MethodPtr>	methods;
+
+  //   methods = {.name = "getPosition", .methodPtr = getPosition};
+  //   methods = {.name = "getMove", .methodPtr = getMove};
+  //   return (methods);
+  // }
+
+  // std::vector<ILuaHeir<AI> >::t_MethodPtr>	AI::_methodPtrs = make_method_list();
+
+  // AI::AI(GameState& gameState, const glm::vec2& position) :
+  //   APlayer(gameState)
+  // {
+  //   _type = "AI";
+  //   _position = position;
+  // }
 
   AI::~AI()
   {
@@ -31,4 +43,14 @@ namespace bbm
   {
     return (_type);
   }
+
+  std::string						AI::getClassName() const
+  {
+    return ("AI");
+  }
+
+  // const std::vector<ILuaHeir<AI>::t_MethodPtr>&		AI::getMethodPtr() const
+  // {
+  //   return (_methodPtrs);
+  // }
 };

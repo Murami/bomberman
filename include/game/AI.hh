@@ -2,13 +2,14 @@
 #define AI_HH
 
 #include "game/APlayer.hh"
+// #include "lua/ILuaHeir.hh"
 
 namespace bbm
 {
-  class	AI : public APlayer
+  class	AI : public APlayer//, public ILuaHeir<AI>
   {
   public:
-    AI(GameState& gameState);
+    AI(GameState& gameState, const glm::vec2& position);
     ~AI();
 
     void		update(float time);
@@ -16,8 +17,12 @@ namespace bbm
     void		unpack(const ISerializedNode & current);
     const std::string&	getType() const;
 
+    std::string						getClassName() const;
+    // const std::vector<ILuaHeir<AI>::t_MethodPtr>&	getMethodPtr() const;
+
   private:
-    std::string	_type;
+    // static std::vector<ILuaHeir<AI> >::t_MethodPtr>	_methodPtrs;
+    std::string						_type;
   };
 };
 

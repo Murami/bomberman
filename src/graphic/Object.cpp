@@ -44,7 +44,6 @@ namespace bbm
 
     newState.transform = getTransform() * renderState.transform;
     renderer.draw(_geometry, _texture, _shader, newState, _primitive);
-    // renderer.draw(_geometry, _texture, _shader, renderState, _primitive);
   }
 
   void	Object::setTexture(const std::string& texture)

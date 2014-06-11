@@ -83,7 +83,7 @@ SRC		=	main				\
 			menu/PauseState			\
 			menu/OpendirException		\
 			sound/SoundManager		\
-			lua/LuaBiche
+			# lua/LuaBiche
 
 SRC_EXT		=	.cpp
 
@@ -140,7 +140,7 @@ MD		=	mkdir -p
 
 DBGBOOL		=	yes
 
-PROFILE		=	no
+PROFILE		=	yes
 
 DBG		=	-g3		\
 			-ggdb
