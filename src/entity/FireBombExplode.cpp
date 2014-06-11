@@ -3,15 +3,18 @@
 #include "graphic/ARenderer.hh"
 #include "graphic/RenderState.hh"
 #include "game/GameState.hh"
+#include "sound/SoundManager.hh"
 
 const float	scaleFactor = 1;
 
 namespace bbm
 {
-  FireBombExplode::FireBombExplode(const glm::vec2& position, GameState& gameState) :
+  FireBombExplode::FireBombExplode(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABombExplode(position, gameState),
     _wall("fire", "default")
   {
+    _idPlayer = idPlayer;
+    SoundManager::getInstance()->play("bomb");
     _type = "FireBombExplode";
     _wall.setPosition(glm::vec3(_position.x, _position.y, _position.z));
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
@@ -81,6 +84,11 @@ namespace bbm
   {
     if (entity->getType() == "Player")
       {
+	if (dynamic_cast<Player *>(entity)->isDead())
+	  {
+	    _gameState.getPlayer(_idPlayer).addScore(1000);
+	    dynamic_cast<Player *>(entity)->die();
+	  }
       }
   }
 

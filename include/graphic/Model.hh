@@ -35,7 +35,7 @@ namespace bbm
     virtual void	draw(ARenderer& renderer, const RenderState& renderState);
 
   protected:
-    gdl::Model		_model;
+    gdl::Model*		_model;
     float		_elapsedTime;
     float		_speed;
     gdl::BasicShader*	_shader;

@@ -9,10 +9,11 @@ namespace bbm
 {
   class	ModelManager
   {
-  protected:
+  private:
     ModelManager();
     ~ModelManager();
 
+  public:
     void			addModel(const std::string& name, const std::string& pathname);
     void			delModel(const std::string& name);
     gdl::Model*			getModel(const std::string& name);

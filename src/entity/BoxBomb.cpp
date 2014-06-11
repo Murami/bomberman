@@ -13,7 +13,7 @@ namespace bbm
 {
   BoxBomb::BoxBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABomb(position, gameState, idPlayer),
-    _model("./assets/models_bomb/LightBomb/LightBomb.obj", "default", 0)
+    _model("BoxBomb", "default", 0)
   {
     _type = "BoxBomb";
     _model.setRoll(90);

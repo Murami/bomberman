@@ -13,7 +13,7 @@ namespace bbm
 {
   FireBomb::FireBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABomb(position, gameState, idPlayer),
-    _model("./assets/models_bomb/FireBomb/Bomb.obj", "default", 0)
+    _model("FireBomb", "default", 0)
    {
     _type = "FireBomb";
     _model.setRoll(90);
@@ -42,7 +42,7 @@ namespace bbm
     if (_gameState.getTileMap().collide(_position.x + x + 0.5, _position.y + y + 0.5))
       return (false);
 
-    _gameState.addEntity(new FireBombExplode(glm::vec2(_position.x + x, _position.y + y), _gameState));
+    _gameState.addEntity(new FireBombExplode(glm::vec2(_position.x + x, _position.y + y), _gameState, _idPlayer));
     for (it = _gameState.getEntities().begin(); it != _gameState.getEntities().end(); it++)
       {
 	if ((*it)->getType() == "GameBox" && (*it)->collide(glm::vec3(_position.x + x + 0.5, _position.y + y + 0.5, 0)))
@@ -68,7 +68,7 @@ namespace bbm
       {
 	_used = true;
 	_gameState.getPlayer(_idPlayer).addBombs();
-	_gameState.addEntity(new FireBombExplode(glm::vec2(_position.x, _position.y), _gameState));
+	_gameState.addEntity(new FireBombExplode(glm::vec2(_position.x, _position.y), _gameState, _idPlayer));
 	for (int i = 1; i !=  _gameState.getPlayer(_idPlayer).getPower()
 	       && addExplode(i, 0); i++);
 	for (int i = 1; i !=  _gameState.getPlayer(_idPlayer).getPower()
@@ -126,7 +126,6 @@ namespace bbm
 		collide(glm::vec3(playerPosition.x  + delta, playerPosition.y + playerMove.y + 1 - delta, 0)) ||
 		collide(glm::vec3(playerPosition.x  + delta, playerPosition.y + playerMove.y + delta, 0)))
 	      playerMove.y = 0;
-
 	    player->setMove(playerMove);
 	  }
       }
