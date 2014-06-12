@@ -126,6 +126,16 @@ namespace bbm
     PlayerConfig		playerConfig;
     GameState::GameStateConfig	gameStateConfig;
 
+    playerConfig.power = 3;
+    playerConfig.typeBomb = FIRE;
+    playerConfig.nbBombs = 1;
+    playerConfig.nbBombsBonus = 1;
+    playerConfig.speed = 0.005;
+    playerConfig.state = IDLE;
+    playerConfig.alive = true;
+    playerConfig.slow = false;
+    playerConfig.dark = false;
+    playerConfig.position = glm::vec2(5, 5);
     if (_config->player1)
       {
 	playerConfig.inputConfig = new InputConfig;

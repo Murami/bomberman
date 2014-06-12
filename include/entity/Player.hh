@@ -2,6 +2,7 @@
 #define PLAYER_HH
 
 #include "game/APlayer.hh"
+#include "game/PlayerConfig.hh"
 
 namespace bbm
 {
@@ -9,6 +10,10 @@ namespace bbm
   {
   public:
     Player(GameState& gameState, const PlayerConfig& playerConfig);
+    Player(GameState& gameState, const PlayerConfig& playerConfig,
+	   glm::vec2 position, int power, int nbBombs, int bBombsBonus,
+	   float speed, bool alive, bool slow,bool dark, BombType typeBomb,
+	   PlayerState state, int score);
     ~Player();
 
     void		handleEvents(float time, const Input& input);
