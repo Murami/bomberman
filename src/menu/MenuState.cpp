@@ -6,6 +6,7 @@
 #include		"graphic/Camera.hh"
 #include		"graphic/ProjectionPerspective.hh"
 #include		"MenuState.hh"
+#include		"PauseState.hh"
 
 #include		"serializer/ISerializedNode.hh"
 #include		"serializer/JSONSerializer.hh"
@@ -70,7 +71,7 @@ namespace	bbm
 	// CHANGER LAUNCHNEWGAME EN LAUNCHLOADEDGAME //
 	///////////////////////////////////////////////
 
-	menu->createNewButton("play", &IMenuManager::launchNewGame,
+	menu->createNewButton("play", &IMenuManager::launchLoadedGame,
 			      glm::vec4(0, 1, 0, 1), false);
 	menu->createNewButton("back", &IMenuManager::setPlayMenu,
 			      glm::vec4(1, 0, 0, 1), true);
@@ -181,19 +182,19 @@ namespace	bbm
     try
       {
 	menu->createNewStateButton("map width", NULL, 4,
-				   glm::vec4(1, 1, 1, 1), "10");
-	menu->addStateToLastButton("15");
-	menu->addStateToLastButton("20");
+				   glm::vec4(1, 1, 1, 1), "20");
 	menu->addStateToLastButton("25");
 	menu->addStateToLastButton("50");
 	menu->addStateToLastButton("100");
+	menu->addStateToLastButton("200");
+	menu->addStateToLastButton("500");
 	menu->createNewStateButton("map height", NULL, 3,
-				   glm::vec4(1, 1, 1, 1), "10");
-	menu->addStateToLastButton("15");
-	menu->addStateToLastButton("20");
+				   glm::vec4(1, 1, 1, 1), "20");
 	menu->addStateToLastButton("25");
 	menu->addStateToLastButton("50");
 	menu->addStateToLastButton("100");
+	menu->addStateToLastButton("200");
+	menu->addStateToLastButton("500");
 	menu->createNewButton("next", &IMenuManager::setNewGameMenu,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setPlayMenu,
@@ -256,6 +257,7 @@ namespace	bbm
 	list.push_back("RSHIFT");
 	list.push_back("RCTRL");
 	list.push_back("RETURN");
+	list.push_back("SPACE");
       }
     for (std::list<std::string>::iterator it = list.begin();
     	 it != list.end(); it++)
@@ -350,6 +352,19 @@ namespace	bbm
       }
   }
 
+  const std::string&	MenuState::_getKeyFromSDLK(const std::string& key)
+  {
+    static std::string newKey;
+    size_t pos = key.rfind("_");
+    if (pos != std::string::npos)
+      {
+	newKey = std::string(&key[pos+1]);
+	std::cout << "Return '" << newKey << "'" << std::endl;
+	return (newKey);
+      }
+    return (key);
+  }
+
   bool		MenuState::_initializeControlPlayer1()
   {
     Menu* menu = new Menu("controlplayer1", this);
@@ -361,23 +376,29 @@ namespace	bbm
     try
       {
 	menu->createNewStateButton("up", NULL, 7,
-				   glm::vec4(1, 1, 1, 1), "UP");
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("up")));
 	this->_setBindingControlPlayer1(menu, "UP");
 	menu->createNewStateButton("down", NULL, 5,
-				   glm::vec4(1, 1, 1, 1), "DOWN");
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("down")));
 	this->_setBindingControlPlayer1(menu, "DOWN");
 	menu->createNewStateButton("left", NULL, 5,
-				   glm::vec4(1, 1, 1, 1), "LEFT");
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("left")));
 	this->_setBindingControlPlayer1(menu, "LEFT");
 	menu->createNewStateButton("right", NULL, 4,
-				   glm::vec4(1, 1, 1, 1), "RIGHT");
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("right")));
 	this->_setBindingControlPlayer1(menu, "RIGHT");
 	menu->createNewStateButton("bomb", NULL, 5,
-				   glm::vec4(1, 1, 1, 1), "0");
-	this->_setBindingControlPlayer1(menu, "0");
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("bomb")));
+	this->_setBindingControlPlayer1(menu, "SPACE");
 	menu->createNewStateButton("bomb2", NULL, 4,
-				   glm::vec4(1, 1, 1, 1), "1");
-	this->_setBindingControlPlayer1(menu, "1");
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("bomb2")));
+	this->_setBindingControlPlayer1(menu, "RETURN");
 	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer1,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setOptionsControlMenu,
@@ -392,19 +413,6 @@ namespace	bbm
     menu->finalize();
     this->_menuList.push_back(menu);
     return (this->_initializeControlPlayer2());
-  }
-
-  const std::string&	MenuState::_getKeyFromSDLK(const std::string& key)
-  {
-    static std::string newKey;
-    size_t pos = key.rfind("_");
-    if (pos != std::string::npos)
-      {
-	newKey = std::string(&key[pos+1]);
-	std::cout << "Return '" << newKey << "'" << std::endl;
-	return (newKey);
-      }
-    return (key);
   }
 
   bool		MenuState::_initializeControlPlayer2()
@@ -794,12 +802,21 @@ namespace	bbm
 	if (s)
 	  {
 	    if (s->getState()[0] >= '0' && s->getState()[0] <= '9')
-	      std::cout << std::string("SDLK_KP_") + s->getState() << std::endl;
+	      {
+	    	std::string key("SDLK_KP_");
+	    	key += s->getState();
+	    	this->_inputConfigPlayer1->bindKey(s->getLabel(), key);
+	      }
 	    else
-	      std::cout << std::string("SDLK_") + s->getState() << std::endl;
+	      {
+	    	std::string key("SDLK_");
+	    	key += s->getState();
+	    	this->_inputConfigPlayer1->bindKey(s->getLabel(), key);
+	      }
 	  }
       	it++;
       }
+    this->_inputConfigPlayer1->save(INPUT_CONFIG_P1);
     this->setOptionsControlMenu(menu);
   }
 
@@ -813,12 +830,21 @@ namespace	bbm
 	if (s)
 	  {
 	    if (s->getState()[0] >= '0' && s->getState()[0] <= '9')
-	      std::cout << std::string("SDLK_KP_") + s->getState() << std::endl;
+	      {
+	    	std::string key("SDLK_KP_");
+	    	key += s->getState();
+	    	this->_inputConfigPlayer2->bindKey(s->getLabel(), key);
+	      }
 	    else
-	      std::cout << std::string("SDLK_") + s->getState() << std::endl;
+	      {
+	    	std::string key("SDLK_");
+	    	key += s->getState();
+	    	this->_inputConfigPlayer2->bindKey(s->getLabel(), key);
+	      }
 	  }
       	it++;
       }
+    this->_inputConfigPlayer2->save(INPUT_CONFIG_P2);
     this->setOptionsControlMenu(menu);
   }
 
@@ -832,12 +858,21 @@ namespace	bbm
 	if (s)
 	  {
 	    if (s->getState()[0] >= '0' && s->getState()[0] <= '9')
-	      std::cout << std::string("SDLK_KP_") + s->getState() << std::endl;
+	      {
+	    	std::string key("SDLK_KP_");
+	    	key += s->getState();
+	    	this->_inputConfigPlayer3->bindKey(s->getLabel(), key);
+	      }
 	    else
-	      std::cout << std::string("SDLK_") + s->getState() << std::endl;
+	      {
+	    	std::string key("SDLK_");
+	    	key += s->getState();
+	    	this->_inputConfigPlayer3->bindKey(s->getLabel(), key);
+	      }
 	  }
       	it++;
       }
+    this->_inputConfigPlayer3->save(INPUT_CONFIG_P3);
     this->setOptionsControlMenu(menu);
   }
 
@@ -919,6 +954,15 @@ namespace	bbm
     this->_manager.pop();
   }
 
+  void		MenuState::launchLoadedGame(Menu* menu)
+  {
+    FileExplorer*	explorer = menu->getExplorer();
+    this->_config.fileToLoad = explorer->getCurrentFile();
+    GameLoadingState*	state = new GameLoadingState(this->_manager,
+						     &this->_config);
+    this->_manager.push(state);
+  }
+
   void		MenuState::launchNewGame(Menu* menu)
   {
     std::list<AButton*> list = menu->getButtons();
@@ -944,7 +988,7 @@ namespace	bbm
       }
     this->_config.newGame = true;
     GameLoadingState*	state = new GameLoadingState(this->_manager,
-						     &this->_config);
+    						     &this->_config);
     this->_manager.push(state);
   }
 
@@ -963,7 +1007,6 @@ namespace	bbm
 	std::stringstream ss;
 	ss << s->getState();
 	ss >> this->_config.mapSizeX;
-	std::cout << "Map X : " << this->_config.mapSizeX << std::endl;
       }
     it++;
     StateButton* s2 = dynamic_cast<StateButton*>(*it);
@@ -972,7 +1015,6 @@ namespace	bbm
 	std::stringstream ss;
 	ss << s2->getState();
 	ss >> this->_config.mapSizeY;
-	std::cout << "Map Y : " << this->_config.mapSizeY << std::endl;
       }
     this->_setNewCurrentMenu("playerselection");
   }

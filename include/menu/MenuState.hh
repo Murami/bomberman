@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 16:43:06 2014 Manu
-// Last update Wed Jun 11 16:03:08 2014 Manu
+// Last update Thu Jun 12 14:13:37 2014 Manu
 //
 
 #ifndef		__MENUSTATE_HH__
@@ -30,6 +30,7 @@ namespace	bbm
 {
   class		Input;
   class		GameManager;
+  class		FileExplorer;
 
   class		MenuState : public IGameState, IMenuManager
   {
@@ -100,6 +101,7 @@ namespace	bbm
     virtual void	setPrevFrame(Menu*);
     virtual void	setIASelectionMenu(Menu*);
     virtual void	launchNewGame(Menu*);
+    virtual void	launchLoadedGame(Menu*);
     virtual void	setOptionControlPlayer1(Menu*);
     virtual void	setOptionControlPlayer2(Menu*);
     virtual void	setOptionControlPlayer3(Menu*);

@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Mon Jun  2 13:10:42 2014 Manu
-// Last update Tue Jun 10 19:56:43 2014 Manu
+// Last update Thu Jun 12 11:16:58 2014 Manu
 //
 
 #ifndef		__SKYBOX_HH__
@@ -25,6 +25,9 @@ namespace	bbm
 {
   class		Skybox : public IDrawable
   {
+  public :
+    static const std::string	VIOLENTDAYS;
+
   private :
     gdl::Texture       	_texture;
     gdl::Geometry      	_geom;

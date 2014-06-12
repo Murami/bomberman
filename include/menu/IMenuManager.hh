@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 16:17:50 2014 Manu
-// Last update Wed Jun 11 05:55:50 2014 Manu
+// Last update Thu Jun 12 14:09:17 2014 Manu
 //
 
 #ifndef		__IMENUMANAGER_HH__
@@ -31,6 +31,7 @@ namespace	bbm
     virtual void	setPrevFrame(Menu*) = 0;
     virtual void	setIASelectionMenu(Menu*) = 0;
     virtual void	launchNewGame(Menu*) = 0;
+    virtual void	launchLoadedGame(Menu*) = 0;
     virtual void	setOptionControlPlayer1(Menu*) = 0;
     virtual void	setOptionControlPlayer2(Menu*) = 0;
     virtual void	setOptionControlPlayer3(Menu*) = 0;

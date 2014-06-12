@@ -1,10 +1,28 @@
 {
-    "input" : {
-	"0" : { "action" : "left", "key" : "SDLK_LEFT"},
-	"1" : { "action" : "right", "key" : "SDLK_RIGHT"},
-	"2" : { "action" : "up", "key" : "SDLK_UP"},
-	"3" : { "action" : "down", "key" : "SDLK_DOWN"},
-	"4" : { "action" : "bomb", "key" : "SDLK_KP_0"},
-	"5" : { "action" : "bomb2", "key" : "SDLK_KP_1"}
-    }
+   "input" : {
+      "0" : {
+         "action" : "bomb",
+         "key" : "SDLK_SPACE"
+      },
+      "1" : {
+         "action" : "bomb2",
+         "key" : "SDLK_RSHIFT"
+      },
+      "2" : {
+         "action" : "down",
+         "key" : "SDLK_DOWN"
+      },
+      "3" : {
+         "action" : "left",
+         "key" : "SDLK_LEFT"
+      },
+      "4" : {
+         "action" : "right",
+         "key" : "SDLK_RIGHT"
+      },
+      "5" : {
+         "action" : "up",
+         "key" : "SDLK_UP"
+      }
+   }
 }
