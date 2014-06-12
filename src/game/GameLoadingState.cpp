@@ -174,7 +174,7 @@ namespace bbm
 
 
     state = new GameState(_manager, &gameStateConfig);
-    state->load("save1.json");
+    state->load("megaSave1");
     _manager.push(state);
   }
 

@@ -209,6 +209,7 @@ namespace bbm
     std::string		key;
 
     inputMapNode = current.get("input");
+    std::cout << "test" << std::endl;
     size = inputMapNode->size();
     for (index = 0; index < size; index++)
       {

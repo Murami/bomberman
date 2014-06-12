@@ -87,6 +87,11 @@ void			JsonNode::add(const std::string& index, int value)
   _current[index] = value;
 }
 
+void			JsonNode::add(const std::string& index, bool value)
+{
+  _current[index] = value;
+}
+
 void			JsonNode::add(const std::string& index, unsigned int value)
 {
   _current[index] = value;
