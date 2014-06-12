@@ -8,7 +8,7 @@ namespace bbm
   SoundManager::SoundManager()
   {
     FMOD_System_Create(&_system);
-    FMOD_System_Init(_system, 8, FMOD_INIT_NORMAL, NULL);
+    FMOD_System_Init(_system, 32, FMOD_INIT_NORMAL, NULL);
   }
 
   SoundManager::~SoundManager()
@@ -60,12 +60,18 @@ namespace bbm
     else
       {
 	_channels[name] = NULL;
-	if (FMOD_System_PlaySound(_system, FMOD_CHANNEL_FREE, _sounds[name], 0, &_channels[name]) != FMOD_OK)
+	if (FMOD_System_PlaySound(_system, FMOD_CHANNEL_FREE, _sounds[name], false, &_channels[name]) != FMOD_OK)
 	  {
 	    std::cerr << "Error : can't play " << name << std::endl;
 	    return ;
 	  }
       }
+    std::map<std::string, FMOD_CHANNEL*>::iterator	it;
+
+    std::cout << std::endl << std::endl;
+    for (it = _channels.begin(); it != _channels.end(); it++) {
+      std::cout << it->first << " : " << it->second << std::endl;
+    }
   }
 
   void	SoundManager::pause(std::string const& name)

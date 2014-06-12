@@ -37,6 +37,7 @@
 #include "serializer/JSONSerializer.hh"
 #include "serializer/Serializer.hh"
 #include "serializer/SerializerException.hh"
+#include "sound/SoundManager.hh"
 
 namespace bbm
 {
@@ -46,6 +47,8 @@ namespace bbm
     _manager(manager),
     _config(config)
   {
+    SoundManager::getInstance()->play("theme");
+    this->_flush = true;
   }
 
   GameState::~GameState()
@@ -238,10 +241,12 @@ namespace bbm
 
   void			GameState::obscuring()
   {
+    _flush = false;
   }
 
   void			GameState::revealing()
   {
+    _flush = true;
   }
 
   void			GameState::draw(float time, Screen& context)
@@ -327,7 +332,8 @@ namespace bbm
 	// for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
 	//   context.draw(*(*itAIs), state);
       }
-    context.flush();
+    if (this->_flush)
+      context.flush();
   }
 
   void			GameState::update(float time, const Input& input)
@@ -336,8 +342,8 @@ namespace bbm
 
     if (input.getKeyDown(SDLK_ESCAPE) || input.getEvent(SDL_QUIT))
       {
-	_manager.pop();
-	PauseState* state = new PauseState(_manager, this);
+	//_manager.pop();
+	PauseState* state = new PauseState(_manager);
 	_manager.push(state);
  	return;
       }

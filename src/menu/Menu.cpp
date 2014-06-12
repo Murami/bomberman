@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:03 2014 Manu
-// Last update Thu Jun 12 14:15:09 2014 Manu
+// Last update Thu Jun 12 16:18:46 2014 Manu
 //
 
 #include		"FileExplorer.hh"
@@ -186,9 +186,13 @@ namespace	bbm
 
   void		Menu::draw(ARenderer& r, const RenderState& s)
   {
+    glDisable(GL_CULL_FACE);
+    glDisable(GL_DEPTH_TEST);
     for (std::list<AButton*>::iterator it = this->_buttons.begin();
 	 it != this->_buttons.end(); it++)
       (*it)->draw(r, s);
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_CULL_FACE);
     glAlphaFunc(GL_GREATER, 0.25f);
     r.draw(*this->_selector, s);
     if (this->_frame != NULL)
