@@ -9,7 +9,7 @@ namespace bbm
     _lifespan = 2000;
     _position.x = snap(position.x);
     _position.y = snap(position.y);
-    _position.z = snap(0.1);
+    // _position.z = snap(0.1);
   }
 
   ABombExplode::~ABombExplode()
@@ -20,5 +20,10 @@ namespace bbm
   void		ABombExplode::setLifeSpan(float time)
   {
     _lifespan = time;
+  }
+
+  const glm::vec2&	ABombExplode::getPosition() const
+  {
+    return (_position);
   }
 };

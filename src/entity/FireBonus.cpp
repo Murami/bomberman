@@ -87,4 +87,9 @@ namespace bbm
 	_used = true;
       }
   }
+
+  const glm::vec2&	FireBonus::getPosition() const
+  {
+    return (_pos);
+  }
 };

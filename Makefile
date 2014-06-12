@@ -191,7 +191,7 @@ endif
 CFLAGS		+=	$(CINC)
 LDFLAGS		+=	$(DLIB)			\
 			$(LIB)			\
-			-Wl,-rpath=./gdl/libs:./lua/libs
+			-Wl,-rpath=./gdl/libs
 
 ## MISC RULES
 
