@@ -105,6 +105,7 @@ namespace bbm
   void			GameLoadingState::loadModel()
   {
     Marvin::initialize();
+    Wall::initialize();
     ModelManager::getInstance()->addModel("FireBomb",
 					    "assets/models_bomb/FireBomb/Bomb.obj");
     ModelManager::getInstance()->addModel("WaterBomb",
@@ -174,6 +175,7 @@ namespace bbm
   void			GameLoadingState::release()
   {
     Marvin::release();
+    Wall::release();
   }
 
   void			GameLoadingState::obscuring()
