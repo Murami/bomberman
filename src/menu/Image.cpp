@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri Jun  6 14:00:05 2014 Manu
-// Last update Fri Jun  6 14:23:06 2014 Manu
+// Last update Thu Jun 12 12:11:19 2014 Manu
 //
 
 #include		"graphic/ARenderer.hh"
@@ -19,6 +19,9 @@ namespace		bbm
   Image::Image(const std::string& filename) : AObject(),
 					      _filename(filename)
   {
+    glEnable(GL_ALPHA_TEST);
+    glEnable(GL_BLEND);
+    glEnable(GL_DEPTH_TEST);
   }
 
   bool		Image::initialize()
@@ -29,6 +32,7 @@ namespace		bbm
 	std::cerr << "Image : unable to load " << this->_filename << std::endl;
 	return (false);
       }
+    this->_geom.setColor(glm::vec4(1, 1, 1, 1));
     this->_geom.pushVertex(glm::vec3(0, -1, -1));
     this->_geom.pushVertex(glm::vec3(0, -1, 1));
     this->_geom.pushVertex(glm::vec3(0, 1, 1));

@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 02:47:32 2014 Manu
-// Last update Tue Jun 10 19:17:32 2014 Manu
+// Last update Thu Jun 12 14:15:23 2014 Manu
 //
 
 #include		"graphic/ARenderer.hh"
@@ -21,6 +21,11 @@ namespace		bbm
     this->_color = color;
     this->_explorer = NULL;
     this->_icone = NULL;
+  }
+
+  FileExplorer*	Frame::getExplorer()
+  {
+    return (this->_explorer);
   }
 
   bool		Frame::initialize()

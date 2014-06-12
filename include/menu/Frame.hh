@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 02:39:57 2014 Manu
-// Last update Tue Jun 10 19:14:28 2014 Manu
+// Last update Thu Jun 12 14:12:21 2014 Manu
 //
 
 #ifndef		__FRAME_HH__
@@ -68,6 +68,7 @@ namespace	bbm
   public :
     void		nextSave();
     void		prevSave();
+    FileExplorer*	getExplorer();
 
   public :
     Frame(const glm::vec4& color);
