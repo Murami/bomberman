@@ -11,6 +11,7 @@
 #include "graphic/Screen.hh"
 #include "sound/SoundManager.hh"
 #include "events/Input.hh"
+# include "MenuState.hh"
 
 const float scaleFactor = 1.0;
 
@@ -140,25 +141,25 @@ namespace bbm
     if (_config->player1)
       {
 	playerConfig.inputConfig = new InputConfig;
-	playerConfig.inputConfig->load("inputConfig1.json");
+	playerConfig.inputConfig->load(MenuState::INPUT_CONFIG_P1);
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     if (_config->player2)
       {
 	playerConfig.inputConfig = new InputConfig;
-	playerConfig.inputConfig->load("inputConfig2.json");
+	playerConfig.inputConfig->load(MenuState::INPUT_CONFIG_P2);
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     if (_config->player3)
       {
 	playerConfig.inputConfig = new InputConfig;
-	playerConfig.inputConfig->load("inputConfig3.json");
+	playerConfig.inputConfig->load(MenuState::INPUT_CONFIG_P3);
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     if (_config->player4)
       {
 	playerConfig.inputConfig = new InputConfig;
-	playerConfig.inputConfig->load("inputConfig4.json");
+	playerConfig.inputConfig->load(MenuState::INPUT_CONFIG_P4);
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     state = new GameState(_manager, &gameStateConfig);
@@ -174,7 +175,7 @@ namespace bbm
 
 
     state = new GameState(_manager, &gameStateConfig);
-    state->load("save1.json");
+    state->load("save1");
     _manager.push(state);
   }
 

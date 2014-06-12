@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 02:47:32 2014 Manu
-// Last update Thu Jun 12 14:15:23 2014 Manu
+// Last update Thu Jun 12 21:25:13 2014 Manu
 //
 
 #include		"graphic/ARenderer.hh"
@@ -55,6 +55,9 @@ namespace		bbm
     this->_icone = new Image(FileExplorer::SAVE_PATH +
 			     std::string("/") +
 			     this->_explorer->getCurrentTexture());
+    std::cout << "current texture : " << FileExplorer::SAVE_PATH +
+      std::string("/") +
+      this->_explorer->getCurrentTexture() << std::endl;
     this->_icone->initialize();
     this->_icone->scale(glm::vec3(2, 3, 2));
     this->_icone->translate(glm::vec3(0.01f, 0.2f, -2));
@@ -63,17 +66,22 @@ namespace		bbm
   void		Frame::_createTitle()
   {
     std::string fileName = this->_explorer->getCurrentFile();
-    for (size_t i = 0; i < fileName.size() and fileName[i] != '.'; i++)
+    std::cout << "current file : " << this->_explorer->getCurrentFile() << std::endl;
+    for (size_t i = 0; i < fileName.size(); i++)
       {
-	if ((fileName[i] >= 'a' and fileName[i] <= 'z') or
-	    (fileName[i] >= '0' and fileName[i] <= '9') or
+	if ((fileName[i] >= '0' && fileName[i] <= '9') ||
+	    (fileName[i] >= 'A' && fileName[i] <= 'Z') ||
+	    (fileName[i] >= 'a' && fileName[i] <= 'z') ||
 	    fileName[i] == 32)
 	  {
+	    std::cout << "filename[i]: " << fileName[i] << std::endl;
 	    Letter* l = new Letter(fileName[i], glm::vec4(1, 1, 1, 1));
 	    l->initialize();
 	    l->translate(glm::vec3(1, -3.25, -static_cast<float>(i)/2));
 	    this->_title.push_back(l);
 	  }
+	else if (fileName[i] == '.')
+	  break;
       }
   }
 
@@ -97,14 +105,6 @@ namespace		bbm
     this->_explorer->next();
     delete (this->_icone);
     this->_createIcone();
-
-    // this->_icone = new Image(FileExplorer::SAVE_PATH +
-    // 			     std::string("/") +
-    // 			     this->_explorer->getCurrentTexture());
-    // this->_icone->initialize();
-    // this->_icone->scale(glm::vec3(2, 4, 3));
-    // this->_icone->translate(glm::vec3(0, 1, -2));
-
     this->_title.empty();
     this->_title.clear();
     this->_createTitle();
@@ -115,14 +115,6 @@ namespace		bbm
     this->_explorer->prev();
     delete (this->_icone);
     this->_createIcone();
-
-    // this->_icone = new Image(FileExplorer::SAVE_PATH +
-    // 			     std::string("/") +
-    // 			     this->_explorer->getCurrentTexture());
-    // this->_icone->initialize();
-    // this->_icone->scale(glm::vec3(2, 4, 3));
-    // this->_icone->translate(glm::vec3(0, 1, -2));
-
     this->_title.empty();
     this->_title.clear();
     this->_createTitle();
@@ -133,6 +125,9 @@ namespace		bbm
     this->_position += t;
     if (this->_icone)
       this->_icone->translate(t);
+    // for (std::list<Letter*>::iterator it = this->_title.begin();
+    // 	 it != this->_title.end(); it++)
+    //   (*it)->translate(t);
   }
 
   void		Frame::rotate(const glm::vec3& r, float angle)
@@ -140,6 +135,9 @@ namespace		bbm
     this->_rotation += r * angle;
     if (this->_icone)
       this->_icone->rotate(r, angle);
+    // for (std::list<Letter*>::iterator it = this->_title.begin();
+    // 	 it != this->_title.end(); it++)
+    //   (*it)->rotate(r, angle);
   }
 
   void		Frame::scale(const glm::vec3& s)
@@ -147,6 +145,9 @@ namespace		bbm
     this->_scale *= s;
     if (this->_icone)
       this->_icone->scale(s);
+    // for (std::list<Letter*>::iterator it = this->_title.begin();
+    // 	 it != this->_title.end(); it++)
+    //   (*it)->scale(s);
   }
 
   glm::mat4	Frame::getTransformation()

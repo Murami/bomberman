@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Wed Jun  4 22:38:54 2014 Manu
-// Last update Thu Jun 12 19:23:10 2014 Manu
+// Last update Thu Jun 12 20:50:09 2014 Manu
 //
 
 #include		"FileExplorer.hh"
@@ -33,17 +33,35 @@ namespace		bbm
 	if (this->_entry->d_name[0] != '.')
 	  {
 	    std::string tmp(this->_entry->d_name);
+	    std::cout << "file to check : " << tmp << std::endl;
 	    if (tmp.find(".tga") != std::string::npos)
-	      this->_iconeNames.push_back(tmp);
+	      {
+		std::cout << "pushing " << tmp << std::endl;
+		this->_iconeNames.push_back(tmp);
+	      }
 	    else if (tmp.find(".save") != std::string::npos)
-	      this->_filenames.push_back(tmp);
+	      {
+		std::cout << "pushing " << tmp << std::endl;
+		this->_filenames.push_back(tmp);
+	      }
 	  }
       }
   }
 
   const std::string&	FileExplorer::getCurrentFile()
   {
-    return (this->_filenames[this->_index]);
+    static std::string tmp;
+    tmp = "";
+    for (size_t i = 0; i < this->_iconeNames[this->_index].size(); i++)
+      {
+	if (this->_iconeNames[this->_index][i] == '.')
+	  break;
+	tmp += this->_iconeNames[this->_index][i];
+      }
+    for (size_t i = 0; i < this->_filenames.size(); i++)
+      if (this->_filenames[i].find(tmp) != std::string::npos)
+	return (this->_filenames[i]);
+    return (tmp);
   }
 
   const std::string&	FileExplorer::getCurrentTexture()
