@@ -1,3 +1,4 @@
+#include <string>
 #include "game/GameLoadingState.hh"
 #include "game/GameManager.hh"
 #include "game/GameState.hh"
@@ -96,9 +97,10 @@ namespace bbm
   void			GameLoadingState::loadSound()
   {
     SoundManager::getInstance()->addMusic("menu", "assets/sound/Turning_tables.mp3");
+    SoundManager::getInstance()->addMusic("theme", "assets/sound/bomberman_them.mp3");
     SoundManager::getInstance()->addSound("banzai", "assets/sound/banzai.mp3");
-    SoundManager::getInstance()->addSound("bomb", "assets/sound/Bomb_Blow.wav");
     SoundManager::getInstance()->addSound("aquaBomb", "assets/sound/aqua_bomb.mp3");
+    SoundManager::getInstance()->addSound("bomb", "assets/sound/Bomb_Blow.wav");
     SoundManager::getInstance()->addSound("bigBomb", "assets/sound/big_bomb.mp3");
   }
 

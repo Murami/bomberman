@@ -37,6 +37,7 @@
 #include "serializer/JSONSerializer.hh"
 #include "serializer/Serializer.hh"
 #include "serializer/SerializerException.hh"
+#include "sound/SoundManager.hh"
 
 namespace bbm
 {
@@ -46,6 +47,7 @@ namespace bbm
     _manager(manager),
     _config(config)
   {
+    SoundManager::getInstance()->play("theme");
   }
 
   GameState::~GameState()
