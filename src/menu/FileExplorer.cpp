@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Wed Jun  4 22:38:54 2014 Manu
-// Last update Tue Jun 10 20:15:13 2014 Manu
+// Last update Thu Jun 12 19:23:10 2014 Manu
 //
 
 #include		"FileExplorer.hh"
@@ -35,7 +35,7 @@ namespace		bbm
 	    std::string tmp(this->_entry->d_name);
 	    if (tmp.find(".tga") != std::string::npos)
 	      this->_iconeNames.push_back(tmp);
-	    else if (tmp.find(".json") != std::string::npos)
+	    else if (tmp.find(".save") != std::string::npos)
 	      this->_filenames.push_back(tmp);
 	  }
       }
