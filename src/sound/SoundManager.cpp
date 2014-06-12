@@ -59,7 +59,7 @@ namespace bbm
       FMOD_Channel_SetPaused(_channels[name], 0);
     else
       {
-	_channels[name.c_str()] = NULL;
+	_channels[name] = NULL;
 	if (FMOD_System_PlaySound(_system, FMOD_CHANNEL_FREE, _sounds[name], 0, &_channels[name]) != FMOD_OK)
 	  {
 	    std::cerr << "Error : can't play " << name << std::endl;
