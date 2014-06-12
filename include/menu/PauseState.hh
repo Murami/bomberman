@@ -30,6 +30,10 @@ namespace	bbm
     Image*		_image;
     GameState*		_gameState;
 
+  private :
+    void		_setNewCurrentMenu(const std::string&);
+    bool		_initializePauseMainMenu();
+
   public :
     virtual void	initialize();
     virtual void	release();
@@ -64,6 +68,9 @@ namespace	bbm
     virtual void	serializeBindingPlayer3(Menu*);
     virtual void	serializeBindingPlayer4(Menu*);
     virtual void	serializeAudioSettings(Menu*);
+
+  public :
+    virtual void	resumeGame(Menu*);
 
   public :
     PauseState(GameManager&, GameState*);

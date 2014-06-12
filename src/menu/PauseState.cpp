@@ -4,7 +4,7 @@
 namespace		bbm
 {
   const std::string	PauseState::PAUSE_BACKGROUND =
-    "./assets/menu/images/grimmnight.tga";
+    "./assets/menu/images/violentdays.tga";
 
   PauseState::PauseState(GameManager& manager, GameState* state) :
     _manager(manager), _gameState(state)
@@ -14,12 +14,52 @@ namespace		bbm
     glEnable(GL_DEPTH_TEST);
   }
 
+  void		PauseState::_setNewCurrentMenu(const std::string& name)
+  {
+    std::list<Menu*>::iterator it = this->_menuList.begin();
+    while (it != this->_menuList.end())
+      {
+	if ((*it)->getTitle() == name)
+	  {
+	    this->_currentMenu = (*it);
+	    this->_currentMenu->initialize();
+	    return ;
+	  }
+	it++;
+      }
+    std::cerr << "Setting new menu : \'" << name << "\' : not found"
+	      << std::endl;
+  }
+
+  bool		PauseState::_initializePauseMainMenu()
+  {
+    Menu* menu = new Menu("pausemainmenu", this);
+    if (!menu->initialize())
+      return (false);
+    try
+      {
+	menu->createNewButton("resume", &IMenuManager::resumeGame,
+			      glm::vec4(1, 1, 1, 1), true);
+	menu->createNewButton("save", NULL, glm::vec4(1, 1, 1, 1), true);
+	menu->createNewButton("options", NULL, glm::vec4(1, 1, 1, 1), true);
+	menu->createNewButton("quit", NULL, glm::vec4(1, 0, 0, 1), true);
+      }
+    catch (FileLoadingException e)
+      {
+      }
+    menu->finalize();
+    this->_menuList.push_back(menu);
+    this->_currentMenu = menu;
+  }
+
   void		PauseState::initialize()
   {
     this->_image = new Image(PAUSE_BACKGROUND);
     if (!this->_image->initialize())
       throw (FileLoadingException(PAUSE_BACKGROUND));
-    this->_image->scale(glm::vec3(10, 10, 10));
+    this->_image->scale(glm::vec3(25, 25, 25));
+    this->_image->translate(glm::vec3(-10, 0, 0));
+    this->_initializePauseMainMenu();
   }
 
   void		PauseState::release()
@@ -37,9 +77,10 @@ namespace		bbm
       {
 	_manager.pop();
       }
+    this->_currentMenu->update(input);
   }
 
-  void		PauseState::draw(float time, Screen& context)
+  void		PauseState::draw(float, Screen& context)
   {
     Transform	perspective = ProjectionPerspective(60,
 						    context.getSize().x /
@@ -52,16 +93,22 @@ namespace		bbm
     context.split(glm::ivec2(0, 0), glm::ivec2(context.getSize().x,
 					       context.getSize().y));
     context.clear();
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    glAlphaFunc(GL_GREATER, 0.25f);
+    // glEnable(GL_BLEND);
+    // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    // glAlphaFunc(GL_GREATER, 0.25f);
     context.draw(*this->_image, state);
     //this->_gameState->draw(time, context);
+    context.draw(*this->_currentMenu, state);
     context.flush();
   }
 
   void		PauseState::revealing()
   {
+  }
+
+  void		PauseState::resumeGame(Menu*)
+  {
+    this->_manager.pop();
   }
 
   void		PauseState::setPlayMenu(Menu*)

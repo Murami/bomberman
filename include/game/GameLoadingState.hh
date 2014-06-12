@@ -12,7 +12,6 @@ namespace bbm
   class GameLoadingState : public IGameState
   {
 
-    // si newGame == true -> la partie est nouvelle sinon chargee
   public :
     struct		GameConfig
     {
@@ -28,7 +27,7 @@ namespace bbm
       bool		music;
       bool		sound;
       bool		newGame;
-      std::string	fileToLoad;
+      std::string*	fileToLoad;
     };
 
   public:
