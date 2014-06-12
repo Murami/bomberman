@@ -171,12 +171,12 @@
       },
       "23" : {
          "object" : {
-            "collide" : true,
-            "shader" : "default",
-            "texture" : "wall",
-            "type" : 2
+            "collide" : false,
+            "shader" : "",
+            "texture" : "",
+            "type" : 3
          },
-         "x" : 19,
+         "x" : 6,
          "y" : 2
       },
       "24" : {
@@ -186,8 +186,8 @@
             "texture" : "wall",
             "type" : 2
          },
-         "x" : 0,
-         "y" : 3
+         "x" : 19,
+         "y" : 2
       },
       "25" : {
          "object" : {
@@ -196,7 +196,7 @@
             "texture" : "wall",
             "type" : 2
          },
-         "x" : 19,
+         "x" : 0,
          "y" : 3
       },
       "26" : {
@@ -206,17 +206,17 @@
             "texture" : "wall",
             "type" : 2
          },
-         "x" : 0,
-         "y" : 4
+         "x" : 19,
+         "y" : 3
       },
       "27" : {
          "object" : {
-            "collide" : false,
-            "shader" : "",
-            "texture" : "",
-            "type" : 3
+            "collide" : true,
+            "shader" : "default",
+            "texture" : "wall",
+            "type" : 2
          },
-         "x" : 14,
+         "x" : 0,
          "y" : 4
       },
       "28" : {
@@ -251,12 +251,12 @@
       },
       "30" : {
          "object" : {
-            "collide" : true,
-            "shader" : "default",
-            "texture" : "wall",
-            "type" : 2
+            "collide" : false,
+            "shader" : "",
+            "texture" : "",
+            "type" : 3
          },
-         "x" : 19,
+         "x" : 11,
          "y" : 5
       },
       "31" : {
@@ -266,17 +266,17 @@
             "texture" : "wall",
             "type" : 2
          },
-         "x" : 0,
-         "y" : 6
+         "x" : 19,
+         "y" : 5
       },
       "32" : {
          "object" : {
-            "collide" : false,
-            "shader" : "",
-            "texture" : "",
-            "type" : 3
+            "collide" : true,
+            "shader" : "default",
+            "texture" : "wall",
+            "type" : 2
          },
-         "x" : 10,
+         "x" : 0,
          "y" : 6
       },
       "33" : {
@@ -321,12 +321,12 @@
       },
       "37" : {
          "object" : {
-            "collide" : true,
-            "shader" : "default",
-            "texture" : "wall",
-            "type" : 2
+            "collide" : false,
+            "shader" : "",
+            "texture" : "",
+            "type" : 3
          },
-         "x" : 19,
+         "x" : 16,
          "y" : 8
       },
       "38" : {
@@ -336,8 +336,8 @@
             "texture" : "wall",
             "type" : 2
          },
-         "x" : 0,
-         "y" : 9
+         "x" : 19,
+         "y" : 8
       },
       "39" : {
          "object" : {
@@ -346,7 +346,7 @@
             "texture" : "wall",
             "type" : 2
          },
-         "x" : 19,
+         "x" : 0,
          "y" : 9
       },
       "4" : {
@@ -366,17 +366,17 @@
             "texture" : "wall",
             "type" : 2
          },
-         "x" : 0,
-         "y" : 10
+         "x" : 19,
+         "y" : 9
       },
       "41" : {
          "object" : {
-            "collide" : false,
-            "shader" : "",
-            "texture" : "",
-            "type" : 3
+            "collide" : true,
+            "shader" : "default",
+            "texture" : "wall",
+            "type" : 2
          },
-         "x" : 13,
+         "x" : 0,
          "y" : 10
       },
       "42" : {
@@ -496,7 +496,7 @@
             "texture" : "",
             "type" : 3
          },
-         "x" : 12,
+         "x" : 9,
          "y" : 15
       },
       "53" : {
@@ -541,12 +541,12 @@
       },
       "57" : {
          "object" : {
-            "collide" : false,
-            "shader" : "",
-            "texture" : "",
-            "type" : 3
+            "collide" : true,
+            "shader" : "default",
+            "texture" : "wall",
+            "type" : 2
          },
-         "x" : 18,
+         "x" : 19,
          "y" : 17
       },
       "58" : {
@@ -556,17 +556,17 @@
             "texture" : "wall",
             "type" : 2
          },
-         "x" : 19,
-         "y" : 17
+         "x" : 0,
+         "y" : 18
       },
       "59" : {
          "object" : {
-            "collide" : true,
-            "shader" : "default",
-            "texture" : "wall",
-            "type" : 2
+            "collide" : false,
+            "shader" : "",
+            "texture" : "",
+            "type" : 3
          },
-         "x" : 0,
+         "x" : 13,
          "y" : 18
       },
       "6" : {

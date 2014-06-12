@@ -30,7 +30,7 @@ namespace bbm
     // _typeBomb = FIRE;
     // _nbBombs = 1;
     // _nbBombsBonus = 1;
-    // _speed = 0.005;
+    _speed = 0.005;
     // _state = IDLE;
     // _alive = true;
     // _slow = false;

@@ -100,7 +100,7 @@ DINC		=	include		\
 			gdl/includes	\
 			jsoncpp/include	\
 			include/menu	\
-			lua/include
+#			lua/include
 
 CFLAGS		=	-Wall		\
 			-Wextra

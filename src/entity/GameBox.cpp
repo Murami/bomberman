@@ -74,9 +74,10 @@ namespace bbm
 
   void			GameBox::interact(AEntity *entity)
   {
-    if (entity->getType() == "Player")
+    if (entity->getType() == "Player" ||
+	entity->getType() == "AI")
       {
-	Player*	player = dynamic_cast<Player*>(entity);
+	APlayer*	player = dynamic_cast<APlayer*>(entity);
 	glm::vec2 playerMove = player->getMove();
 	glm::vec2 playerPosition = player->getPosition();
 	float delta = player->getDelta();
@@ -96,12 +97,12 @@ namespace bbm
 	    collide(glm::vec3(playerPosition.x + delta, playerPosition.y  + 1 - delta, 0)) ||
 	    collide(glm::vec3(playerPosition.x + delta, playerPosition.y  + delta, 0)))
 	  {
-	    if (dynamic_cast<Player *>(entity)->isDead())
+	    if (!player->isDead())
 	      {
 		if (_idPlayer != 1)
 		  {
 		    _gameState.getPlayer(_idPlayer).addScore(1000);
-		    dynamic_cast<Player *>(entity)->die();
+		    player->die();
 		  }
 	      }
 	  }

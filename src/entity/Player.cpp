@@ -72,6 +72,7 @@ namespace bbm
 
   void			Player::update(float time)
   {
+    updateState();
     managePhysics(time);
     manageModel(time);
   }
