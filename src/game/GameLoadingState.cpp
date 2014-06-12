@@ -121,6 +121,7 @@ namespace bbm
 
   void			GameLoadingState::newGameState()
   {
+    std::cout << "new" << std::endl;
     GameState*			state;
     PlayerConfig		playerConfig;
     GameState::GameStateConfig	gameStateConfig;
@@ -156,7 +157,7 @@ namespace bbm
 
   void                  GameLoadingState::loadGameState()
   {
-
+    std::cout << "load" << std::endl;
     GameState*			state;
     GameState::GameStateConfig	gameStateConfig;
 

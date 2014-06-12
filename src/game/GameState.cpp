@@ -78,14 +78,14 @@ namespace bbm
     Serializer		s = Serializer::create<JSONSerializer>();
     try
       {
-	s->deserializeFromFile(file, *this);
+	s->deserializeFromFile("saves/" + file + ".save", *this);
       }
     catch (SerializerException& ex)
       {
 	throw SerializerException("Deserializer GameState Error : "
 				  + std::string(ex.what()));
       }
-    _tilemap.load(_tilemapName);
+    _tilemap.load(file);
   }
 
   void			GameState::save(const std::string & file)
@@ -93,23 +93,24 @@ namespace bbm
     Serializer		s = Serializer::create<JSONSerializer>();
     try
       {
-	s->serializeToFile(file, *this);
+	s->serializeToFile("saves/" + file + ".save", *this);
       }
     catch (SerializerException& ex)
       {
 	throw SerializerException("Serializer GameState Error : "
 				  + std::string(ex.what()));
       }
-    _tilemap.save(_tilemapName);
+    _tilemap.save(file);
   }
 
   void			GameState::pack(ISerializedNode & current) const
   {
     std::list<AEntity*>::const_iterator	it;
+    std::list<Player>::const_iterator	itPlayers;
     ISerializedNode*			entityListNode;
+    ISerializedNode*			playerListNode;
     int					i;
 
-    current.add("tilemap", _tilemapName);
     entityListNode = current.add("entity");
     for (i = 0, it = _entities.begin(); it != _entities.end(); ++it)
       {
@@ -122,6 +123,7 @@ namespace bbm
 	    i++;
 	  }
       }
+    playerListNode = current.add("players");
   }
 
   void			GameState::unpack(const ISerializedNode & current)
@@ -134,7 +136,6 @@ namespace bbm
     int			size;
     int			index;
 
-    current.get("tilemap", _tilemapName);
     entityListNode = current.get("entity");
     size = entityListNode->size();
     for (index = 0; index < size; index++)
@@ -180,6 +181,8 @@ namespace bbm
 		  << std::endl;
     	_players.push_back(player);
       }
+
+    this->save("megaSave1");
 
     // INIT EN BRUT DES AI
     // for (int i = 0; i != 1; i++)
@@ -366,10 +369,10 @@ namespace bbm
     it = _entities.begin();
     while (it != _entities.end())
       {
-	if ((*it)->expired())
-	  it = _entities.erase(it);
-	else
-	  it++;
+    	if ((*it)->expired())
+    	  it = _entities.erase(it);
+    	else
+    	  it++;
       }
     _skybox.update();
   }
