@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Wed Jun  4 22:38:54 2014 Manu
-// Last update Thu Jun 12 20:50:09 2014 Manu
+// Last update Fri Jun 13 00:51:05 2014 Manu
 //
 
 #include		"FileExplorer.hh"
@@ -48,26 +48,49 @@ namespace		bbm
       }
   }
 
-  const std::string&	FileExplorer::getCurrentFile()
+  const std::string& FileExplorer::getCurrentFile()
   {
-    static std::string tmp;
-    tmp = "";
-    for (size_t i = 0; i < this->_iconeNames[this->_index].size(); i++)
+    if (this->_index > this->_filenames.size())
       {
-	if (this->_iconeNames[this->_index][i] == '.')
-	  break;
-	tmp += this->_iconeNames[this->_index][i];
       }
-    for (size_t i = 0; i < this->_filenames.size(); i++)
-      if (this->_filenames[i].find(tmp) != std::string::npos)
-	return (this->_filenames[i]);
-    return (tmp);
+    else
+      {
+      }
   }
 
-  const std::string&	FileExplorer::getCurrentTexture()
+  const std::string& FileExplorer::getCurrentTexture()
   {
-    return (this->_iconeNames[this->_index]);
+    if (this->_index > this->_iconeNames.size())
+      {
+      }
+    else
+      {
+      }
   }
+
+  // const std::string&	FileExplorer::getCurrentFile()
+  // {
+  //   static std::string tmp;
+  //   tmp = "";
+  //   for (size_t i = 0; i < this->_iconeNames[this->_index].size(); i++)
+  //     {
+  // 	if (this->_iconeNames[this->_index][i] == '.')
+  // 	  break;
+  // 	tmp += this->_iconeNames[this->_index][i];
+  //     }
+  //   for (size_t i = 0; i < this->_filenames.size(); i++)
+  //     if (this->_filenames[i].find(tmp) != std::string::npos)
+  // 	return (this->_filenames[i]);
+  //   return (tmp);
+  // }
+
+  // const std::string&	FileExplorer::getCurrentTexture()
+  // {
+  //   static std::string def("default");
+  //   if (this->_index < this->_iconeNames.size())
+  //     return (this->_iconeNames[this->_index]);
+  //   return (def);
+  // }
 
   void			FileExplorer::next()
   {
