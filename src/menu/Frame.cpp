@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 02:47:32 2014 Manu
-// Last update Fri Jun 13 00:26:10 2014 Manu
+// Last update Fri Jun 13 01:14:48 2014 Manu
 //
 
 #include		"graphic/ARenderer.hh"
@@ -52,12 +52,7 @@ namespace		bbm
 
   void		Frame::_createIcone()
   {
-    std::cout << "current texture : " << FileExplorer::SAVE_PATH +
-      std::string("/") +
-      this->_explorer->getCurrentTexture() << std::endl;
-    this->_icone = new Image(FileExplorer::SAVE_PATH +
-			     std::string("/") +
-			     this->_explorer->getCurrentTexture());
+    this->_icone = new Image(this->_explorer->getCurrentTexture());
     this->_icone->initialize();
     this->_icone->scale(glm::vec3(2, 3, 2));
     this->_icone->translate(glm::vec3(0.01f, 0.2f, -2));
