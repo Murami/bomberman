@@ -1,6 +1,7 @@
 #include "game/AI.hh"
 #include "lua/LuaBiche.hh"
-#include <unistd.h>
+#include "game/GameState.hh"
+#include "entity/BombFactory.hh"
 
 namespace bbm
 {
@@ -22,6 +23,8 @@ namespace bbm
     add_method_to_vector(methods, "goLeft", &AI::goLeft);
     add_method_to_vector(methods, "goRight", &AI::goRight);
     add_method_to_vector(methods, "goDown", &AI::goDown);
+    add_method_to_vector(methods, "putBomb", &AI::putBomb);
+    add_method_to_vector(methods, "haveBomb", &AI::haveBomb);
     return (methods);
   }
 
@@ -88,6 +91,18 @@ namespace bbm
   int	AI::goDown(lua_State*)
   {
     this->setMove(glm::vec2(0, -1));
+    return (1);
+  }
+
+  int	AI::putBomb(lua_State*)
+  {
+    _nbBombs--;
+    _gameState.addEntity(BombFactory::getInstance()->create(FIRE, glm::vec2(_position.x, _position.y), _gameState, getID()));
+    return (1);
+  }
+
+  int	AI::haveBomb(lua_State*)
+  {
     return (1);
   }
 

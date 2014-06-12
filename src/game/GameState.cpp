@@ -225,10 +225,6 @@ namespace bbm
 	itSpawn += rand() % _tilemap.getSpawns().size();
 	player = new Player(*this, *it);
 	player->initPosition(itSpawn->x, itSpawn->y);
-<<<<<<< HEAD
-=======
-	// _AIs.push_back(new AI(*this, glm::vec2(itSpawn->x + 1, itSpawn->y)));
->>>>>>> 947aa4800b4053dfe1e137e71a8acc90aa88f5ef
     	_players.push_back(player);
       }
 
