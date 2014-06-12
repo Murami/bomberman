@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 13:12:51 2014 Manu
-// Last update Wed Jun 11 03:38:41 2014 Manu
+// Last update Thu Jun 12 21:17:31 2014 Manu
 //
 
 #include		"LetterManager.hpp"
