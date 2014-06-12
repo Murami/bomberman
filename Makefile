@@ -208,6 +208,7 @@ $(CNAME):	$(COBJ)
 		@$(MAKED) jsoncpp
 		@echo "[lua]"
 		@$(MAKED) lua/lua-5.2.3 linux
+		@cp lua/lua-5.2.3/src/liblua.a lua/libs
 		@echo
 		@echo "Linkage : $(CNAME)"
 		@$(CC) $(COBJ) -o $(CNAME) $(LDFLAGS)
