@@ -111,7 +111,7 @@ namespace bbm
 
     try
       {
-	s->serializeToFile("maps/" + file + "map", *this);
+	s->serializeToFile("maps/" + file + ".map", *this);
       }
     catch (SerializerException& ex)
       {
@@ -243,7 +243,7 @@ namespace bbm
 	      {
 		newState.transform = transform;
 		newState.transform.translate(glm::vec3(x, y, 0));
-		renderer.draw(*tile, newState);
+		// renderer.draw(*tile, newState);
 	      }
 	  }
       }

@@ -83,7 +83,7 @@ SRC		=	main				\
 			menu/PauseState			\
 			menu/OpendirException		\
 			sound/SoundManager		\
-			# lua/LuaBiche
+			lua/LuaBiche
 
 SRC_EXT		=	.cpp
 
@@ -100,7 +100,7 @@ DINC		=	include		\
 			gdl/includes	\
 			jsoncpp/include	\
 			include/menu	\
-#			lua/include
+			lua/include
 
 CFLAGS		=	-Wall		\
 			-Wextra
@@ -118,11 +118,11 @@ LIB		=	gdl_gl		\
 			dl		\
 			rt		\
 			json		\
-#			lua
+			lua
 
 DLIB		=	gdl/libs	\
 			jsoncpp/libs	\
-#			lua/libs
+			lua/libs
 
 LDFLAGS		=	src/sound/libfmodex64-4.44.31.so
 

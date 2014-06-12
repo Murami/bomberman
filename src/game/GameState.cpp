@@ -37,6 +37,7 @@
 #include "serializer/JSONSerializer.hh"
 #include "serializer/Serializer.hh"
 #include "serializer/SerializerException.hh"
+#include "sound/SoundManager.hh"
 
 namespace bbm
 {
@@ -46,6 +47,7 @@ namespace bbm
     _manager(manager),
     _config(config)
   {
+    SoundManager::getInstance()->play("theme");
     this->_flush = true;
   }
 
@@ -178,11 +180,13 @@ namespace bbm
       {
 
     	std::stringstream	ss;
+	std::stringstream	ss2;
 
     	ss << index;
+	ss2 << index + 1;
+	playerNode = playersListNode->get(ss.str());
 	playerConfig.inputConfig = new InputConfig;
-	playerConfig.inputConfig->load("inputConfig" + ss.str() + ".json");
-	playerNode = entityListNode->get(ss.str());
+	playerConfig.inputConfig->load("inputConfig" + ss2.str() + ".json");
 	playerNode->get("position", playerConfig.position);
 	playerNode->get("power", playerConfig.power);
 	playerNode->get("nbBombs", playerConfig.nbBombs);
@@ -221,10 +225,11 @@ namespace bbm
 	itSpawn += rand() % _tilemap.getSpawns().size();
 	player = new Player(*this, *it);
 	player->initPosition(itSpawn->x, itSpawn->y);
+	_AIs.push_back(new AI(*this, glm::vec2(itSpawn->x + 1, itSpawn->y)));
     	_players.push_back(player);
       }
 
-    // this->save("megaSave1");
+    this->save("megaSave1");
 
     // INIT EN BRUT DES AI
     // for (int i = 0; i != 1; i++)
@@ -324,9 +329,9 @@ namespace bbm
 	    context.draw(*(*itPlayers), state);
 
 	//draw AI
-	// std::list<AI*>::iterator	itAIs;
-	// for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
-	//   context.draw(*(*itAIs), state);
+	std::list<AI*>::iterator	itAIs;
+	for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
+	  context.draw(*(*itAIs), state);
       }
     if (this->_flush)
       context.flush();
@@ -351,8 +356,8 @@ namespace bbm
       (*itPlayers)->handleEvents(time, input);
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
       (*itPlayers)->update(time);
-    // for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
-    //   (*itAIs)->update(time);
+    for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
+      (*itAIs)->update(time);
 
     // Update all entities
     for (it = _entities.begin(); it != _entities.end(); it++)
@@ -379,7 +384,7 @@ namespace bbm
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
       if ((*itPlayers)->getID() == id)
 	return (*(*itPlayers));
-    throw (std::runtime_error("player not found"));
+    // throw (std::runtime_error("player not found"));
   }
 
   std::list<AEntity*>&	GameState::getEntities()

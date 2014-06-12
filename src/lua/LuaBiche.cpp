@@ -5,7 +5,7 @@
 // Login   <bichon_b@epitech.net>
 //
 // Started on  Tue May 20 12:22:22 2014 bichon_b
-// Last update Wed Jun 11 15:59:01 2014 bichon_b
+// Last update Thu Jun 12 20:16:03 2014 Desabre Quentin
 //
 
 #include "lua/LuaBiche.hh"
