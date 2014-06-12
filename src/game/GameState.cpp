@@ -333,7 +333,7 @@ namespace bbm
 	//draw players
 	PlayerIt	itPlayers;
 	for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
-	  if (std::abs((*itPlayers)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 10 &&
+	  if (std::abs((*itPlayers)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 12 &&
 	      std::abs((*itPlayers)->getPosition().y -(*itPlayersCamera)->getPosition().y) < 10)
 	    context.draw(*(*itPlayers), state);
 
