@@ -116,6 +116,10 @@ namespace		bbm
   {
   }
 
+  void		PauseState::launchLoadedGame(Menu*)
+  {
+  }
+
   void		PauseState::launchNewGame(Menu*)
   {
   }

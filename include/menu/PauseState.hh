@@ -53,6 +53,7 @@ namespace	bbm
     virtual void	setPrevFrame(Menu*);
     virtual void	setIASelectionMenu(Menu*);
     virtual void	launchNewGame(Menu*);
+    virtual void	launchLoadedGame(Menu*);
     virtual void	setOptionControlPlayer1(Menu*);
     virtual void	setOptionControlPlayer2(Menu*);
     virtual void	setOptionControlPlayer3(Menu*);
