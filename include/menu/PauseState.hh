@@ -11,28 +11,50 @@
 # include	"game/GameState.hh"
 # include	"graphic/ShaderManager.hh"
 # include	"graphic/Camera.hh"
+# include	"game/GameLoadingState.hh"
 
 namespace	bbm
 {
   class		Input;
   class		GameManager;
-  class		GameState;
+  class		Skybox;
+  class		InputConfig;
 
   class		PauseState : public IGameState, IMenuManager
   {
+
   public :
-    static const std::string	PAUSE_BACKGROUND;
+    const static std::string		INPUT_CONFIG_P1;
+    const static std::string		INPUT_CONFIG_P2;
+    const static std::string		INPUT_CONFIG_P3;
+    const static std::string		INPUT_CONFIG_P4;
 
   private :
-    GameManager&	_manager;
-    Menu*		_currentMenu;
-    std::list<Menu*>	_menuList;
-    Image*		_image;
-    GameState*		_gameState;
+    GameManager&			_manager;
+    Menu*				_currentMenu;
+    std::list<Menu*>			_menuList;
+    Skybox*				_skybox;
+    GameLoadingState::GameConfig	_config;
+    InputConfig*			_inputConfigPlayer1;
+    InputConfig*			_inputConfigPlayer2;
+    InputConfig*			_inputConfigPlayer3;
+    InputConfig*			_inputConfigPlayer4;
 
   private :
     void		_setNewCurrentMenu(const std::string&);
     bool		_initializePauseMainMenu();
+    bool		_initializeOptionsMenu();
+    bool		_initializeOptionControlMenu();
+    bool		_initializeOptionAudioMenu();
+    bool		_initializeControlPlayer1();
+    bool		_initializeControlPlayer2();
+    bool		_initializeControlPlayer3();
+    bool		_initializeControlPlayer4();
+    void		_setBindingControlPlayer1(Menu*, const std::string&);
+    void		_setBindingControlPlayer2(Menu*, const std::string&);
+    void		_setBindingControlPlayer3(Menu*, const std::string&);
+    void		_setBindingControlPlayer4(Menu*, const std::string&);
+    const std::string&	_getKeyFromSDLK(const std::string&);
 
   public :
     virtual void	initialize();
@@ -71,9 +93,10 @@ namespace	bbm
 
   public :
     virtual void	resumeGame(Menu*);
+    virtual void	saveGame(Menu*);
 
   public :
-    PauseState(GameManager&, GameState*);
+    PauseState(GameManager&);
     virtual ~PauseState();
   };
 }

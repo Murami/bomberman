@@ -263,7 +263,7 @@ namespace	bbm
   }
 
   ////////////////////////////////////////////////////////
-  // RAJOUTER LES BINDING POUR LES 2 DERNIERS KEYBOARDS //
+  // FAIRE LES BINDING POUR LES 2 DERNIERS KEYBOARDS //
   ////////////////////////////////////////////////////////
 
   void		MenuState::_setBindingControlPlayer2(Menu* menu,
@@ -723,13 +723,8 @@ namespace	bbm
       std::cerr << "Error initializing high score menu" << std::endl;
   }
 
-  void		MenuState::release()
-  {
-  }
-
-  void		MenuState::obscuring()
-  {
-  }
+  void		MenuState::release() {}
+  void		MenuState::obscuring() {}
 
   void		MenuState::update(float, const Input& input)
   {
@@ -950,7 +945,7 @@ namespace	bbm
     FileExplorer*	explorer = menu->getExplorer();
     std::string tmp = explorer->getCurrentFile();
     std::string tmp2;
-    size_t pos = tmp.find(".json");
+    size_t pos = tmp.find(".save");
     for (size_t i = 0; i < pos; i++)
       tmp2 += tmp[i];
     this->_config.fileToLoad = new std::string(tmp2);
@@ -1053,9 +1048,7 @@ namespace	bbm
     this->_setNewCurrentMenu("iaselection");
   }
 
-  void		MenuState::setContinueGameMenu(Menu*)
-  {
-  }
+  void		MenuState::setContinueGameMenu(Menu*) {}
 
   void		MenuState::setLoadGameMenu(Menu*)
   {
@@ -1078,6 +1071,7 @@ namespace	bbm
   }
 
   void		MenuState::resumeGame(Menu*) {}
+  void		MenuState::saveGame(Menu*) {}
 
   MenuState::~MenuState()
   {

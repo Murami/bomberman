@@ -28,7 +28,7 @@ namespace bbm
   {
     FrameManager	frame(60);
     IGameState*		state = new MenuState(_manager);
-    //IGameState*		state = new PauseState(_manager, NULL);
+    // IGameState*		state = new PauseState(_manager, NULL);
 
     _manager.push(state);
 

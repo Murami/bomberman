@@ -1,3 +1,4 @@
+#include <string>
 #include "game/GameLoadingState.hh"
 #include "game/GameManager.hh"
 #include "game/GameState.hh"
@@ -96,9 +97,10 @@ namespace bbm
   void			GameLoadingState::loadSound()
   {
     SoundManager::getInstance()->addMusic("menu", "assets/sound/Turning_tables.mp3");
+    SoundManager::getInstance()->addMusic("theme", "assets/sound/bomberman_them.mp3");
     SoundManager::getInstance()->addSound("banzai", "assets/sound/banzai.mp3");
-    SoundManager::getInstance()->addSound("bomb", "assets/sound/Bomb_Blow.wav");
     SoundManager::getInstance()->addSound("aquaBomb", "assets/sound/aqua_bomb.mp3");
+    SoundManager::getInstance()->addSound("bomb", "assets/sound/Bomb_Blow.wav");
     SoundManager::getInstance()->addSound("bigBomb", "assets/sound/big_bomb.mp3");
   }
 
@@ -127,6 +129,16 @@ namespace bbm
     PlayerConfig		playerConfig;
     GameState::GameStateConfig	gameStateConfig;
 
+    playerConfig.power = 3;
+    playerConfig.typeBomb = FIRE;
+    playerConfig.nbBombs = 1;
+    playerConfig.nbBombsBonus = 1;
+    playerConfig.speed = 0.005;
+    playerConfig.state = IDLE;
+    playerConfig.alive = true;
+    playerConfig.slow = false;
+    playerConfig.dark = false;
+    playerConfig.position = glm::vec2(5, 5);
     if (_config->player1)
       {
 	playerConfig.inputConfig = new InputConfig;
@@ -164,7 +176,7 @@ namespace bbm
 
 
     state = new GameState(_manager, &gameStateConfig);
-    state->load("save1.json");
+    state->load("megaSave1");
     _manager.push(state);
   }
 

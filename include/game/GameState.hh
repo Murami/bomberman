@@ -57,7 +57,7 @@ namespace bbm
 
   private:
     Skybox	_skybox;
-
+    bool	_flush;
     std::list<AEntity*>		_entities;
     std::list<Player*>		_players;
     std::list<AI*>		_AIs;
