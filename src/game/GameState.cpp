@@ -180,11 +180,13 @@ namespace bbm
       {
 
     	std::stringstream	ss;
+	std::stringstream	ss2;
 
     	ss << index;
+	ss2 << index + 1;
+	playerNode = playersListNode->get(ss.str());
 	playerConfig.inputConfig = new InputConfig;
-	playerConfig.inputConfig->load("inputConfig" + ss.str() + ".json");
-	playerNode = entityListNode->get(ss.str());
+	playerConfig.inputConfig->load("inputConfig" + ss2.str() + ".json");
 	playerNode->get("position", playerConfig.position);
 	playerNode->get("power", playerConfig.power);
 	playerNode->get("nbBombs", playerConfig.nbBombs);
@@ -226,7 +228,7 @@ namespace bbm
     	_players.push_back(player);
       }
 
-    // this->save("megaSave1");
+    this->save("megaSave1");
 
     // INIT EN BRUT DES AI
     // for (int i = 0; i != 1; i++)

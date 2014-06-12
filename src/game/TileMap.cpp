@@ -111,7 +111,7 @@ namespace bbm
 
     try
       {
-	s->serializeToFile("maps/" + file + "map", *this);
+	s->serializeToFile("maps/" + file + ".map", *this);
       }
     catch (SerializerException& ex)
       {

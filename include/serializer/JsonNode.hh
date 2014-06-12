@@ -20,6 +20,7 @@ public:
   void                  add(const std::string& index, const glm::vec3& value);
   void                  add(const std::string& index, const glm::vec4& value);
   void			add(const std::string& index, const std::string& value);
+  void			add(const std::string& index, bool value);
   void			add(const std::string& index, int value);
   void			add(const std::string& index, unsigned int value);
   void			add(const std::string& index, double value);

@@ -39,7 +39,7 @@ namespace bbm
   {
     current.add("position", _position);
     current.add("power", _power);
-    current.add("nbBonbs", _nbBombs);
+    current.add("nbBombs", _nbBombs);
     current.add("nbBombsBonus", _nbBombsBonus);
     current.add("speed", _speed);
     current.add("alive", _alive);
