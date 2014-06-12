@@ -27,8 +27,9 @@ namespace bbm
   std::vector<ILuaHeir<AI>::t_MethodPtr>	AI::_methodPtrs = make_method_list();
 
   AI::AI(GameState& gameState, const glm::vec2& position) :
-    APlayer(gameState)
+    APlayer(gameState), _script("scripts/test.lua")
   {
+    _script.addObject("player", this);
     _type = "AI";
     _position = position;
   }
@@ -39,12 +40,9 @@ namespace bbm
 
   void	AI::update(float time)
   {
-    // LuaBiche	script("scripts/test.lua");
-
-    // script.addObject("player", this);
-    // script.run();
-    std::cout << "ENTER HERE" << std::endl;
-    (void) time;
+    managePhysics(time);
+    manageModel(time);
+    _script.run();
   }
 
   void  AI::pack(ISerializedNode & current) const
@@ -64,41 +62,29 @@ namespace bbm
 
   int	AI::goUp(lua_State*)
   {
-    glm::vec2	vect;
-
-    vect = this->getPosition();
-    vect.y--;
-    this->setMove(vect);
+    std::cout << "up" << std::endl;
+    this->setMove(glm::vec2(0, 1));
     return (1);
   }
 
   int	AI::goLeft(lua_State*)
   {
-    glm::vec2	vect;
-
-    vect = this->getPosition();
-    vect.x--;
-    this->setMove(vect);
+    std::cout << "left" << std::endl;
+    this->setMove(glm::vec2(-1, 0));
     return (1);
   }
 
   int	AI::goRight(lua_State*)
   {
-    glm::vec2	vect;
-
-    vect = this->getPosition();
-    vect.x++;
-    this->setMove(vect);
+    std::cout << "right" << std::endl;
+    this->setMove(glm::vec2(1, 0));
     return (1);
   }
 
   int	AI::goDown(lua_State*)
   {
-    glm::vec2	vect;
-
-    vect = this->getPosition();
-    vect.y++;
-    this->setMove(vect);
+    std::cout << "down" << std::endl;
+    this->setMove(glm::vec2(0, -1));
     return (1);
   }
 

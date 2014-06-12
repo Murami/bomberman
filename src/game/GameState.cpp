@@ -225,6 +225,7 @@ namespace bbm
 	itSpawn += rand() % _tilemap.getSpawns().size();
 	player = new Player(*this, *it);
 	player->initPosition(itSpawn->x, itSpawn->y);
+	_AIs.push_back(new AI(*this, glm::vec2(itSpawn->x + 1, itSpawn->y)));
     	_players.push_back(player);
       }
 
@@ -383,7 +384,7 @@ namespace bbm
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
       if ((*itPlayers)->getID() == id)
 	return (*(*itPlayers));
-    throw (std::runtime_error("player not found"));
+    // throw (std::runtime_error("player not found"));
   }
 
   std::list<AEntity*>&	GameState::getEntities()

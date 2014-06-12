@@ -28,7 +28,7 @@ namespace bbm
       {
 	_animations[i - 38] = new gdl::Model;
 	_animations[i - 38]->load("./gdl/assets/marvin.fbx");
-	usleep(500000);
+	usleep(1000000);
 	_animations[i - 38]->createSubAnim(0, "run", i, i + 1);
 	_animations[i - 38]->setCurrentSubAnim("run", true);
       }

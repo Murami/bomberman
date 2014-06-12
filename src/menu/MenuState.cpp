@@ -123,6 +123,7 @@ namespace	bbm
     return (true);
   }
 
+
   bool		MenuState::_initializePlayerSelectionMenu()
   {
     Menu* menu = new Menu("playerselection", this);
@@ -354,7 +355,6 @@ namespace	bbm
     if (pos != std::string::npos)
       {
 	newKey = std::string(&key[pos+1]);
-	std::cout << "Return '" << newKey << "'" << std::endl;
 	return (newKey);
       }
     return (key);
@@ -740,7 +740,7 @@ namespace	bbm
 
   void		MenuState::draw(float, Screen& context)
   {
-    Transform	perspective = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1.0f, 1000);
+    Transform	perspective = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 0.1f, 1000);
     Transform	camera = Camera(glm::vec3(10, 0, 0),
 				glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     RenderState state(perspective, camera);
