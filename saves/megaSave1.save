@@ -1079,8 +1079,13 @@
          "nbBombs" : 1,
          "nbBombsBonus" : 1,
          "position" : {
+<<<<<<< HEAD
             "x" : 12.0,
             "y" : 7.0
+=======
+            "x" : 9.0,
+            "y" : 3.0
+>>>>>>> 330757781d90a2e35682b1f9e8aebcdf37dc0ac7
          },
          "power" : 3,
          "score" : 32767,

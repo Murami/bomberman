@@ -83,7 +83,7 @@ SRC		=	main				\
 			menu/PauseState			\
 			menu/OpendirException		\
 			sound/SoundManager		\
-#			lua/LuaBiche
+			lua/LuaBiche
 
 SRC_EXT		=	.cpp
 
