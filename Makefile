@@ -225,7 +225,7 @@ clean:
 		@$(RM) $(COBJ)
 
 fclean:		clean
-		@$(MAKED) jsoncpp clean
+		@$(MAKED) jsoncpp fclean
 		@$(RM) $(CNAME)
 
 re:		fclean all
