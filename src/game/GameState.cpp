@@ -4,6 +4,7 @@
 #include <iostream>
 #include <utility>
 #include <SDL.h>
+#include "PauseState.hh"
 #include "game/Tile.hh"
 #include "game/GameState.hh"
 #include "game/GameManager.hh"
@@ -334,6 +335,8 @@ namespace bbm
     if (input.getKeyDown(SDLK_ESCAPE) || input.getEvent(SDL_QUIT))
       {
 	_manager.pop();
+	PauseState* state = new PauseState(_manager, this);
+	_manager.push(state);
  	return;
       }
 

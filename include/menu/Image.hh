@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri Jun  6 14:00:02 2014 Manu
-// Last update Fri Jun  6 14:08:05 2014 Manu
+// Last update Thu Jun 12 11:02:57 2014 Manu
 //
 
 #ifndef		__IMAGE_HH__
@@ -16,6 +16,8 @@
 # include	<Geometry.hh>
 # include	<Texture.hh>
 # include	"AObject.hh"
+# include	"graphic/IDrawable.hh"
+# include	"graphic/ProjectionPerspective.hh"
 
 namespace	gdl
 {
@@ -27,7 +29,7 @@ namespace	bbm
   class		ARenderer;
   class		RenderState;
 
-  class		Image : public AObject
+  class		Image : public IDrawable, public AObject
   {
   private :
     gdl::Geometry	_geom;

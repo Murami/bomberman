@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:00 2014 Manu
-// Last update Wed Jun 11 01:48:58 2014 Manu
+// Last update Thu Jun 12 14:14:35 2014 Manu
 //
 
 #ifndef		__MENU_HH__
@@ -65,6 +65,9 @@ namespace	bbm
   public :
     bool	initialize();
     void	update(const Input&);
+
+  public :
+    FileExplorer*	getExplorer();
 
   public :
     void	createNewButton(const std::string&,

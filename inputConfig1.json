@@ -2,11 +2,11 @@
    "input" : {
       "0" : {
          "action" : "bomb",
-         "key" : "SDLK_KP_0"
+         "key" : "SDLK_SPACE"
       },
       "1" : {
          "action" : "bomb2",
-         "key" : "SDLK_KP_1"
+         "key" : "SDLK_RSHIFT"
       },
       "2" : {
          "action" : "down",
@@ -22,7 +22,7 @@
       },
       "5" : {
          "action" : "up",
-         "key" : "SDLK_DOWN"
+         "key" : "SDLK_UP"
       }
    }
 }

@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:03 2014 Manu
-// Last update Wed Jun 11 14:52:14 2014 Desabre Quentin
+// Last update Thu Jun 12 14:15:09 2014 Manu
 //
 
 #include		"FileExplorer.hh"
@@ -25,6 +25,11 @@ namespace	bbm
   const std::list<AButton*>&	Menu::getButtons() const
   {
     return (this->_buttons);
+  }
+
+  FileExplorer*	Menu::getExplorer()
+  {
+    return (this->_frame->getExplorer());
   }
 
   bool		Menu::initialize()

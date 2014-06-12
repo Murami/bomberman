@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Mon Jun  2 13:10:45 2014 Manu
-// Last update Tue Jun 10 19:56:19 2014 Manu
+// Last update Thu Jun 12 11:17:57 2014 Manu
 //
 
 #include		"graphic/RenderState.hh"
@@ -15,14 +15,17 @@
 namespace	bbm
 {
 
+  const std::string Skybox::VIOLENTDAYS = "assets/menu/images/violentdays.tga";
+
   Skybox::Skybox() : _position(0, 0, 0), _rotation(0, 0, 0), _scale(1, 1, 1)
   {
   }
 
   bool		Skybox::initialize()
   {
-    if (!this->_texture.load("./assets/menu/images/violentdays.tga"))
-      throw (FileLoadingException("Error while loading ./assets/menu/images/violentdays.tga"));
+    if (!this->_texture.load(VIOLENTDAYS))
+      throw (FileLoadingException(std::string("Error while loading ") +
+				  VIOLENTDAYS));
     this->_shader = ShaderManager::getInstance()->getShader("default");
     this->_geom.pushVertex(glm::vec3(-10, 10, -10));
     this->_geom.pushVertex(glm::vec3(-10, 10, 10));

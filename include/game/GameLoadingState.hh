@@ -27,6 +27,7 @@ namespace bbm
       bool		music;
       bool		sound;
       bool		newGame;
+      std::string	fileToLoad;
     };
 
   public:

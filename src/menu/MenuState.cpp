@@ -6,6 +6,7 @@
 #include		"graphic/Camera.hh"
 #include		"graphic/ProjectionPerspective.hh"
 #include		"MenuState.hh"
+#include		"PauseState.hh"
 
 #include		"serializer/ISerializedNode.hh"
 #include		"serializer/JSONSerializer.hh"
@@ -70,7 +71,7 @@ namespace	bbm
 	// CHANGER LAUNCHNEWGAME EN LAUNCHLOADEDGAME //
 	///////////////////////////////////////////////
 
-	menu->createNewButton("play", &IMenuManager::launchNewGame,
+	menu->createNewButton("play", &IMenuManager::launchLoadedGame,
 			      glm::vec4(0, 1, 0, 1), false);
 	menu->createNewButton("back", &IMenuManager::setPlayMenu,
 			      glm::vec4(1, 0, 0, 1), true);
@@ -256,6 +257,7 @@ namespace	bbm
 	list.push_back("RSHIFT");
 	list.push_back("RCTRL");
 	list.push_back("RETURN");
+	list.push_back("SPACE");
       }
     for (std::list<std::string>::iterator it = list.begin();
     	 it != list.end(); it++)
@@ -350,6 +352,19 @@ namespace	bbm
       }
   }
 
+  const std::string&	MenuState::_getKeyFromSDLK(const std::string& key)
+  {
+    static std::string newKey;
+    size_t pos = key.rfind("_");
+    if (pos != std::string::npos)
+      {
+	newKey = std::string(&key[pos+1]);
+	std::cout << "Return '" << newKey << "'" << std::endl;
+	return (newKey);
+      }
+    return (key);
+  }
+
   bool		MenuState::_initializeControlPlayer1()
   {
     Menu* menu = new Menu("controlplayer1", this);
@@ -361,23 +376,29 @@ namespace	bbm
     try
       {
 	menu->createNewStateButton("up", NULL, 7,
-				   glm::vec4(1, 1, 1, 1), "UP");
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("up")));
 	this->_setBindingControlPlayer1(menu, "UP");
 	menu->createNewStateButton("down", NULL, 5,
-				   glm::vec4(1, 1, 1, 1), "DOWN");
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("down")));
 	this->_setBindingControlPlayer1(menu, "DOWN");
 	menu->createNewStateButton("left", NULL, 5,
-				   glm::vec4(1, 1, 1, 1), "LEFT");
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("left")));
 	this->_setBindingControlPlayer1(menu, "LEFT");
 	menu->createNewStateButton("right", NULL, 4,
-				   glm::vec4(1, 1, 1, 1), "RIGHT");
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("right")));
 	this->_setBindingControlPlayer1(menu, "RIGHT");
 	menu->createNewStateButton("bomb", NULL, 5,
-				   glm::vec4(1, 1, 1, 1), "0");
-	this->_setBindingControlPlayer1(menu, "0");
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("bomb")));
+	this->_setBindingControlPlayer1(menu, "SPACE");
 	menu->createNewStateButton("bomb2", NULL, 4,
-				   glm::vec4(1, 1, 1, 1), "1");
-	this->_setBindingControlPlayer1(menu, "1");
+				   glm::vec4(1, 1, 1, 1),
+				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("bomb2")));
+	this->_setBindingControlPlayer1(menu, "RETURN");
 	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer1,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setOptionsControlMenu,
@@ -392,19 +413,6 @@ namespace	bbm
     menu->finalize();
     this->_menuList.push_back(menu);
     return (this->_initializeControlPlayer2());
-  }
-
-  const std::string&	MenuState::_getKeyFromSDLK(const std::string& key)
-  {
-    static std::string newKey;
-    size_t pos = key.rfind("_");
-    if (pos != std::string::npos)
-      {
-	newKey = std::string(&key[pos+1]);
-	std::cout << "Return '" << newKey << "'" << std::endl;
-	return (newKey);
-      }
-    return (key);
   }
 
   bool		MenuState::_initializeControlPlayer2()
@@ -946,6 +954,15 @@ namespace	bbm
     this->_manager.pop();
   }
 
+  void		MenuState::launchLoadedGame(Menu* menu)
+  {
+    FileExplorer*	explorer = menu->getExplorer();
+    this->_config.fileToLoad = explorer->getCurrentFile();
+    GameLoadingState*	state = new GameLoadingState(this->_manager,
+						     &this->_config);
+    this->_manager.push(state);
+  }
+
   void		MenuState::launchNewGame(Menu* menu)
   {
     std::list<AButton*> list = menu->getButtons();
@@ -971,7 +988,7 @@ namespace	bbm
       }
     this->_config.newGame = true;
     GameLoadingState*	state = new GameLoadingState(this->_manager,
-						     &this->_config);
+    						     &this->_config);
     this->_manager.push(state);
   }
 
