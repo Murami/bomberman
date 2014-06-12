@@ -156,6 +156,10 @@ namespace bbm
 
   void			GameState::initialize()
   {
+    Player					*player;
+    SerializableVector<glm::ivec2>::iterator	itSpawn;
+    int						i;
+
     if (!this->_skybox.initialize())
       std::cerr << "Error initializing skybox" << std::endl;
     glEnable(GL_CULL_FACE);
@@ -167,7 +171,13 @@ namespace bbm
     for(it = _config->playersConfigs.begin();
     	it != _config->playersConfigs.end(); ++it)
       {
-    	_players.push_back(new Player(*this, *it));
+	itSpawn = _tilemap.getSpawns().begin();
+	itSpawn += rand() % _tilemap.getSpawns().size();
+	player = new Player(*this, *it);
+	player->initPosition(itSpawn->x, itSpawn->y);
+	std::cout << player->getPosition().x << " " << player->getPosition().x
+		  << std::endl;
+    	_players.push_back(player);
       }
 
     // INIT EN BRUT DES AI

@@ -150,7 +150,6 @@ namespace bbm
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     state = new GameState(_manager, &gameStateConfig);
-    // state->load("save1.json");
     state->randomize(_config->mapSizeX, _config->mapSizeY);
     _manager.push(state);
   }
@@ -201,10 +200,10 @@ namespace bbm
       }
     else if (input.getKeyDown(SDLK_SPACE))
       {
-	// if (_config->newGame = true)
-	//   newGameState();
-	// else
-	newGameState();
+	if (_config->newGame == true)
+	  newGameState();
+	else
+	  loadGameState();
       }
   }
 

@@ -128,7 +128,7 @@ LDFLAGS		=	src/sound/libfmodex64-4.44.31.so
 
 ## RUNS
 
-CC		=	g++ -fmax-errors=5
+CC		=	clang++
 RM		=	rm -rf
 MD		=	mkdir -p
 
