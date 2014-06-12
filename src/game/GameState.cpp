@@ -326,19 +326,15 @@ namespace bbm
 	//draw entities
 	EntitiesIt		entitiesIt;
 	for (entitiesIt = _entities.begin(); entitiesIt != _entities.end(); entitiesIt++)
-	  if ((*entitiesIt)->getPosition().x + 5 < (*itPlayersCamera)->getPosition().x &&
-	      (*entitiesIt)->getPosition().x - 5 > (*itPlayersCamera)->getPosition().x &&
-	      (*entitiesIt)->getPosition().y + 5 < (*itPlayersCamera)->getPosition().y &&
-	      (*entitiesIt)->getPosition().y - 5 > (*itPlayersCamera)->getPosition().y)
+	  if (std::abs((*entitiesIt)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 5 &&
+	      std::abs((*entitiesIt)->getPosition().y -(*itPlayersCamera)->getPosition().y) < 5)
 	    context.draw(*(*entitiesIt), state);
 
 	//draw players
 	PlayerIt	itPlayers;
 	for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
-	  if ((*itPlayers)->getPosition().x + 5 < (*itPlayersCamera)->getPosition().x &&
-	      (*itPlayers)->getPosition().x - 5 > (*itPlayersCamera)->getPosition().x &&
-	      (*itPlayers)->getPosition().y + 5 < (*itPlayersCamera)->getPosition().y &&
-	      (*itPlayers)->getPosition().y - 5 > (*itPlayersCamera)->getPosition().y)
+	  if (std::abs((*itPlayers)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 5 &&
+	      std::abs((*itPlayers)->getPosition().y -(*itPlayersCamera)->getPosition().y) < 5)
 	    context.draw(*(*itPlayers), state);
 
 	//draw AI
