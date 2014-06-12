@@ -326,12 +326,20 @@ namespace bbm
 	//draw entities
 	EntitiesIt		entitiesIt;
 	for (entitiesIt = _entities.begin(); entitiesIt != _entities.end(); entitiesIt++)
-	  context.draw(*(*entitiesIt), state);
+	  if ((*entitiesIt)->getPosition().x + 5 < (*itPlayersCamera)->getPosition().x &&
+	      (*entitiesIt)->getPosition().x - 5 > (*itPlayersCamera)->getPosition().x &&
+	      (*entitiesIt)->getPosition().y + 5 < (*itPlayersCamera)->getPosition().y &&
+	      (*entitiesIt)->getPosition().y - 5 > (*itPlayersCamera)->getPosition().y)
+	    context.draw(*(*entitiesIt), state);
 
 	//draw players
 	PlayerIt	itPlayers;
 	for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
-	  context.draw(*(*itPlayers), state);
+	  if ((*itPlayers)->getPosition().x + 5 < (*itPlayersCamera)->getPosition().x &&
+	      (*itPlayers)->getPosition().x - 5 > (*itPlayersCamera)->getPosition().x &&
+	      (*itPlayers)->getPosition().y + 5 < (*itPlayersCamera)->getPosition().y &&
+	      (*itPlayers)->getPosition().y - 5 > (*itPlayersCamera)->getPosition().y)
+	    context.draw(*(*itPlayers), state);
 
 	//draw AI
 	// std::list<AI*>::iterator	itAIs;

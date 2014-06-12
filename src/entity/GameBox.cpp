@@ -123,4 +123,9 @@ namespace bbm
   {
     return (_type);
   }
+
+  const glm::vec2&	GameBox::getPosition() const
+  {
+    return (_pos);
+  }
 };
