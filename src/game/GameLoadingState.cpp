@@ -177,7 +177,7 @@ namespace bbm
 
 
     state = new GameState(_manager, &gameStateConfig);
-    state->load("save1");
+    state->load(*(_config->fileToLoad));
     _manager.push(state);
   }
 
