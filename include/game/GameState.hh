@@ -60,7 +60,7 @@ namespace bbm
     bool	_flush;
     std::list<AEntity*>		_entities;
     std::list<Player*>		_players;
-    // std::list<AI*>		_AIs;
+    std::list<AI*>		_AIs;
     TileMap			_tilemap;
     std::string			_tilemapName;
     GameManager&		_manager;

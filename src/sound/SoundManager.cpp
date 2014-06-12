@@ -66,12 +66,6 @@ namespace bbm
 	    return ;
 	  }
       }
-    std::map<std::string, FMOD_CHANNEL*>::iterator	it;
-
-    std::cout << std::endl << std::endl;
-    for (it = _channels.begin(); it != _channels.end(); it++) {
-      std::cout << it->first << " : " << it->second << std::endl;
-    }
   }
 
   void	SoundManager::pause(std::string const& name)

@@ -83,7 +83,7 @@ SRC		=	main				\
 			menu/PauseState			\
 			menu/OpendirException		\
 			sound/SoundManager		\
-			# lua/LuaBiche
+			lua/LuaBiche
 
 SRC_EXT		=	.cpp
 
@@ -118,7 +118,7 @@ LIB		=	gdl_gl		\
 			dl		\
 			rt		\
 			json		\
-#			lua
+			lua
 
 DLIB		=	gdl/libs	\
 			jsoncpp/libs	\
