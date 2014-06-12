@@ -79,14 +79,14 @@ namespace bbm
     Serializer		s = Serializer::create<JSONSerializer>();
     try
       {
-	s->deserializeFromFile(file, *this);
+	s->deserializeFromFile("saves/" + file + ".save", *this);
       }
     catch (SerializerException& ex)
       {
 	throw SerializerException("Deserializer GameState Error : "
 				  + std::string(ex.what()));
       }
-    _tilemap.load(_tilemapName);
+    _tilemap.load(file);
   }
 
   void			GameState::save(const std::string & file)
@@ -94,48 +94,65 @@ namespace bbm
     Serializer		s = Serializer::create<JSONSerializer>();
     try
       {
-	s->serializeToFile(file, *this);
+	s->serializeToFile("saves/" + file + ".save", *this);
       }
     catch (SerializerException& ex)
       {
 	throw SerializerException("Serializer GameState Error : "
 				  + std::string(ex.what()));
       }
-    _tilemap.save(_tilemapName);
+    _tilemap.save(file);
   }
 
   void			GameState::pack(ISerializedNode & current) const
   {
-    std::list<AEntity*>::const_iterator	it;
+    std::list<AEntity*>::const_iterator	itEntities;
+    std::list<Player*>::const_iterator	itPlayers;
     ISerializedNode*			entityListNode;
+    ISerializedNode*			playerListNode;
     int					i;
 
-    current.add("tilemap", _tilemapName);
     entityListNode = current.add("entity");
-    for (i = 0, it = _entities.begin(); it != _entities.end(); ++it)
+    for (i = 0, itEntities = _entities.begin();
+	 itEntities != _entities.end(); ++itEntities)
       {
-	if ((*it)->expired() == false)
+	if ((*itEntities)->expired() == false)
 	  {
 	    std::stringstream	ss;
 
 	    ss << i;
-	    entityListNode->add(ss.str(), *(*it));
+	    entityListNode->add(ss.str(), *(*itEntities));
 	    i++;
 	  }
+      }
+    playerListNode = current.add("players");
+    for (i = 0, itPlayers = _players.begin();
+	 itPlayers != _players.end(); ++itPlayers)
+      {
+	std::stringstream	ss;
+
+	ss << i;
+	playerListNode->add(ss.str(), *(*itPlayers));
+	i++;
       }
   }
 
   void			GameState::unpack(const ISerializedNode & current)
   {
+
+    PlayerConfig	playerConfig;
     ISerializedNode*	entityListNode;
+    ISerializedNode*	playersListNode;
     ISerializedNode*	entityNode;
+    ISerializedNode*	playerNode;
     EntityFactory	factory;
     AEntity*		entity;
     std::string		type;
     int			size;
     int			index;
+    int			typeBomb;
+    int			state;
 
-    current.get("tilemap", _tilemapName);
     entityListNode = current.get("entity");
     size = entityListNode->size();
     for (index = 0; index < size; index++)
@@ -152,7 +169,34 @@ namespace bbm
     	    addEntity(entity);
     	  }
     	else
-    	  std::cout << "Serializer GameState Warning: unknown entity type" << std::endl;
+    	  std::cout << "Serializer GameState Warning: unknown entity type"
+		    << std::endl;
+      }
+    playersListNode = current.get("players");
+    size = playersListNode->size();
+    for (index = 0; index < size; index++)
+      {
+
+    	std::stringstream	ss;
+
+    	ss << index;
+	playerConfig.inputConfig = new InputConfig;
+	playerConfig.inputConfig->load("inputConfig" + ss.str() + ".json");
+	playerNode = entityListNode->get(ss.str());
+	playerNode->get("position", playerConfig.position);
+	playerNode->get("power", playerConfig.power);
+	playerNode->get("nbBombs", playerConfig.nbBombs);
+	playerNode->get("nbBombsBonus", playerConfig.nbBombsBonus);
+	playerNode->get("speed", playerConfig.speed);
+	playerNode->get("alive", playerConfig.alive);
+	playerNode->get("slow", playerConfig.slow);
+	playerNode->get("dark", playerConfig.dark);
+	playerNode->get("score", playerConfig.score);
+	playerNode->get("typeBomb", typeBomb);
+	playerNode->get("state", state);
+	playerConfig.typeBomb = static_cast<BombType>(typeBomb);
+	playerConfig.state = static_cast<PlayerState>(state);
+	_config->playersConfigs.push_back(playerConfig);
       }
   }
 
@@ -177,72 +221,14 @@ namespace bbm
 	itSpawn += rand() % _tilemap.getSpawns().size();
 	player = new Player(*this, *it);
 	player->initPosition(itSpawn->x, itSpawn->y);
-	std::cout << player->getPosition().x << " " << player->getPosition().x
-		  << std::endl;
     	_players.push_back(player);
       }
+
+    // this->save("megaSave1");
 
     // INIT EN BRUT DES AI
     // for (int i = 0; i != 1; i++)
     //   _AIs.push_back(new AI(*this, glm::vec2(5, 5)));
-
-    // PlayerConfig	playerConfig;
-    // playerConfig.inputConfig = new InputConfig;
-    // playerConfig.inputConfig->load("inputConfig1.json");
-    // playerConfig.splitScreenPosition = glm::vec2(0, 0);
-    // playerConfig.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
-    // _players.push_back(new Player(*this, playerConfig));
-
-    // PlayerConfig	playerConfig2;
-    // playerConfig2.inputConfig = new InputConfig;
-    // playerConfig2.inputConfig->load("inputConfig2.json");
-    // playerConfig2.splitScreenPosition = glm::vec2(512 * 1.5, 0);
-    // playerConfig2.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
-    // _players.push_back(new Player(*this, playerConfig2));
-
-    // PlayerConfig	playerConfig3;
-    // playerConfig3.inputConfig = new InputConfig;
-    // playerConfig3.inputConfig->load("inputConfig3.json");
-    // playerConfig3.splitScreenPosition = glm::vec2(0, 384 * 1.5);
-    // playerConfig3.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
-    // _players.push_back(new Player(*this, playerConfig3));
-
-    // PlayerConfig	playerConfig4;
-    // playerConfig4.inputConfig = new InputConfig;
-    // playerConfig4.inputConfig->load("inputConfig4.json");
-    // playerConfig4.splitScreenPosition = glm::vec2(512 * 1.5, 384 * 1.5);
-    // playerConfig4.splitScreenSize = glm::vec2(512 * 1.5, 384 * 1.5);
-    // _players.push_back(new Player(*this, playerConfig4));
-
-    // addEntity(new BombBonus(glm::vec2(5, 17)));
-    // addEntity(new SpeedBonus(glm::vec2(5, 15)));
-    // addEntity(new MultiBombBonus(glm::vec2(5, 13)));
-    // addEntity(new DarkBonus(glm::vec2(5, 11)));
-    // addEntity(new WaterBonus(glm::vec2(5, 9)));
-    // addEntity(new PowerBonus(glm::vec2(5, 7)));
-    // addEntity(new FireBonus(glm::vec2(5, 5)));
-    // addEntity(new RandomBonus(glm::vec2(5, 3)));
-    // addEntity(new BoxBonus(glm::vec2(5, 1)));
-    // addEntity(new GameBox(glm::vec2(5, 2), *this));
-    // addEntity(new GameBox(glm::vec2(5, 4), *this));
-    // addEntity(new GameBox(glm::vec2(5, 6), *this));
-    // addEntity(new GameBox(glm::vec2(5, 8), *this));
-    // addEntity(new GameBox(glm::vec2(5, 10), *this));
-    // addEntity(new GameBox(glm::vec2(5, 12), *this));
-    // addEntity(new GameBox(glm::vec2(5, 14), *this));
-    // addEntity(new GameBox(glm::vec2(5, 16), *this));
-    // addEntity(new GameBox(glm::vec2(5, 18), *this));
-    // addEntity(new GameBox(glm::vec2(15, 2), *this));
-    // addEntity(new GameBox(glm::vec2(15, 3), *this));
-    // addEntity(new GameBox(glm::vec2(15, 4), *this));
-    // addEntity(new GameBox(glm::vec2(15, 5), *this));
-    // addEntity(new GameBox(glm::vec2(15, 6), *this));
-    // addEntity(new GameBox(glm::vec2(15, 8), *this));
-    // addEntity(new GameBox(glm::vec2(15, 10), *this));
-    // addEntity(new GameBox(glm::vec2(15, 12), *this));
-    // addEntity(new GameBox(glm::vec2(15, 14), *this));
-    // addEntity(new GameBox(glm::vec2(15, 16), *this));
-    // addEntity(new GameBox(glm::vec2(15, 18), *this));
   }
 
   void			GameState::release()
@@ -326,12 +312,16 @@ namespace bbm
 	//draw entities
 	EntitiesIt		entitiesIt;
 	for (entitiesIt = _entities.begin(); entitiesIt != _entities.end(); entitiesIt++)
-	  context.draw(*(*entitiesIt), state);
+	  if (std::abs((*entitiesIt)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 10 &&
+	      std::abs((*entitiesIt)->getPosition().y -(*itPlayersCamera)->getPosition().y) < 10)
+	    context.draw(*(*entitiesIt), state);
 
 	//draw players
 	PlayerIt	itPlayers;
 	for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
-	  context.draw(*(*itPlayers), state);
+	  if (std::abs((*itPlayers)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 12 &&
+	      std::abs((*itPlayers)->getPosition().y -(*itPlayersCamera)->getPosition().y) < 10)
+	    context.draw(*(*itPlayers), state);
 
 	//draw AI
 	// std::list<AI*>::iterator	itAIs;
@@ -370,10 +360,10 @@ namespace bbm
     it = _entities.begin();
     while (it != _entities.end())
       {
-	if ((*it)->expired())
-	  it = _entities.erase(it);
-	else
-	  it++;
+    	if ((*it)->expired())
+    	  it = _entities.erase(it);
+    	else
+    	  it++;
       }
     _skybox.update();
   }

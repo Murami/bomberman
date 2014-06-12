@@ -93,4 +93,9 @@ namespace bbm
 	_used = true;
       }
   }
+
+  const glm::vec2&	RandomBonus::getPosition() const
+  {
+    return (_pos);
+  }
 };

@@ -20,9 +20,12 @@ namespace bbm
 
     virtual void		update(float time) = 0;
     virtual bool		expired() const = 0 ;
+    // virtual bool		collide(const IQuadTree& node);
+    // virtual bool		collide(AEntity *) = 0;
     virtual bool		collide(const glm::vec3&) = 0;
     virtual const std::string &	getType() const = 0;
     virtual void		interact(AEntity *) = 0;
+    virtual const glm::vec2&	getPosition() const = 0;
 
     virtual void		pack(ISerializedNode & current) const = 0;
     virtual void		unpack(const ISerializedNode & current) = 0;

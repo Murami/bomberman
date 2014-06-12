@@ -92,4 +92,9 @@ namespace bbm
 	_used = true;
       }
   }
+
+  const glm::vec2&	DarkBonus::getPosition() const
+  {
+    return (_pos);
+  }
 };

@@ -22,4 +22,9 @@ namespace bbm
   {
     _lifespan = time;
   }
+
+  const glm::vec2&	ABomb::getPosition() const
+  {
+    return (_position);
+  }
 }

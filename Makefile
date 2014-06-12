@@ -192,8 +192,6 @@ CFLAGS		+=	$(CINC)
 LDFLAGS		+=	$(DLIB)			\
 			$(LIB)			\
 			-Wl,-rpath=./gdl/libs
-#			-Wl,-rpath=./gdl/libs:./lua/libs
-
 
 ## MISC RULES
 

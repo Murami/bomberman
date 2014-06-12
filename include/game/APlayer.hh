@@ -9,7 +9,6 @@
 #include "graphic/Model.hh"
 #include "graphic/Transformable.hh"
 #include "game/Wall.hh"
-#include "game/PlayerConfig.hh"
 
 namespace bbm
 {
@@ -95,20 +94,20 @@ namespace bbm
     void		manageModel(float time);
 
   protected:
-    glm::vec2		_position;
-    glm::vec2		_move;
-    int			_power;
-    int			_nbBombs;
-    int			_nbBombsBonus;
-    float      		_speed;
-    bool		_alive;
-    bool		_slow;
-    bool		_dark;
-    Marvin		_model;
-    BombType		_typeBomb;
-    PlayerState		_state;
-    GameState&		_gameState;
-    int			_score;
+    glm::vec2		_position; //yes
+    glm::vec2		_move; //NO
+    int			_power; //yes
+    int			_nbBombs; //yes
+    int			_nbBombsBonus; //yes
+    float      		_speed; //yes
+    bool		_alive; //yes
+    bool		_slow; //yes
+    bool		_dark; //yes
+    Marvin		_model; //NO
+    BombType		_typeBomb; //yes
+    PlayerState		_state; //yes
+    GameState&		_gameState; //NO
+    int			_score; //yes
   };
 };
 
