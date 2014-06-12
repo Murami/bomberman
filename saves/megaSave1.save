@@ -17,560 +17,511 @@
       "10" : {
          "position" : {
             "x" : 2.0,
-            "y" : 4.0
+            "y" : 11.0
          },
          "type" : "GameBox"
       },
       "100" : {
          "position" : {
             "x" : 12.0,
-            "y" : 13.0
+            "y" : 7.0
          },
          "type" : "GameBox"
       },
       "101" : {
          "position" : {
             "x" : 12.0,
-            "y" : 14.0
+            "y" : 8.0
          },
          "type" : "GameBox"
       },
       "102" : {
          "position" : {
-            "x" : 13.0,
-            "y" : 1.0
+            "x" : 12.0,
+            "y" : 9.0
          },
          "type" : "GameBox"
       },
       "103" : {
          "position" : {
-            "x" : 13.0,
-            "y" : 2.0
+            "x" : 12.0,
+            "y" : 11.0
          },
          "type" : "GameBox"
       },
       "104" : {
          "position" : {
             "x" : 13.0,
-            "y" : 4.0
+            "y" : 6.0
          },
          "type" : "GameBox"
       },
       "105" : {
          "position" : {
             "x" : 13.0,
-            "y" : 5.0
+            "y" : 7.0
          },
          "type" : "GameBox"
       },
       "106" : {
          "position" : {
             "x" : 13.0,
-            "y" : 6.0
+            "y" : 13.0
          },
          "type" : "GameBox"
       },
       "107" : {
          "position" : {
             "x" : 13.0,
-            "y" : 9.0
+            "y" : 14.0
          },
          "type" : "GameBox"
       },
       "108" : {
          "position" : {
             "x" : 13.0,
-            "y" : 10.0
+            "y" : 18.0
          },
          "type" : "GameBox"
       },
       "109" : {
          "position" : {
-            "x" : 13.0,
-            "y" : 11.0
+            "x" : 14.0,
+            "y" : 1.0
          },
          "type" : "GameBox"
       },
       "11" : {
          "position" : {
             "x" : 2.0,
-            "y" : 6.0
+            "y" : 12.0
          },
          "type" : "GameBox"
       },
       "110" : {
          "position" : {
-            "x" : 13.0,
-            "y" : 13.0
+            "x" : 14.0,
+            "y" : 2.0
          },
          "type" : "GameBox"
       },
       "111" : {
          "position" : {
-            "x" : 13.0,
-            "y" : 16.0
+            "x" : 14.0,
+            "y" : 6.0
          },
          "type" : "GameBox"
       },
       "112" : {
          "position" : {
-            "x" : 13.0,
-            "y" : 18.0
+            "x" : 14.0,
+            "y" : 7.0
          },
          "type" : "GameBox"
       },
       "113" : {
          "position" : {
             "x" : 14.0,
-            "y" : 5.0
+            "y" : 15.0
          },
          "type" : "GameBox"
       },
       "114" : {
          "position" : {
             "x" : 14.0,
-            "y" : 6.0
+            "y" : 16.0
          },
          "type" : "GameBox"
       },
       "115" : {
          "position" : {
             "x" : 14.0,
-            "y" : 8.0
+            "y" : 17.0
          },
          "type" : "GameBox"
       },
       "116" : {
          "position" : {
             "x" : 14.0,
-            "y" : 9.0
+            "y" : 18.0
          },
          "type" : "GameBox"
       },
       "117" : {
          "position" : {
-            "x" : 14.0,
-            "y" : 10.0
+            "x" : 15.0,
+            "y" : 1.0
          },
          "type" : "GameBox"
       },
       "118" : {
          "position" : {
-            "x" : 14.0,
-            "y" : 11.0
+            "x" : 15.0,
+            "y" : 2.0
          },
          "type" : "GameBox"
       },
       "119" : {
          "position" : {
-            "x" : 14.0,
-            "y" : 12.0
+            "x" : 15.0,
+            "y" : 3.0
          },
          "type" : "GameBox"
       },
       "12" : {
          "position" : {
             "x" : 2.0,
-            "y" : 7.0
+            "y" : 13.0
          },
          "type" : "GameBox"
       },
       "120" : {
          "position" : {
-            "x" : 14.0,
-            "y" : 14.0
+            "x" : 15.0,
+            "y" : 6.0
          },
          "type" : "GameBox"
       },
       "121" : {
          "position" : {
-            "x" : 14.0,
-            "y" : 15.0
+            "x" : 15.0,
+            "y" : 10.0
          },
          "type" : "GameBox"
       },
       "122" : {
          "position" : {
-            "x" : 14.0,
-            "y" : 17.0
+            "x" : 15.0,
+            "y" : 11.0
          },
          "type" : "GameBox"
       },
       "123" : {
          "position" : {
-            "x" : 14.0,
-            "y" : 18.0
+            "x" : 15.0,
+            "y" : 14.0
          },
          "type" : "GameBox"
       },
       "124" : {
          "position" : {
             "x" : 15.0,
-            "y" : 1.0
+            "y" : 15.0
          },
          "type" : "GameBox"
       },
       "125" : {
          "position" : {
             "x" : 15.0,
-            "y" : 6.0
+            "y" : 17.0
          },
          "type" : "GameBox"
       },
       "126" : {
          "position" : {
-            "x" : 15.0,
-            "y" : 8.0
+            "x" : 16.0,
+            "y" : 1.0
          },
          "type" : "GameBox"
       },
       "127" : {
          "position" : {
-            "x" : 15.0,
-            "y" : 9.0
+            "x" : 16.0,
+            "y" : 3.0
          },
          "type" : "GameBox"
       },
       "128" : {
          "position" : {
-            "x" : 15.0,
-            "y" : 15.0
+            "x" : 16.0,
+            "y" : 6.0
          },
          "type" : "GameBox"
       },
       "129" : {
          "position" : {
-            "x" : 15.0,
-            "y" : 17.0
+            "x" : 16.0,
+            "y" : 9.0
          },
          "type" : "GameBox"
       },
       "13" : {
          "position" : {
             "x" : 2.0,
-            "y" : 9.0
+            "y" : 15.0
          },
          "type" : "GameBox"
       },
       "130" : {
          "position" : {
-            "x" : 15.0,
-            "y" : 18.0
+            "x" : 16.0,
+            "y" : 10.0
          },
          "type" : "GameBox"
       },
       "131" : {
          "position" : {
             "x" : 16.0,
-            "y" : 1.0
+            "y" : 12.0
          },
          "type" : "GameBox"
       },
       "132" : {
          "position" : {
             "x" : 16.0,
-            "y" : 3.0
+            "y" : 14.0
          },
          "type" : "GameBox"
       },
       "133" : {
          "position" : {
-            "x" : 16.0,
-            "y" : 5.0
+            "x" : 17.0,
+            "y" : 1.0
          },
          "type" : "GameBox"
       },
       "134" : {
          "position" : {
-            "x" : 16.0,
-            "y" : 8.0
+            "x" : 17.0,
+            "y" : 4.0
          },
          "type" : "GameBox"
       },
       "135" : {
          "position" : {
-            "x" : 16.0,
-            "y" : 10.0
+            "x" : 17.0,
+            "y" : 9.0
          },
          "type" : "GameBox"
       },
       "136" : {
          "position" : {
-            "x" : 16.0,
-            "y" : 12.0
+            "x" : 17.0,
+            "y" : 10.0
          },
          "type" : "GameBox"
       },
       "137" : {
          "position" : {
-            "x" : 16.0,
-            "y" : 16.0
+            "x" : 17.0,
+            "y" : 14.0
          },
          "type" : "GameBox"
       },
       "138" : {
          "position" : {
             "x" : 17.0,
-            "y" : 1.0
+            "y" : 16.0
          },
          "type" : "GameBox"
       },
       "139" : {
          "position" : {
             "x" : 17.0,
-            "y" : 3.0
+            "y" : 18.0
          },
          "type" : "GameBox"
       },
       "14" : {
          "position" : {
             "x" : 2.0,
-            "y" : 10.0
+            "y" : 18.0
          },
          "type" : "GameBox"
       },
       "140" : {
          "position" : {
-            "x" : 17.0,
-            "y" : 5.0
+            "x" : 18.0,
+            "y" : 2.0
          },
          "type" : "GameBox"
       },
       "141" : {
          "position" : {
-            "x" : 17.0,
-            "y" : 6.0
+            "x" : 18.0,
+            "y" : 3.0
          },
          "type" : "GameBox"
       },
       "142" : {
          "position" : {
-            "x" : 17.0,
+            "x" : 18.0,
             "y" : 8.0
          },
          "type" : "GameBox"
       },
       "143" : {
          "position" : {
-            "x" : 17.0,
+            "x" : 18.0,
             "y" : 9.0
          },
          "type" : "GameBox"
       },
       "144" : {
          "position" : {
-            "x" : 17.0,
+            "x" : 18.0,
             "y" : 10.0
          },
          "type" : "GameBox"
       },
       "145" : {
          "position" : {
-            "x" : 17.0,
+            "x" : 18.0,
             "y" : 12.0
-         },
-         "type" : "GameBox"
-      },
-      "146" : {
-         "position" : {
-            "x" : 18.0,
-            "y" : 1.0
-         },
-         "type" : "GameBox"
-      },
-      "147" : {
-         "position" : {
-            "x" : 18.0,
-            "y" : 2.0
-         },
-         "type" : "GameBox"
-      },
-      "148" : {
-         "position" : {
-            "x" : 18.0,
-            "y" : 7.0
-         },
-         "type" : "GameBox"
-      },
-      "149" : {
-         "position" : {
-            "x" : 18.0,
-            "y" : 9.0
          },
          "type" : "GameBox"
       },
       "15" : {
          "position" : {
-            "x" : 2.0,
-            "y" : 11.0
-         },
-         "type" : "GameBox"
-      },
-      "150" : {
-         "position" : {
-            "x" : 18.0,
-            "y" : 11.0
-         },
-         "type" : "GameBox"
-      },
-      "151" : {
-         "position" : {
-            "x" : 18.0,
-            "y" : 15.0
-         },
-         "type" : "GameBox"
-      },
-      "152" : {
-         "position" : {
-            "x" : 18.0,
-            "y" : 18.0
+            "x" : 3.0,
+            "y" : 1.0
          },
          "type" : "GameBox"
       },
       "16" : {
          "position" : {
-            "x" : 2.0,
-            "y" : 12.0
+            "x" : 3.0,
+            "y" : 2.0
          },
          "type" : "GameBox"
       },
       "17" : {
          "position" : {
-            "x" : 2.0,
-            "y" : 13.0
+            "x" : 3.0,
+            "y" : 3.0
          },
          "type" : "GameBox"
       },
       "18" : {
          "position" : {
-            "x" : 2.0,
-            "y" : 14.0
+            "x" : 3.0,
+            "y" : 5.0
          },
          "type" : "GameBox"
       },
       "19" : {
          "position" : {
-            "x" : 2.0,
-            "y" : 15.0
+            "x" : 3.0,
+            "y" : 6.0
          },
          "type" : "GameBox"
       },
       "2" : {
          "position" : {
             "x" : 1.0,
-            "y" : 4.0
+            "y" : 9.0
          },
          "type" : "GameBox"
       },
       "20" : {
          "position" : {
-            "x" : 2.0,
-            "y" : 16.0
+            "x" : 3.0,
+            "y" : 7.0
          },
          "type" : "GameBox"
       },
       "21" : {
          "position" : {
-            "x" : 2.0,
-            "y" : 18.0
+            "x" : 3.0,
+            "y" : 8.0
          },
          "type" : "GameBox"
       },
       "22" : {
          "position" : {
             "x" : 3.0,
-            "y" : 1.0
+            "y" : 9.0
          },
          "type" : "GameBox"
       },
       "23" : {
          "position" : {
             "x" : 3.0,
-            "y" : 3.0
+            "y" : 10.0
          },
          "type" : "GameBox"
       },
       "24" : {
          "position" : {
             "x" : 3.0,
-            "y" : 10.0
+            "y" : 13.0
          },
          "type" : "GameBox"
       },
       "25" : {
          "position" : {
             "x" : 3.0,
-            "y" : 13.0
+            "y" : 16.0
          },
          "type" : "GameBox"
       },
       "26" : {
          "position" : {
             "x" : 3.0,
-            "y" : 16.0
-         },
-         "type" : "GameBox"
-      },
-      "27" : {
-         "position" : {
-            "x" : 3.0,
-            "y" : 17.0
-         },
-         "type" : "GameBox"
-      },
-      "28" : {
-         "position" : {
-            "x" : 3.0,
             "y" : 18.0
          },
          "type" : "GameBox"
       },
-      "29" : {
+      "27" : {
          "position" : {
             "x" : 4.0,
             "y" : 1.0
          },
          "type" : "GameBox"
       },
-      "3" : {
-         "position" : {
-            "x" : 1.0,
-            "y" : 9.0
-         },
-         "type" : "GameBox"
-      },
-      "30" : {
+      "28" : {
          "position" : {
             "x" : 4.0,
             "y" : 2.0
          },
          "type" : "GameBox"
       },
+      "29" : {
+         "position" : {
+            "x" : 4.0,
+            "y" : 4.0
+         },
+         "type" : "GameBox"
+      },
+      "3" : {
+         "position" : {
+            "x" : 1.0,
+            "y" : 14.0
+         },
+         "type" : "GameBox"
+      },
+      "30" : {
+         "position" : {
+            "x" : 4.0,
+            "y" : 5.0
+         },
+         "type" : "GameBox"
+      },
       "31" : {
          "position" : {
             "x" : 4.0,
-            "y" : 3.0
+            "y" : 6.0
          },
          "type" : "GameBox"
       },
       "32" : {
          "position" : {
             "x" : 4.0,
-            "y" : 7.0
+            "y" : 11.0
          },
          "type" : "GameBox"
       },
       "33" : {
          "position" : {
             "x" : 4.0,
-            "y" : 9.0
+            "y" : 13.0
          },
          "type" : "GameBox"
       },
       "34" : {
          "position" : {
             "x" : 4.0,
-            "y" : 11.0
+            "y" : 15.0
          },
          "type" : "GameBox"
       },
@@ -584,133 +535,133 @@
       "36" : {
          "position" : {
             "x" : 5.0,
-            "y" : 6.0
+            "y" : 2.0
          },
          "type" : "GameBox"
       },
       "37" : {
          "position" : {
             "x" : 5.0,
-            "y" : 7.0
+            "y" : 3.0
          },
          "type" : "GameBox"
       },
       "38" : {
          "position" : {
             "x" : 5.0,
-            "y" : 10.0
+            "y" : 4.0
          },
          "type" : "GameBox"
       },
       "39" : {
          "position" : {
             "x" : 5.0,
-            "y" : 11.0
+            "y" : 5.0
          },
          "type" : "GameBox"
       },
       "4" : {
          "position" : {
             "x" : 1.0,
-            "y" : 10.0
+            "y" : 16.0
          },
          "type" : "GameBox"
       },
       "40" : {
          "position" : {
             "x" : 5.0,
-            "y" : 15.0
+            "y" : 6.0
          },
          "type" : "GameBox"
       },
       "41" : {
          "position" : {
             "x" : 5.0,
-            "y" : 16.0
+            "y" : 9.0
          },
          "type" : "GameBox"
       },
       "42" : {
          "position" : {
             "x" : 5.0,
-            "y" : 17.0
+            "y" : 11.0
          },
          "type" : "GameBox"
       },
       "43" : {
          "position" : {
             "x" : 5.0,
-            "y" : 18.0
+            "y" : 15.0
          },
          "type" : "GameBox"
       },
       "44" : {
          "position" : {
-            "x" : 6.0,
-            "y" : 5.0
+            "x" : 5.0,
+            "y" : 17.0
          },
          "type" : "GameBox"
       },
       "45" : {
          "position" : {
-            "x" : 6.0,
-            "y" : 6.0
+            "x" : 5.0,
+            "y" : 18.0
          },
          "type" : "GameBox"
       },
       "46" : {
          "position" : {
             "x" : 6.0,
-            "y" : 9.0
+            "y" : 1.0
          },
          "type" : "GameBox"
       },
       "47" : {
          "position" : {
             "x" : 6.0,
-            "y" : 10.0
+            "y" : 3.0
          },
          "type" : "GameBox"
       },
       "48" : {
          "position" : {
             "x" : 6.0,
-            "y" : 11.0
+            "y" : 4.0
          },
          "type" : "GameBox"
       },
       "49" : {
          "position" : {
             "x" : 6.0,
-            "y" : 12.0
+            "y" : 8.0
          },
          "type" : "GameBox"
       },
       "5" : {
          "position" : {
             "x" : 1.0,
-            "y" : 11.0
+            "y" : 17.0
          },
          "type" : "GameBox"
       },
       "50" : {
          "position" : {
             "x" : 6.0,
-            "y" : 13.0
+            "y" : 10.0
          },
          "type" : "GameBox"
       },
       "51" : {
          "position" : {
             "x" : 6.0,
-            "y" : 14.0
+            "y" : 12.0
          },
          "type" : "GameBox"
       },
       "52" : {
          "position" : {
             "x" : 6.0,
-            "y" : 15.0
+            "y" : 14.0
          },
          "type" : "GameBox"
       },
@@ -724,7 +675,7 @@
       "54" : {
          "position" : {
             "x" : 6.0,
-            "y" : 17.0
+            "y" : 18.0
          },
          "type" : "GameBox"
       },
@@ -738,273 +689,273 @@
       "56" : {
          "position" : {
             "x" : 7.0,
-            "y" : 5.0
+            "y" : 3.0
          },
          "type" : "GameBox"
       },
       "57" : {
          "position" : {
             "x" : 7.0,
-            "y" : 6.0
+            "y" : 5.0
          },
          "type" : "GameBox"
       },
       "58" : {
          "position" : {
             "x" : 7.0,
-            "y" : 10.0
+            "y" : 6.0
          },
          "type" : "GameBox"
       },
       "59" : {
          "position" : {
             "x" : 7.0,
-            "y" : 11.0
+            "y" : 8.0
          },
          "type" : "GameBox"
       },
       "6" : {
          "position" : {
             "x" : 1.0,
-            "y" : 12.0
+            "y" : 18.0
          },
          "type" : "GameBox"
       },
       "60" : {
          "position" : {
             "x" : 7.0,
-            "y" : 16.0
+            "y" : 9.0
          },
          "type" : "GameBox"
       },
       "61" : {
          "position" : {
             "x" : 7.0,
-            "y" : 18.0
+            "y" : 11.0
          },
          "type" : "GameBox"
       },
       "62" : {
          "position" : {
-            "x" : 8.0,
-            "y" : 2.0
+            "x" : 7.0,
+            "y" : 12.0
          },
          "type" : "GameBox"
       },
       "63" : {
          "position" : {
-            "x" : 8.0,
-            "y" : 5.0
+            "x" : 7.0,
+            "y" : 13.0
          },
          "type" : "GameBox"
       },
       "64" : {
          "position" : {
-            "x" : 8.0,
-            "y" : 6.0
+            "x" : 7.0,
+            "y" : 15.0
          },
          "type" : "GameBox"
       },
       "65" : {
          "position" : {
-            "x" : 8.0,
-            "y" : 10.0
+            "x" : 7.0,
+            "y" : 18.0
          },
          "type" : "GameBox"
       },
       "66" : {
          "position" : {
             "x" : 8.0,
-            "y" : 11.0
+            "y" : 1.0
          },
          "type" : "GameBox"
       },
       "67" : {
          "position" : {
             "x" : 8.0,
-            "y" : 12.0
+            "y" : 4.0
          },
          "type" : "GameBox"
       },
       "68" : {
          "position" : {
             "x" : 8.0,
-            "y" : 16.0
+            "y" : 5.0
          },
          "type" : "GameBox"
       },
       "69" : {
          "position" : {
-            "x" : 9.0,
-            "y" : 3.0
+            "x" : 8.0,
+            "y" : 6.0
          },
          "type" : "GameBox"
       },
       "7" : {
          "position" : {
-            "x" : 1.0,
-            "y" : 14.0
+            "x" : 2.0,
+            "y" : 5.0
          },
          "type" : "GameBox"
       },
       "70" : {
          "position" : {
-            "x" : 9.0,
-            "y" : 4.0
+            "x" : 8.0,
+            "y" : 8.0
          },
          "type" : "GameBox"
       },
       "71" : {
          "position" : {
-            "x" : 9.0,
-            "y" : 5.0
+            "x" : 8.0,
+            "y" : 10.0
          },
          "type" : "GameBox"
       },
       "72" : {
          "position" : {
-            "x" : 9.0,
-            "y" : 7.0
+            "x" : 8.0,
+            "y" : 11.0
          },
          "type" : "GameBox"
       },
       "73" : {
          "position" : {
-            "x" : 9.0,
-            "y" : 8.0
+            "x" : 8.0,
+            "y" : 15.0
          },
          "type" : "GameBox"
       },
       "74" : {
          "position" : {
             "x" : 9.0,
-            "y" : 9.0
+            "y" : 1.0
          },
          "type" : "GameBox"
       },
       "75" : {
          "position" : {
             "x" : 9.0,
-            "y" : 10.0
+            "y" : 2.0
          },
          "type" : "GameBox"
       },
       "76" : {
          "position" : {
             "x" : 9.0,
-            "y" : 11.0
+            "y" : 3.0
          },
          "type" : "GameBox"
       },
       "77" : {
          "position" : {
             "x" : 9.0,
-            "y" : 16.0
+            "y" : 5.0
          },
          "type" : "GameBox"
       },
       "78" : {
          "position" : {
             "x" : 9.0,
-            "y" : 17.0
+            "y" : 8.0
          },
          "type" : "GameBox"
       },
       "79" : {
          "position" : {
             "x" : 9.0,
-            "y" : 18.0
+            "y" : 14.0
          },
          "type" : "GameBox"
       },
       "8" : {
          "position" : {
-            "x" : 1.0,
-            "y" : 15.0
+            "x" : 2.0,
+            "y" : 6.0
          },
          "type" : "GameBox"
       },
       "80" : {
          "position" : {
-            "x" : 10.0,
-            "y" : 3.0
+            "x" : 9.0,
+            "y" : 15.0
          },
          "type" : "GameBox"
       },
       "81" : {
          "position" : {
-            "x" : 10.0,
-            "y" : 5.0
+            "x" : 9.0,
+            "y" : 18.0
          },
          "type" : "GameBox"
       },
       "82" : {
          "position" : {
             "x" : 10.0,
-            "y" : 6.0
+            "y" : 2.0
          },
          "type" : "GameBox"
       },
       "83" : {
          "position" : {
             "x" : 10.0,
-            "y" : 7.0
+            "y" : 3.0
          },
          "type" : "GameBox"
       },
       "84" : {
          "position" : {
             "x" : 10.0,
-            "y" : 9.0
+            "y" : 4.0
          },
          "type" : "GameBox"
       },
       "85" : {
          "position" : {
             "x" : 10.0,
-            "y" : 11.0
+            "y" : 8.0
          },
          "type" : "GameBox"
       },
       "86" : {
          "position" : {
             "x" : 10.0,
-            "y" : 12.0
+            "y" : 11.0
          },
          "type" : "GameBox"
       },
       "87" : {
          "position" : {
             "x" : 10.0,
-            "y" : 15.0
+            "y" : 12.0
          },
          "type" : "GameBox"
       },
       "88" : {
          "position" : {
             "x" : 10.0,
-            "y" : 16.0
+            "y" : 15.0
          },
          "type" : "GameBox"
       },
       "89" : {
          "position" : {
             "x" : 10.0,
-            "y" : 17.0
+            "y" : 16.0
          },
          "type" : "GameBox"
       },
       "9" : {
          "position" : {
             "x" : 2.0,
-            "y" : 1.0
+            "y" : 7.0
          },
          "type" : "GameBox"
       },
       "90" : {
          "position" : {
-            "x" : 10.0,
-            "y" : 18.0
+            "x" : 11.0,
+            "y" : 2.0
          },
          "type" : "GameBox"
       },
@@ -1018,56 +969,56 @@
       "92" : {
          "position" : {
             "x" : 11.0,
-            "y" : 8.0
+            "y" : 5.0
          },
          "type" : "GameBox"
       },
       "93" : {
          "position" : {
             "x" : 11.0,
-            "y" : 11.0
+            "y" : 8.0
          },
          "type" : "GameBox"
       },
       "94" : {
          "position" : {
             "x" : 11.0,
-            "y" : 12.0
+            "y" : 11.0
          },
          "type" : "GameBox"
       },
       "95" : {
          "position" : {
             "x" : 11.0,
-            "y" : 13.0
+            "y" : 14.0
          },
          "type" : "GameBox"
       },
       "96" : {
          "position" : {
-            "x" : 12.0,
-            "y" : 1.0
+            "x" : 11.0,
+            "y" : 16.0
          },
          "type" : "GameBox"
       },
       "97" : {
          "position" : {
             "x" : 12.0,
-            "y" : 2.0
+            "y" : 1.0
          },
          "type" : "GameBox"
       },
       "98" : {
          "position" : {
             "x" : 12.0,
-            "y" : 4.0
+            "y" : 2.0
          },
          "type" : "GameBox"
       },
       "99" : {
          "position" : {
             "x" : 12.0,
-            "y" : 10.0
+            "y" : 3.0
          },
          "type" : "GameBox"
       }
@@ -1079,13 +1030,8 @@
          "nbBombs" : 1,
          "nbBombsBonus" : 1,
          "position" : {
-<<<<<<< HEAD
-            "x" : 12.0,
-            "y" : 7.0
-=======
-            "x" : 9.0,
-            "y" : 3.0
->>>>>>> 330757781d90a2e35682b1f9e8aebcdf37dc0ac7
+            "x" : 14.0,
+            "y" : 4.0
          },
          "power" : 3,
          "score" : 32767,

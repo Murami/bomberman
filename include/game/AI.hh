@@ -3,6 +3,7 @@
 
 #include "game/APlayer.hh"
 #include "lua/ILuaHeir.hh"
+#include "lua/LuaBiche.hh"
 
 namespace bbm
 {
@@ -28,6 +29,7 @@ namespace bbm
   private:
     static std::vector<ILuaHeir<AI>::t_MethodPtr>	_methodPtrs;
     std::string						_type;
+    LuaBiche						_script;
   };
 };
 
