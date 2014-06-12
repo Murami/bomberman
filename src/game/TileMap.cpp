@@ -75,6 +75,7 @@ namespace bbm
 	posy = (std::rand() % (y - 2)) + 1;
 	tile = new Tile(false, "", "", Tile::Spawn);
 	tile->setDrawable(NULL);
+	_spawns.push_back(glm::ivec2(posx, posy));
 	setTile(posx, posy, tile);
       }
   }
@@ -90,7 +91,6 @@ namespace bbm
     catch (SerializerException& ex)
       {
 	throw SerializerException("Deserializer TileMap Error : " + std::string(ex.what()));
-
       }
 
     _object.pushVertex(glm::vec3(0, 0, 0));
@@ -129,7 +129,7 @@ namespace bbm
     int					i;
 
     current.add("size", _size);
-    current.add("spawns", _spawns);
+    // current.add("spawns", _spawns);
     current.add("ground", _object);
     vectorNode = current.add("tiles");
     for (i = 0, it = _tiles.begin(); it != _tiles.end(); ++it)
@@ -161,7 +161,7 @@ namespace bbm
     ISerializedNode*		tileNode;
 
     current.get("size", _size);
-    current.get("spawns", _spawns);
+    // current.get("spawns", _spawns);
     current.get("ground", _object);
     _tiles.resize(_size.x * _size.y, NULL);
     vectorNode = current.get("tiles");
@@ -178,6 +178,8 @@ namespace bbm
 	tileNode->get("object", *tile);
 	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
 	setTile(x, y, tile);
+	if (tile->getType() == Tile::Spawn)
+	  _spawns.push_back(glm::ivec2(x, y));
       }
   }
 
@@ -220,6 +222,11 @@ namespace bbm
       return (Tile::Void);
     else
       return (tile->getType());
+  }
+
+  SerializableVector<glm::ivec2>& TileMap::getSpawns()
+  {
+    return (_spawns);
   }
 
   void		TileMap::draw(ARenderer& renderer, const RenderState& renderState)

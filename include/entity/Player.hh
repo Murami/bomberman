@@ -16,6 +16,7 @@ namespace bbm
     void                pack(ISerializedNode & current) const;
     void                unpack(const ISerializedNode & current);
     const std::string&  getType() const;
+    void                initPosition(int x, int y);
 
   private:
     PlayerConfig	_playerConfig;

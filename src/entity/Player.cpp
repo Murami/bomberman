@@ -87,4 +87,9 @@ namespace bbm
   {
     return (_type);
   }
+
+  void			Player::initPosition(int x, int y)
+  {
+    _position = glm::vec2(x, y);
+  }
 };
