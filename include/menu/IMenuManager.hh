@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 16:17:50 2014 Manu
-// Last update Thu Jun 12 14:09:17 2014 Manu
+// Last update Thu Jun 12 17:04:17 2014 Manu
 //
 
 #ifndef		__IMENUMANAGER_HH__
@@ -42,6 +42,11 @@ namespace	bbm
     virtual void	serializeBindingPlayer3(Menu*) = 0;
     virtual void	serializeBindingPlayer4(Menu*) = 0;
     virtual void	serializeAudioSettings(Menu*) = 0;
+
+  public :
+    virtual void	resumeGame(Menu*) = 0;
+    virtual void	saveGame(Menu*) = 0;
+
   };
 }
 

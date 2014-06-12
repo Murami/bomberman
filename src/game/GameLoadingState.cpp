@@ -107,6 +107,7 @@ namespace bbm
   void			GameLoadingState::loadModel()
   {
     Marvin::initialize();
+    Wall::initialize();
     ModelManager::getInstance()->addModel("FireBomb",
 					    "assets/models_bomb/FireBomb/Bomb.obj");
     ModelManager::getInstance()->addModel("WaterBomb",
@@ -123,10 +124,21 @@ namespace bbm
 
   void			GameLoadingState::newGameState()
   {
+    std::cout << "new" << std::endl;
     GameState*			state;
     PlayerConfig		playerConfig;
     GameState::GameStateConfig	gameStateConfig;
 
+    playerConfig.power = 3;
+    playerConfig.typeBomb = FIRE;
+    playerConfig.nbBombs = 1;
+    playerConfig.nbBombsBonus = 1;
+    playerConfig.speed = 0.005;
+    playerConfig.state = IDLE;
+    playerConfig.alive = true;
+    playerConfig.slow = false;
+    playerConfig.dark = false;
+    playerConfig.position = glm::vec2(5, 5);
     if (_config->player1)
       {
 	playerConfig.inputConfig = new InputConfig;
@@ -152,14 +164,13 @@ namespace bbm
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     state = new GameState(_manager, &gameStateConfig);
-    // state->load("save1.json");
     state->randomize(_config->mapSizeX, _config->mapSizeY);
     _manager.push(state);
   }
 
   void                  GameLoadingState::loadGameState()
   {
-
+    std::cout << "load" << std::endl;
     GameState*			state;
     GameState::GameStateConfig	gameStateConfig;
 
@@ -176,6 +187,7 @@ namespace bbm
   void			GameLoadingState::release()
   {
     Marvin::release();
+    Wall::release();
   }
 
   void			GameLoadingState::obscuring()
@@ -203,10 +215,10 @@ namespace bbm
       }
     else if (input.getKeyDown(SDLK_SPACE))
       {
-	// if (_config->newGame = true)
-	//   newGameState();
-	// else
-	newGameState();
+	if (_config->newGame == true)
+	  newGameState();
+	else
+	  loadGameState();
       }
   }
 

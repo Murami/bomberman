@@ -66,11 +66,6 @@ namespace	bbm
 			      glm::vec4(1, 1, 1, 1), false);
 	menu->createNewButton("prev", &IMenuManager::setPrevFrame,
 			      glm::vec4(1, 1, 1, 1), false);
-
-	///////////////////////////////////////////////
-	// CHANGER LAUNCHNEWGAME EN LAUNCHLOADEDGAME //
-	///////////////////////////////////////////////
-
 	menu->createNewButton("play", &IMenuManager::launchLoadedGame,
 			      glm::vec4(0, 1, 0, 1), false);
 	menu->createNewButton("back", &IMenuManager::setPlayMenu,
@@ -268,7 +263,7 @@ namespace	bbm
   }
 
   ////////////////////////////////////////////////////////
-  // RAJOUTER LES BINDING POUR LES 2 DERNIERS KEYBOARDS //
+  // FAIRE LES BINDING POUR LES 2 DERNIERS KEYBOARDS //
   ////////////////////////////////////////////////////////
 
   void		MenuState::_setBindingControlPlayer2(Menu* menu,
@@ -516,10 +511,6 @@ namespace	bbm
     return (this->_initializeControlPlayer4());
   }
 
-  /////////////////////////////
-  // faire le binding player 4 et faire les sauvegarde lors de l'appui sur ok
-  /////////////////////////////
-
   bool		MenuState::_initializeControlPlayer4()
   {
     Menu* menu = new Menu("controlplayer4", this);
@@ -732,13 +723,8 @@ namespace	bbm
       std::cerr << "Error initializing high score menu" << std::endl;
   }
 
-  void		MenuState::release()
-  {
-  }
-
-  void		MenuState::obscuring()
-  {
-  }
+  void		MenuState::release() {}
+  void		MenuState::obscuring() {}
 
   void		MenuState::update(float, const Input& input)
   {
@@ -957,9 +943,14 @@ namespace	bbm
   void		MenuState::launchLoadedGame(Menu* menu)
   {
     FileExplorer*	explorer = menu->getExplorer();
-    this->_config.fileToLoad = explorer->getCurrentFile();
+    std::string tmp = explorer->getCurrentFile();
+    std::string tmp2;
+    size_t pos = tmp.find(".save");
+    for (size_t i = 0; i < pos; i++)
+      tmp2 += tmp[i];
+    this->_config.fileToLoad = new std::string(tmp2);
     GameLoadingState*	state = new GameLoadingState(this->_manager,
-						     &this->_config);
+    						     &this->_config);
     this->_manager.push(state);
   }
 
@@ -1057,9 +1048,7 @@ namespace	bbm
     this->_setNewCurrentMenu("iaselection");
   }
 
-  void		MenuState::setContinueGameMenu(Menu*)
-  {
-  }
+  void		MenuState::setContinueGameMenu(Menu*) {}
 
   void		MenuState::setLoadGameMenu(Menu*)
   {
@@ -1081,10 +1070,13 @@ namespace	bbm
     this->_setNewCurrentMenu("control");
   }
 
+  void		MenuState::resumeGame(Menu*) {}
+  void		MenuState::saveGame(Menu*) {}
+
   MenuState::~MenuState()
   {
     for (std::list<Menu*>::iterator it = this->_menuList.begin();
-	 it != this->_menuList.end(); it++)
+    	 it != this->_menuList.end(); it++)
       delete (*it);
   }
 }

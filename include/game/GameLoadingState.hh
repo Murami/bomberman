@@ -1,7 +1,8 @@
 #ifndef GAMELOADINGSTATE_HH
-#define GAMELOADINGSTATE_HH
+# define GAMELOADINGSTATE_HH
 
-#include "game/IGameState.hh"
+# include <string>
+# include "game/IGameState.hh"
 
 namespace bbm
 {
@@ -11,7 +12,6 @@ namespace bbm
   class GameLoadingState : public IGameState
   {
 
-    // si newGame == true -> la partie est nouvelle sinon chargee
   public :
     struct		GameConfig
     {
@@ -27,7 +27,7 @@ namespace bbm
       bool		music;
       bool		sound;
       bool		newGame;
-      std::string	fileToLoad;
+      std::string*	fileToLoad;
     };
 
   public:

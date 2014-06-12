@@ -17,7 +17,7 @@ namespace bbm
     SoundManager::getInstance()->play("bigBomb");
     _idPlayer = idPlayer;
     _type = "PowerBombExplode";
-    _wall.setPosition(glm::vec3(_position.x, _position.y, _position.z));
+    _wall.setPosition(glm::vec3(_position.x, _position.y, 0));
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
   }
 

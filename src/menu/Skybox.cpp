@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Mon Jun  2 13:10:45 2014 Manu
-// Last update Thu Jun 12 11:17:57 2014 Manu
+// Last update Thu Jun 12 16:19:55 2014 Manu
 //
 
 #include		"graphic/RenderState.hh"
@@ -60,7 +60,7 @@ namespace	bbm
     this->_geom.pushUv(glm::vec2(0.75, 0));
     this->_geom.pushUv(glm::vec2(0.75, 1));
     this->_geom.build();
-    this->scale(glm::vec3(5, 5, 5));
+    this->scale(glm::vec3(10, 10, 10));
     return (true);
   }
 

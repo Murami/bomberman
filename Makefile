@@ -128,7 +128,7 @@ LDFLAGS		=	src/sound/libfmodex64-4.44.31.so
 
 ## RUNS
 
-CC		=	g++ -fmax-errors=5
+CC		=	g++
 RM		=	rm -rf
 MD		=	mkdir -p
 
@@ -192,8 +192,6 @@ CFLAGS		+=	$(CINC)
 LDFLAGS		+=	$(DLIB)			\
 			$(LIB)			\
 			-Wl,-rpath=./gdl/libs
-#			-Wl,-rpath=./gdl/libs:./lua/libs
-
 
 ## MISC RULES
 

@@ -91,7 +91,6 @@ namespace bbm
 	    collide(glm::vec3(playerPosition.x  + delta, playerPosition.y + playerMove.y + 1 - delta, 0)) ||
 	    collide(glm::vec3(playerPosition.x  + delta, playerPosition.y + playerMove.y + delta, 0)))
 	  playerMove.y = 0;
-
 	if (collide(glm::vec3(playerPosition.x + 1 - delta, playerPosition.y  + 1 - delta, 0)) ||
 	    collide(glm::vec3(playerPosition.x + 1 - delta, playerPosition.y  + delta, 0)) ||
 	    collide(glm::vec3(playerPosition.x + delta, playerPosition.y  + 1 - delta, 0)) ||
@@ -99,8 +98,11 @@ namespace bbm
 	  {
 	    if (dynamic_cast<Player *>(entity)->isDead())
 	      {
-		_gameState.getPlayer(_idPlayer).addScore(1000);
-		dynamic_cast<Player *>(entity)->die();
+		if (_idPlayer != 1)
+		  {
+		    _gameState.getPlayer(_idPlayer).addScore(1000);
+		    dynamic_cast<Player *>(entity)->die();
+		  }
 	      }
 	  }
 	player->setMove(playerMove);
@@ -109,7 +111,6 @@ namespace bbm
 	entity->getType() == "PowerBombExplode")
       {
 	AEntity *bonus;
-
 	dynamic_cast<ABombExplode*>(entity)->setLifeSpan(0);
 	bonus = BonusFactory::getInstance()->createRandom(_pos);
 	if (bonus != NULL)
@@ -121,5 +122,10 @@ namespace bbm
   const std::string &	GameBox::getType() const
   {
     return (_type);
+  }
+
+  const glm::vec2&	GameBox::getPosition() const
+  {
+    return (_pos);
   }
 };

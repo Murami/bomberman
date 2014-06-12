@@ -22,20 +22,20 @@ namespace bbm
   APlayer::APlayer(GameState& gameState) :
     _gameState(gameState)
   {
-    _alive = true;
-    _slow = false;
-    _dark = false;
     _model.setPosition(glm::vec3(12 + 0.5, 12 + 0.5, 0));
     _model.setScale(glm::vec3(modelScaleFactor, modelScaleFactor, modelScaleFactor));
     _model.setRoll(90);
-    _position = glm::vec2(5, 5);
     _move = glm::vec2(0, 0);
-    _power = 3;
-    _typeBomb = FIRE;
-    _nbBombs = 1;
-    _nbBombsBonus = 1;
-    _speed = 0.005;
-    _state = IDLE;
+    // _power = 3;
+    // _typeBomb = FIRE;
+    // _nbBombs = 1;
+    // _nbBombsBonus = 1;
+    // _speed = 0.005;
+    // _state = IDLE;
+    // _alive = true;
+    // _slow = false;
+    // _dark = false;
+    // _position = glm::vec2(5, 5);
   }
 
   APlayer::~APlayer()
@@ -89,11 +89,11 @@ namespace bbm
 
     for (it = _gameState.getEntities().begin(); it != _gameState.getEntities().end(); it++)
       {
-	if ((*it)->collide(glm::vec3(_position.x + _move.x + 1 - delta, _position.y + _move.y + delta, 0)) ||
-	    (*it)->collide(glm::vec3(_position.x + _move.x + delta, _position.y + _move.y + 1 - delta, 0)) ||
-	    (*it)->collide(glm::vec3(_position.x + _move.x + 1 - delta, _position.y + _move.y + 1 - delta, 0)) ||
-	    (*it)->collide(glm::vec3(_position.x + _move.x + delta, _position.y + _move.y + delta, 0)))
-	  (*it)->interact(this);
+    	if ((*it)->collide(glm::vec3(_position.x + _move.x + 1 - delta, _position.y + _move.y + delta, 0)) ||
+    	    (*it)->collide(glm::vec3(_position.x + _move.x + delta, _position.y + _move.y + 1 - delta, 0)) ||
+    	    (*it)->collide(glm::vec3(_position.x + _move.x + 1 - delta, _position.y + _move.y + 1 - delta, 0)) ||
+    	    (*it)->collide(glm::vec3(_position.x + _move.x + delta, _position.y + _move.y + delta, 0)))
+    	  (*it)->interact(this);
       }
   }
 

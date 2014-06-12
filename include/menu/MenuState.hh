@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 16:43:06 2014 Manu
-// Last update Thu Jun 12 14:13:37 2014 Manu
+// Last update Thu Jun 12 17:02:51 2014 Manu
 //
 
 #ifndef		__MENUSTATE_HH__
@@ -60,9 +60,9 @@ namespace	bbm
     bool		_initializePlayerSelectionMenu();
     bool		_initializeIASelectionMenu();
     bool		_initializeLoadGameMenu();
+    bool		_initializeOptionVideoMenu();
     bool		_initializeOptionControlMenu();
     bool		_initializeOptionAudioMenu();
-    bool		_initializeOptionVideoMenu();
     bool		_initializeControlPlayer1();
     bool		_initializeControlPlayer2();
     bool		_initializeControlPlayer3();
@@ -112,6 +112,10 @@ namespace	bbm
     virtual void	serializeBindingPlayer3(Menu*);
     virtual void	serializeBindingPlayer4(Menu*);
     virtual void	serializeAudioSettings(Menu*);
+
+  public :
+    virtual void	resumeGame(Menu*);
+    virtual void	saveGame(Menu*);
 
   public :
     MenuState(GameManager&);
