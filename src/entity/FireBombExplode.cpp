@@ -13,10 +13,11 @@ namespace bbm
     ABombExplode(position, gameState),
     _wall("fire", "default")
   {
-    _idPlayer = idPlayer;
     SoundManager::getInstance()->play("bomb");
+
+    _idPlayer = idPlayer;
     _type = "FireBombExplode";
-    _wall.setPosition(glm::vec3(_position.x, _position.y, _position.z));
+    _wall.setPosition(glm::vec3(_position.x, _position.y, 0));
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
   }
 

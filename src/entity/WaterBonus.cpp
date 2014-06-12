@@ -90,4 +90,9 @@ namespace bbm
 	_used = true;
       }
   }
+
+  const glm::vec2&	WaterBonus::getPosition() const
+  {
+    return (_pos);
+  }
 };

@@ -26,6 +26,8 @@ namespace bbm
     void                pack(ISerializedNode & current) const;
     void                unpack(const ISerializedNode & current);
 
+    const glm::vec2&	getPosition() const;
+
   protected:
     void		draw(ARenderer& render, const RenderState& renderState);
 

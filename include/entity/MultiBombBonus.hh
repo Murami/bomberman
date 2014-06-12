@@ -27,6 +27,8 @@ namespace bbm
     void		pack(ISerializedNode & current) const;
     void		unpack(const ISerializedNode & current);
 
+    const glm::vec2&	getPosition() const;
+
   private:
     glm::vec2		_pos;
     Wall		_wall;

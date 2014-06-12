@@ -93,4 +93,8 @@ namespace bbm
       }
   }
 
+  const glm::vec2&	SpeedBonus::getPosition() const
+  {
+    return (_pos);
+  }
 };
