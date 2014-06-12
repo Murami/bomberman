@@ -5,7 +5,7 @@
 // Login   <bichon_b@epitech.net>
 //
 // Started on  Tue May 20 12:22:22 2014 bichon_b
-// Last update Thu Jun 12 20:16:03 2014 Desabre Quentin
+// Last update Thu Jun 12 21:12:18 2014 bichon_b
 //
 
 #include "lua/LuaBiche.hh"
@@ -19,7 +19,7 @@ LuaBiche::LuaBiche(std::string const& file)
   if (luaL_loadfile(_lua, file.c_str()))
     {
       std::cerr << lua_tostring(_lua, -1) << std::endl;
-      exit(-1);
+      throw ;
     }
 }
 

@@ -225,15 +225,14 @@ namespace bbm
 	itSpawn += rand() % _tilemap.getSpawns().size();
 	player = new Player(*this, *it);
 	player->initPosition(itSpawn->x, itSpawn->y);
-	// _AIs.push_back(new AI(*this, glm::vec2(itSpawn->x + 1, itSpawn->y)));
     	_players.push_back(player);
       }
 
     this->save("megaSave1");
 
     // INIT EN BRUT DES AI
-    // for (int i = 0; i != 1; i++)
-    //   _AIs.push_back(new AI(*this, glm::vec2(5, 5)));
+    for (int i = 0; i != 1; i++)
+      _AIs.push_back(new AI(*this, glm::vec2(5, 5)));
   }
 
   void			GameState::release()

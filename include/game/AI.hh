@@ -22,6 +22,8 @@ namespace bbm
     int	goLeft(lua_State*);
     int	goRight(lua_State*);
     int	goDown(lua_State*);
+    int	putBomb(lua_State*);
+    int	haveBomb(lua_State*);
 
     std::string						getClassName() const;
     const std::vector<ILuaHeir<AI>::t_MethodPtr>&	getMethodPtr() const;
@@ -29,7 +31,6 @@ namespace bbm
   private:
     static std::vector<ILuaHeir<AI>::t_MethodPtr>	_methodPtrs;
     std::string						_type;
-    LuaBiche						_script;
   };
 };
 

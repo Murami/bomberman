@@ -26,16 +26,18 @@ namespace bbm
     _model.setScale(glm::vec3(modelScaleFactor, modelScaleFactor, modelScaleFactor));
     _model.setRoll(90);
     _move = glm::vec2(0, 0);
-    // _power = 3;
-    // _typeBomb = FIRE;
-    // _nbBombs = 1;
-    // _nbBombsBonus = 1;
-    // _speed = 0.005;
-    // _state = IDLE;
-    // _alive = true;
-    // _slow = false;
-    // _dark = false;
-    // _position = glm::vec2(5, 5);
+
+    // DEFAULT WITHOUT LOADING
+    _power = 3;
+    _typeBomb = FIRE;
+    _nbBombs = 1;
+    _nbBombsBonus = 1;
+    _speed = 0.005;
+    _state = IDLE;
+    _alive = true;
+    _slow = false;
+    _dark = false;
+    _position = glm::vec2(5, 5);
   }
 
   APlayer::~APlayer()

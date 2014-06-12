@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Wed Jun  4 22:38:50 2014 Manu
-// Last update Tue Jun 10 20:15:19 2014 Manu
+// Last update Fri Jun 13 00:28:52 2014 Manu
 //
 
 #ifndef		__FILEEXPLORER_HH__

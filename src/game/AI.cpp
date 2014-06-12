@@ -1,5 +1,7 @@
 #include "game/AI.hh"
 #include "lua/LuaBiche.hh"
+#include "game/GameState.hh"
+#include "entity/BombFactory.hh"
 
 namespace bbm
 {
@@ -21,15 +23,16 @@ namespace bbm
     add_method_to_vector(methods, "goLeft", &AI::goLeft);
     add_method_to_vector(methods, "goRight", &AI::goRight);
     add_method_to_vector(methods, "goDown", &AI::goDown);
+    add_method_to_vector(methods, "putBomb", &AI::putBomb);
+    add_method_to_vector(methods, "haveBomb", &AI::haveBomb);
     return (methods);
   }
 
   std::vector<ILuaHeir<AI>::t_MethodPtr>	AI::_methodPtrs = make_method_list();
 
   AI::AI(GameState& gameState, const glm::vec2& position) :
-    APlayer(gameState), _script("scripts/test.lua")
+    APlayer(gameState)
   {
-    _script.addObject("player", this);
     _type = "AI";
     _position = position;
   }
@@ -40,9 +43,16 @@ namespace bbm
 
   void	AI::update(float time)
   {
-    managePhysics(time);
+    LuaBiche	tmp("scripts/test.lua");
+
+    tmp.addObject("player", this);
+    tmp.run();
+    updateState();
     manageModel(time);
-    _script.run();
+    if (_move.x != 0 || _move.y != 0)
+      glm::normalize(_move);
+    managePhysics(time);
+    updateState();
   }
 
   void  AI::pack(ISerializedNode & current) const
@@ -62,29 +72,37 @@ namespace bbm
 
   int	AI::goUp(lua_State*)
   {
-    std::cout << "up" << std::endl;
     this->setMove(glm::vec2(0, 1));
     return (1);
   }
 
   int	AI::goLeft(lua_State*)
   {
-    std::cout << "left" << std::endl;
     this->setMove(glm::vec2(-1, 0));
     return (1);
   }
 
   int	AI::goRight(lua_State*)
   {
-    std::cout << "right" << std::endl;
     this->setMove(glm::vec2(1, 0));
     return (1);
   }
 
   int	AI::goDown(lua_State*)
   {
-    std::cout << "down" << std::endl;
     this->setMove(glm::vec2(0, -1));
+    return (1);
+  }
+
+  int	AI::putBomb(lua_State*)
+  {
+    _nbBombs--;
+    _gameState.addEntity(BombFactory::getInstance()->create(FIRE, glm::vec2(_position.x, _position.y), _gameState, getID()));
+    return (1);
+  }
+
+  int	AI::haveBomb(lua_State*)
+  {
     return (1);
   }
 

@@ -32,6 +32,7 @@ SRC		=	main				\
 			game/Wall			\
 			game/GameLoadingState		\
 			game/APlayer			\
+			game/AI				\
 			entity/BonusFactory		\
 			entity/EntityFactory		\
 			entity/BombFactory		\
@@ -82,7 +83,7 @@ SRC		=	main				\
 			menu/PauseState			\
 			menu/OpendirException		\
 			sound/SoundManager		\
-#			lua/LuaBiche
+			lua/LuaBiche
 
 SRC_EXT		=	.cpp
 
@@ -117,7 +118,7 @@ LIB		=	gdl_gl		\
 			dl		\
 			rt		\
 			json		\
-			# lua
+			lua
 
 DLIB		=	gdl/libs	\
 			jsoncpp/libs	\
@@ -188,9 +189,9 @@ ifeq ($(PROFILE), yes)
 endif
 
 CFLAGS		+=	$(CINC)
-LDFLAGS		+=	$(DLIB)			\
-			$(LIB)			\
-			-Wl,-rpath=./gdl/libs
+LDFLAGS		+=	$(DLIB)				\
+			$(LIB)				\
+			-Wl,-rpath=./gdl/libs:./lua/libs
 
 ## MISC RULES
 
@@ -205,6 +206,9 @@ $(CNAME):	$(COBJ)
 		@echo
 		@echo "[jsoncpp]"
 		@$(MAKED) jsoncpp
+		@echo "[lua]"
+		@$(MAKED) lua/lua-5.2.3 linux
+		@cp lua/lua-5.2.3/src/liblua.a lua/libs
 		@echo
 		@echo "Linkage : $(CNAME)"
 		@$(CC) $(COBJ) -o $(CNAME) $(LDFLAGS)
@@ -223,10 +227,14 @@ $(COBJ):	$(MAKEOBJ)
 clean:
 		@$(MAKED) jsoncpp clean
 		@$(RM) $(COBJ)
+		@$(RM) lua/lua-5.2.3/src/*.o
 
 fclean:		clean
 		@$(MAKED) jsoncpp fclean
 		@$(RM) $(CNAME)
+		@$(RM) lua/lua-5.2.3/src/*.a
+		@$(RM) lua/lua-5.2.3/src/luac
+		@$(RM) lua/lua-5.2.3/src/lua
 
 re:		fclean all
 redbg:		fclean dbg
