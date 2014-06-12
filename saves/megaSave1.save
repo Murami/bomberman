@@ -1044,8 +1044,8 @@
          "nbBombs" : 1,
          "nbBombsBonus" : 1,
          "position" : {
-            "x" : 7.0,
-            "y" : 14.0
+            "x" : 9.0,
+            "y" : 3.0
          },
          "power" : 3,
          "score" : 32,
