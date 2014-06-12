@@ -182,7 +182,7 @@ namespace bbm
     	_players.push_back(player);
       }
 
-    this->save("megaSave1");
+    // this->save("megaSave1");
 
     // INIT EN BRUT DES AI
     // for (int i = 0; i != 1; i++)
