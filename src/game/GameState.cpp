@@ -328,9 +328,9 @@ namespace bbm
 	    context.draw(*(*itPlayers), state);
 
 	//draw AI
-	std::list<AI*>::iterator	itAIs;
-	for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
-	  context.draw(*(*itAIs), state);
+	// std::list<AI*>::iterator	itAIs;
+	// for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
+	  // context.draw(*(*itAIs), state);
       }
     if (this->_flush)
       context.flush();
@@ -350,13 +350,13 @@ namespace bbm
 
     // Update all players and AI
     std::list<Player*>::iterator	itPlayers;
-    std::list<AI*>::iterator		itAIs;
+    // std::list<AI*>::iterator		itAIs;
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
       (*itPlayers)->handleEvents(time, input);
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
       (*itPlayers)->update(time);
-    for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
-      (*itAIs)->update(time);
+    // for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
+    //   (*itAIs)->update(time);
 
     // Update all entities
     for (it = _entities.begin(); it != _entities.end(); it++)
