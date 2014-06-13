@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Mon Jun  2 13:10:45 2014 Manu
-// Last update Thu Jun 12 16:19:55 2014 Manu
+// Last update Fri Jun 13 06:00:13 2014 Desabre Quentin
 //
 
 #include		"graphic/RenderState.hh"
@@ -15,7 +15,7 @@
 namespace	bbm
 {
 
-  const std::string Skybox::VIOLENTDAYS = "assets/menu/images/violentdays.tga";
+  const std::string Skybox::VIOLENTDAYS = "assets/menu/images/interstellar.tga";
 
   Skybox::Skybox() : _position(0, 0, 0), _rotation(0, 0, 0), _scale(1, 1, 1)
   {

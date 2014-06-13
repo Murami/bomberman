@@ -11,7 +11,7 @@
 #include "graphic/ARenderer.hh"
 #include "game/GameState.hh"
 
-const float	maxSpeed = 0.01;
+const float	maxSpeed = 0.005;
 const float	modelScaleFactor = 0.0020;
 const float	boxScale = 0.8;
 const float	delta = 0.8;
@@ -26,18 +26,6 @@ namespace bbm
     _model.setScale(glm::vec3(modelScaleFactor, modelScaleFactor, modelScaleFactor));
     _model.setRoll(90);
     _move = glm::vec2(0, 0);
-
-    // DEFAULT WITHOUT LOADING
-    _power = 3;
-    _typeBomb = FIRE;
-    _nbBombs = 1;
-    _nbBombsBonus = 1;
-    _speed = 0.005;
-    _state = IDLE;
-    _alive = true;
-    _slow = false;
-    _dark = false;
-    _position = glm::vec2(5, 5);
   }
 
   APlayer::~APlayer()
@@ -46,21 +34,47 @@ namespace bbm
 
   void			APlayer::pack(ISerializedNode & current) const
   {
-    (void) current;
+    current.add("position", _position);
+    current.add("power", _power);
+    current.add("nbBombs", _nbBombs);
+    current.add("nbBombsBonus", _nbBombsBonus);
+    current.add("speed", _speed);
+    current.add("alive", _alive);
+    current.add("slow", _slow);
+    current.add("dark", _dark);
+    current.add("typeBomb", _typeBomb);
+    current.add("state", _state);
+    current.add("score", _score);
+    current.add("idPlayer", _idPlayer);
+    current.add("id", getID());
+    current.add("lastId", getLastID());
   }
 
   void			APlayer::unpack(const ISerializedNode & current)
   {
-    (void) current;
-  }
+    int			typeBomb;
+    int			state;
+    unsigned int	id;
+    unsigned int	lastId;
 
-  void			APlayer::managePhysics(float time)
-  {
-    _move *= _speed * time;
-    collideEntity();
-    collideMap();
-    _position += _move;
-    _model.setPosition(glm::vec3(_position.x + 0.5, _position.y + 0.5, 0));
+    current.get("position", _position);
+    current.get("power", _power);
+    current.get("nbBonbs", _nbBombs);
+    current.get("nbBombsBonus", _nbBombsBonus);
+    current.get("speed", _speed);
+    current.get("alive", _alive);
+    current.get("slow", _slow);
+    current.get("dark", _dark);
+    current.get("typeBomb", typeBomb);
+    current.get("state", state);
+    _typeBomb = static_cast<BombType>(typeBomb);
+    _state = static_cast<PlayerState>(state);
+    current.get("score", _score);
+    current.get("idPlayer", _idPlayer);
+    current.get("id", id);
+    current.get("lastId", lastId);
+    setID(id);
+    setLastID(lastId);
   }
 
   void			APlayer::collideMap()
@@ -126,6 +140,17 @@ namespace bbm
       }
   }
 
+  void			APlayer::managePhysics(float time)
+  {
+    if (_move.x != 0 && _move.y != 0)
+      glm::normalize(_move);
+    _move *= _speed * time;
+    collideEntity();
+    collideMap();
+    _position += _move;
+    _model.setPosition(glm::vec3(_position.x + 0.5, _position.y + 0.5, 0));
+  }
+
   //ATENTION AU REFERENCE VERS LE PLAYER !
   bool			APlayer::expired() const
   {
@@ -139,7 +164,8 @@ namespace bbm
 
   void			APlayer::draw(ARenderer& renderer, const RenderState& renderState)
   {
-    renderer.draw(_model, renderState);
+    if (_alive)
+      renderer.draw(_model, renderState);
   }
 
   void			APlayer::interact(AEntity *entity)
@@ -184,7 +210,7 @@ namespace bbm
       }
     else
       {
-	_speed +=  0.005 / 2;
+	_speed +=  0.005 / 10;
 	if (_speed > maxSpeed)
 	  _speed = maxSpeed;
       }
@@ -267,6 +293,11 @@ namespace bbm
   void	APlayer::addScore(int score)
   {
     _score += score;
+  }
+
+  int	APlayer::getScore() const
+  {
+    return (_score);
   }
 
   void	APlayer::die()

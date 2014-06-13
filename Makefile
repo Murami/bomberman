@@ -23,6 +23,7 @@ SRC		=	main				\
 			graphic/Utils			\
 			game/GameManager		\
 			game/GameState			\
+			game/GameOverState		\
 			game/Game			\
 			game/Tile			\
 			game/TileManager		\

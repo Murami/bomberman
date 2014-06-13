@@ -13,11 +13,11 @@ namespace bbm
 {
   PowerBomb::PowerBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABomb(position, gameState, idPlayer),
-    _model("PowerBomb2", "default", 0)
+    _model("PowerBomb", "default", 0)
   {
     _type = "PowerBomb";
     _model.setRoll(90);
-    _model.setPosition(glm::vec3(_position.x + 0.5 + translate, _position.y + 0.5 + translate, 0.1));
+    _model.setPosition(glm::vec3(_pos.x + 0.5 + translate, _pos.y + 0.5 + translate, 0.1));
     _model.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
   }
 
@@ -25,27 +25,25 @@ namespace bbm
   {
   }
 
-  void			PowerBomb::pack(ISerializedNode & current) const
+  void			PowerBomb::initialize()
   {
-    (void)current;
-  }
-
-  void			PowerBomb::unpack(const ISerializedNode & current)
-  {
-    (void)current;
+    _type = "PowerBomb";
+    _model.setRoll(90);
+    _model.setPosition(glm::vec3(_pos.x + 0.5 + translate, _pos.y + 0.5 + translate, 0.1));
+    _model.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
   }
 
   bool			PowerBomb::addExplode(float x, float y)
   {
     std::list<AEntity*>::iterator it;
 
-    if (_gameState.getTileMap().collide(_position.x + x + 0.5, _position.y + y + 0.5))
+    if (_gameState.getTileMap().collide(_pos.x + x + 0.5, _pos.y + y + 0.5))
       return (false);
 
-    _gameState.addEntity(new PowerBombExplode(glm::vec2(_position.x + x, _position.y + y), _gameState, _idPlayer));
+    _gameState.addEntity(new PowerBombExplode(glm::vec2(_pos.x + x, _pos.y + y), _gameState, _idPlayer));
     for (it = _gameState.getEntities().begin(); it != _gameState.getEntities().end(); it++)
       {
-	if ((*it)->getType() == "GameBox" && (*it)->collide(glm::vec3(_position.x + x + 0.5, _position.y + y + 0.5, 0)))
+	if ((*it)->getType() == "GameBox" && (*it)->collide(glm::vec3(_pos.x + x + 0.5, _pos.y + y + 0.5, 0)))
 	  return (false);
       }
     return (true);
@@ -57,6 +55,18 @@ namespace bbm
     glm::vec2	playerPosition = player.getPosition();
     float	delta = player.getDelta();
 
+    if (_anim <= 2)
+      {
+	_anim += 0.1;
+	_model.move(glm::vec3(0, 0, 0.025));
+      }
+    else
+      {
+	_anim += 0.1;
+	_model.move(glm::vec3(0, 0, -0.025));
+	if (_anim >= 3.9)
+	  _anim = 0;
+      }
     if (!collide(glm::vec3(playerPosition.x + 1 - delta, playerPosition.y  + 1 - delta, 0)) &&
 	!collide(glm::vec3(playerPosition.x + 1 - delta, playerPosition.y  + delta, 0)) &&
 	!collide(glm::vec3(playerPosition.x + delta, playerPosition.y + 1 - delta, 0)) &&
@@ -69,11 +79,11 @@ namespace bbm
       {
 	_used = true;
 	_gameState.getPlayer(_idPlayer).addBombsBonus();
-	_gameState.addEntity(new PowerBombExplode(glm::vec2(_position.x, _position.y), _gameState, _idPlayer));
-	for (int i = 1; i != 100 && addExplode(i, 0); i++);
-	for (int i = 1; i != 100 && addExplode(-i, 0); i++);
-	for (int i = 1; i != 100 && addExplode(0, i); i++);
-	for (int i = 1; i != 100 && addExplode(0, -i); i++);
+	_gameState.addEntity(new PowerBombExplode(glm::vec2(_pos.x, _pos.y), _gameState, _idPlayer));
+	for (int i = 1; i != 500 && addExplode(i, 0); i++);
+	for (int i = 1; i != 500 && addExplode(-i, 0); i++);
+	for (int i = 1; i != 500 && addExplode(0, i); i++);
+	for (int i = 1; i != 500 && addExplode(0, -i); i++);
       }
   }
 
@@ -94,8 +104,8 @@ namespace bbm
 
   bool			PowerBomb::collide(const glm::vec3 & pos)
   {
-    if (pos.x < _position.x + 1 - delta && pos.x >= _position.x + delta &&
-    	pos.y < _position.y + 1 - delta && pos.y  >= _position.y + delta)
+    if (pos.x < _pos.x + 1 - delta && pos.x >= _pos.x + delta &&
+    	pos.y < _pos.y + 1 - delta && pos.y  >= _pos.y + delta)
       return (true);
     return (false);
   }
@@ -104,11 +114,11 @@ namespace bbm
   {
     if (entity->getType() == "PowerBombExplode" || entity->getType() == "FireBombExplode")
       _lifespan = 0;
-    if (entity->getType() == "Player")
+    if (entity->getType() == "Player" || entity->getType() == "AI")
       {
 	if (entity->getID() != _idPlayer || !_playerIsOver)
 	  {
-	    Player*	player = dynamic_cast<Player*>(entity);
+	    APlayer*	player = dynamic_cast<APlayer*>(entity);
 	    glm::vec2	playerMove = player->getMove();
 	    glm::vec2	playerPosition = player->getPosition();
 	    float	delta = player->getDelta();

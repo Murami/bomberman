@@ -5,7 +5,7 @@
 #include "game/GameState.hh"
 #include "entity/BombFactory.hh"
 
-const float	maxSpeed = 0.01;
+const float	maxSpeed = 0.005;
 const float	modelScaleFactor = 0.0020;
 const float	boxScale = 0.8;
 const float	delta = 0.8;
@@ -28,53 +28,43 @@ namespace bbm
     _dark = config.dark;
     _typeBomb = config.typeBomb;
     _state = config.state;
-    _score = config.score;
+    if (config.idPlayer)
+      _idPlayer = config.idPlayer;
+    else
+      _idPlayer = getID();
+    if (config.id)
+      setID(config.id);
+    if (config.lastId)
+      setLastID(config.lastId);
+
+    _score = 0;
+    // _score = config.score;
   }
 
   Player::~Player()
   {
   }
 
-  void			Player::pack(ISerializedNode & current) const
+  void			Player::initialize()
   {
-    current.add("position", _position);
-    current.add("power", _power);
-    current.add("nbBombs", _nbBombs);
-    current.add("nbBombsBonus", _nbBombsBonus);
-    current.add("speed", _speed);
-    current.add("alive", _alive);
-    current.add("slow", _slow);
-    current.add("dark", _dark);
-    current.add("typeBomb", _typeBomb);
-    current.add("state", _state);
-    current.add("score", _score);
+
   }
 
-  void			Player::unpack(const ISerializedNode & current)
+  PlayerConfig&		Player::getPlayerConfig()
   {
-    int typeBomb;
-    int	state;
-
-    current.get("position", _position);
-    current.get("power", _power);
-    current.get("nbBonbs", _nbBombs);
-    current.get("nbBombsBonus", _nbBombsBonus);
-    current.get("speed", _speed);
-    current.get("alive", _alive);
-    current.get("slow", _slow);
-    current.get("dark", _dark);
-    current.get("typeBomb", typeBomb);
-    current.get("state", state);
-    _typeBomb = static_cast<BombType>(typeBomb);
-    _state = static_cast<PlayerState>(state);
-    current.get("score", _score);
+    return (this->_playerConfig);
   }
 
   void			Player::update(float time)
   {
-    updateState();
-    managePhysics(time);
-    manageModel(time);
+    if (_alive)
+      {
+	updateState();
+	if (_move.x != 0 && _move.y != 0)
+	  glm::normalize(_move);
+	managePhysics(time);
+	manageModel(time);
+      }
   }
 
   void			Player::handleEvents(float time, const Input& input)
@@ -115,9 +105,6 @@ namespace bbm
 	_move.x = -_move.x;
 	_move.y = -_move.y;
       }
-    updateState();
-    if (_move.x != 0 && _move.y != 0)
-      glm::normalize(_move);
   }
 
   const std::string&	Player::getType() const

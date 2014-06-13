@@ -7,6 +7,7 @@
 #include "PauseState.hh"
 #include "game/Tile.hh"
 #include "game/GameState.hh"
+#include "game/GameOverState.hh"
 #include "game/GameManager.hh"
 
 #include "events/Input.hh"
@@ -47,7 +48,7 @@ namespace bbm
     _manager(manager),
     _config(config)
   {
-    SoundManager::getInstance()->play("FaFTheme");
+    // SoundManager::getInstance()->play("FaFTheme");
     this->_flush = true;
   }
 
@@ -71,7 +72,7 @@ namespace bbm
 		_tilemap.getTileType(posx, posy + 1) != Tile::Spawn &&
 		_tilemap.getTileType(posx, posy - 1) != Tile::Spawn &&
 		std::rand() % 2 == 1)
-	      addEntity(new GameBox(glm::vec2(posx, posy), -1, *this));
+	      addEntity(new GameBox(glm::vec2(posx, posy), 0, *this));
 	  }
       }
   }
@@ -110,8 +111,10 @@ namespace bbm
   {
     std::list<AEntity*>::const_iterator	itEntities;
     std::list<Player*>::const_iterator	itPlayers;
+    std::list<AI*>::const_iterator	itAIs;
     ISerializedNode*			entityListNode;
     ISerializedNode*			playerListNode;
+    ISerializedNode*			AIListNode;
     int					i;
 
     entityListNode = current.add("entity");
@@ -123,10 +126,12 @@ namespace bbm
 	    std::stringstream	ss;
 
 	    ss << i;
+	    std::cout << "type = " << (*itEntities)->getType() << std::endl;
 	    entityListNode->add(ss.str(), *(*itEntities));
 	    i++;
 	  }
       }
+    std::cout << "test1" << std::endl;
     playerListNode = current.add("players");
     for (i = 0, itPlayers = _players.begin();
 	 itPlayers != _players.end(); ++itPlayers)
@@ -137,6 +142,18 @@ namespace bbm
 	playerListNode->add(ss.str(), *(*itPlayers));
 	i++;
       }
+    std::cout << "test2" << std::endl;
+    AIListNode = current.add("AIs");
+    for (i = 0, itAIs = _AIs.begin(); itAIs != _AIs.end(); ++itAIs)
+      {
+
+	std::stringstream	ss;
+
+	ss << i;
+	AIListNode->add(ss.str(), *(*itAIs));
+	i++;
+      }
+    std::cout << "test3" << std::endl;
   }
 
   void			GameState::unpack(const ISerializedNode & current)
@@ -163,11 +180,13 @@ namespace bbm
 
     	ss << index;
     	entityNode = entityListNode->get(ss.str());
+	std::cout << "index = " << ss.str()<< std::endl;
     	entityNode->get("type", type);
     	entity = factory.create(type, *this);
     	if (entity != NULL)
     	  {
     	    entityListNode->get(ss.str(), *entity);
+	    entity->initialize();
     	    addEntity(entity);
     	  }
     	else
@@ -196,6 +215,9 @@ namespace bbm
 	playerNode->get("slow", playerConfig.slow);
 	playerNode->get("dark", playerConfig.dark);
 	playerNode->get("score", playerConfig.score);
+	playerNode->get("idPlayer", playerConfig.idPlayer);
+	playerNode->get("id", playerConfig.id);
+	playerNode->get("lastId", playerConfig.lastId);
 	playerNode->get("typeBomb", typeBomb);
 	playerNode->get("state", state);
 	playerConfig.typeBomb = static_cast<BombType>(typeBomb);
@@ -222,16 +244,19 @@ namespace bbm
       {
 	itSpawn = _tilemap.getSpawns().begin();
 	itSpawn += rand() % _tilemap.getSpawns().size();
+	(*it).position = glm::vec2(itSpawn->x, itSpawn->y);
 	player = new Player(*this, *it);
-	player->initPosition(itSpawn->x, itSpawn->y);
     	_players.push_back(player);
       }
 
-    this->save("megaSave1");
-
-    // INIT EN BRUT DES AI
-    for (int i = 0; i != 1; i++)
-      _AIs.push_back(new AI(*this, glm::vec2(5, 5)));
+    for(it = _config->AIConfigs.begin();
+    	it != _config->AIConfigs.end(); ++it)
+      {
+	itSpawn = _tilemap.getSpawns().begin();
+	itSpawn += rand() % _tilemap.getSpawns().size();
+	(*it).position = glm::vec2(itSpawn->x, itSpawn->y);
+	_AIs.push_back(new AI(*this, *it));
+      }
   }
 
   void			GameState::release()
@@ -266,16 +291,17 @@ namespace bbm
 					glm::vec3(0, 0, 1));
 	RenderState		state(projection, camera, Transform());
 
+
 	/// SPLIT SCREEN
 	if (_players.size() == 2)
 	  {
 	    if (std::distance(_players.begin(), itPlayersCamera) == 0)
-	      context.split(glm::ivec2(0, 0),
-			    glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
+	      context.split(glm::ivec2(0, context.getSize().y / 2),
+			    glm::ivec2(context.getSize().x, context.getSize().y / 2));
 
 	    if (std::distance(_players.begin(), itPlayersCamera) == 1)
-	      context.split(glm::ivec2(context.getSize().x / 2, context.getSize().y / 2),
-			    glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
+	      context.split(glm::ivec2(0, 0),
+			    glm::ivec2(context.getSize().x, context.getSize().y / 2));
 	  }
 	else if (_players.size() == 3)
 	  {
@@ -315,49 +341,99 @@ namespace bbm
 	//draw entities
 	EntitiesIt		entitiesIt;
 	for (entitiesIt = _entities.begin(); entitiesIt != _entities.end(); entitiesIt++)
-	  if (std::abs((*entitiesIt)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 10 &&
+	  if (std::abs((*entitiesIt)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 15 &&
 	      std::abs((*entitiesIt)->getPosition().y -(*itPlayersCamera)->getPosition().y) < 10)
 	    context.draw(*(*entitiesIt), state);
 
 	//draw players
 	PlayerIt	itPlayers;
 	for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
-	  if (std::abs((*itPlayers)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 12 &&
+	  if (std::abs((*itPlayers)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 15 &&
 	      std::abs((*itPlayers)->getPosition().y -(*itPlayersCamera)->getPosition().y) < 10)
 	    context.draw(*(*itPlayers), state);
+
 
 	//draw AI
 	std::list<AI*>::iterator	itAIs;
 	for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
 	  context.draw(*(*itAIs), state);
       }
+    glDisable(GL_CULL_FACE);
+    context.draw(_skybox, stateSky);
+    glEnable(GL_CULL_FACE);
     if (this->_flush)
       context.flush();
   }
 
   void			GameState::update(float time, const Input& input)
   {
-    EntitiesIt it;
-
     if (input.getKeyDown(SDLK_ESCAPE) || input.getEvent(SDL_QUIT))
       {
 	//_manager.pop();
-	PauseState* state = new PauseState(_manager);
+	PauseState* state = new PauseState(_manager, *this);
 	_manager.push(state);
  	return;
       }
+    updateAIPlayer(time, input);
+    updateEntity(time, input);
+    _skybox.update();
+  }
 
-    // Update all players and AI
+  void			GameState::updateAIPlayer(float time, const Input& input)
+  {
     std::list<Player*>::iterator	itPlayers;
     std::list<AI*>::iterator		itAIs;
-    for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
-      (*itPlayers)->handleEvents(time, input);
-    for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
-      (*itPlayers)->update(time);
-    for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
-      (*itAIs)->update(time);
+    int					nbPlayer = 0;
+    int					nbAi = 0;
 
-    // Update all entities
+    for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
+      if ((*itPlayers)->isDead())
+	nbPlayer++;
+    for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
+      if ((*itAIs)->isDead())
+	nbAi++;
+
+    // if (nbPlayer == 0 && nbAi == 0)
+    //   {
+    // 	std::cout << "DRAW" << std::endl;
+    // 	_manager.pop();
+    // 	_manager.push(new GameOverState(_manager, "draw"));
+    //   }
+    // else if (nbPlayer == 1 && nbAi == 0)
+    //   {
+    // 	for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
+    // 	  if ((*itPlayers)->isDead())
+    // 	    {
+    // 	      _manager.pop();
+    // 	      _manager.push(new GameOverState(_manager, "player1"));
+    // 	      std::cout << "player numero ? won the game with " << (*itPlayers)->getScore() << "points" << std::endl;
+    // 	    }
+    //   }
+    // else if (nbPlayer == 0 && nbAi != 0)
+    //   {
+    // 	std::cout << "AI won the game !" << std::endl;
+    // 	_manager.pop();
+    // 	_manager.push(new GameOverState(_manager, "ia"));
+    //   }
+
+    for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
+      if ((*itPlayers)->isDead())
+	(*itPlayers)->handleEvents(time, input);
+    for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
+      if ((*itPlayers)->isDead())
+	(*itPlayers)->update(time);
+
+
+    for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
+      if ((*itAIs)->isDead())
+	(*itAIs)->update(time);
+  }
+
+  void			GameState::updateEntity(float time, const Input& input)
+  {
+    EntitiesIt it;
+
+    (void)input;
     for (it = _entities.begin(); it != _entities.end(); it++)
       (*it)->update(time);
     it = _entities.begin();
@@ -368,8 +444,8 @@ namespace bbm
     	else
     	  it++;
       }
-    _skybox.update();
   }
+
 
   void			GameState::addEntity(AEntity* entity)
   {
@@ -388,6 +464,16 @@ namespace bbm
       if ((*itAIs)->getID() == id)
 	return (*(*itAIs));
     throw (std::runtime_error("player not found"));
+  }
+
+  std::list<Player*>&	GameState::getPlayerList()
+  {
+    return (this->_players);
+  }
+
+  std::list<AI*>&	GameState::getAIList()
+  {
+    return (this->_AIs);
   }
 
   std::list<AEntity*>&	GameState::getEntities()

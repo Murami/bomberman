@@ -12,6 +12,7 @@ namespace bbm
 
   Marvin::Marvin()
   {
+    _elapsedTime = 0;
     _pause = true;
     _shader = ShaderManager::getInstance()->getShader("default");
   }
@@ -27,10 +28,14 @@ namespace bbm
     for (int i = 38; i < 54; i++)
       {
 	_animations[i - 38] = new gdl::Model;
-	_animations[i - 38]->load("./gdl/assets/marvin.fbx");
-	usleep(1000000);
-	_animations[i - 38]->createSubAnim(0, "run", i, i + 1);
-	_animations[i - 38]->setCurrentSubAnim("run", true);
+	if (_animations[i - 38]->load("./gdl/assets/marvin.fbx") == true)
+	  std::cout << "load = true" << std::endl;
+	if (_animations[i - 38]->createSubAnim(0, "run", i, i + 1) == true)
+	  std::cout << "create sub = true" << std::endl;
+	if (_animations[i - 38]->setCurrentSubAnim("run", true) == true)
+	  std::cout << "set current = true" << std::endl;
+	std::cout << "sleep de 1" << std::endl;
+	sleep(1);
       }
   }
 

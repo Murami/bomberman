@@ -13,11 +13,11 @@ namespace bbm
 {
   FireBonus::FireBonus() : _wall("fireBonus", "default")
   {
-
   }
 
   FireBonus::FireBonus(const glm::vec2& pos) : _wall("fireBonus", "default")
   {
+    _anim = 0;
     _pos = pos;
     _type = "FireBonus";
     _used = false;
@@ -29,16 +29,10 @@ namespace bbm
   {
   }
 
-  void          FireBonus::pack(ISerializedNode & current) const
+  void		FireBonus::initialize()
   {
-    current.add("type", _type);
-    current.add("position", _pos);
-  }
-
-  void		FireBonus::unpack(const ISerializedNode & current)
-  {
-    current.get("type", _type);
-    current.get("position", _pos);
+    _type = "FireBonus";
+    _anim = 0;
     _used = false;
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
     _wall.setPosition(glm::vec3(_pos.x + translate, _pos.y + translate, 0));
@@ -47,6 +41,18 @@ namespace bbm
   void		FireBonus::update(float time)
   {
     (void)time;
+    if (_anim <= 2)
+      {
+	_anim += 0.1;
+	_wall.move(glm::vec3(0, 0, 0.025));
+      }
+    else
+      {
+	_anim += 0.1;
+	_wall.move(glm::vec3(0, 0, -0.025));
+	if (_anim >= 3.9)
+	  _anim = 0;
+      }
   }
 
   bool		FireBonus::expired() const
@@ -76,13 +82,13 @@ namespace bbm
 
   void			FireBonus::interact(AEntity *entity)
   {
-    if (entity->getType() == "Player")
+    if (entity->getType() == "Player" || entity->getType() == "AI")
       {
 	if (_used == false)
-	  dynamic_cast<Player*>(entity)->addPower();
+	  dynamic_cast<APlayer*>(entity)->addPower();
 	_used = true;
       }
-    if (entity->getType() == "FireBombExplode")
+    if (entity->getType() == "FireBombExplode" || entity->getType() == "PowerBombExplode")
       {
 	_used = true;
       }

@@ -24,14 +24,13 @@ namespace bbm
     void			setLifespan(float);
     bool			collide(const glm::vec3&);
 
-    void                        pack(ISerializedNode & current) const;
-    void                        unpack(const ISerializedNode & current);
+
+    void			initialize();
 
   protected:
     void			draw(ARenderer& renderer, const RenderState& renderState);
 
   private:
-    std::string			_type;
     Wall		       	_wall;
   };
 };
