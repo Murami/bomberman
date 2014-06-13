@@ -12,6 +12,7 @@ namespace bbm
 
   Marvin::Marvin()
   {
+    _elapsedTime = 0;
     _pause = true;
     _shader = ShaderManager::getInstance()->getShader("default");
   }

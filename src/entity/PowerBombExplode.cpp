@@ -12,7 +12,7 @@ namespace bbm
   PowerBombExplode::PowerBombExplode(const glm::vec2& position, GameState& gameState,
 				     unsigned int idPlayer) :
     ABombExplode(position, gameState),
-    _wall("fire", "default")
+    _wall("fire2", "default")
   {
     SoundManager::getInstance()->play("bigBomb");
     _idPlayer = idPlayer;

@@ -40,9 +40,9 @@ namespace bbm
     _object.pushVertex(glm::vec3(x, y, 0));
     _object.pushVertex(glm::vec3(0, y, 0));
     _object.pushUv(glm::vec2(0, 0));
-    _object.pushUv(glm::vec2(x / 10, 0));
-    _object.pushUv(glm::vec2(x / 10, y / 10));
-    _object.pushUv(glm::vec2(0, y / 10));
+    _object.pushUv(glm::vec2(x / 100, 0));
+    _object.pushUv(glm::vec2(x / 100, y / 100));
+    _object.pushUv(glm::vec2(0, y / 100));
     _object.build();
 
     for (i = 0; i < x; i++)
@@ -98,9 +98,9 @@ namespace bbm
     _object.pushVertex(glm::vec3(_size.x, _size.y, 0));
     _object.pushVertex(glm::vec3(0, _size.y, 0));
     _object.pushUv(glm::vec2(0, 0));
-    _object.pushUv(glm::vec2(_size.x / 10, 0));
-    _object.pushUv(glm::vec2(_size.x / 10, _size.y / 10));
-    _object.pushUv(glm::vec2(0, _size.y / 10));
+    _object.pushUv(glm::vec2(_size.x / 25, 0));
+    _object.pushUv(glm::vec2(_size.x / 25, _size.y / 25));
+    _object.pushUv(glm::vec2(0, _size.y / 25));
     _object.build();
   }
 

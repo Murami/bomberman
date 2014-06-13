@@ -2,12 +2,25 @@ math.randomseed(os.time())
 local number = math.random(1, 10)
 
 function move ()
-   -- tester si il y a un mur autour du joueur et bouger autre part
+   local n = math.random(1, 4)
+
+   if n == 1 then
+      player:goUp()
+   elseif n == 2 then
+      player:goLeft()
+   elseif n == 3 then
+      player:goRight()
+   else
+      player:goDown()
+   end
 end
 
-if (number == 5 || number == 6) then
-   -- tester si le joueur peut encore mettre une bombe sinon move()
-   player:putBomb()
+if (number == 5 or number == 6) then
+   if player:haveBomb() then
+      player:putBomb()
+   else
+      move()
+   end
 else
    move()
 end

@@ -54,15 +54,6 @@ namespace bbm
     (void) current;
   }
 
-  void			APlayer::managePhysics(float time)
-  {
-    _move *= _speed * time;
-    collideEntity();
-    collideMap();
-    _position += _move;
-    _model.setPosition(glm::vec3(_position.x + 0.5, _position.y + 0.5, 0));
-  }
-
   void			APlayer::collideMap()
   {
     try
@@ -126,6 +117,17 @@ namespace bbm
       }
   }
 
+  void			APlayer::managePhysics(float time)
+  {
+    if (_move.x != 0 && _move.y != 0)
+      glm::normalize(_move);
+    _move *= _speed * time;
+    collideEntity();
+    collideMap();
+    _position += _move;
+    _model.setPosition(glm::vec3(_position.x + 0.5, _position.y + 0.5, 0));
+  }
+
   //ATENTION AU REFERENCE VERS LE PLAYER !
   bool			APlayer::expired() const
   {
@@ -158,6 +160,11 @@ namespace bbm
   void			APlayer::addBombs()
   {
     _nbBombs++;
+  }
+
+  int	APlayer::getBomb() const
+  {
+    return (_nbBombs);
   }
 
   void			APlayer::addBombsBonus()
