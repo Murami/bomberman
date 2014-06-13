@@ -30,12 +30,12 @@ public:
   LuaBiche(std::string const& file);
   virtual ~LuaBiche();
 
-  virtual void	run();
+  void	run();
 
-  virtual void	addVar(std::string const& name, std::string const& value);
-  virtual void	addVar(std::string const& name, bool value);
-  virtual void	addVar(std::string const& name, int value);
-  virtual void	addVar(std::string const& name, double value);
+  void	addVar(std::string const& name, std::string const& value);
+  void	addVar(std::string const& name, bool value);
+  void	addVar(std::string const& name, int value);
+  void	addVar(std::string const& name, double value);
 
   template <typename T>
   void	addVar(std::string const& name, T begin, T const& end);
@@ -47,13 +47,6 @@ public:
   static void	*pushuserdata(lua_State*, void*, size_t);
   template <typename T>
   static int	push(lua_State*, ILuaHeir<T>*);
-  static int	new_T(lua_State*);
-
-  static int	thunk(lua_State *)
-  {
-    std::cout << "enter" << std::endl;
-    return (0);
-  }
 
 private:
   /* on pousse sur la stack des données de différents types pour y avoir accès en Lua */

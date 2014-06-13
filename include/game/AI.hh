@@ -11,9 +11,10 @@ namespace bbm
   class	AI : public APlayer, public ILuaHeir<AI>
   {
   public:
-    AI(GameState& gameState, const PlayerConfig& config, std::string scriptName);
+    AI(GameState& gameState, const PlayerConfig& config);
     ~AI();
 
+    void		initialize();
     void		update(float time);
     const std::string&	getType() const;
 
@@ -21,6 +22,10 @@ namespace bbm
     int	goLeft(lua_State*);
     int	goRight(lua_State*);
     int	goDown(lua_State*);
+    int	goUpLeft(lua_State*);
+    int	goUpRight(lua_State*);
+    int	goDownLeft(lua_State*);
+    int	goDownRight(lua_State*);
     int	putBomb(lua_State*);
     int	haveBomb(lua_State*);
 
@@ -31,6 +36,7 @@ namespace bbm
     static std::vector<ILuaHeir<AI>::t_MethodPtr>	_methodPtrs;
     std::string						_type;
     std::string						_scriptName;
+    LuaBiche*						_script;
   };
 };
 

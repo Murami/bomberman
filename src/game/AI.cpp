@@ -23,6 +23,10 @@ namespace bbm
     add_method_to_vector(methods, "goLeft", &AI::goLeft);
     add_method_to_vector(methods, "goRight", &AI::goRight);
     add_method_to_vector(methods, "goDown", &AI::goDown);
+    add_method_to_vector(methods, "goUpLeft", &AI::goUpLeft);
+    add_method_to_vector(methods, "goUpRight", &AI::goUpRight);
+    add_method_to_vector(methods, "goDownLeft", &AI::goDownLeft);
+    add_method_to_vector(methods, "goDownRight", &AI::goDownRight);
     add_method_to_vector(methods, "putBomb", &AI::putBomb);
     add_method_to_vector(methods, "haveBomb", &AI::haveBomb);
     return (methods);
@@ -30,11 +34,12 @@ namespace bbm
 
   std::vector<ILuaHeir<AI>::t_MethodPtr>	AI::_methodPtrs = make_method_list();
 
-  AI::AI(GameState& gameState, const PlayerConfig& config, std::string scriptName) :
+  AI::AI(GameState& gameState, const PlayerConfig& config) :
     APlayer(gameState)
   {
     _type = "AI";
-    _scriptName = scriptName;
+    _scriptName = "scripts/easy.lua";
+    // _scriptName = config.scriptName;
     _position = config.position;
     _power = config.power;
     _nbBombs = config.nbBombs;
@@ -46,20 +51,27 @@ namespace bbm
     _typeBomb = config.typeBomb;
     _state = config.state;
     _score = 0;
+    _script = new LuaBiche("scripts/easy.lua");
+    _script->addObject("player", this);
   }
 
   AI::~AI()
   {
   }
 
+  void	AI::initialize()
+  {
+
+  }
+
   void	AI::update(float time)
   {
     if (_alive)
       {
-	LuaBiche	script(_scriptName);
+	// LuaBiche	script(_scriptName);
 
-	script.addObject("player", this);
-	script.run();
+	// script.addObject("player", this);
+	_script->run(this);
 	managePhysics(time);
 	updateState();
 	manageModel(time);
@@ -92,6 +104,30 @@ namespace bbm
   int	AI::goDown(lua_State*)
   {
     this->setMove(glm::vec2(0, -1));
+    return (1);
+  }
+
+  int	AI::goUpLeft(lua_State*)
+  {
+    this->setMove(glm::vec2(-1, 1));
+    return (1);
+  }
+
+  int	AI::goUpRight(lua_State*)
+  {
+    this->setMove(glm::vec2(1, 1));
+    return (1);
+  }
+
+  int	AI::goDownLeft(lua_State*)
+  {
+    this->setMove(glm::vec2(-1, -1));
+    return (1);
+  }
+
+  int	AI::goDownRight(lua_State*)
+  {
+    this->setMove(glm::vec2(1, -1));
     return (1);
   }
 
