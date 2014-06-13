@@ -91,7 +91,7 @@ namespace bbm
 	  dynamic_cast<APlayer*>(entity)->setTypeBomb(BOX);
 	_used = true;
       }
-    if (entity->getType() == "FireBombExplode")
+    if (entity->getType() == "FireBombExplode" || entity->getType() == "PowerBombExplode")
       {
 	_used = true;
       }
