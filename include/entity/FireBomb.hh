@@ -35,6 +35,7 @@ namespace bbm
     bool		addExplode(float x, float y);
 
   private:
+    float		_anim;
     Model		_model;
     std::string		_type;
   };

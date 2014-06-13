@@ -18,6 +18,7 @@ namespace bbm
 
   SpeedBonus::SpeedBonus(const glm::vec2& pos) : _wall("speedBonus", "default")
   {
+    _anim = 0;
     _pos = pos;
     _type = "SpeedBonus";
     _used = false;
@@ -49,6 +50,18 @@ namespace bbm
   void			SpeedBonus::update(float time)
   {
     (void)time;
+    if (_anim <= 2)
+      {
+	_anim += 0.1;
+	_wall.move(glm::vec3(0, 0, 0.025));
+      }
+    else
+      {
+	_anim += 0.1;
+	_wall.move(glm::vec3(0, 0, -0.025));
+	if (_anim >= 4)
+	  _anim = 0;
+      }
   }
 
   bool			SpeedBonus::expired() const
@@ -78,16 +91,16 @@ namespace bbm
 
   void			SpeedBonus::interact(AEntity *entity)
   {
-    if (entity->getType() == "Player")
+    if (entity->getType() == "Player" || entity->getType() == "AI")
       {
 	if (!_used)
 	  {
-	    dynamic_cast<Player*>(entity)->addScore(100);
-	    dynamic_cast<Player*>(entity)->addSpeed();
+	    dynamic_cast<APlayer*>(entity)->addScore(100);
+	    dynamic_cast<APlayer*>(entity)->addSpeed();
 	  }
 	_used = true;
       }
-    if (entity->getType() == "FireBombExplode")
+    if (entity->getType() == "FireBombExplode" || entity->getType() == "PowerBombExplode")
       {
 	_used = true;
       }

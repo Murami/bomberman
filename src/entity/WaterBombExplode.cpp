@@ -81,9 +81,9 @@ namespace bbm
 
   void			WaterBombExplode::interact(AEntity * entity)
   {
-    if (entity->getType() == "Player")
+    if (entity->getType() == "Player" || entity->getType() == "AI")
       {
-	dynamic_cast<Player *>(entity)->slowSpeed();
+	dynamic_cast<APlayer*>(entity)->slowSpeed();
       }
   }
 

@@ -5,7 +5,7 @@
 #include "game/GameState.hh"
 #include "entity/BombFactory.hh"
 
-const float	maxSpeed = 0.01;
+const float	maxSpeed = 0.005;
 const float	modelScaleFactor = 0.0020;
 const float	boxScale = 0.8;
 const float	delta = 0.8;
@@ -28,11 +28,17 @@ namespace bbm
     _dark = config.dark;
     _typeBomb = config.typeBomb;
     _state = config.state;
-    _score = config.score;
+    _score = 0;
+    // _score = config.score;
   }
 
   Player::~Player()
   {
+  }
+
+  PlayerConfig&		Player::getPlayerConfig()
+  {
+    return (this->_playerConfig);
   }
 
   void			Player::pack(ISerializedNode & current) const
@@ -72,11 +78,14 @@ namespace bbm
 
   void			Player::update(float time)
   {
-    updateState();
-    if (_move.x != 0 && _move.y != 0)
-      glm::normalize(_move);
-    managePhysics(time);
-    manageModel(time);
+    if (_alive)
+      {
+	updateState();
+	if (_move.x != 0 && _move.y != 0)
+	  glm::normalize(_move);
+	managePhysics(time);
+	manageModel(time);
+      }
   }
 
   void			Player::handleEvents(float time, const Input& input)

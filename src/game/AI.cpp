@@ -50,13 +50,16 @@ namespace bbm
 
   void	AI::update(float time)
   {
-    LuaBiche	tmp("scripts/easy.lua");
+    if (_alive)
+      {
+	LuaBiche	tmp("scripts/easy.lua");
 
-    tmp.addObject("player", this);
-    tmp.run();
-    managePhysics(time);
-    updateState();
-    manageModel(time);
+	tmp.addObject("player", this);
+	tmp.run();
+	managePhysics(time);
+	updateState();
+	manageModel(time);
+      }
   }
 
   void  AI::pack(ISerializedNode & current) const

@@ -18,6 +18,7 @@ namespace bbm
 
   BombBonus::BombBonus(const glm::vec2& pos) : _wall("bombBonus", "default")
   {
+    _anim = 0;
     _pos = pos;
     _used = false;
     _type = "BombBonus";
@@ -49,6 +50,18 @@ namespace bbm
   void			BombBonus::update(float time)
   {
     (void)time;
+    if (_anim <= 2)
+      {
+	_anim += 0.1;
+	_wall.move(glm::vec3(0, 0, 0.025));
+      }
+    else
+      {
+	_anim += 0.1;
+	_wall.move(glm::vec3(0, 0, -0.025));
+	if (_anim >= 4)
+	  _anim = 0;
+      }
   }
 
   bool			BombBonus::expired() const

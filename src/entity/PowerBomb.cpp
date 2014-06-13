@@ -57,6 +57,18 @@ namespace bbm
     glm::vec2	playerPosition = player.getPosition();
     float	delta = player.getDelta();
 
+    if (_anim <= 2)
+      {
+	_anim += 0.1;
+	_model.move(glm::vec3(0, 0, 0.025));
+      }
+    else
+      {
+	_anim += 0.1;
+	_model.move(glm::vec3(0, 0, -0.025));
+	if (_anim >= 4)
+	  _anim = 0;
+      }
     if (!collide(glm::vec3(playerPosition.x + 1 - delta, playerPosition.y  + 1 - delta, 0)) &&
 	!collide(glm::vec3(playerPosition.x + 1 - delta, playerPosition.y  + delta, 0)) &&
 	!collide(glm::vec3(playerPosition.x + delta, playerPosition.y + 1 - delta, 0)) &&
@@ -104,11 +116,11 @@ namespace bbm
   {
     if (entity->getType() == "PowerBombExplode" || entity->getType() == "FireBombExplode")
       _lifespan = 0;
-    if (entity->getType() == "Player")
+    if (entity->getType() == "Player" || entity->getType() == "AI")
       {
 	if (entity->getID() != _idPlayer || !_playerIsOver)
 	  {
-	    Player*	player = dynamic_cast<Player*>(entity);
+	    APlayer*	player = dynamic_cast<APlayer*>(entity);
 	    glm::vec2	playerMove = player->getMove();
 	    glm::vec2	playerPosition = player->getPosition();
 	    float	delta = player->getDelta();

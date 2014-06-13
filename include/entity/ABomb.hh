@@ -34,6 +34,7 @@ class	ABomb : public AEntity
     bool				_used;
     bool				_playerIsOver;
     float				_lifespan;
+    float				_anim;
   };
 };
 

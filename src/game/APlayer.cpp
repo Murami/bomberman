@@ -11,7 +11,7 @@
 #include "graphic/ARenderer.hh"
 #include "game/GameState.hh"
 
-const float	maxSpeed = 0.01;
+const float	maxSpeed = 0.005;
 const float	modelScaleFactor = 0.0020;
 const float	boxScale = 0.8;
 const float	delta = 0.8;
@@ -32,7 +32,7 @@ namespace bbm
     _typeBomb = FIRE;
     _nbBombs = 1;
     _nbBombsBonus = 1;
-    _speed = 0.005;
+    _speed = 0.0025;
     _state = IDLE;
     _alive = true;
     _slow = false;
@@ -141,7 +141,8 @@ namespace bbm
 
   void			APlayer::draw(ARenderer& renderer, const RenderState& renderState)
   {
-    renderer.draw(_model, renderState);
+    if (_alive)
+      renderer.draw(_model, renderState);
   }
 
   void			APlayer::interact(AEntity *entity)
@@ -269,6 +270,11 @@ namespace bbm
   void	APlayer::addScore(int score)
   {
     _score += score;
+  }
+
+  int	APlayer::getScore() const
+  {
+    return (_score);
   }
 
   void	APlayer::die()

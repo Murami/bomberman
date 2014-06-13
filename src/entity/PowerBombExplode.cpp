@@ -85,10 +85,17 @@ namespace bbm
   {
     if (entity->getType() == "Player")
       {
-	if (dynamic_cast<Player *>(entity)->isDead())
+	if (dynamic_cast<APlayer*>(entity)->isDead())
 	  {
 	    _gameState.getPlayer(_idPlayer).addScore(1000);
-	    dynamic_cast<Player *>(entity)->die();
+	    dynamic_cast<APlayer*>(entity)->die();
+	  }
+      }
+    if (entity->getType() == "AI")
+      {
+	if (dynamic_cast<APlayer*>(entity)->isDead())
+	  {
+	    dynamic_cast<APlayer*>(entity)->die();
 	  }
       }
   }

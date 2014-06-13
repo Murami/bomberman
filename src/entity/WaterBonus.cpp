@@ -18,6 +18,7 @@ namespace bbm
 
   WaterBonus::WaterBonus(const glm::vec2& pos) : _wall("waterBonus", "default")
   {
+    _anim = 0;
     _pos = pos;
     _type = "WaterBonus";
     _used = false;
@@ -47,6 +48,18 @@ namespace bbm
   void		WaterBonus::update(float time)
   {
     (void)time;
+    if (_anim <= 2)
+      {
+	_anim += 0.1;
+	_wall.move(glm::vec3(0, 0, 0.025));
+      }
+    else
+      {
+	_anim += 0.1;
+	_wall.move(glm::vec3(0, 0, -0.025));
+	if (_anim >= 4)
+	  _anim = 0;
+      }
   }
 
   bool		WaterBonus::expired() const
@@ -76,12 +89,12 @@ namespace bbm
 
   void			WaterBonus::interact(AEntity *entity)
   {
-    if (entity->getType() == "Player")
+    if (entity->getType() == "Player" || entity->getType() == "AI")
       {
 	if (_used == false)
 	  {
-	    dynamic_cast<Player*>(entity)->setTypeBomb(WATER);
-	    dynamic_cast<Player*>(entity)->addScore(100);
+	    dynamic_cast<APlayer*>(entity)->setTypeBomb(WATER);
+	    dynamic_cast<APlayer*>(entity)->addScore(100);
 	  }
 	_used = true;
       }

@@ -41,6 +41,8 @@ namespace bbm
     void			revealing();
     void			release();
     void			update(float time, const Input& input);
+    void			updateAIPlayer(float time, const Input& input);
+    void			updateEntity(float time, const Input& input);
     void			draw(float time, Screen& context);
 
     void			randomize(int x, int y);
@@ -52,6 +54,9 @@ namespace bbm
     void			addEntity(AEntity* entity);
     std::list<AEntity*>&	getEntities();
     APlayer&			getPlayer(unsigned int id);
+
+    std::list<Player*>&		getPlayerList();
+    std::list<AI*>&		getAIList();
 
     TileMap&			getTileMap();
 

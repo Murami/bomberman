@@ -79,9 +79,9 @@ namespace bbm
 
   void			DarkBombExplode::interact(AEntity * entity)
   {
-    if (entity->getType() == "Player")
+    if (entity->getType() == "Player" || entity->getType() == "AI")
       {
-	dynamic_cast<Player *>(entity)->setDark(true);
+	dynamic_cast<APlayer*>(entity)->setDark(true);
       }
   }
 

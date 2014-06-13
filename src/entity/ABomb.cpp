@@ -5,6 +5,7 @@ namespace bbm
 {
   ABomb::ABomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) : _gameState(gameState)
   {
+    _anim = 0;
     _used = false;
     _playerIsOver = true;
     _lifespan = 2000;

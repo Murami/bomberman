@@ -32,6 +32,7 @@ namespace bbm
     void		draw(ARenderer& render, const RenderState& renderState);
 
   private:
+    float		_anim;
     std::string		_type;
     glm::vec2		_pos;
     Wall		_wall;

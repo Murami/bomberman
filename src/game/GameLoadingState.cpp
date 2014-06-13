@@ -77,6 +77,12 @@ namespace bbm
 
   void			GameLoadingState::loadTexture()
   {
+    TextureManager::getInstance()->addTexture("draw", "assets/game/draw.tga");
+    TextureManager::getInstance()->addTexture("player1", "assets/game/player1.tga");
+    TextureManager::getInstance()->addTexture("player2", "assets/game/player2.tga");
+    TextureManager::getInstance()->addTexture("player3", "assets/game/player3.tga");
+    TextureManager::getInstance()->addTexture("player4", "assets/game/player4.tga");
+    TextureManager::getInstance()->addTexture("ia", "assets/game/ia.tga");
     TextureManager::getInstance()->addTexture("fire", "assets/game/effects/fire.tga");
     TextureManager::getInstance()->addTexture("fire2", "assets/game/effects/fire2.tga");
     TextureManager::getInstance()->addTexture("dark", "assets/game/effects/dark.tga");
