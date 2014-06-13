@@ -207,7 +207,7 @@ namespace bbm
 	ss2 << index + 1;
 	playerNode = playersListNode->get(ss.str());
 	playerConfig.inputConfig = new InputConfig;
-	playerConfig.inputConfig->load("inputConfig" + ss2.str() + ".json");
+	playerConfig.inputConfig->load("./input/inputConfig" + ss2.str() + ".json");
 	playerNode->get("position", playerConfig.position);
 	playerNode->get("power", playerConfig.power);
 	playerNode->get("nbBombs", playerConfig.nbBombs);
