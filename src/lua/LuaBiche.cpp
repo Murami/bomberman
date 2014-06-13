@@ -5,7 +5,7 @@
 // Login   <bichon_b@epitech.net>
 //
 // Started on  Tue May 20 12:22:22 2014 bichon_b
-// Last update Fri Jun 13 16:41:26 2014 bichon_b
+// Last update Fri Jun 13 18:18:12 2014 bichon_b
 //
 
 #include "lua/LuaBiche.hh"
@@ -31,7 +31,11 @@ LuaBiche::~LuaBiche()
 void	LuaBiche::run()
 {
   if (lua_pcall(_lua, 0, LUA_MULTRET, 0))
-    std::cerr << "Error in lua script : " << lua_tostring(_lua, -1) << std::endl;
+    {
+      std::cerr << "Error in lua script : " << lua_tostring(_lua, -1) << std::endl;
+      lua_pop(_lua, 1);
+      throw ;
+    }
 }
 
 void	LuaBiche::addVar(std::string const& name, std::string const& value)
