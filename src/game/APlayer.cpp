@@ -186,7 +186,7 @@ namespace bbm
       }
     else
       {
-	_speed +=  0.005 / 2;
+	_speed +=  0.005 / 10;
 	if (_speed > maxSpeed)
 	  _speed = maxSpeed;
       }

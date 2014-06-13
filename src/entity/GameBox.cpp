@@ -99,7 +99,7 @@ namespace bbm
 	  {
 	    if (!player->isDead())
 	      {
-		if (_idPlayer != 1)
+		if (_idPlayer != -1)
 		  {
 		    _gameState.getPlayer(_idPlayer).addScore(1000);
 		    player->die();
