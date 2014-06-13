@@ -8,8 +8,8 @@ namespace		bbm
   const std::string	PauseState::INPUT_CONFIG_P3 = "./inputConfig3.json";
   const std::string	PauseState::INPUT_CONFIG_P4 = "./inputConfig4.json";
 
-  PauseState::PauseState(GameManager& manager) :
-    _manager(manager)
+  PauseState::PauseState(GameManager& manager, GameState& gameState) :
+    _manager(manager), _gameState(gameState)
   {
     glEnable(GL_BLEND);
     glEnable(GL_ALPHA_TEST);
@@ -55,11 +55,11 @@ namespace		bbm
       {
 	menu->createNewButton("resume", &IMenuManager::resumeGame,
 			      glm::vec4(1, 1, 1, 1), true);
-	menu->createNewButton("save", &IMenuManager::saveGame,
-			      glm::vec4(1, 1, 1, 1), true);
 	menu->createNewButton("options", &IMenuManager::setOptionsMenu,
 			      glm::vec4(1, 1, 1, 1), true);
-	menu->createNewButton("quit", &IMenuManager::exitGame,
+	menu->createNewButton("save and quit", &IMenuManager::saveGame,
+			      glm::vec4(1, 1, 1, 1), true);
+	menu->createNewButton("back to main menu", &IMenuManager::exitGame,
 			      glm::vec4(1, 0, 0, 1), true);
       }
     catch (FileLoadingException e)
@@ -118,30 +118,30 @@ namespace		bbm
       }
     try
       {
+	std::string upKey = this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("up"));
+	std::string downKey = this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("down"));
+	std::string leftKey = this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("left"));
+	std::string rightKey = this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("right"));
+	std::string bombKey = this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("bomb"));
+	std::string bomb2Key = this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("bomb2"));
 	menu->createNewStateButton("up", NULL, 7,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("up")));
-	this->_setBindingControlPlayer1(menu, "UP");
+				   glm::vec4(1, 1, 1, 1), upKey);
+	this->_setBindingControlPlayer1(menu, upKey);
 	menu->createNewStateButton("down", NULL, 5,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("down")));
-	this->_setBindingControlPlayer1(menu, "DOWN");
+				   glm::vec4(1, 1, 1, 1), downKey);
+	this->_setBindingControlPlayer1(menu, downKey);
 	menu->createNewStateButton("left", NULL, 5,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("left")));
-	this->_setBindingControlPlayer1(menu, "LEFT");
+				   glm::vec4(1, 1, 1, 1), leftKey);
+	this->_setBindingControlPlayer1(menu, leftKey);
 	menu->createNewStateButton("right", NULL, 4,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("right")));
-	this->_setBindingControlPlayer1(menu, "RIGHT");
+				   glm::vec4(1, 1, 1, 1), rightKey);
+	this->_setBindingControlPlayer1(menu, rightKey);
 	menu->createNewStateButton("bomb", NULL, 5,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("bomb")));
-	this->_setBindingControlPlayer1(menu, "SPACE");
+				   glm::vec4(1, 1, 1, 1), bombKey);
+	this->_setBindingControlPlayer1(menu, bombKey);
 	menu->createNewStateButton("bomb2", NULL, 4,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("bomb2")));
-	this->_setBindingControlPlayer1(menu, "RETURN");
+				   glm::vec4(1, 1, 1, 1), bomb2Key);
+	this->_setBindingControlPlayer1(menu, bomb2Key);
 	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer1,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setOptionsControlMenu,
@@ -168,31 +168,31 @@ namespace		bbm
       }
     try
       {
+	std::string upKey = this->_getKeyFromSDLK(this->_inputConfigPlayer2->getKeyName("up"));
+	std::string downKey = this->_getKeyFromSDLK(this->_inputConfigPlayer2->getKeyName("down"));
+	std::string leftKey = this->_getKeyFromSDLK(this->_inputConfigPlayer2->getKeyName("left"));
+	std::string rightKey = this->_getKeyFromSDLK(this->_inputConfigPlayer2->getKeyName("right"));
+	std::string bombKey = this->_getKeyFromSDLK(this->_inputConfigPlayer2->getKeyName("bomb"));
+	std::string bomb2Key = this->_getKeyFromSDLK(this->_inputConfigPlayer2->getKeyName("bomb2"));
 	menu->createNewStateButton("up", NULL, 7,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer2->getKeyName("up")));
-	this->_setBindingControlPlayer2(menu, "z");
+				   glm::vec4(1, 1, 1, 1), upKey);
+	this->_setBindingControlPlayer2(menu, upKey);
 	menu->createNewStateButton("down", NULL, 5,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer2->getKeyName("down")));
-	this->_setBindingControlPlayer2(menu, "s");
+				   glm::vec4(1, 1, 1, 1), downKey);
+	this->_setBindingControlPlayer2(menu, downKey);
 	menu->createNewStateButton("left", NULL, 5,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer2->getKeyName("left")));
-	this->_setBindingControlPlayer2(menu, "q");
+				   glm::vec4(1, 1, 1, 1), leftKey);
+	this->_setBindingControlPlayer2(menu, leftKey);
 	menu->createNewStateButton("right", NULL, 4,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer2->getKeyName("right")));
-	this->_setBindingControlPlayer2(menu, "d");
+				   glm::vec4(1, 1, 1, 1), rightKey);
+	this->_setBindingControlPlayer2(menu, rightKey);
 	menu->createNewStateButton("bomb", NULL, 5,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer2->getKeyName("bomb")));
-	this->_setBindingControlPlayer2(menu, "x");
+				   glm::vec4(1, 1, 1, 1), bombKey);
+	this->_setBindingControlPlayer2(menu, bombKey);
 	menu->createNewStateButton("bomb2", NULL, 4,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer2->getKeyName("bomb2")));
-	this->_setBindingControlPlayer2(menu, "w");
-	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer4,
+				   glm::vec4(1, 1, 1, 1), bomb2Key);
+	this->_setBindingControlPlayer2(menu, bomb2Key);
+	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer2,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setOptionsControlMenu,
 			      glm::vec4(1, 0, 0, 1));
@@ -218,31 +218,31 @@ namespace		bbm
       }
     try
       {
+	std::string upKey = this->_getKeyFromSDLK(this->_inputConfigPlayer3->getKeyName("up"));
+	std::string downKey = this->_getKeyFromSDLK(this->_inputConfigPlayer3->getKeyName("down"));
+	std::string leftKey = this->_getKeyFromSDLK(this->_inputConfigPlayer3->getKeyName("left"));
+	std::string rightKey = this->_getKeyFromSDLK(this->_inputConfigPlayer3->getKeyName("right"));
+	std::string bombKey = this->_getKeyFromSDLK(this->_inputConfigPlayer3->getKeyName("bomb"));
+	std::string bomb2Key = this->_getKeyFromSDLK(this->_inputConfigPlayer3->getKeyName("bomb2"));
 	menu->createNewStateButton("up", NULL, 7,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer3->getKeyName("up")));
-	this->_setBindingControlPlayer2(menu, "z");
+				   glm::vec4(1, 1, 1, 1), upKey);
+	this->_setBindingControlPlayer3(menu, upKey);
 	menu->createNewStateButton("down", NULL, 5,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer3->getKeyName("down")));
-	this->_setBindingControlPlayer2(menu, "s");
+				   glm::vec4(1, 1, 1, 1), downKey);
+	this->_setBindingControlPlayer3(menu, downKey);
 	menu->createNewStateButton("left", NULL, 5,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer3->getKeyName("left")));
-	this->_setBindingControlPlayer2(menu, "q");
+				   glm::vec4(1, 1, 1, 1), leftKey);
+	this->_setBindingControlPlayer3(menu, leftKey);
 	menu->createNewStateButton("right", NULL, 4,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer3->getKeyName("right")));
-	this->_setBindingControlPlayer2(menu, "d");
+				   glm::vec4(1, 1, 1, 1), rightKey);
+	this->_setBindingControlPlayer3(menu, rightKey);
 	menu->createNewStateButton("bomb", NULL, 5,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer3->getKeyName("bomb")));
-	this->_setBindingControlPlayer2(menu, "x");
+				   glm::vec4(1, 1, 1, 1), bombKey);
+	this->_setBindingControlPlayer3(menu, bombKey);
 	menu->createNewStateButton("bomb2", NULL, 4,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer3->getKeyName("bomb2")));
-	this->_setBindingControlPlayer2(menu, "w");
-	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer4,
+				   glm::vec4(1, 1, 1, 1), bomb2Key);
+	this->_setBindingControlPlayer3(menu, bomb2Key);
+	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer3,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setOptionsControlMenu,
 			      glm::vec4(1, 0, 0, 1));
@@ -269,30 +269,30 @@ namespace		bbm
       }
     try
       {
+	std::string upKey = this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("up"));
+	std::string downKey = this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("down"));
+	std::string leftKey = this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("left"));
+	std::string rightKey = this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("right"));
+	std::string bombKey = this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("bomb"));
+	std::string bomb2Key = this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("bomb2"));
 	menu->createNewStateButton("up", NULL, 7,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("up")));
-	this->_setBindingControlPlayer2(menu, "z");
+				   glm::vec4(1, 1, 1, 1), upKey);
+	this->_setBindingControlPlayer4(menu, upKey);
 	menu->createNewStateButton("down", NULL, 5,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("down")));
-	this->_setBindingControlPlayer2(menu, "s");
+				   glm::vec4(1, 1, 1, 1), downKey);
+	this->_setBindingControlPlayer4(menu, downKey);
 	menu->createNewStateButton("left", NULL, 5,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("left")));
-	this->_setBindingControlPlayer2(menu, "q");
+				   glm::vec4(1, 1, 1, 1), leftKey);
+	this->_setBindingControlPlayer4(menu, leftKey);
 	menu->createNewStateButton("right", NULL, 4,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("right")));
-	this->_setBindingControlPlayer2(menu, "d");
+				   glm::vec4(1, 1, 1, 1), rightKey);
+	this->_setBindingControlPlayer4(menu, rightKey);
 	menu->createNewStateButton("bomb", NULL, 5,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("bomb")));
-	this->_setBindingControlPlayer2(menu, "x");
+				   glm::vec4(1, 1, 1, 1), bombKey);
+	this->_setBindingControlPlayer4(menu, bombKey);
 	menu->createNewStateButton("bomb2", NULL, 4,
-				   glm::vec4(1, 1, 1, 1),
-				   this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("bomb2")));
-	this->_setBindingControlPlayer2(menu, "w");
+				   glm::vec4(1, 1, 1, 1), bomb2Key);
+	this->_setBindingControlPlayer4(menu, bomb2Key);
 	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer4,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setOptionsControlMenu,
@@ -316,8 +316,8 @@ namespace		bbm
       return (false);
     try
       {
-	menu->createNewToggleButton("sound", &IMenuManager::setMainMenu);
-	menu->createNewToggleButton("music", &IMenuManager::setMainMenu);
+	menu->createNewToggleButton("sound", NULL);
+	menu->createNewToggleButton("music", NULL);
 	menu->createNewButton("ok", &IMenuManager::serializeAudioSettings,
 			      glm::vec4(0, 1, 0, 1), true);
 	menu->createNewButton("cancel", &IMenuManager::setOptionsMenu,
@@ -364,16 +364,54 @@ namespace		bbm
   void		PauseState::initialize()
   {
     memset(&this->_config, 0, sizeof(this->_config));
+    std::vector<InputConfig*> configs;
+    std::list<Player*>::iterator it;
+    std::list<Player*> players = this->_gameState.getPlayerList();
+    PlayerConfig playerConfig;
+    for (it = players.begin(); it != players.end(); it++)
+      {
+	playerConfig = (*it)->getPlayerConfig();
+	configs.push_back(playerConfig.inputConfig);
+      }
+    InputConfig* tab[4];
+    memset(tab, 0, 4 * sizeof(*tab));
+    int nb = 0;
+    for (std::vector<InputConfig*>::iterator it = configs.begin();
+	 it != configs.end(); it++)
+      {
+	tab[nb] = (*it);
+	nb++;
+      }
+    if (tab[0])
+      this->_inputConfigPlayer1 = tab[0];
+    else
+      {
+	this->_inputConfigPlayer1 = new InputConfig();
+	this->_inputConfigPlayer1->load(INPUT_CONFIG_P1);
+      }
+    if (tab[1])
+      this->_inputConfigPlayer2 = tab[1];
+    else
+      {
+	this->_inputConfigPlayer2 = new InputConfig();
+	this->_inputConfigPlayer2->load(INPUT_CONFIG_P2);
+      }
+    if (tab[2])
+      this->_inputConfigPlayer3 = tab[2];
+    else
+      {
+	this->_inputConfigPlayer3 = new InputConfig();
+	this->_inputConfigPlayer3->load(INPUT_CONFIG_P3);
+      }
+    if (tab[3])
+      this->_inputConfigPlayer4 = tab[3];
+    else
+      {
+	this->_inputConfigPlayer4 = new InputConfig();
+	this->_inputConfigPlayer4->load(INPUT_CONFIG_P4);
+      }
     this->_initializePauseMainMenu();
     this->_initializeOptionsMenu();
-    this->_inputConfigPlayer1 = new InputConfig();
-    this->_inputConfigPlayer1->load(INPUT_CONFIG_P1);
-    this->_inputConfigPlayer2 = new InputConfig();
-    this->_inputConfigPlayer2->load(INPUT_CONFIG_P2);
-    this->_inputConfigPlayer3 = new InputConfig();
-    this->_inputConfigPlayer3->load(INPUT_CONFIG_P3);
-    this->_inputConfigPlayer4 = new InputConfig();
-    this->_inputConfigPlayer4->load(INPUT_CONFIG_P4);
     this->_skybox = new Skybox();
     try
       {
@@ -536,11 +574,51 @@ namespace		bbm
     context.flush();
   }
 
+  void		PauseState::setOptionControlPlayer1(Menu*)
+  {
+    this->_setNewCurrentMenu("controlplayer1");
+  }
+
+  void		PauseState::setOptionControlPlayer2(Menu*)
+  {
+    this->_setNewCurrentMenu("controlplayer2");
+  }
+
+  void		PauseState::setOptionControlPlayer3(Menu*)
+  {
+    this->_setNewCurrentMenu("controlplayer3");
+  }
+
+  void		PauseState::setOptionControlPlayer4(Menu*)
+  {
+    this->_setNewCurrentMenu("controlplayer4");
+  }
+
+  void		PauseState::setOptionsAudioMenu(Menu*)
+  {
+    this->_setNewCurrentMenu("audio");
+  }
+
+  void		PauseState::setOptionsControlMenu(Menu*)
+  {
+    this->_setNewCurrentMenu("control");
+  }
+
   void		PauseState::revealing() {}
-  void		PauseState::saveGame(Menu*) {}
+
+  void		PauseState::saveGame(Menu*)
+  {
+
+    this->_manager.pop();
+    this->_manager.pop();
+  }
 
   void		PauseState::resumeGame(Menu*)
   {
+    this->_inputConfigPlayer1->load(INPUT_CONFIG_P1);
+    this->_inputConfigPlayer1->load(INPUT_CONFIG_P2);
+    this->_inputConfigPlayer1->load(INPUT_CONFIG_P3);
+    this->_inputConfigPlayer1->load(INPUT_CONFIG_P4);
     this->_manager.pop();
   }
 
@@ -550,6 +628,7 @@ namespace		bbm
 
   void		PauseState::setOptionsMenu(Menu*)
   {
+    this->_setNewCurrentMenu("options");
   }
 
   void		PauseState::setHighScoreMenu(Menu*)
@@ -558,6 +637,8 @@ namespace		bbm
 
   void		PauseState::exitGame(Menu*)
   {
+    this->_manager.pop();
+    this->_manager.pop();
   }
 
   void		PauseState::setNewGameMenu(Menu*)
@@ -574,14 +655,7 @@ namespace		bbm
 
   void		PauseState::setMainMenu(Menu*)
   {
-  }
-
-  void		PauseState::setOptionsAudioMenu(Menu*)
-  {
-  }
-
-  void		PauseState::setOptionsControlMenu(Menu*)
-  {
+    this->_setNewCurrentMenu("pausemainmenu");
   }
 
   void		PauseState::setNextFrame(Menu*)
@@ -601,22 +675,6 @@ namespace		bbm
   }
 
   void		PauseState::launchNewGame(Menu*)
-  {
-  }
-
-  void		PauseState::setOptionControlPlayer1(Menu*)
-  {
-  }
-
-  void		PauseState::setOptionControlPlayer2(Menu*)
-  {
-  }
-
-  void		PauseState::setOptionControlPlayer3(Menu*)
-  {
-  }
-
-  void		PauseState::setOptionControlPlayer4(Menu*)
   {
   }
 

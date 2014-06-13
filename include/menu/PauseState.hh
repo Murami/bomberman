@@ -19,6 +19,7 @@ namespace	bbm
   class		GameManager;
   class		Skybox;
   class		InputConfig;
+  class		GameState;
 
   class		PauseState : public IGameState, IMenuManager
   {
@@ -31,6 +32,7 @@ namespace	bbm
 
   private :
     GameManager&			_manager;
+    GameState&				_gameState;
     Menu*				_currentMenu;
     std::list<Menu*>			_menuList;
     Skybox*				_skybox;
@@ -96,7 +98,7 @@ namespace	bbm
     virtual void	saveGame(Menu*);
 
   public :
-    PauseState(GameManager&);
+    PauseState(GameManager&, GameState&);
     virtual ~PauseState();
   };
 }

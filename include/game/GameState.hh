@@ -53,6 +53,8 @@ namespace bbm
     std::list<AEntity*>&	getEntities();
     Player&			getPlayer(unsigned int id);
 
+    std::list<Player*>&		getPlayerList();
+
     TileMap&			getTileMap();
 
   private:

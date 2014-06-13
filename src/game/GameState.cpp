@@ -336,6 +336,11 @@ namespace bbm
       context.flush();
   }
 
+  std::list<Player*>&	GameState::getPlayerList()
+  {
+    return (this->_players);
+  }
+
   void			GameState::update(float time, const Input& input)
   {
     EntitiesIt it;
@@ -343,7 +348,7 @@ namespace bbm
     if (input.getKeyDown(SDLK_ESCAPE) || input.getEvent(SDL_QUIT))
       {
 	//_manager.pop();
-	PauseState* state = new PauseState(_manager);
+	PauseState* state = new PauseState(_manager, *this);
 	_manager.push(state);
  	return;
       }
