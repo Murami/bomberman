@@ -17,7 +17,6 @@ namespace bbm
     void		initialize();
     void		update(float time);
     const std::string&	getType() const;
-    void		initialize();
 
     int	goUp(lua_State*);
     int	goLeft(lua_State*);

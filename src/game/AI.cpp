@@ -77,7 +77,7 @@ namespace bbm
 	LuaBiche	script(_scriptName);
 
 	script.addObject("player", this);
-	script.run(this);
+	script.run();
 	managePhysics(time);
 	updateState();
 	manageModel(time);
