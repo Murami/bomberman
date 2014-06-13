@@ -31,6 +31,7 @@ namespace bbm
   private:
     static std::vector<ILuaHeir<AI>::t_MethodPtr>	_methodPtrs;
     std::string						_type;
+    LuaBiche*						_script;
   };
 };
 

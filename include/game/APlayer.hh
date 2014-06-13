@@ -65,6 +65,7 @@ namespace bbm
     const glm::vec2 &	getMove() const;
     float		getDelta() const;
     int			getPower() const;
+    int			getBomb() const;
     void		setTypeBomb(BombType);
     void		setSpeed(float);
     void		setDark(bool);

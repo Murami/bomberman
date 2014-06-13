@@ -53,7 +53,7 @@ namespace bbm
 
   void			DarkBomb::update(float time)
   {
-    Player&	player =  _gameState.getPlayer(_idPlayer);
+    APlayer&	player =  _gameState.getPlayer(_idPlayer);
     glm::vec2	playerPosition = player.getPosition();
     float	delta = player.getDelta();
 

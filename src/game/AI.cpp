@@ -33,6 +33,8 @@ namespace bbm
   AI::AI(GameState& gameState, const glm::vec2& position) :
     APlayer(gameState)
   {
+    _script = new LuaBiche("scripts/easy.lua");
+    _script->addObject("player", this);
     _type = "AI";
     _position = position;
   }
@@ -43,10 +45,11 @@ namespace bbm
 
   void	AI::update(float time)
   {
-    LuaBiche	tmp("scripts/test.lua");
+    // LuaBiche	tmp("scripts/easy.lua");
 
-    tmp.addObject("player", this);
-    tmp.run();
+    // tmp.addObject("player", this);
+    // tmp.run();
+    _script->run();
     updateState();
     manageModel(time);
     if (_move.x != 0 || _move.y != 0)
@@ -101,8 +104,13 @@ namespace bbm
     return (1);
   }
 
-  int	AI::haveBomb(lua_State*)
+  int	AI::haveBomb(lua_State* L)
   {
+    bool	b = true;
+
+    if (this->getBomb() <= 0)
+      b = false;
+    lua_pushboolean(L, (int)b);
     return (1);
   }
 
