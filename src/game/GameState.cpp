@@ -436,28 +436,28 @@ namespace bbm
       if ((*itAIs)->isDead())
 	nbAi++;
 
-    // if (nbPlayer == 0 && nbAi == 0)
-    //   {
-    // 	std::cout << "DRAW" << std::endl;
-    // 	_manager.pop();
-    // 	_manager.push(new GameOverState(_manager, "draw"));
-    //   }
-    // else if (nbPlayer == 1 && nbAi == 0)
-    //   {
-    // 	for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
-    // 	  if ((*itPlayers)->isDead())
-    // 	    {
-    // 	      _manager.pop();
-    // 	      _manager.push(new GameOverState(_manager, "player1"));
-    // 	      std::cout << "player numero ? won the game with " << (*itPlayers)->getScore() << "points" << std::endl;
-    // 	    }
-    //   }
-    // else if (nbPlayer == 0 && nbAi != 0)
-    //   {
-    // 	std::cout << "AI won the game !" << std::endl;
-    // 	_manager.pop();
-    // 	_manager.push(new GameOverState(_manager, "ia"));
-    //   }
+    if (nbPlayer == 0 && nbAi == 0)
+      {
+    	std::cout << "DRAW" << std::endl;
+    	_manager.pop();
+    	_manager.push(new GameOverState(_manager, "draw"));
+      }
+    else if (nbPlayer == 1 && nbAi == 0)
+      {
+    	for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
+    	  if ((*itPlayers)->isDead())
+    	    {
+    	      _manager.pop();
+    	      _manager.push(new GameOverState(_manager, "player1"));
+    	      std::cout << "player numero ? won the game with " << (*itPlayers)->getScore() << "points" << std::endl;
+    	    }
+      }
+    else if (nbPlayer == 0 && nbAi != 0)
+      {
+    	std::cout << "AI won the game !" << std::endl;
+    	_manager.pop();
+    	_manager.push(new GameOverState(_manager, "ia"));
+      }
 
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
       if ((*itPlayers)->isDead())
