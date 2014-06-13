@@ -42,18 +42,18 @@ namespace bbm
     if (_gameState.getTileMap().collide(_position.x + x + 0.5, _position.y + y + 0.5))
       return (false);
 
-    _gameState.addEntity(new DarkBombExplode(glm::vec2(_position.x + x, _position.y + y), _gameState));
     for (it = _gameState.getEntities().begin(); it != _gameState.getEntities().end(); it++)
       {
 	if ((*it)->getType() == "GameBox" && (*it)->collide(glm::vec3(_position.x + x + 0.5, _position.y + y + 0.5, 0)))
 	  return (false);
       }
+    _gameState.addEntity(new DarkBombExplode(glm::vec2(_position.x + x, _position.y + y), _gameState));
     return (true);
   }
 
   void			DarkBomb::update(float time)
   {
-    Player&	player =  _gameState.getPlayer(_idPlayer);
+    APlayer&	player =  _gameState.getPlayer(_idPlayer);
     glm::vec2	playerPosition = player.getPosition();
     float	delta = player.getDelta();
 
@@ -114,7 +114,7 @@ namespace bbm
 
   void			DarkBomb::interact(AEntity * entity)
   {
-    if (entity->getType() == "PowerBombExplode" || entity->getType() == "PowerBombExplode")
+    if (entity->getType() == "PowerBombExplode" || entity->getType() == "FireBombExplode")
       _lifespan = 0;
     if (entity->getType() == "Player")
       {

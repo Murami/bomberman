@@ -78,11 +78,12 @@ namespace bbm
   void			GameLoadingState::loadTexture()
   {
     TextureManager::getInstance()->addTexture("fire", "assets/game/effects/fire.tga");
+    TextureManager::getInstance()->addTexture("fire2", "assets/game/effects/fire2.tga");
     TextureManager::getInstance()->addTexture("dark", "assets/game/effects/dark.tga");
     TextureManager::getInstance()->addTexture("water", "assets/game/effects/water.tga");
     TextureManager::getInstance()->addTexture("wall", "assets/game/box/wall.tga");
     TextureManager::getInstance()->addTexture("gamebox", "assets/game/box/gamebox.tga");
-    TextureManager::getInstance()->addTexture("ground", "assets/game/metal4.tga");
+    TextureManager::getInstance()->addTexture("ground", "assets/game/grass.tga");
     TextureManager::getInstance()->addTexture("fireBonus", "assets/game/bonus/fire_bonus.tga");
     TextureManager::getInstance()->addTexture("bombBonus", "assets/game/bonus/bomb_bonus.tga");
     TextureManager::getInstance()->addTexture("speedBonus", "assets/game/bonus/speed_bonus.tga");
@@ -98,7 +99,9 @@ namespace bbm
   void			GameLoadingState::loadSound()
   {
     SoundManager::getInstance()->addMusic("menu", "assets/sound/Turning_tables.mp3");
-    SoundManager::getInstance()->addMusic("theme", "assets/sound/bomberman_them.mp3");
+    SoundManager::getInstance()->addMusic("bomberTheme", "assets/sound/bomberman_them.mp3");
+    SoundManager::getInstance()->addMusic("GoTTheme", "assets/sound/GoT_them.mp3");
+    SoundManager::getInstance()->addMusic("FaFTheme", "assets/sound/Tokio_Drift.mp3");
     SoundManager::getInstance()->addSound("banzai", "assets/sound/banzai.mp3");
     SoundManager::getInstance()->addSound("aquaBomb", "assets/sound/aqua_bomb.mp3");
     SoundManager::getInstance()->addSound("bomb", "assets/sound/Bomb_Blow.wav");

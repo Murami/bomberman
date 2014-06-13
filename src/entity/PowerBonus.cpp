@@ -82,7 +82,6 @@ namespace bbm
       {
 	if (_used == false)
 	  {
-	    std::cout << "set du type power" << std::endl;
 	    dynamic_cast<Player*>(entity)->setTypeBomb(POWER);
 	  }
 	_used = true;

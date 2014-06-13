@@ -13,6 +13,7 @@ namespace bbm
     AI(GameState& gameState, const glm::vec2& position);
     ~AI();
 
+    void		initialize();
     void		update(float time);
     void		pack(ISerializedNode & current) const;
     void		unpack(const ISerializedNode & current);
@@ -31,6 +32,7 @@ namespace bbm
   private:
     static std::vector<ILuaHeir<AI>::t_MethodPtr>	_methodPtrs;
     std::string						_type;
+    LuaBiche*						_script;
   };
 };
 

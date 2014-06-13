@@ -170,6 +170,7 @@
          "y" : 1
       },
       "23" : {
+<<<<<<< HEAD
          "object" : {
             "collide" : true,
             "shader" : "default",
@@ -180,6 +181,8 @@
          "y" : 2
       },
       "24" : {
+=======
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
          "object" : {
             "collide" : false,
             "shader" : "",
@@ -189,7 +192,7 @@
          "x" : 4,
          "y" : 2
       },
-      "25" : {
+      "24" : {
          "object" : {
             "collide" : false,
             "shader" : "",
@@ -209,7 +212,11 @@
          "x" : 19,
          "y" : 2
       },
+<<<<<<< HEAD
       "27" : {
+=======
+      "25" : {
+>>>>>>> b28c5c8d2495240a14d7ea251982e378fc2e6bd5
          "object" : {
             "collide" : true,
             "shader" : "default",
@@ -219,7 +226,11 @@
          "x" : 0,
          "y" : 3
       },
+<<<<<<< HEAD
       "28" : {
+=======
+      "26" : {
+>>>>>>> b28c5c8d2495240a14d7ea251982e378fc2e6bd5
          "object" : {
             "collide" : true,
             "shader" : "default",
@@ -228,6 +239,36 @@
          },
          "x" : 19,
          "y" : 3
+      },
+<<<<<<< HEAD
+      "29" : {
+=======
+      "27" : {
+>>>>>>> b28c5c8d2495240a14d7ea251982e378fc2e6bd5
+         "object" : {
+            "collide" : true,
+            "shader" : "default",
+            "texture" : "wall",
+            "type" : 2
+         },
+         "x" : 0,
+<<<<<<< HEAD
+         "y" : 4
+      },
+      "3" : {
+=======
+         "y" : 5
+      },
+      "28" : {
+>>>>>>> b28c5c8d2495240a14d7ea251982e378fc2e6bd5
+         "object" : {
+            "collide" : true,
+            "shader" : "default",
+            "texture" : "wall",
+            "type" : 2
+         },
+         "x" : 19,
+         "y" : 5
       },
       "29" : {
          "object" : {
@@ -236,18 +277,14 @@
             "texture" : "wall",
             "type" : 2
          },
-         "x" : 0,
+<<<<<<< HEAD
+         "x" : 19,
          "y" : 4
-      },
-      "3" : {
-         "object" : {
-            "collide" : true,
-            "shader" : "default",
-            "texture" : "wall",
-            "type" : 2
-         },
+=======
+<<<<<<< HEAD
          "x" : 3,
          "y" : 0
+>>>>>>> b28c5c8d2495240a14d7ea251982e378fc2e6bd5
       },
       "30" : {
          "object" : {
@@ -256,30 +293,37 @@
             "texture" : "wall",
             "type" : 2
          },
-         "x" : 19,
-         "y" : 4
-      },
-      "31" : {
-         "object" : {
-            "collide" : true,
-            "shader" : "default",
-            "texture" : "wall",
-            "type" : 2
-         },
          "x" : 0,
+<<<<<<< HEAD
          "y" : 5
+=======
+         "y" : 6
+=======
+         "x" : 19,
+         "y" : 5
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
+>>>>>>> b28c5c8d2495240a14d7ea251982e378fc2e6bd5
       },
-      "32" : {
+      "3" : {
          "object" : {
             "collide" : true,
             "shader" : "default",
             "texture" : "wall",
             "type" : 2
          },
+<<<<<<< HEAD
          "x" : 19,
+<<<<<<< HEAD
          "y" : 5
+=======
+         "y" : 6
+=======
+         "x" : 3,
+         "y" : 0
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
+>>>>>>> b28c5c8d2495240a14d7ea251982e378fc2e6bd5
       },
-      "33" : {
+      "30" : {
          "object" : {
             "collide" : true,
             "shader" : "default",
@@ -288,18 +332,34 @@
          },
          "x" : 0,
          "y" : 6
+      },
+<<<<<<< HEAD
+      "33" : {
+=======
+      "31" : {
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
+         "object" : {
+            "collide" : true,
+            "shader" : "default",
+            "texture" : "wall",
+            "type" : 2
+         },
+<<<<<<< HEAD
+         "x" : 19,
+         "y" : 6
+=======
+<<<<<<< HEAD
+         "x" : 11,
+         "y" : 7
+>>>>>>> b28c5c8d2495240a14d7ea251982e378fc2e6bd5
       },
       "34" : {
-         "object" : {
-            "collide" : true,
-            "shader" : "default",
-            "texture" : "wall",
-            "type" : 2
-         },
-         "x" : 19,
+=======
+         "x" : 15,
          "y" : 6
       },
-      "35" : {
+      "32" : {
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
          "object" : {
             "collide" : true,
             "shader" : "default",
@@ -308,6 +368,55 @@
          },
          "x" : 0,
          "y" : 7
+      },
+<<<<<<< HEAD
+      "35" : {
+=======
+      "33" : {
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
+         "object" : {
+            "collide" : true,
+            "shader" : "default",
+            "texture" : "wall",
+            "type" : 2
+         },
+         "x" : 19,
+         "y" : 7
+      },
+<<<<<<< HEAD
+      "36" : {
+=======
+      "34" : {
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
+         "object" : {
+            "collide" : true,
+            "shader" : "default",
+            "texture" : "wall",
+            "type" : 2
+         },
+<<<<<<< HEAD
+         "x" : 0,
+=======
+         "x" : 19,
+>>>>>>> b28c5c8d2495240a14d7ea251982e378fc2e6bd5
+         "y" : 8
+      },
+<<<<<<< HEAD
+      "37" : {
+=======
+      "35" : {
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
+         "object" : {
+            "collide" : true,
+            "shader" : "default",
+            "texture" : "wall",
+            "type" : 2
+         },
+         "x" : 0,
+<<<<<<< HEAD
+         "y" : 9
+=======
+         "y" : 8
       },
       "36" : {
          "object" : {
@@ -317,7 +426,8 @@
             "type" : 2
          },
          "x" : 19,
-         "y" : 7
+         "y" : 8
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
       },
       "37" : {
          "object" : {
@@ -326,8 +436,11 @@
             "texture" : "wall",
             "type" : 2
          },
+<<<<<<< HEAD
+         "x" : 19,
+=======
          "x" : 0,
-         "y" : 8
+         "y" : 9
       },
       "38" : {
          "object" : {
@@ -336,8 +449,13 @@
             "texture" : "wall",
             "type" : 2
          },
+<<<<<<< HEAD
          "x" : 19,
-         "y" : 8
+=======
+         "x" : 4,
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
+>>>>>>> b28c5c8d2495240a14d7ea251982e378fc2e6bd5
+         "y" : 9
       },
       "39" : {
          "object" : {
@@ -346,8 +464,18 @@
             "texture" : "wall",
             "type" : 2
          },
+<<<<<<< HEAD
          "x" : 0,
+         "y" : 10
+=======
+<<<<<<< HEAD
+         "x" : 0,
+         "y" : 10
+=======
+         "x" : 19,
          "y" : 9
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
+>>>>>>> b28c5c8d2495240a14d7ea251982e378fc2e6bd5
       },
       "4" : {
          "object" : {
@@ -356,8 +484,13 @@
             "texture" : "wall",
             "type" : 2
          },
+<<<<<<< HEAD
+         "x" : 19,
+         "y" : 10
+=======
          "x" : 4,
          "y" : 0
+>>>>>>> b28c5c8d2495240a14d7ea251982e378fc2e6bd5
       },
       "40" : {
          "object" : {
@@ -366,17 +499,35 @@
             "texture" : "wall",
             "type" : 2
          },
+<<<<<<< HEAD
+         "x" : 0,
+         "y" : 11
+=======
+<<<<<<< HEAD
          "x" : 19,
-         "y" : 9
+=======
+         "x" : 0,
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
+         "y" : 10
+>>>>>>> b28c5c8d2495240a14d7ea251982e378fc2e6bd5
       },
       "41" : {
          "object" : {
+<<<<<<< HEAD
             "collide" : true,
             "shader" : "default",
             "texture" : "wall",
             "type" : 2
          },
-         "x" : 0,
+         "x" : 19,
+         "y" : 11
+=======
+            "collide" : false,
+            "shader" : "",
+            "texture" : "",
+            "type" : 3
+         },
+         "x" : 12,
          "y" : 10
       },
       "42" : {
@@ -388,6 +539,7 @@
          },
          "x" : 19,
          "y" : 10
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
       },
       "43" : {
          "object" : {
@@ -396,17 +548,26 @@
             "texture" : "wall",
             "type" : 2
          },
+<<<<<<< HEAD
          "x" : 0,
+         "y" : 12
+=======
+         "x" : 3,
          "y" : 11
+>>>>>>> b28c5c8d2495240a14d7ea251982e378fc2e6bd5
       },
       "44" : {
          "object" : {
-            "collide" : true,
-            "shader" : "default",
-            "texture" : "wall",
-            "type" : 2
+            "collide" : false,
+            "shader" : "",
+            "texture" : "",
+            "type" : 3
          },
-         "x" : 19,
+<<<<<<< HEAD
+         "x" : 9,
+=======
+         "x" : 10,
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
          "y" : 11
       },
       "45" : {
@@ -416,7 +577,7 @@
             "texture" : "wall",
             "type" : 2
          },
-         "x" : 0,
+         "x" : 19,
          "y" : 12
       },
       "46" : {
@@ -426,8 +587,8 @@
             "texture" : "wall",
             "type" : 2
          },
-         "x" : 19,
-         "y" : 12
+         "x" : 0,
+         "y" : 13
       },
       "47" : {
          "object" : {
@@ -436,7 +597,7 @@
             "texture" : "wall",
             "type" : 2
          },
-         "x" : 0,
+         "x" : 19,
          "y" : 13
       },
       "48" : {
@@ -446,8 +607,8 @@
             "texture" : "wall",
             "type" : 2
          },
-         "x" : 19,
-         "y" : 13
+         "x" : 0,
+         "y" : 14
       },
       "49" : {
          "object" : {
@@ -456,8 +617,8 @@
             "texture" : "wall",
             "type" : 2
          },
-         "x" : 0,
-         "y" : 14
+         "x" : 19,
+         "y" : 13
       },
       "5" : {
          "object" : {
@@ -466,17 +627,21 @@
             "texture" : "wall",
             "type" : 2
          },
+<<<<<<< HEAD
+         "x" : 19,
+=======
          "x" : 5,
          "y" : 0
       },
       "50" : {
          "object" : {
-            "collide" : true,
-            "shader" : "default",
-            "texture" : "wall",
-            "type" : 2
+            "collide" : false,
+            "shader" : "",
+            "texture" : "",
+            "type" : 3
          },
-         "x" : 19,
+         "x" : 5,
+>>>>>>> b28c5c8d2495240a14d7ea251982e378fc2e6bd5
          "y" : 14
       },
       "51" : {
@@ -501,12 +666,25 @@
       },
       "53" : {
          "object" : {
+<<<<<<< HEAD
+            "collide" : false,
+            "shader" : "",
+            "texture" : "",
+            "type" : 3
+         },
+         "x" : 8,
+=======
             "collide" : true,
             "shader" : "default",
             "texture" : "wall",
             "type" : 2
          },
+<<<<<<< HEAD
          "x" : 19,
+=======
+         "x" : 0,
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
+>>>>>>> b28c5c8d2495240a14d7ea251982e378fc2e6bd5
          "y" : 15
       },
       "54" : {
@@ -519,7 +697,11 @@
          "x" : 0,
          "y" : 16
       },
+<<<<<<< HEAD
       "55" : {
+=======
+      "54" : {
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
          "object" : {
             "collide" : true,
             "shader" : "default",
@@ -529,6 +711,19 @@
          "x" : 19,
          "y" : 16
       },
+<<<<<<< HEAD
+=======
+      "55" : {
+         "object" : {
+            "collide" : false,
+            "shader" : "",
+            "texture" : "",
+            "type" : 3
+         },
+         "x" : 10,
+         "y" : 16
+      },
+>>>>>>> 7d219ffb20ea44ad1b1de04cf55fb2ab1801c8fc
       "56" : {
          "object" : {
             "collide" : true,
