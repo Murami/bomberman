@@ -316,14 +316,14 @@ namespace bbm
 	//draw entities
 	EntitiesIt		entitiesIt;
 	for (entitiesIt = _entities.begin(); entitiesIt != _entities.end(); entitiesIt++)
-	  if (std::abs((*entitiesIt)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 10 &&
+	  if (std::abs((*entitiesIt)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 15 &&
 	      std::abs((*entitiesIt)->getPosition().y -(*itPlayersCamera)->getPosition().y) < 10)
 	    context.draw(*(*entitiesIt), state);
 
 	//draw players
 	PlayerIt	itPlayers;
 	for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
-	  if (std::abs((*itPlayers)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 12 &&
+	  if (std::abs((*itPlayers)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 15 &&
 	      std::abs((*itPlayers)->getPosition().y -(*itPlayersCamera)->getPosition().y) < 10)
 	    context.draw(*(*itPlayers), state);
 

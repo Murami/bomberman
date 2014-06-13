@@ -63,7 +63,6 @@ namespace bbm
 	!collide(glm::vec3(playerPosition.x + delta, playerPosition.y + delta, 0)))
       _playerIsOver = false;
     _lifespan -= time;
-
     if (_lifespan <= 0)
       {
 	_used = true;

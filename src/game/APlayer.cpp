@@ -54,15 +54,6 @@ namespace bbm
     (void) current;
   }
 
-  void			APlayer::managePhysics(float time)
-  {
-    _move *= _speed * time;
-    collideEntity();
-    collideMap();
-    _position += _move;
-    _model.setPosition(glm::vec3(_position.x + 0.5, _position.y + 0.5, 0));
-  }
-
   void			APlayer::collideMap()
   {
     try
@@ -124,6 +115,17 @@ namespace bbm
 	_model.setPitch(90);
 	_model.play();
       }
+  }
+
+  void			APlayer::managePhysics(float time)
+  {
+    if (_move.x != 0 && _move.y != 0)
+      glm::normalize(_move);
+    _move *= _speed * time;
+    collideEntity();
+    collideMap();
+    _position += _move;
+    _model.setPosition(glm::vec3(_position.x + 0.5, _position.y + 0.5, 0));
   }
 
   //ATENTION AU REFERENCE VERS LE PLAYER !

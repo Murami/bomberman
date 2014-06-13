@@ -52,8 +52,8 @@ namespace bbm
 
   void			Player::unpack(const ISerializedNode & current)
   {
-    int typeBomb;
-    int	state;
+    int			typeBomb;
+    int			state;
 
     current.get("position", _position);
     current.get("power", _power);
@@ -73,6 +73,8 @@ namespace bbm
   void			Player::update(float time)
   {
     updateState();
+    if (_move.x != 0 && _move.y != 0)
+      glm::normalize(_move);
     managePhysics(time);
     manageModel(time);
   }
@@ -115,9 +117,6 @@ namespace bbm
 	_move.x = -_move.x;
 	_move.y = -_move.y;
       }
-    updateState();
-    if (_move.x != 0 && _move.y != 0)
-      glm::normalize(_move);
   }
 
   const std::string&	Player::getType() const

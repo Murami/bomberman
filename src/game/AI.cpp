@@ -47,12 +47,9 @@ namespace bbm
 
     tmp.addObject("player", this);
     tmp.run();
-    updateState();
-    manageModel(time);
-    if (_move.x != 0 || _move.y != 0)
-      glm::normalize(_move);
     managePhysics(time);
     updateState();
+    manageModel(time);
   }
 
   void  AI::pack(ISerializedNode & current) const

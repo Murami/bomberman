@@ -78,11 +78,12 @@ namespace bbm
   void			GameLoadingState::loadTexture()
   {
     TextureManager::getInstance()->addTexture("fire", "assets/game/effects/fire.tga");
+    TextureManager::getInstance()->addTexture("fire2", "assets/game/effects/fire2.tga");
     TextureManager::getInstance()->addTexture("dark", "assets/game/effects/dark.tga");
     TextureManager::getInstance()->addTexture("water", "assets/game/effects/water.tga");
     TextureManager::getInstance()->addTexture("wall", "assets/game/box/wall.tga");
     TextureManager::getInstance()->addTexture("gamebox", "assets/game/box/gamebox.tga");
-    TextureManager::getInstance()->addTexture("ground", "assets/game/metal4.tga");
+    TextureManager::getInstance()->addTexture("ground", "assets/game/grass.tga");
     TextureManager::getInstance()->addTexture("fireBonus", "assets/game/bonus/fire_bonus.tga");
     TextureManager::getInstance()->addTexture("bombBonus", "assets/game/bonus/bomb_bonus.tga");
     TextureManager::getInstance()->addTexture("speedBonus", "assets/game/bonus/speed_bonus.tga");

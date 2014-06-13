@@ -13,7 +13,7 @@ namespace bbm
 {
   PowerBomb::PowerBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABomb(position, gameState, idPlayer),
-    _model("PowerBomb2", "default", 0)
+    _model("PowerBomb", "default", 0)
   {
     _type = "PowerBomb";
     _model.setRoll(90);
@@ -70,10 +70,10 @@ namespace bbm
 	_used = true;
 	_gameState.getPlayer(_idPlayer).addBombsBonus();
 	_gameState.addEntity(new PowerBombExplode(glm::vec2(_position.x, _position.y), _gameState, _idPlayer));
-	for (int i = 1; i != 100 && addExplode(i, 0); i++);
-	for (int i = 1; i != 100 && addExplode(-i, 0); i++);
-	for (int i = 1; i != 100 && addExplode(0, i); i++);
-	for (int i = 1; i != 100 && addExplode(0, -i); i++);
+	for (int i = 1; i != 500 && addExplode(i, 0); i++);
+	for (int i = 1; i != 500 && addExplode(-i, 0); i++);
+	for (int i = 1; i != 500 && addExplode(0, i); i++);
+	for (int i = 1; i != 500 && addExplode(0, -i); i++);
       }
   }
 
