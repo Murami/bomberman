@@ -4,10 +4,10 @@
 
 namespace		bbm
 {
-  const std::string	PauseState::INPUT_CONFIG_P1 = "./inputConfig1.json";
-  const std::string	PauseState::INPUT_CONFIG_P2 = "./inputConfig2.json";
-  const std::string	PauseState::INPUT_CONFIG_P3 = "./inputConfig3.json";
-  const std::string	PauseState::INPUT_CONFIG_P4 = "./inputConfig4.json";
+  const std::string	PauseState::INPUT_CONFIG_P1 = "./input/inputConfig1.json";
+  const std::string	PauseState::INPUT_CONFIG_P2 = "./input/inputConfig2.json";
+  const std::string	PauseState::INPUT_CONFIG_P3 = "./input/inputConfig3.json";
+  const std::string	PauseState::INPUT_CONFIG_P4 = "./input/inputConfig4.json";
 
   PauseState::PauseState(GameManager& manager, GameState& gameState) :
     _manager(manager), _gameState(gameState)

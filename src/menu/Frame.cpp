@@ -5,6 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 02:47:32 2014 Manu
+// Last update Fri Jun 13 15:13:08 2014 Manu
 // Last update Fri Jun 13 05:56:55 2014 Desabre Quentin
 //
 
@@ -69,7 +70,6 @@ namespace		bbm
 	    (fileName[i] >= 'a' && fileName[i] <= 'z') ||
 	    fileName[i] == 32)
 	  {
-	    std::cout << "filename[i]: " << fileName[i] << std::endl;
 	    Letter* l = new Letter(fileName[i], glm::vec4(1, 1, 1, 1));
 	    l->initialize();
 	    l->translate(glm::vec3(1, -3.25, -static_cast<float>(i)/2));

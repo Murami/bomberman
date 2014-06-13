@@ -34,6 +34,7 @@ namespace bbm
     APlayer(gameState)
   {
     _type = "AI";
+    // _scriptName = scriptName;
     _position = config.position;
     _power = config.power;
     _nbBombs = config.nbBombs;
@@ -61,18 +62,16 @@ namespace bbm
 
   void	AI::initialize()
   {
-    _script = new LuaBiche("scripts/easy.lua");
-    _script->addObject("player", this);
   }
 
   void	AI::update(float time)
   {
     if (_alive)
       {
-	LuaBiche	tmp("scripts/easy.lua");
+	LuaBiche	script(_scriptName);
 
-	tmp.addObject("player", this);
-	tmp.run();
+	script.addObject("player", this);
+	script.run();
 	managePhysics(time);
 	updateState();
 	manageModel(time);
@@ -110,8 +109,11 @@ namespace bbm
 
   int	AI::putBomb(lua_State*)
   {
-    _nbBombs--;
-    _gameState.addEntity(BombFactory::getInstance()->create(FIRE, glm::vec2(_position.x, _position.y), _gameState, getID()));
+    if (_nbBombs > 0)
+      {
+	_nbBombs--;
+	_gameState.addEntity(BombFactory::getInstance()->create(FIRE, glm::vec2(_position.x, _position.y), _gameState, getID()));
+      }
     return (1);
   }
 

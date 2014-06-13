@@ -14,9 +14,9 @@ namespace bbm
     AI(GameState& gameState, const PlayerConfig& config);
     ~AI();
 
-    void		initialize();
     void		update(float time);
     const std::string&	getType() const;
+    void		initialize();
 
     int	goUp(lua_State*);
     int	goLeft(lua_State*);
@@ -31,7 +31,7 @@ namespace bbm
   private:
     static std::vector<ILuaHeir<AI>::t_MethodPtr>	_methodPtrs;
     std::string						_type;
-    LuaBiche*						_script;
+    std::string						_scriptName;
   };
 };
 
