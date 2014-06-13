@@ -35,6 +35,11 @@ namespace bbm
   {
   }
 
+  PlayerConfig&		Player::getPlayerConfig()
+  {
+    return (this->_playerConfig);
+  }
+
   void			Player::pack(ISerializedNode & current) const
   {
     current.add("position", _position);
