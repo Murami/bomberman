@@ -17,7 +17,7 @@ namespace bbm
   class	ARenderer;
   class	RenderState;
 
-  class	TileMap : public IDrawable, public ISerializable
+  class	TileMap : public ISerializable
   {
   public:
     TileMap();
@@ -36,10 +36,9 @@ namespace bbm
     void				load(const std::string & file);
     void				save(const std::string & file);
     void				randomize(int x, int y);
-
-  protected:
     void				draw(ARenderer& renderer,
-					     const RenderState& renderState);
+					     const RenderState& renderState,
+					     const glm::vec2& position);
 
   private:
     std::vector<Tile*>			_tiles;

@@ -227,25 +227,32 @@ namespace bbm
     return (_spawns);
   }
 
-  void		TileMap::draw(ARenderer& renderer, const RenderState& renderState)
+  void		TileMap::draw(ARenderer& renderer, const RenderState& renderState,
+			      const glm::vec2& position)
   {
     RenderState	newState = renderState;
     Transform	transform = renderState.transform;
 
-    for (int y = 0; y < _size.y; y++)
+    for (int y = -10; y < 10; y++)
       {
-	for (int x = 0; x < _size.x; x++)
-	  {
-	    Tile*	tile;
-
-	    tile = getTile(x, y);
-	    if (tile && tile->getDrawable() != NULL)
+    	for (int x = -15; x < 15; x++)
+    	  {
+	    try
 	      {
-		newState.transform = transform;
-		newState.transform.translate(glm::vec3(x, y, 0));
-		renderer.draw(*tile, newState);
+		Tile*	tile;
+
+		tile = getTile(static_cast<int>(position.x) + x, static_cast<int>(position.y) + y);
+		if (tile && tile->getDrawable() != NULL)
+		  {
+		    newState.transform = transform;
+		    newState.transform.translate(glm::vec3(static_cast<int>(position.x) + x, static_cast<int>(position.y) + y, 0));
+		    renderer.draw(*tile, newState);
+		  }
 	      }
-	  }
+	    catch (const std::exception& e)
+	      {
+	      }
+    	  }
       }
     renderer.draw(_object, renderState);
   }
