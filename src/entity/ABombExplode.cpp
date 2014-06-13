@@ -7,9 +7,8 @@ namespace bbm
   ABombExplode::ABombExplode(const glm::vec2 & position, GameState& gameState) : _gameState(gameState)
   {
     _lifespan = 2000;
-    _position.x = snap(position.x);
-    _position.y = snap(position.y);
-    // _position.z = snap(0.1);
+    _pos.x = snap(position.x);
+    _pos.y = snap(position.y);
   }
 
   ABombExplode::~ABombExplode()
@@ -24,6 +23,6 @@ namespace bbm
 
   const glm::vec2&	ABombExplode::getPosition() const
   {
-    return (_position);
+    return (_pos);
   }
 };

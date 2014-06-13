@@ -67,7 +67,7 @@ namespace bbm
   AEntity*	       	BonusFactory::createRandom(const glm::vec2 & pos)
   {
 
-    return ((this->*_map[static_cast<BonusType>(std::rand() % (_map.size() - 1))])(pos));
+    return ((this->*_map[static_cast<BonusType>(std::rand() % _map.size())])(pos));
   }
 
   AEntity*		BonusFactory::createNone(const glm::vec2 & pos)

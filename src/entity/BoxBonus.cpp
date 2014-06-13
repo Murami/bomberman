@@ -13,11 +13,11 @@ namespace bbm
 {
   BoxBonus::BoxBonus() : _wall("boxBonus", "default")
   {
-
   }
 
   BoxBonus::BoxBonus(const glm::vec2& pos) : _wall("boxBonus", "default")
   {
+    _anim = 0;
     _pos = pos;
     _type = "BoxBonus";
     _used = false;
@@ -28,27 +28,34 @@ namespace bbm
 
   BoxBonus::~BoxBonus()
   {
-  }
-
-  void          BoxBonus::pack(ISerializedNode & current) const
-  {
-    current.add("type", _type);
-    current.add("position", _pos);
-  }
-
-  void		BoxBonus::unpack(const ISerializedNode & current)
-  {
-    current.get("type", _type);
-    current.get("position", _pos);
+    _type = "BoxBonus";
+    _anim = 0;
     _used = false;
     _wall.yaw(90);
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
     _wall.setPosition(glm::vec3(_pos.x - translate + 1, _pos.y + translate, 0));
   }
 
+  void		BoxBonus::initialize()
+  {
+
+  }
+
   void		BoxBonus::update(float time)
   {
     (void)time;
+    if (_anim <= 2)
+      {
+	_anim += 0.1;
+	_wall.move(glm::vec3(0, 0, 0.025));
+      }
+    else
+      {
+	_anim += 0.1;
+	_wall.move(glm::vec3(0, 0, -0.025));
+	if (_anim >= 3.9)
+	  _anim = 0;
+      }
   }
 
   bool		BoxBonus::expired() const
@@ -78,10 +85,10 @@ namespace bbm
 
   void			BoxBonus::interact(AEntity *entity)
   {
-    if (entity->getType() == "Player")
+    if (entity->getType() == "Player" || entity->getType() == "AI")
       {
 	if (_used == false)
-	  dynamic_cast<Player*>(entity)->setTypeBomb(BOX);
+	  dynamic_cast<APlayer*>(entity)->setTypeBomb(BOX);
 	_used = true;
       }
     if (entity->getType() == "FireBombExplode")

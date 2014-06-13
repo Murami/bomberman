@@ -13,11 +13,11 @@ namespace bbm
 {
   BombBonus::BombBonus() : _wall("bombBonus", "default")
   {
-
   }
 
   BombBonus::BombBonus(const glm::vec2& pos) : _wall("bombBonus", "default")
   {
+    _anim = 0;
     _pos = pos;
     _used = false;
     _type = "BombBonus";
@@ -30,16 +30,10 @@ namespace bbm
   {
   }
 
-  void			BombBonus::pack(ISerializedNode & current) const
+  void			BombBonus::initialize()
   {
-    current.add("type", _type);
-    current.add("position", _pos);
-  }
-
-  void			BombBonus::unpack(const ISerializedNode & current)
-  {
-    current.get("type", _type);
-    current.get("position", _pos);
+    _type = "BombBonus";
+    _anim = 0;
     _used = false;
     _wall.yaw(90);
     _wall.setPosition(glm::vec3(_pos.x + 1 - translate, _pos.y + translate, 0));
@@ -49,6 +43,18 @@ namespace bbm
   void			BombBonus::update(float time)
   {
     (void)time;
+    if (_anim <= 2)
+      {
+	_anim += 0.1;
+	_wall.move(glm::vec3(0, 0, 0.025));
+      }
+    else
+      {
+	_anim += 0.1;
+	_wall.move(glm::vec3(0, 0, -0.025));
+	if (_anim >= 3.9)
+	  _anim = 0;
+      }
   }
 
   bool			BombBonus::expired() const

@@ -18,15 +18,13 @@ namespace bbm
 
     void		handleEvents(float time, const Input& input);
     void		update(float time);
-    void                pack(ISerializedNode & current) const;
-    void                unpack(const ISerializedNode & current);
     const std::string&  getType() const;
     void                initPosition(int x, int y);
     PlayerConfig&	getPlayerConfig();
+    void		initialize();
 
   private:
     PlayerConfig	_playerConfig;
-    std::string		_type;
   };
 };
 

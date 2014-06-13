@@ -5,7 +5,8 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 02:47:32 2014 Manu
-// Last update Fri Jun 13 14:41:18 2014 Manu
+// Last update Fri Jun 13 15:13:08 2014 Manu
+// Last update Fri Jun 13 05:56:55 2014 Desabre Quentin
 //
 
 #include		"graphic/ARenderer.hh"
@@ -119,9 +120,6 @@ namespace		bbm
     this->_position += t;
     if (this->_icone)
       this->_icone->translate(t);
-    // for (std::list<Letter*>::iterator it = this->_title.begin();
-    // 	 it != this->_title.end(); it++)
-    //   (*it)->translate(t);
   }
 
   void		Frame::rotate(const glm::vec3& r, float angle)
@@ -129,9 +127,6 @@ namespace		bbm
     this->_rotation += r * angle;
     if (this->_icone)
       this->_icone->rotate(r, angle);
-    // for (std::list<Letter*>::iterator it = this->_title.begin();
-    // 	 it != this->_title.end(); it++)
-    //   (*it)->rotate(r, angle);
   }
 
   void		Frame::scale(const glm::vec3& s)
@@ -139,9 +134,6 @@ namespace		bbm
     this->_scale *= s;
     if (this->_icone)
       this->_icone->scale(s);
-    // for (std::list<Letter*>::iterator it = this->_title.begin();
-    // 	 it != this->_title.end(); it++)
-    //   (*it)->scale(s);
   }
 
   glm::mat4	Frame::getTransformation()

@@ -13,11 +13,11 @@ namespace bbm
 {
   GameBox::GameBox(GameState& gameState) : _wall("gamebox", "default"), _gameState(gameState)
   {
-
   }
 
-  GameBox::GameBox(const glm::vec2& pos, int idPlayer, GameState& gameState) : _wall("gamebox", "default") , _gameState(gameState), _idPlayer(idPlayer)
+  GameBox::GameBox(const glm::vec2& pos, int idPlayer, GameState& gameState) : _wall("gamebox", "default") , _gameState(gameState)
   {
+    _idPlayer = idPlayer;
     _type = "GameBox";
     _pos = pos;
     _used = false;
@@ -29,16 +29,9 @@ namespace bbm
   {
   }
 
-  void			GameBox::pack(ISerializedNode & current) const
+  void			GameBox::initialize()
   {
-    current.add("type", _type);
-    current.add("position", _pos);
-  }
-
-  void			GameBox::unpack(const ISerializedNode & current)
-  {
-    current.get("type", _type);
-    current.get("position", _pos);
+    _type = "GameBox";
     _used = false;
     _wall.yaw(90);
     _wall.setPosition(glm::vec3(_pos.x + 1, _pos.y, 0));
@@ -99,11 +92,9 @@ namespace bbm
 	  {
 	    if (!player->isDead())
 	      {
-		if (_idPlayer != 1)
-		  {
-		    _gameState.getPlayer(_idPlayer).addScore(1000);
-		    player->die();
-		  }
+		if (_idPlayer != 0)
+		  _gameState.getPlayer(_idPlayer).addScore(1000);
+		player->die();
 	      }
 	  }
 	player->setMove(playerMove);
@@ -111,12 +102,15 @@ namespace bbm
     if (entity->getType() == "FireBombExplode" ||
 	entity->getType() == "PowerBombExplode")
       {
-	AEntity *bonus;
-	dynamic_cast<ABombExplode*>(entity)->setLifeSpan(0);
-	bonus = BonusFactory::getInstance()->createRandom(_pos);
-	if (bonus != NULL)
-	  _gameState.addEntity(bonus);
-	_used = true;
+	if (_used == false)
+	  {
+	    AEntity *bonus;
+	    dynamic_cast<ABombExplode*>(entity)->setLifeSpan(0);
+	    bonus = BonusFactory::getInstance()->createRandom(_pos);
+	    if (bonus != NULL)
+	      _gameState.addEntity(bonus);
+	    _used = true;
+	  }
       }
   }
 

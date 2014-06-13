@@ -30,12 +30,21 @@ namespace bbm
 
   std::vector<ILuaHeir<AI>::t_MethodPtr>	AI::_methodPtrs = make_method_list();
 
-  AI::AI(GameState& gameState, const glm::vec2& position) :
+  AI::AI(GameState& gameState, const PlayerConfig& config) :
     APlayer(gameState)
   {
     _type = "AI";
-    _position = position;
-    // this->initialize();
+    _position = config.position;
+    _power = config.power;
+    _nbBombs = config.nbBombs;
+    _nbBombsBonus = config.nbBombsBonus;
+    _speed = config.speed;
+    _alive = config.alive;
+    _slow = config.slow;
+    _dark = config.dark;
+    _typeBomb = config.typeBomb;
+    _state = config.state;
+    _score = 0;
   }
 
   AI::~AI()
@@ -50,23 +59,16 @@ namespace bbm
 
   void	AI::update(float time)
   {
-    LuaBiche	tmp("scripts/easy.lua");
+    if (_alive)
+      {
+	LuaBiche	tmp("scripts/easy.lua");
 
-    tmp.addObject("player", this);
-    tmp.run();
-    managePhysics(time);
-    updateState();
-    manageModel(time);
-  }
-
-  void  AI::pack(ISerializedNode & current) const
-  {
-    (void) current;
-  }
-
-  void  AI::unpack(const ISerializedNode & current)
-  {
-    (void) current;
+	tmp.addObject("player", this);
+	tmp.run();
+	managePhysics(time);
+	updateState();
+	manageModel(time);
+      }
   }
 
   const std::string&	AI::getType() const

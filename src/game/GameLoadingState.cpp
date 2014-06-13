@@ -77,13 +77,19 @@ namespace bbm
 
   void			GameLoadingState::loadTexture()
   {
+    TextureManager::getInstance()->addTexture("draw", "assets/game/draw.tga");
+    TextureManager::getInstance()->addTexture("player1", "assets/game/player1.tga");
+    TextureManager::getInstance()->addTexture("player2", "assets/game/player2.tga");
+    TextureManager::getInstance()->addTexture("player3", "assets/game/player3.tga");
+    TextureManager::getInstance()->addTexture("player4", "assets/game/player4.tga");
+    TextureManager::getInstance()->addTexture("ia", "assets/game/ia.tga");
     TextureManager::getInstance()->addTexture("fire", "assets/game/effects/fire.tga");
     TextureManager::getInstance()->addTexture("fire2", "assets/game/effects/fire2.tga");
     TextureManager::getInstance()->addTexture("dark", "assets/game/effects/dark.tga");
     TextureManager::getInstance()->addTexture("water", "assets/game/effects/water.tga");
     TextureManager::getInstance()->addTexture("wall", "assets/game/box/wall.tga");
     TextureManager::getInstance()->addTexture("gamebox", "assets/game/box/gamebox.tga");
-    TextureManager::getInstance()->addTexture("ground", "assets/game/grass.tga");
+    TextureManager::getInstance()->addTexture("ground", "assets/game/ground5.tga");
     TextureManager::getInstance()->addTexture("fireBonus", "assets/game/bonus/fire_bonus.tga");
     TextureManager::getInstance()->addTexture("bombBonus", "assets/game/bonus/bomb_bonus.tga");
     TextureManager::getInstance()->addTexture("speedBonus", "assets/game/bonus/speed_bonus.tga");
@@ -143,6 +149,9 @@ namespace bbm
     playerConfig.slow = false;
     playerConfig.dark = false;
     playerConfig.position = glm::vec2(5, 5);
+    playerConfig.idPlayer = 0;
+    playerConfig.id = 0;
+    playerConfig.lastId = 0;
     if (_config->player1)
       {
 	playerConfig.inputConfig = new InputConfig;
@@ -166,6 +175,11 @@ namespace bbm
 	playerConfig.inputConfig = new InputConfig;
 	playerConfig.inputConfig->load(MenuState::INPUT_CONFIG_P4);
 	gameStateConfig.playersConfigs.push_back(playerConfig);
+      }
+    for (int i = 0; i < _config->numberIA; i++)
+      {
+	playerConfig.inputConfig = NULL;
+	gameStateConfig.AIConfigs.push_back(playerConfig);
       }
     state = new GameState(_manager, &gameStateConfig);
     state->randomize(_config->mapSizeX, _config->mapSizeY);

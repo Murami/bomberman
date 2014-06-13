@@ -203,7 +203,7 @@ void			JsonNode::get(const std::string& index, unsigned int& value) const
 {
   if (!_current.isMember(index))
     throw SerializerException("[" + index + "] doesn't exist");
-  if (!_current[index].isUInt())
+  if (!_current[index].isUInt() && !_current[index].isInt())
     throw SerializerException("[" + index + "] is not an unsigned int type");
   value = _current[index].asInt();
 }

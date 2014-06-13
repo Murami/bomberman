@@ -40,9 +40,9 @@ namespace bbm
     _object.pushVertex(glm::vec3(x, y, 0));
     _object.pushVertex(glm::vec3(0, y, 0));
     _object.pushUv(glm::vec2(0, 0));
-    _object.pushUv(glm::vec2(x / 100, 0));
-    _object.pushUv(glm::vec2(x / 100, y / 100));
-    _object.pushUv(glm::vec2(0, y / 100));
+    _object.pushUv(glm::vec2(x / 8, 0));
+    _object.pushUv(glm::vec2(x / 8, y / 8));
+    _object.pushUv(glm::vec2(0, y / 8));
     _object.build();
 
     for (i = 0; i < x; i++)
@@ -243,7 +243,7 @@ namespace bbm
 	      {
 		newState.transform = transform;
 		newState.transform.translate(glm::vec3(x, y, 0));
-		// renderer.draw(*tile, newState);
+		renderer.draw(*tile, newState);
 	      }
 	  }
       }
