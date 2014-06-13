@@ -25,6 +25,7 @@ namespace bbm
   public:
     struct				GameStateConfig
     {
+      bool				load;
       std::vector<PlayerConfig>		playersConfigs;
       std::vector<PlayerConfig>		AIConfigs;
     };

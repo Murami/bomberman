@@ -16,6 +16,7 @@ namespace bbm
   class	WaterBomb : public ABomb
   {
   public:
+    WaterBomb(GameState & GameState);
     WaterBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer);
     ~WaterBomb();
 

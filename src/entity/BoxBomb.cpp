@@ -11,6 +11,10 @@ const float scaleFactor = 0.09 * 0.8;
 
 namespace bbm
 {
+  BoxBomb::BoxBomb(GameState& gameState) : ABomb(gameState), _model("BoxBomb", "default", 0)
+  {
+  }
+
   BoxBomb::BoxBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABomb(position, gameState, idPlayer),
     _model("BoxBomb", "default", 0)

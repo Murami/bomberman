@@ -30,6 +30,16 @@ namespace bbm
     AEntity*	createRandomBonus(GameState & gameState);
     AEntity*	createMultiBombBonus(GameState & gameState);
     AEntity*	createGameBox(GameState & gameState);
+    AEntity*	createPowerBomb(GameState & gameState);
+    AEntity*	createWaterBomb(GameState & gameState);
+    AEntity*	createFireBomb(GameState & gameState);
+    AEntity*	createDarkBomb(GameState & gameState);
+    AEntity*	createBoxBomb(GameState & gameState);
+    AEntity*	createMultiBomb(GameState & gameState);
+    AEntity*	createDarkBombExplode(GameState & gameState);
+    AEntity*	createFireBombExplode(GameState & gameState);
+    AEntity*	createPowerBombExplode(GameState & gameState);
+    AEntity*	createWaterBombExplode(GameState & gameState);
 
   public:
     static std::map<std::string, FactoryMethod>	_map;

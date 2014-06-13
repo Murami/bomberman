@@ -45,6 +45,14 @@ namespace bbm
     _typeBomb = config.typeBomb;
     _state = config.state;
     _score = 0;
+    if (config.idPlayer)
+      _idPlayer = config.idPlayer;
+    else
+      _idPlayer = getID();
+    if (config.id)
+      setID(config.id);
+    if (config.lastId)
+      setLastID(config.lastId);
   }
 
   AI::~AI()

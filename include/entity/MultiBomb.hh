@@ -16,6 +16,7 @@ namespace bbm
   class	MultiBomb : public ABomb
   {
   public:
+    MultiBomb(GameState & GameState);
     MultiBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer);
     ~MultiBomb();
 

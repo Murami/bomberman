@@ -9,6 +9,11 @@ const float	scaleFactor = 1;
 
 namespace bbm
 {
+  WaterBombExplode::WaterBombExplode(GameState & gameState): ABombExplode(gameState), _wall("water", "default")
+  {
+
+  }
+
   WaterBombExplode::WaterBombExplode(const glm::vec2& position, GameState& gameState) :
     ABombExplode(position, gameState),
     _wall("water", "default")

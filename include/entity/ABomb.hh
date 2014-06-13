@@ -13,6 +13,7 @@ class	ABomb : public AEntity
   {
 
   public:
+    ABomb(GameState& gameState);
     ABomb(const glm::vec2& postion, GameState& gameState, unsigned int idPlayer);
     ~ABomb();
 

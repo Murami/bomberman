@@ -181,6 +181,7 @@ namespace bbm
 	playerConfig.inputConfig = NULL;
 	gameStateConfig.AIConfigs.push_back(playerConfig);
       }
+    gameStateConfig.load = false;
     state = new GameState(_manager, &gameStateConfig);
     state->randomize(_config->mapSizeX, _config->mapSizeY);
     _manager.push(state);
@@ -188,11 +189,10 @@ namespace bbm
 
   void                  GameLoadingState::loadGameState()
   {
-    std::cout << "load" << std::endl;
     GameState*			state;
     GameState::GameStateConfig	gameStateConfig;
 
-
+    gameStateConfig.load = true;
     state = new GameState(_manager, &gameStateConfig);
     state->load(*(_config->fileToLoad));
     _manager.push(state);

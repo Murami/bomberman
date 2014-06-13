@@ -13,6 +13,7 @@ namespace bbm
   class	WaterBombExplode : public ABombExplode
   {
   public:
+    WaterBombExplode(GameState & GameState);
     WaterBombExplode(const glm::vec2& position, GameState& gameState);
     ~WaterBombExplode();
 

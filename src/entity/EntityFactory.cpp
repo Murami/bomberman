@@ -11,6 +11,17 @@
 #include "entity/WaterBonus.hh"
 #include "entity/GameBox.hh"
 
+#include "entity/FireBomb.hh"
+#include "entity/BoxBomb.hh"
+#include "entity/MultiBomb.hh"
+#include "entity/PowerBomb.hh"
+#include "entity/DarkBomb.hh"
+#include "entity/WaterBomb.hh"
+#include "entity/FireBombExplode.hh"
+#include "entity/PowerBombExplode.hh"
+#include "entity/DarkBombExplode.hh"
+#include "entity/WaterBombExplode.hh"
+
 namespace bbm
 {
   std::map<std::string, EntityFactory::FactoryMethod>	createEntityMap()
@@ -27,6 +38,16 @@ namespace bbm
     map["DarkBonus"] = &EntityFactory::createDarkBonus;
     map["PowerBonus"] = &EntityFactory::createPowerBonus;
     map["GameBox"] = &EntityFactory::createGameBox;
+    map["WaterBomb"] = &EntityFactory::createWaterBomb;
+    map["PowerBomb"] = &EntityFactory::createPowerBomb;
+    map["BoxBomb"] = &EntityFactory::createBoxBomb;
+    map["FireBomb"] = &EntityFactory::createFireBomb;
+    map["MultiBomb"] = &EntityFactory::createMultiBomb;
+    map["DarkBomb"] = &EntityFactory::createDarkBomb;
+    map["FireBombExplode"] = &EntityFactory::createFireBombExplode;
+    map["DarkBombExplode"] = &EntityFactory::createDarkBombExplode;
+    map["WaterBombExplode"] = &EntityFactory::createWaterBombExplode;
+    map["PowerBombExplode"] = &EntityFactory::createPowerBombExplode;
 
     return (map);
   }
@@ -109,5 +130,56 @@ namespace bbm
   AEntity*	EntityFactory::createGameBox(GameState & gameState)
   {
     return (new GameBox(gameState));
+  }
+
+
+  AEntity*	EntityFactory::createPowerBomb(GameState & gameState)
+  {
+    return (new PowerBomb(gameState));
+  }
+
+  AEntity*	EntityFactory::createWaterBomb(GameState & gameState)
+  {
+    return (new WaterBomb(gameState));
+  }
+
+  AEntity*	EntityFactory::createFireBomb(GameState & gameState)
+  {
+    return (new FireBomb(gameState));
+  }
+
+  AEntity*	EntityFactory::createDarkBomb(GameState & gameState)
+  {
+    return (new DarkBomb(gameState));
+  }
+
+  AEntity*	EntityFactory::createBoxBomb(GameState & gameState)
+  {
+    return (new BoxBomb(gameState));
+  }
+
+  AEntity*	EntityFactory::createMultiBomb(GameState & gameState)
+  {
+    return (new MultiBomb(gameState));
+  }
+
+  AEntity*	EntityFactory::createDarkBombExplode(GameState & gameState)
+  {
+    return (new DarkBombExplode(gameState));
+  }
+
+  AEntity*	EntityFactory::createFireBombExplode(GameState & gameState)
+  {
+    return (new FireBombExplode(gameState));
+  }
+
+  AEntity*	EntityFactory::createPowerBombExplode(GameState & gameState)
+  {
+    return (new PowerBombExplode(gameState));
+  }
+
+  AEntity*	EntityFactory::createWaterBombExplode(GameState & gameState)
+  {
+    return (new WaterBombExplode(gameState));;
   }
 };
