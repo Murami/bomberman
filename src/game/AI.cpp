@@ -19,6 +19,7 @@ namespace bbm
   {
     std::vector<ILuaHeir<AI>::t_MethodPtr>	methods;
 
+    add_method_to_vector(methods, "getIdPlayer", &AI::getIdPlayer);
     add_method_to_vector(methods, "goUp", &AI::goUp);
     add_method_to_vector(methods, "goLeft", &AI::goLeft);
     add_method_to_vector(methods, "goRight", &AI::goRight);
@@ -87,6 +88,12 @@ namespace bbm
   const std::string&	AI::getType() const
   {
     return (_type);
+  }
+
+  int	AI::getIdPlayer(lua_State* L)
+  {
+    lua_pushinteger(L, _idPlayer);
+    return (1);
   }
 
   int	AI::goUp(lua_State*)

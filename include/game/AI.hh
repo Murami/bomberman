@@ -18,6 +18,7 @@ namespace bbm
     void		update(float time);
     const std::string&	getType() const;
 
+    int	getIdPlayer(lua_State*);
     int	goUp(lua_State*);
     int	goLeft(lua_State*);
     int	goRight(lua_State*);
