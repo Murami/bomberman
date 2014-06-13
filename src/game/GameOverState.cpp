@@ -54,6 +54,7 @@ namespace bbm
 
   void			GameOverState::update(float time, const Input& input)
   {
+    (void)time;
     if (input.getKeyDown(SDLK_SPACE))
       {
 	_manager.pop();

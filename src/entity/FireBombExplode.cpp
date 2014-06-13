@@ -15,6 +15,7 @@ namespace bbm
   {
     SoundManager::getInstance()->play("bomb");
 
+    _lifespan = 500;
     _idPlayer = idPlayer;
     _type = "FireBombExplode";
     _wall.setPosition(glm::vec3(_position.x, _position.y, 0));

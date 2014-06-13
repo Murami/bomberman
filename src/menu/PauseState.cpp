@@ -570,6 +570,7 @@ namespace		bbm
 				glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     RenderState	state(perspective, camera);
 
+    (void)time;
     context.split(glm::ivec2(0, 0), glm::ivec2(context.getSize().x,
 					       context.getSize().y));
     context.clear();
