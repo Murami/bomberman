@@ -47,7 +47,7 @@ namespace bbm
     _manager(manager),
     _config(config)
   {
-    SoundManager::getInstance()->play("theme");
+    SoundManager::getInstance()->play("FaFTheme");
     this->_flush = true;
   }
 
@@ -208,7 +208,6 @@ namespace bbm
   {
     Player					*player;
     SerializableVector<glm::ivec2>::iterator	itSpawn;
-    int						i;
 
     if (!this->_skybox.initialize())
       std::cerr << "Error initializing skybox" << std::endl;
@@ -328,9 +327,9 @@ namespace bbm
 	    context.draw(*(*itPlayers), state);
 
 	//draw AI
-	// std::list<AI*>::iterator	itAIs;
-	// for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
-	  // context.draw(*(*itAIs), state);
+	std::list<AI*>::iterator	itAIs;
+	for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
+	  context.draw(*(*itAIs), state);
       }
     if (this->_flush)
       context.flush();
@@ -350,13 +349,13 @@ namespace bbm
 
     // Update all players and AI
     std::list<Player*>::iterator	itPlayers;
-    // std::list<AI*>::iterator		itAIs;
+    std::list<AI*>::iterator		itAIs;
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
       (*itPlayers)->handleEvents(time, input);
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
       (*itPlayers)->update(time);
-    // for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
-    //   (*itAIs)->update(time);
+    for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
+      (*itAIs)->update(time);
 
     // Update all entities
     for (it = _entities.begin(); it != _entities.end(); it++)
@@ -377,13 +376,18 @@ namespace bbm
     _entities.push_back(entity);
   }
 
-  Player&		GameState::getPlayer(unsigned int id)
+  APlayer&		GameState::getPlayer(unsigned int id)
   {
     std::list<Player*>::iterator	itPlayers;
+    std::list<AI*>::iterator		itAIs;
+
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
       if ((*itPlayers)->getID() == id)
 	return (*(*itPlayers));
-    // throw (std::runtime_error("player not found"));
+    for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
+      if ((*itAIs)->getID() == id)
+	return (*(*itAIs));
+    throw (std::runtime_error("player not found"));
   }
 
   std::list<AEntity*>&	GameState::getEntities()

@@ -99,7 +99,9 @@ namespace bbm
   void			GameLoadingState::loadSound()
   {
     SoundManager::getInstance()->addMusic("menu", "assets/sound/Turning_tables.mp3");
-    SoundManager::getInstance()->addMusic("theme", "assets/sound/bomberman_them.mp3");
+    SoundManager::getInstance()->addMusic("bomberTheme", "assets/sound/bomberman_them.mp3");
+    SoundManager::getInstance()->addMusic("GoTTheme", "assets/sound/GoT_them.mp3");
+    SoundManager::getInstance()->addMusic("FaFTheme", "assets/sound/Tokio_Drift.mp3");
     SoundManager::getInstance()->addSound("banzai", "assets/sound/banzai.mp3");
     SoundManager::getInstance()->addSound("aquaBomb", "assets/sound/aqua_bomb.mp3");
     SoundManager::getInstance()->addSound("bomb", "assets/sound/Bomb_Blow.wav");
@@ -178,7 +180,7 @@ namespace bbm
 
 
     state = new GameState(_manager, &gameStateConfig);
-    state->load("save1");
+    state->load(*(_config->fileToLoad));
     _manager.push(state);
   }
 

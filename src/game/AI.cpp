@@ -35,15 +35,22 @@ namespace bbm
   {
     _type = "AI";
     _position = position;
+    // this->initialize();
   }
 
   AI::~AI()
   {
   }
 
+  void	AI::initialize()
+  {
+    _script = new LuaBiche("scripts/easy.lua");
+    _script->addObject("player", this);
+  }
+
   void	AI::update(float time)
   {
-    LuaBiche	tmp("scripts/test.lua");
+    LuaBiche	tmp("scripts/easy.lua");
 
     tmp.addObject("player", this);
     tmp.run();
@@ -98,8 +105,13 @@ namespace bbm
     return (1);
   }
 
-  int	AI::haveBomb(lua_State*)
+  int	AI::haveBomb(lua_State* L)
   {
+    bool	b = true;
+
+    if (this->getBomb() <= 0)
+      b = false;
+    lua_pushboolean(L, (int)b);
     return (1);
   }
 

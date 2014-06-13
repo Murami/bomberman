@@ -230,7 +230,7 @@ clean:
 		@$(RM) lua/lua-5.2.3/src/*.o
 
 fclean:		clean
-		@$(MAKED) jsoncpp clean
+		@$(MAKED) jsoncpp fclean
 		@$(RM) $(CNAME)
 		@$(RM) lua/lua-5.2.3/src/*.a
 		@$(RM) lua/lua-5.2.3/src/luac

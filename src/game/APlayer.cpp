@@ -162,6 +162,11 @@ namespace bbm
     _nbBombs++;
   }
 
+  int	APlayer::getBomb() const
+  {
+    return (_nbBombs);
+  }
+
   void			APlayer::addBombsBonus()
   {
     _nbBombsBonus++;

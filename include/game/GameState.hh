@@ -51,7 +51,7 @@ namespace bbm
 
     void			addEntity(AEntity* entity);
     std::list<AEntity*>&	getEntities();
-    Player&			getPlayer(unsigned int id);
+    APlayer&			getPlayer(unsigned int id);
 
     TileMap&			getTileMap();
 
