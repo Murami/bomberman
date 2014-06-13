@@ -54,7 +54,7 @@ namespace bbm
 
     tmp.addObject("player", this);
     tmp.run();
-    _script->run();
+    // _script->run();
     updateState();
     manageModel(time);
     if (_move.x != 0 || _move.y != 0)
