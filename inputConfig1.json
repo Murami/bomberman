@@ -10,7 +10,7 @@
       },
       "2" : {
          "action" : "down",
-         "key" : "SDLK_UP"
+         "key" : "SDLK_DOWN"
       },
       "3" : {
          "action" : "left",
@@ -22,7 +22,7 @@
       },
       "5" : {
          "action" : "up",
-         "key" : "SDLK_DOWN"
+         "key" : "SDLK_UP"
       }
    }
 }

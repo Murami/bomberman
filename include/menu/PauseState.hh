@@ -48,14 +48,15 @@ namespace	bbm
     bool		_initializeOptionsMenu();
     bool		_initializeOptionControlMenu();
     bool		_initializeOptionAudioMenu();
+    bool		_initializeControlPlayer();
     bool		_initializeControlPlayer1();
     bool		_initializeControlPlayer2();
     bool		_initializeControlPlayer3();
     bool		_initializeControlPlayer4();
-    void		_setBindingControlPlayer1(Menu*, const std::string&);
-    void		_setBindingControlPlayer2(Menu*, const std::string&);
-    void		_setBindingControlPlayer3(Menu*, const std::string&);
-    void		_setBindingControlPlayer4(Menu*, const std::string&);
+    void		_setBindingControlPlayer(Menu*, const std::string&);
+    // void		_setBindingControlPlayer2(Menu*, const std::string&);
+    // void		_setBindingControlPlayer3(Menu*, const std::string&);
+    // void		_setBindingControlPlayer4(Menu*, const std::string&);
     const std::string&	_getKeyFromSDLK(const std::string&);
 
   public :
