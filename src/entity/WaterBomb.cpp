@@ -66,7 +66,7 @@ namespace bbm
       {
 	_anim += 0.1;
 	_model.move(glm::vec3(0, 0, -0.025));
-	if (_anim >= 4)
+	if (_anim >= 3.9)
 	  _anim = 0;
       }
     if (!collide(glm::vec3(playerPosition.x + 1 - delta, playerPosition.y  + 1 - delta, 0)) &&

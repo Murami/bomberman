@@ -59,7 +59,7 @@ namespace bbm
       {
 	_anim += 0.1;
 	_wall.move(glm::vec3(0, 0, -0.025));
-	if (_anim >= 4)
+	if (_anim >= 3.9)
 	  _anim = 0;
       }
   }
@@ -91,10 +91,10 @@ namespace bbm
 
   void			BoxBonus::interact(AEntity *entity)
   {
-    if (entity->getType() == "Player")
+    if (entity->getType() == "Player" || entity->getType() == "AI")
       {
 	if (_used == false)
-	  dynamic_cast<Player*>(entity)->setTypeBomb(BOX);
+	  dynamic_cast<APlayer*>(entity)->setTypeBomb(BOX);
 	_used = true;
       }
     if (entity->getType() == "FireBombExplode")

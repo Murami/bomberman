@@ -57,16 +57,16 @@ namespace bbm
     glm::vec2	playerPosition = player.getPosition();
     float	delta = player.getDelta();
 
-    if (_anim <= 2)
+    if (_anim <= 3)
       {
 	_anim += 0.1;
-	_model.move(glm::vec3(0, 0, 0.025));
+	_model.move(glm::vec3(0, 0, 0.0125));
       }
     else
       {
 	_anim += 0.1;
-	_model.move(glm::vec3(0, 0, -0.025));
-	if (_anim >= 4)
+	_model.move(glm::vec3(0, 0, -0.0125));
+	if (_anim >= 6)
 	  _anim = 0;
       }
     if (!collide(glm::vec3(playerPosition.x + 1 - delta, playerPosition.y  + 1 - delta, 0)) &&

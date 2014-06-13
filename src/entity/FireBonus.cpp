@@ -57,7 +57,7 @@ namespace bbm
       {
 	_anim += 0.1;
 	_wall.move(glm::vec3(0, 0, -0.025));
-	if (_anim >= 4)
+	if (_anim >= 3.9)
 	  _anim = 0;
       }
   }

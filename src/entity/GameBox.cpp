@@ -111,12 +111,15 @@ namespace bbm
     if (entity->getType() == "FireBombExplode" ||
 	entity->getType() == "PowerBombExplode")
       {
-	AEntity *bonus;
-	dynamic_cast<ABombExplode*>(entity)->setLifeSpan(0);
-	bonus = BonusFactory::getInstance()->createRandom(_pos);
-	if (bonus != NULL)
-	  _gameState.addEntity(bonus);
-	_used = true;
+	if (_used == false)
+	  {
+	    AEntity *bonus;
+	    dynamic_cast<ABombExplode*>(entity)->setLifeSpan(0);
+	    bonus = BonusFactory::getInstance()->createRandom(_pos);
+	    if (bonus != NULL)
+	      _gameState.addEntity(bonus);
+	    _used = true;
+	  }
       }
   }
 

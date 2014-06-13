@@ -42,12 +42,12 @@ namespace bbm
     if (_gameState.getTileMap().collide(_position.x + x + 0.5, _position.y + y + 0.5))
       return (false);
 
-    _gameState.addEntity(new FireBomb(glm::vec2(_position.x + x, _position.y + y), _gameState, _idPlayer));
     for (it = _gameState.getEntities().begin(); it != _gameState.getEntities().end(); it++)
       {
 	if ((*it)->getType() == "GameBox" && (*it)->collide(glm::vec3(_position.x + x + 0.5, _position.y + y + 0.5, 0)))
 	  return (false);
       }
+    _gameState.addEntity(new FireBomb(glm::vec2(_position.x + x, _position.y + y), _gameState, _idPlayer));
     return (true);
   }
 
@@ -66,7 +66,7 @@ namespace bbm
       {
 	_anim += 0.1;
 	_model.move(glm::vec3(0, 0, -0.025));
-	if (_anim >= 4)
+	if (_anim >= 3.9)
 	  _anim = 0;
       }
     if (!collide(glm::vec3(playerPosition.x + 1 - delta, playerPosition.y  + 1 - delta, 0)) &&

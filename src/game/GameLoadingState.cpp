@@ -89,7 +89,7 @@ namespace bbm
     TextureManager::getInstance()->addTexture("water", "assets/game/effects/water.tga");
     TextureManager::getInstance()->addTexture("wall", "assets/game/box/wall.tga");
     TextureManager::getInstance()->addTexture("gamebox", "assets/game/box/gamebox.tga");
-    TextureManager::getInstance()->addTexture("ground", "assets/game/grass.tga");
+    TextureManager::getInstance()->addTexture("ground", "assets/game/ground5.tga");
     TextureManager::getInstance()->addTexture("fireBonus", "assets/game/bonus/fire_bonus.tga");
     TextureManager::getInstance()->addTexture("bombBonus", "assets/game/bonus/bomb_bonus.tga");
     TextureManager::getInstance()->addTexture("speedBonus", "assets/game/bonus/speed_bonus.tga");
