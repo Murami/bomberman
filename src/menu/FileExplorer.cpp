@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Wed Jun  4 22:38:54 2014 Manu
-// Last update Fri Jun 13 03:31:52 2014 Manu
+// Last update Fri Jun 13 17:48:18 2014 Manu
 //
 
 #include		<unistd.h>
@@ -35,16 +35,16 @@ namespace		bbm
 	  {
 	    std::string tmp(this->_entry->d_name);
 	    if (tmp.find(".save") != std::string::npos)
-	      {
-	    	std::cout << "pushing " << tmp << std::endl;
-	    	this->_filenames.push_back(tmp);
-	      }
+	      this->_filenames.push_back(tmp);
 	  }
       }
   }
 
   const std::string& FileExplorer::getCurrentFile()
   {
+    static std::string ret("no save");
+    if (this->_filenames.size() == 0)
+      return (ret);
     return (this->_filenames[this->_index]);
   }
 
@@ -52,6 +52,13 @@ namespace		bbm
   {
     static std::string icone;
     icone = "./saves/";
+    if (this->_filenames.size() == 0)
+      {
+	icone += std::string("default.tga");
+	if (access(icone.c_str(), F_OK) == -1)
+	  throw (FileLoadingException(icone + std::string(": No such file or directory")));
+	return (icone);
+      }
     for (size_t i = 0; i < this->_filenames[this->_index].size(); i++)
       {
 	if (this->_filenames[this->_index][i] == '.')
