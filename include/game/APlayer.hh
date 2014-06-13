@@ -82,8 +82,7 @@ namespace bbm
 
     virtual const std::string&		getType() const = 0;
     virtual void			update(float time) = 0;
-    virtual void			pack(ISerializedNode & current) const = 0;
-    virtual void			unpack(const ISerializedNode & current) = 0;
+    virtual void			initialize() = 0;
 
   protected:
     void				draw(ARenderer& renderer, const RenderState& renderState);
@@ -94,7 +93,8 @@ namespace bbm
     void				collideEntity();
     void				managePhysics(float time);
     void				manageModel(float time);
-
+    void				pack(ISerializedNode & current) const;
+    void				unpack(const ISerializedNode & current);
   protected:
     glm::vec2				_position;
     glm::vec2				_move;

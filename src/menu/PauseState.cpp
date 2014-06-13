@@ -1,3 +1,4 @@
+#include		<ctime>
 #include		"game/GameManager.hh"
 #include		"PauseState.hh"
 
@@ -617,9 +618,14 @@ namespace		bbm
 
   void		PauseState::saveGame(Menu*)
   {
-    //
-    // Sauvegarder la partie ICIIIIIIIIIII !!!!!!!! (-CI LAFAMILLE)
-    //
+    std::stringstream	ss;
+    time_t		now = time(0);
+    struct tm		tstruct;
+    char		buf[80];
+    tstruct = *localtime(&now);
+    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
+    ss << buf;
+    _gameState.save("save_" + ss.str());
     this->_manager.pop();
     this->_manager.pop();
   }

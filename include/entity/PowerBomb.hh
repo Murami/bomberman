@@ -25,8 +25,7 @@ namespace bbm
     void		interact(AEntity *);
     bool		collide(const glm::vec3&);
 
-    void		pack(ISerializedNode & current) const;
-    void		unpack(const ISerializedNode & current);
+    void		initialize();
 
   protected:
     void		draw(ARenderer& renderer, const RenderState& renderState);
@@ -36,7 +35,6 @@ namespace bbm
 
   private:
     Model		_model;
-    std::string		_type;
   };
 };
 

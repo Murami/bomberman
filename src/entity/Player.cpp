@@ -28,6 +28,15 @@ namespace bbm
     _dark = config.dark;
     _typeBomb = config.typeBomb;
     _state = config.state;
+    if (config.idPlayer)
+      _idPlayer = config.idPlayer;
+    else
+      _idPlayer = getID();
+    if (config.id)
+      setID(config.id);
+    if (config.lastId)
+      setLastID(config.lastId);
+
     _score = 0;
     // _score = config.score;
   }
@@ -36,44 +45,14 @@ namespace bbm
   {
   }
 
+  void			Player::initialize()
+  {
+
+  }
+
   PlayerConfig&		Player::getPlayerConfig()
   {
     return (this->_playerConfig);
-  }
-
-  void			Player::pack(ISerializedNode & current) const
-  {
-    current.add("position", _position);
-    current.add("power", _power);
-    current.add("nbBombs", _nbBombs);
-    current.add("nbBombsBonus", _nbBombsBonus);
-    current.add("speed", _speed);
-    current.add("alive", _alive);
-    current.add("slow", _slow);
-    current.add("dark", _dark);
-    current.add("typeBomb", _typeBomb);
-    current.add("state", _state);
-    current.add("score", _score);
-  }
-
-  void			Player::unpack(const ISerializedNode & current)
-  {
-    int			typeBomb;
-    int			state;
-
-    current.get("position", _position);
-    current.get("power", _power);
-    current.get("nbBonbs", _nbBombs);
-    current.get("nbBombsBonus", _nbBombsBonus);
-    current.get("speed", _speed);
-    current.get("alive", _alive);
-    current.get("slow", _slow);
-    current.get("dark", _dark);
-    current.get("typeBomb", typeBomb);
-    current.get("state", state);
-    _typeBomb = static_cast<BombType>(typeBomb);
-    _state = static_cast<PlayerState>(state);
-    current.get("score", _score);
   }
 
   void			Player::update(float time)

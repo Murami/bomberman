@@ -149,6 +149,9 @@ namespace bbm
     playerConfig.slow = false;
     playerConfig.dark = false;
     playerConfig.position = glm::vec2(5, 5);
+    playerConfig.idPlayer = 0;
+    playerConfig.id = 0;
+    playerConfig.lastId = 0;
     if (_config->player1)
       {
 	playerConfig.inputConfig = new InputConfig;
@@ -172,6 +175,11 @@ namespace bbm
 	playerConfig.inputConfig = new InputConfig;
 	playerConfig.inputConfig->load(MenuState::INPUT_CONFIG_P4);
 	gameStateConfig.playersConfigs.push_back(playerConfig);
+      }
+    for (int i = 0; i < _config->numberIA; i++)
+      {
+	playerConfig.inputConfig = NULL;
+	gameStateConfig.AIConfigs.push_back(playerConfig);
       }
     state = new GameState(_manager, &gameStateConfig);
     state->randomize(_config->mapSizeX, _config->mapSizeY);

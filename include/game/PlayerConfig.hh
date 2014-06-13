@@ -18,6 +18,9 @@ namespace bbm
     bool		dark;
     BombType		typeBomb;
     PlayerState		state;
+    unsigned int	idPlayer;
+    unsigned int	id;
+    unsigned int	lastId;
     int			score;
   };
 };

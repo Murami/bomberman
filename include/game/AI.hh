@@ -2,6 +2,7 @@
 #define AI_HH
 
 #include "game/APlayer.hh"
+#include "game/PlayerConfig.hh"
 #include "lua/ILuaHeir.hh"
 #include "lua/LuaBiche.hh"
 
@@ -10,13 +11,11 @@ namespace bbm
   class	AI : public APlayer, public ILuaHeir<AI>
   {
   public:
-    AI(GameState& gameState, const glm::vec2& position);
+    AI(GameState& gameState, const PlayerConfig& config);
     ~AI();
 
     void		initialize();
     void		update(float time);
-    void		pack(ISerializedNode & current) const;
-    void		unpack(const ISerializedNode & current);
     const std::string&	getType() const;
 
     int	goUp(lua_State*);

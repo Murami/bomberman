@@ -22,15 +22,12 @@ class	ABomb : public AEntity
     virtual bool			collide(const glm::vec3&) = 0;
     virtual const std::string &		getType() const = 0;
     virtual void			setLifeSpan(float);
+    virtual void			initialize() = 0;
 
-    virtual void			pack(ISerializedNode & current) const = 0;
-    virtual void			unpack(const ISerializedNode & current) = 0;
     const glm::vec2&			getPosition() const;
 
   protected:
-    glm::vec2				_position;
     GameState&				_gameState;
-    unsigned int			_idPlayer;
     bool				_used;
     bool				_playerIsOver;
     float				_lifespan;

@@ -16,23 +16,30 @@ namespace bbm
     AEntity();
     virtual ~AEntity();
 
-    unsigned int		getID();
+    unsigned int		getID() const;
+    unsigned int		getLastID() const;
+    void			setID(unsigned int id);
+    void			setLastID(unsigned int id);
 
     virtual void		update(float time) = 0;
     virtual bool		expired() const = 0 ;
-    // virtual bool		collide(const IQuadTree& node);
-    // virtual bool		collide(AEntity *) = 0;
     virtual bool		collide(const glm::vec3&) = 0;
     virtual const std::string &	getType() const = 0;
     virtual void		interact(AEntity *) = 0;
     virtual const glm::vec2&	getPosition() const = 0;
-
-    virtual void		pack(ISerializedNode & current) const = 0;
-    virtual void		unpack(const ISerializedNode & current) = 0;
+    virtual void		initialize() = 0;
 
   protected:
     virtual void		draw(ARenderer& renderer, const RenderState& renderState) = 0;
     static unsigned int		newID();
+
+    void			pack(ISerializedNode & current) const;
+    void			unpack(const ISerializedNode & current);
+
+  protected:
+    glm::vec2			_pos;
+    std::string			_type;
+    unsigned int		_idPlayer;
 
   private:
     static unsigned int		_lastInstanceID;

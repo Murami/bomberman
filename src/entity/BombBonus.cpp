@@ -13,7 +13,6 @@ namespace bbm
 {
   BombBonus::BombBonus() : _wall("bombBonus", "default")
   {
-
   }
 
   BombBonus::BombBonus(const glm::vec2& pos) : _wall("bombBonus", "default")
@@ -31,16 +30,10 @@ namespace bbm
   {
   }
 
-  void			BombBonus::pack(ISerializedNode & current) const
+  void			BombBonus::initialize()
   {
-    current.add("type", _type);
-    current.add("position", _pos);
-  }
-
-  void			BombBonus::unpack(const ISerializedNode & current)
-  {
-    current.get("type", _type);
-    current.get("position", _pos);
+    _type = "BombBonus";
+    _anim = 0;
     _used = false;
     _wall.yaw(90);
     _wall.setPosition(glm::vec3(_pos.x + 1 - translate, _pos.y + translate, 0));

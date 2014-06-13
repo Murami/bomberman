@@ -13,7 +13,6 @@ namespace bbm
 {
   SpeedBonus::SpeedBonus() : _wall("speedBonus", "default")
   {
-
   }
 
   SpeedBonus::SpeedBonus(const glm::vec2& pos) : _wall("speedBonus", "default")
@@ -31,16 +30,10 @@ namespace bbm
   {
   }
 
-  void			SpeedBonus::pack(ISerializedNode & current) const
+  void			SpeedBonus::initialize()
   {
-    current.add("type", _type);
-    current.add("position", _pos);
-  }
-
-  void			SpeedBonus::unpack(const ISerializedNode & current)
-  {
-    current.get("type", _type);
-    current.get("position", _pos);
+    _type = "SpeedBonus";
+    _anim = 0;
     _used = false;
     _wall.yaw(90);
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));

@@ -13,7 +13,6 @@ namespace bbm
 {
   DarkBonus::DarkBonus() : _wall("darkBonus", "default")
   {
-
   }
 
   DarkBonus::DarkBonus(const glm::vec2& pos) : _wall("darkBonus", "default")
@@ -31,16 +30,10 @@ namespace bbm
   {
   }
 
-  void          DarkBonus::pack(ISerializedNode & current) const
+  void		DarkBonus::initialize()
   {
-    current.add("type", _type);
-    current.add("position", _pos);
-  }
-
-  void		DarkBonus::unpack(const ISerializedNode & current)
-  {
-    current.get("type", _type);
-    current.get("position", _pos);
+    _type = "DarkBonus";
+    _anim = 0;
     _used = false;
     _wall.yaw(90);
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));

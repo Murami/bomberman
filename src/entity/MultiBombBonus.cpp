@@ -13,7 +13,6 @@ namespace bbm
 {
   MultiBombBonus::MultiBombBonus() : _wall("deathBonus", "default")
   {
-
   }
 
   MultiBombBonus::MultiBombBonus(const glm::vec2& pos) : _wall("deathBonus", "default")
@@ -31,16 +30,10 @@ namespace bbm
   {
   }
 
-  void          MultiBombBonus::pack(ISerializedNode & current) const
+  void		MultiBombBonus::initialize()
   {
-    current.add("type", _type);
-    current.add("position", _pos);
-  }
-
-  void		MultiBombBonus::unpack(const ISerializedNode & current)
-  {
-    current.get("type", _type);
-    current.get("position", _pos);
+    _type = "MultiBombBonus";
+    _anim = 0;
     _used = false;
     _wall.yaw(90);
     _wall.setPosition(glm::vec3(_pos.x - translate + 1, _pos.y + translate, 0));

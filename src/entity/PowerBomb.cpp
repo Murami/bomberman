@@ -17,7 +17,7 @@ namespace bbm
   {
     _type = "PowerBomb";
     _model.setRoll(90);
-    _model.setPosition(glm::vec3(_position.x + 0.5 + translate, _position.y + 0.5 + translate, 0.1));
+    _model.setPosition(glm::vec3(_pos.x + 0.5 + translate, _pos.y + 0.5 + translate, 0.1));
     _model.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
   }
 
@@ -25,27 +25,25 @@ namespace bbm
   {
   }
 
-  void			PowerBomb::pack(ISerializedNode & current) const
+  void			PowerBomb::initialize()
   {
-    (void)current;
-  }
-
-  void			PowerBomb::unpack(const ISerializedNode & current)
-  {
-    (void)current;
+    _type = "PowerBomb";
+    _model.setRoll(90);
+    _model.setPosition(glm::vec3(_pos.x + 0.5 + translate, _pos.y + 0.5 + translate, 0.1));
+    _model.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
   }
 
   bool			PowerBomb::addExplode(float x, float y)
   {
     std::list<AEntity*>::iterator it;
 
-    if (_gameState.getTileMap().collide(_position.x + x + 0.5, _position.y + y + 0.5))
+    if (_gameState.getTileMap().collide(_pos.x + x + 0.5, _pos.y + y + 0.5))
       return (false);
 
-    _gameState.addEntity(new PowerBombExplode(glm::vec2(_position.x + x, _position.y + y), _gameState, _idPlayer));
+    _gameState.addEntity(new PowerBombExplode(glm::vec2(_pos.x + x, _pos.y + y), _gameState, _idPlayer));
     for (it = _gameState.getEntities().begin(); it != _gameState.getEntities().end(); it++)
       {
-	if ((*it)->getType() == "GameBox" && (*it)->collide(glm::vec3(_position.x + x + 0.5, _position.y + y + 0.5, 0)))
+	if ((*it)->getType() == "GameBox" && (*it)->collide(glm::vec3(_pos.x + x + 0.5, _pos.y + y + 0.5, 0)))
 	  return (false);
       }
     return (true);
@@ -81,7 +79,7 @@ namespace bbm
       {
 	_used = true;
 	_gameState.getPlayer(_idPlayer).addBombsBonus();
-	_gameState.addEntity(new PowerBombExplode(glm::vec2(_position.x, _position.y), _gameState, _idPlayer));
+	_gameState.addEntity(new PowerBombExplode(glm::vec2(_pos.x, _pos.y), _gameState, _idPlayer));
 	for (int i = 1; i != 500 && addExplode(i, 0); i++);
 	for (int i = 1; i != 500 && addExplode(-i, 0); i++);
 	for (int i = 1; i != 500 && addExplode(0, i); i++);
@@ -106,8 +104,8 @@ namespace bbm
 
   bool			PowerBomb::collide(const glm::vec3 & pos)
   {
-    if (pos.x < _position.x + 1 - delta && pos.x >= _position.x + delta &&
-    	pos.y < _position.y + 1 - delta && pos.y  >= _position.y + delta)
+    if (pos.x < _pos.x + 1 - delta && pos.x >= _pos.x + delta &&
+    	pos.y < _pos.y + 1 - delta && pos.y  >= _pos.y + delta)
       return (true);
     return (false);
   }

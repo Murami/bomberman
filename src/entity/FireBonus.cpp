@@ -13,7 +13,6 @@ namespace bbm
 {
   FireBonus::FireBonus() : _wall("fireBonus", "default")
   {
-
   }
 
   FireBonus::FireBonus(const glm::vec2& pos) : _wall("fireBonus", "default")
@@ -30,16 +29,10 @@ namespace bbm
   {
   }
 
-  void          FireBonus::pack(ISerializedNode & current) const
+  void		FireBonus::initialize()
   {
-    current.add("type", _type);
-    current.add("position", _pos);
-  }
-
-  void		FireBonus::unpack(const ISerializedNode & current)
-  {
-    current.get("type", _type);
-    current.get("position", _pos);
+    _type = "FireBonus";
+    _anim = 0;
     _used = false;
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
     _wall.setPosition(glm::vec3(_pos.x + translate, _pos.y + translate, 0));

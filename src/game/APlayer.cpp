@@ -26,18 +26,6 @@ namespace bbm
     _model.setScale(glm::vec3(modelScaleFactor, modelScaleFactor, modelScaleFactor));
     _model.setRoll(90);
     _move = glm::vec2(0, 0);
-
-    // DEFAULT WITHOUT LOADING
-    _power = 3;
-    _typeBomb = FIRE;
-    _nbBombs = 1;
-    _nbBombsBonus = 1;
-    _speed = 0.0025;
-    _state = IDLE;
-    _alive = true;
-    _slow = false;
-    _dark = false;
-    _position = glm::vec2(5, 5);
   }
 
   APlayer::~APlayer()
@@ -46,12 +34,47 @@ namespace bbm
 
   void			APlayer::pack(ISerializedNode & current) const
   {
-    (void) current;
+    current.add("position", _position);
+    current.add("power", _power);
+    current.add("nbBombs", _nbBombs);
+    current.add("nbBombsBonus", _nbBombsBonus);
+    current.add("speed", _speed);
+    current.add("alive", _alive);
+    current.add("slow", _slow);
+    current.add("dark", _dark);
+    current.add("typeBomb", _typeBomb);
+    current.add("state", _state);
+    current.add("score", _score);
+    current.add("idPlayer", _idPlayer);
+    current.add("id", getID());
+    current.add("lastId", getLastID());
   }
 
   void			APlayer::unpack(const ISerializedNode & current)
   {
-    (void) current;
+    int			typeBomb;
+    int			state;
+    unsigned int	id;
+    unsigned int	lastId;
+
+    current.get("position", _position);
+    current.get("power", _power);
+    current.get("nbBonbs", _nbBombs);
+    current.get("nbBombsBonus", _nbBombsBonus);
+    current.get("speed", _speed);
+    current.get("alive", _alive);
+    current.get("slow", _slow);
+    current.get("dark", _dark);
+    current.get("typeBomb", typeBomb);
+    current.get("state", state);
+    _typeBomb = static_cast<BombType>(typeBomb);
+    _state = static_cast<PlayerState>(state);
+    current.get("score", _score);
+    current.get("idPlayer", _idPlayer);
+    current.get("id", id);
+    current.get("lastId", lastId);
+    setID(id);
+    setLastID(lastId);
   }
 
   void			APlayer::collideMap()

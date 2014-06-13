@@ -18,7 +18,7 @@ namespace bbm
     _lifespan = 500;
     _idPlayer = idPlayer;
     _type = "FireBombExplode";
-    _wall.setPosition(glm::vec3(_position.x, _position.y, 0));
+    _wall.setPosition(glm::vec3(_pos.x, _pos.y, 0));
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
   }
 
@@ -26,14 +26,14 @@ namespace bbm
   {
   }
 
-  void			FireBombExplode::pack(ISerializedNode & current) const
+  void			FireBombExplode::initialize()
   {
-    (void)current;
-  }
+    SoundManager::getInstance()->play("bomb");
 
-  void			FireBombExplode::unpack(const ISerializedNode & current)
-  {
-    (void)current;
+    _lifespan = 500;
+    _type = "FireBombExplode";
+    _wall.setPosition(glm::vec3(_pos.x, _pos.y, 0));
+    _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
   }
 
   void			FireBombExplode::update(float time)
@@ -60,11 +60,11 @@ namespace bbm
     for (it = _gameState.getEntities().begin(); it != _gameState.getEntities().end(); it++)
       {
 	if (_lifespan != 0 && ((*it)->getType() != getType()) &&
-	    ((*it)->collide(glm::vec3(_position.x + 1 - 0.01,	_position.y + 0.01, 0)) ||
-	     (*it)->collide(glm::vec3(_position.x + 0.01,	_position.y + 1 - 0.01, 0)) ||
-	     (*it)->collide(glm::vec3(_position.x + 0.5,	_position.y + 0.5, 0)) ||
-	     (*it)->collide(glm::vec3(_position.x + 1 - 0.01,	_position.y + 1 - 0.01, 0)) ||
-	     (*it)->collide(glm::vec3(_position.x + 1 - 0.01,	_position.y + 0.01, 0))))
+	    ((*it)->collide(glm::vec3(_pos.x + 1 - 0.01,	_pos.y + 0.01, 0)) ||
+	     (*it)->collide(glm::vec3(_pos.x + 0.01,	_pos.y + 1 - 0.01, 0)) ||
+	     (*it)->collide(glm::vec3(_pos.x + 0.5,	_pos.y + 0.5, 0)) ||
+	     (*it)->collide(glm::vec3(_pos.x + 1 - 0.01,	_pos.y + 1 - 0.01, 0)) ||
+	     (*it)->collide(glm::vec3(_pos.x + 1 - 0.01,	_pos.y + 0.01, 0))))
 	  (*it)->interact(this);
       }
   }
@@ -76,8 +76,8 @@ namespace bbm
 
   bool			FireBombExplode::collide(const glm::vec3 & pos)
   {
-    if (pos.x < _position.x + 1 && pos.x >= _position.x &&
-    	pos.y < _position.y + 1 && pos.y  >= _position.y)
+    if (pos.x < _pos.x + 1 && pos.x >= _pos.x &&
+    	pos.y < _pos.y + 1 && pos.y  >= _pos.y)
       return (true);
     return (false);
   }

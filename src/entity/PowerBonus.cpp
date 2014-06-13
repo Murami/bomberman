@@ -13,7 +13,6 @@ namespace bbm
 {
   PowerBonus::PowerBonus() : _wall("powerBonus", "default")
   {
-
   }
 
   PowerBonus::PowerBonus(const glm::vec2& pos) : _wall("powerBonus", "default")
@@ -31,16 +30,10 @@ namespace bbm
   {
   }
 
-  void          PowerBonus::pack(ISerializedNode & current) const
+  void		PowerBonus::initialize()
   {
-    current.add("type", _type);
-    current.add("position", _pos);
-  }
-
-  void		PowerBonus::unpack(const ISerializedNode & current)
-  {
-    current.get("type", _type);
-    current.get("position", _pos);
+    _type = "PowerBonus";
+    _anim = 0;
     _used = false;
     _wall.yaw(90);
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));

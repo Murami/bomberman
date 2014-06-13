@@ -23,18 +23,15 @@ namespace bbm
     void		interact(AEntity *);
     bool		collide(const glm::vec3&);
 
-    void		pack(ISerializedNode & current) const;
-    void		unpack(const ISerializedNode & current);
-
     const glm::vec2&	getPosition() const;
+
+    void		initialize();
 
   protected:
     void		draw(ARenderer& render, const RenderState& renderState);
 
   private:
     float		_anim;
-    std::string		_type;
-    glm::vec2		_pos;
     Wall		_wall;
     bool		_used;
   };

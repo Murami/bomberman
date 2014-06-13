@@ -72,7 +72,7 @@ namespace bbm
 		_tilemap.getTileType(posx, posy + 1) != Tile::Spawn &&
 		_tilemap.getTileType(posx, posy - 1) != Tile::Spawn &&
 		std::rand() % 2 == 1)
-	      addEntity(new GameBox(glm::vec2(posx, posy), -1, *this));
+	      addEntity(new GameBox(glm::vec2(posx, posy), 0, *this));
 	  }
       }
   }
@@ -111,8 +111,10 @@ namespace bbm
   {
     std::list<AEntity*>::const_iterator	itEntities;
     std::list<Player*>::const_iterator	itPlayers;
+    std::list<AI*>::const_iterator	itAIs;
     ISerializedNode*			entityListNode;
     ISerializedNode*			playerListNode;
+    ISerializedNode*			AIListNode;
     int					i;
 
     entityListNode = current.add("entity");
@@ -124,10 +126,12 @@ namespace bbm
 	    std::stringstream	ss;
 
 	    ss << i;
+	    std::cout << "type = " << (*itEntities)->getType() << std::endl;
 	    entityListNode->add(ss.str(), *(*itEntities));
 	    i++;
 	  }
       }
+    std::cout << "test1" << std::endl;
     playerListNode = current.add("players");
     for (i = 0, itPlayers = _players.begin();
 	 itPlayers != _players.end(); ++itPlayers)
@@ -138,6 +142,18 @@ namespace bbm
 	playerListNode->add(ss.str(), *(*itPlayers));
 	i++;
       }
+    std::cout << "test2" << std::endl;
+    AIListNode = current.add("AIs");
+    for (i = 0, itAIs = _AIs.begin(); itAIs != _AIs.end(); ++itAIs)
+      {
+
+	std::stringstream	ss;
+
+	ss << i;
+	AIListNode->add(ss.str(), *(*itAIs));
+	i++;
+      }
+    std::cout << "test3" << std::endl;
   }
 
   void			GameState::unpack(const ISerializedNode & current)
@@ -164,11 +180,13 @@ namespace bbm
 
     	ss << index;
     	entityNode = entityListNode->get(ss.str());
+	std::cout << "index = " << ss.str()<< std::endl;
     	entityNode->get("type", type);
     	entity = factory.create(type, *this);
     	if (entity != NULL)
     	  {
     	    entityListNode->get(ss.str(), *entity);
+	    entity->initialize();
     	    addEntity(entity);
     	  }
     	else
@@ -197,6 +215,9 @@ namespace bbm
 	playerNode->get("slow", playerConfig.slow);
 	playerNode->get("dark", playerConfig.dark);
 	playerNode->get("score", playerConfig.score);
+	playerNode->get("idPlayer", playerConfig.idPlayer);
+	playerNode->get("id", playerConfig.id);
+	playerNode->get("lastId", playerConfig.lastId);
 	playerNode->get("typeBomb", typeBomb);
 	playerNode->get("state", state);
 	playerConfig.typeBomb = static_cast<BombType>(typeBomb);
@@ -223,16 +244,19 @@ namespace bbm
       {
 	itSpawn = _tilemap.getSpawns().begin();
 	itSpawn += rand() % _tilemap.getSpawns().size();
+	(*it).position = glm::vec2(itSpawn->x, itSpawn->y);
 	player = new Player(*this, *it);
-	player->initPosition(itSpawn->x, itSpawn->y);
     	_players.push_back(player);
       }
 
-    // this->save("megaSave1");
-
-    // INIT EN BRUT DES AI
-    for (int i = 0; i != 1; i++)
-      _AIs.push_back(new AI(*this, glm::vec2(5, 5)));
+    for(it = _config->AIConfigs.begin();
+    	it != _config->AIConfigs.end(); ++it)
+      {
+	itSpawn = _tilemap.getSpawns().begin();
+	itSpawn += rand() % _tilemap.getSpawns().size();
+	(*it).position = glm::vec2(itSpawn->x, itSpawn->y);
+	_AIs.push_back(new AI(*this, *it));
+      }
   }
 
   void			GameState::release()

@@ -27,18 +27,14 @@ namespace bbm
     void			interact(AEntity *);
     const std::string &		getType() const;
 
-    void			pack(ISerializedNode & current) const;
-    void			unpack(const ISerializedNode & current);
-
     const glm::vec2&		getPosition() const;
 
+    void			initialize();
+
   private:
-    glm::vec2			_pos;
-    std::string			_type;
     Wall			_wall;
     GameState&			_gameState;
     bool			_used;
-    int				_idPlayer;
   };
 };
 
