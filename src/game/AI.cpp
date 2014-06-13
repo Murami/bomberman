@@ -33,22 +33,27 @@ namespace bbm
   AI::AI(GameState& gameState, const glm::vec2& position) :
     APlayer(gameState)
   {
-    _script = new LuaBiche("scripts/easy.lua");
-    _script->addObject("player", this);
     _type = "AI";
     _position = position;
+    // this->initialize();
   }
 
   AI::~AI()
   {
   }
 
+  void	AI::initialize()
+  {
+    _script = new LuaBiche("scripts/easy.lua");
+    _script->addObject("player", this);
+  }
+
   void	AI::update(float time)
   {
-    // LuaBiche	tmp("scripts/easy.lua");
+    LuaBiche	tmp("scripts/easy.lua");
 
-    // tmp.addObject("player", this);
-    // tmp.run();
+    tmp.addObject("player", this);
+    tmp.run();
     _script->run();
     updateState();
     manageModel(time);

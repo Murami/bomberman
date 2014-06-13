@@ -13,6 +13,7 @@ namespace bbm
     AI(GameState& gameState, const glm::vec2& position);
     ~AI();
 
+    void		initialize();
     void		update(float time);
     void		pack(ISerializedNode & current) const;
     void		unpack(const ISerializedNode & current);
