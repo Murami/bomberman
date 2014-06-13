@@ -54,7 +54,7 @@ namespace bbm
 	RenderState	newState = renderState;
 
 	newState.transform *= getTransform();
-	renderer.draw(*_model, _shader, newState, _elapsedTime);
+	renderer.draw(*_model, _shader, newState, _elapsedTime, glm::vec4(1, 1, 1, 1));
       }
   }
 };

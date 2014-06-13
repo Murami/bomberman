@@ -17,8 +17,10 @@ namespace bbm
     virtual ~ARenderer();
 
     void		draw(IDrawable& drawable, const RenderState& state);
-    virtual void	draw(gdl::Geometry& geometry, gdl::Texture* texture, gdl::BasicShader* shader, const RenderState& state, int primitive) = 0;
-    virtual void	draw(gdl::Model& model, gdl::BasicShader* shader, const RenderState& state, float time) = 0;
+    virtual void	draw(gdl::Geometry& geometry, gdl::Texture* texture, gdl::BasicShader* shader,
+			     const RenderState& state, int primitive, const glm::vec4& color) = 0;
+    virtual void	draw(gdl::Model& model, gdl::BasicShader* shader, const RenderState& state,
+			     float time, const glm::vec4& color) = 0;
   };
 };
 

@@ -16,8 +16,10 @@ namespace bbm
     Screen(const std::string& name);
     ~Screen();
 
-    void		draw(gdl::Geometry& geometry, gdl::Texture* texture, gdl::BasicShader* shader, const RenderState& renderState, int primitive);
-    void		draw(gdl::Model& model, gdl::BasicShader* shader, const RenderState& renderState, float time);
+    void		draw(gdl::Geometry& geometry, gdl::Texture* texture, gdl::BasicShader* shader,
+			     const RenderState& renderState, int primitive, const glm::vec4& color);
+    void		draw(gdl::Model& model, gdl::BasicShader* shader, const RenderState& renderState,
+			     float time, const glm::vec4& color);
 
     void		flush();
     void		split(const glm::ivec2& position, const glm::ivec2& size) const;

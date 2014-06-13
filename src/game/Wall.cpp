@@ -19,7 +19,7 @@ namespace bbm
     RenderState	newState = renderState;
 
     newState.transform *= getTransform();
-    renderer.draw(*_geometry, _texture, _shader, newState, GL_QUADS);
+    renderer.draw(*_geometry, _texture, _shader, newState, GL_QUADS, glm::vec4(1, 1, 1, 1));
   }
 
   void		Wall::release()

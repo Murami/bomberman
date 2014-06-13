@@ -260,6 +260,13 @@ namespace bbm
   void			GameState::initialize()
   {
     SerializableVector<glm::ivec2>::iterator	itSpawn;
+    std::vector<glm::vec4>			colors;
+
+    colors.resize(4);
+    colors[0] = glm::vec4(0.8, 0.2, 0.2, 1);
+    colors[1] = glm::vec4(0.2, 0.8, 0.2, 1);
+    colors[2] = glm::vec4(0, 0.4, 1, 1);
+    colors[3] = glm::vec4(1, 1, 0.2, 1);
 
     if (!this->_skybox.initialize())
       std::cerr << "Error initializing skybox" << std::endl;
@@ -278,7 +285,9 @@ namespace bbm
 	    itSpawn += rand() % _tilemap.getSpawns().size();
 	    (*it).position = glm::vec2(itSpawn->x, itSpawn->y);
 	  }
-    	_players.push_back(new Player(*this, *it));
+	Player*	p = new Player(*this, *it);
+	p->setColor(colors[std::distance(_config->playersConfigs.begin(), it)]);
+    	_players.push_back(p);
       }
     for(it = _config->AIConfigs.begin();
     	it != _config->AIConfigs.end(); ++it)

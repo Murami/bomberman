@@ -56,7 +56,7 @@ namespace bbm
     RenderState	newState = renderState;
 
     newState.transform = getTransform() * renderState.transform;
-    renderer.draw(_geometry, _texture, _shader, newState, _primitive);
+    renderer.draw(_geometry, _texture, _shader, newState, _primitive, glm::vec4(1, 1, 1, 1));
   }
 
   void	Object::setTexture(const std::string& texture)

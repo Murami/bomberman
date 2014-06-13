@@ -12,6 +12,7 @@ namespace bbm
     Marvin();
     ~Marvin();
 
+    void	setColor(const glm::vec4& color);
     void	update(float time);
     void	pause();
     void	play();
@@ -20,6 +21,7 @@ namespace bbm
     static void	initialize();
     static void release();
   private:
+    glm::vec4				_color;
     bool				_pause;
     gdl::BasicShader*			_shader;
     float				_elapsedTime;
