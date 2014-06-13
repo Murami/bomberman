@@ -11,6 +11,10 @@ const float scaleFactor = 0.09 * 0.8;
 
 namespace bbm
 {
+  FireBomb::FireBomb(GameState& gameState) : ABomb(gameState), _model("FireBomb", "default", 0)
+   {
+   }
+
   FireBomb::FireBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABomb(position, gameState, idPlayer),
     _model("FireBomb", "default", 0)

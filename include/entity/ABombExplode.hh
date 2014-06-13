@@ -10,6 +10,7 @@ namespace bbm
   class ABombExplode : public AEntity
   {
   public:
+    ABombExplode(GameState& gameState);
     ABombExplode(const glm::vec2& position, GameState& gameState);
     ~ABombExplode();
 

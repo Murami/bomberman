@@ -16,6 +16,7 @@ namespace bbm
   class	PowerBomb : public ABomb
   {
   public:
+    PowerBomb(GameState & GameState);
     PowerBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer);
     ~PowerBomb();
 

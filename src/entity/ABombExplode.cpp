@@ -4,6 +4,11 @@
 
 namespace bbm
 {
+  ABombExplode::ABombExplode(GameState& gameState) : _gameState(gameState)
+  {
+    _lifespan = 2000;
+  }
+
   ABombExplode::ABombExplode(const glm::vec2 & position, GameState& gameState) : _gameState(gameState)
   {
     _lifespan = 2000;

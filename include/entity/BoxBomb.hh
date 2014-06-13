@@ -16,6 +16,7 @@ namespace bbm
   class	BoxBomb : public ABomb
   {
   public:
+    BoxBomb(GameState & GameState);
     BoxBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer);
     ~BoxBomb();
 

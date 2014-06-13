@@ -11,6 +11,10 @@ const float scaleFactor = 0.09 * 0.8;
 
 namespace bbm
 {
+  MultiBomb::MultiBomb(GameState& gameState) : ABomb(gameState), _model("MultiBomb", "default", 0)
+  {
+  }
+
   MultiBomb::MultiBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABomb(position, gameState, idPlayer),
     _model("MultiBomb", "default", 0)

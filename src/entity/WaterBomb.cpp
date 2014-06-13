@@ -11,6 +11,11 @@ const float scaleFactor = 0.09 * 0.8;
 
 namespace bbm
 {
+
+  WaterBomb::WaterBomb(GameState& gameState) : ABomb(gameState), _model("WaterBomb", "default", 0)
+  {
+  }
+
   WaterBomb::WaterBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABomb(position, gameState, idPlayer),
     _model("WaterBomb", "default", 0)

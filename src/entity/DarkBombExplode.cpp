@@ -8,6 +8,10 @@ const float	scaleFactor = 1;
 
 namespace bbm
 {
+  DarkBombExplode::DarkBombExplode(GameState& gameState) : ABombExplode(gameState), _wall("dark", "default")
+  {
+  }
+
   DarkBombExplode::DarkBombExplode(const glm::vec2& position, GameState& gameState) :
     ABombExplode(position, gameState),
     _wall("dark", "default")

@@ -13,6 +13,7 @@ namespace bbm
   class	FireBombExplode : public ABombExplode
   {
   public:
+    FireBombExplode(GameState & GameState);
     FireBombExplode(const glm::vec2& position, GameState& gameState, unsigned int id);
     ~FireBombExplode();
 

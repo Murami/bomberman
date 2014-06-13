@@ -9,6 +9,10 @@ const float	scaleFactor = 1;
 
 namespace bbm
 {
+  PowerBombExplode::PowerBombExplode(GameState& gameState) : ABombExplode(gameState), _wall("fire2", "default")
+  {
+  }
+
   PowerBombExplode::PowerBombExplode(const glm::vec2& position, GameState& gameState,
 				     unsigned int idPlayer) :
     ABombExplode(position, gameState),

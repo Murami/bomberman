@@ -16,6 +16,7 @@ namespace bbm
   class	DarkBomb : public ABomb
   {
   public:
+    DarkBomb(GameState & GameState);
     DarkBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer);
     ~DarkBomb();
 

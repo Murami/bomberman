@@ -13,6 +13,7 @@ namespace bbm
   class	DarkBombExplode : public ABombExplode
   {
   public:
+    DarkBombExplode(GameState & GameState);
     DarkBombExplode(const glm::vec2& position, GameState& gameState);
     ~DarkBombExplode();
 

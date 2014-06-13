@@ -17,6 +17,7 @@ namespace bbm
     void		initialize();
     void		update(float time);
     const std::string&	getType() const;
+    void		initialize();
 
     int	goUp(lua_State*);
     int	goLeft(lua_State*);
@@ -36,7 +37,6 @@ namespace bbm
     static std::vector<ILuaHeir<AI>::t_MethodPtr>	_methodPtrs;
     std::string						_type;
     std::string						_scriptName;
-    LuaBiche*						_script;
   };
 };
 

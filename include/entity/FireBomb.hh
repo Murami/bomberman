@@ -16,6 +16,7 @@ namespace bbm
   class	FireBomb : public ABomb
   {
   public:
+    FireBomb(GameState & GameState);
     FireBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer);
     ~FireBomb();
 

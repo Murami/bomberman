@@ -51,8 +51,14 @@ namespace bbm
     _typeBomb = config.typeBomb;
     _state = config.state;
     _score = 0;
-    _script = new LuaBiche("scripts/easy.lua");
-    _script->addObject("player", this);
+    if (config.idPlayer)
+      _idPlayer = config.idPlayer;
+    else
+      _idPlayer = getID();
+    if (config.id)
+      setID(config.id);
+    if (config.lastId)
+      setLastID(config.lastId);
   }
 
   AI::~AI()
@@ -68,10 +74,10 @@ namespace bbm
   {
     if (_alive)
       {
-	// LuaBiche	script(_scriptName);
+	LuaBiche	script(_scriptName);
 
-	// script.addObject("player", this);
-	_script->run(this);
+	script.addObject("player", this);
+	script.run(this);
 	managePhysics(time);
 	updateState();
 	manageModel(time);

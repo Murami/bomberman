@@ -162,8 +162,10 @@ namespace bbm
     PlayerConfig	playerConfig;
     ISerializedNode*	entityListNode;
     ISerializedNode*	playersListNode;
+    ISerializedNode*	AIListNode;
     ISerializedNode*	entityNode;
     ISerializedNode*	playerNode;
+    ISerializedNode*	AINode;
     EntityFactory	factory;
     AEntity*		entity;
     std::string		type;
@@ -224,11 +226,39 @@ namespace bbm
 	playerConfig.state = static_cast<PlayerState>(state);
 	_config->playersConfigs.push_back(playerConfig);
       }
+
+    AIListNode = current.get("AIs");
+    size = AIListNode->size();
+    for (index = 0; index < size; index++)
+      {
+
+    	std::stringstream	ss;
+
+    	ss << index;
+	AINode = AIListNode->get(ss.str());
+	playerConfig.inputConfig = NULL;
+	AINode->get("position", playerConfig.position);
+	AINode->get("power", playerConfig.power);
+	AINode->get("nbBombs", playerConfig.nbBombs);
+	AINode->get("nbBombsBonus", playerConfig.nbBombsBonus);
+	AINode->get("speed", playerConfig.speed);
+	AINode->get("alive", playerConfig.alive);
+	AINode->get("slow", playerConfig.slow);
+	AINode->get("dark", playerConfig.dark);
+	AINode->get("score", playerConfig.score);
+	AINode->get("idPlayer", playerConfig.idPlayer);
+	AINode->get("id", playerConfig.id);
+	AINode->get("lastId", playerConfig.lastId);
+	AINode->get("typeBomb", typeBomb);
+	AINode->get("state", state);
+	playerConfig.typeBomb = static_cast<BombType>(typeBomb);
+	playerConfig.state = static_cast<PlayerState>(state);
+	_config->AIConfigs.push_back(playerConfig);
+      }
   }
 
   void			GameState::initialize()
   {
-    Player					*player;
     SerializableVector<glm::ivec2>::iterator	itSpawn;
 
     if (!this->_skybox.initialize())
@@ -242,19 +272,23 @@ namespace bbm
     for(it = _config->playersConfigs.begin();
     	it != _config->playersConfigs.end(); ++it)
       {
-	itSpawn = _tilemap.getSpawns().begin();
-	itSpawn += rand() % _tilemap.getSpawns().size();
-	(*it).position = glm::vec2(itSpawn->x, itSpawn->y);
-	player = new Player(*this, *it);
-    	_players.push_back(player);
+	if (_config->load == false)
+	  {
+	    itSpawn = _tilemap.getSpawns().begin();
+	    itSpawn += rand() % _tilemap.getSpawns().size();
+	    (*it).position = glm::vec2(itSpawn->x, itSpawn->y);
+	  }
+    	_players.push_back(new Player(*this, *it));
       }
-
     for(it = _config->AIConfigs.begin();
     	it != _config->AIConfigs.end(); ++it)
       {
-	itSpawn = _tilemap.getSpawns().begin();
-	itSpawn += rand() % _tilemap.getSpawns().size();
-	(*it).position = glm::vec2(itSpawn->x, itSpawn->y);
+	if (_config->load == false)
+	  {
+	    itSpawn = _tilemap.getSpawns().begin();
+	    itSpawn += rand() % _tilemap.getSpawns().size();
+	    (*it).position = glm::vec2(itSpawn->x, itSpawn->y);
+	  }
 	_AIs.push_back(new AI(*this, *it));
       }
   }
