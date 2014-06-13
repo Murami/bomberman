@@ -366,6 +366,14 @@ namespace		bbm
     memset(&this->_config, 0, sizeof(this->_config));
     this->_initializePauseMainMenu();
     this->_initializeOptionsMenu();
+    this->_inputConfigPlayer1 = new InputConfig();
+    this->_inputConfigPlayer1->load(INPUT_CONFIG_P1);
+    this->_inputConfigPlayer2 = new InputConfig();
+    this->_inputConfigPlayer2->load(INPUT_CONFIG_P2);
+    this->_inputConfigPlayer3 = new InputConfig();
+    this->_inputConfigPlayer3->load(INPUT_CONFIG_P3);
+    this->_inputConfigPlayer4 = new InputConfig();
+    this->_inputConfigPlayer4->load(INPUT_CONFIG_P4);
     this->_skybox = new Skybox();
     try
       {

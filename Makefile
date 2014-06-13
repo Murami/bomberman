@@ -208,6 +208,7 @@ $(CNAME):	$(COBJ)
 		@$(MAKED) jsoncpp
 		@echo "[lua]"
 		@$(MAKED) lua/lua-5.2.3 linux
+		@cp lua/lua-5.2.3/src/liblua.a lua/libs
 		@echo
 		@echo "Linkage : $(CNAME)"
 		@$(CC) $(COBJ) -o $(CNAME) $(LDFLAGS)
@@ -229,7 +230,7 @@ clean:
 		@$(RM) lua/lua-5.2.3/src/*.o
 
 fclean:		clean
-		@$(MAKED) jsoncpp clean
+		@$(MAKED) jsoncpp fclean
 		@$(RM) $(CNAME)
 		@$(RM) lua/lua-5.2.3/src/*.a
 		@$(RM) lua/lua-5.2.3/src/luac
