@@ -4,8 +4,10 @@
 #include <Geometry.hh>
 #include <Texture.hh>
 #include <BasicShader.hh>
+
 #include "graphic/IDrawable.hh"
 #include "graphic/Transformable.hh"
+
 #include "serializer/ISerializable.hh"
 
 namespace bbm

@@ -1,7 +1,7 @@
 #ifndef RENDERSTATE_HH
-#define RENDERSTATE_HH
+# define RENDERSTATE_HH
 
-#include "graphic/Transform.hh"
+# include "graphic/Transform.hh"
 
 namespace bbm
 {

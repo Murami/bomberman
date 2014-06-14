@@ -19,6 +19,9 @@ namespace bbm
     std::srand(std::time(0));
     ShaderManager::getInstance()->addShader("default", "gdl/shaders/basic.vp",
 					    "gdl/shaders/basic.fp");
+    ShaderManager::getInstance()->addShader("default2", "gdl/shaders/basic.vp",
+					    "gdl/shaders/basic2.fp");
+
   }
 
   Game::~Game()

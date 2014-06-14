@@ -86,7 +86,8 @@ SRC		=	main				\
 			menu/IntroState			\
 			menu/IntroMarvin		\
 			sound/SoundManager		\
-			lua/LuaBiche
+			lua/LuaBiche			\
+			hud/HUD				\
 
 SRC_EXT		=	.cpp
 
@@ -103,7 +104,8 @@ DINC		=	include		\
 			gdl/includes	\
 			jsoncpp/include	\
 			include/menu	\
-			lua/include
+			lua/include	\
+			hud/
 
 CFLAGS		=	-Wall		\
 			-Wextra
@@ -143,7 +145,7 @@ MD		=	mkdir -p
 
 DBGBOOL		=	yes
 
-PROFILE		=	yes
+PROFILE		=	no
 
 DBG		=	-g3		\
 			-ggdb

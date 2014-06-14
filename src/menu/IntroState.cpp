@@ -1,10 +1,14 @@
-#include		"graphic/ModelManager.hh"
-#include		"events/Input.hh"
+#include		"menu/IntroState.hh"
 #include		"menu/IntroMarvin.hh"
+
+#include		"events/Input.hh"
+
+#include		"graphic/Screen.hh"
 #include		"graphic/ProjectionPerspective.hh"
 #include		"graphic/Camera.hh"
 #include		"graphic/RenderState.hh"
-#include		"IntroState.hh"
+#include		"graphic/ModelManager.hh"
+
 
 namespace		bbm
 {

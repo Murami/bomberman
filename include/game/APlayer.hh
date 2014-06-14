@@ -1,14 +1,20 @@
 #ifndef APLAYER_HH
-#define APLAYER_HH
+# define APLAYER_HH
 
+# include "entity/Marvin.hh"
+# include "entity/AEntity.hh"
+# include "events/InputConfig.hh"
+# include "events/IEventListener.hh"
+# include "graphic/IDrawable.hh"
+# include "graphic/Model.hh"
+# include "graphic/Transformable.hh"
+# include "game/Wall.hh"
 #include "entity/Marvin.hh"
 #include "entity/AEntity.hh"
-#include "events/InputConfig.hh"
-#include "events/IEventListener.hh"
+
 #include "graphic/IDrawable.hh"
-#include "graphic/Model.hh"
 #include "graphic/Transformable.hh"
-#include "game/Wall.hh"
+#include "graphic/Model.hh"
 
 namespace bbm
 {
@@ -80,6 +86,10 @@ namespace bbm
     void				addBombsBonus();
     void				addScore(int score);
     void				die();
+    BombType				getBonusType() const;
+    bool				isDark() const;
+    bool				isSlow() const;
+    void				increaseMaxBomb();
 
     virtual const std::string&		getType() const = 0;
     virtual void			update(float time) = 0;
@@ -114,6 +124,7 @@ namespace bbm
     PlayerState				_state;
     GameState&				_gameState;
     int					_score;
+    int					_maxBomb;
   };
 };
 

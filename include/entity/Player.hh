@@ -1,8 +1,8 @@
 #ifndef PLAYER_HH
-#define PLAYER_HH
+# define PLAYER_HH
 
-#include "game/APlayer.hh"
-#include "game/PlayerConfig.hh"
+# include "game/APlayer.hh"
+# include "game/PlayerConfig.hh"
 
 namespace bbm
 {
@@ -12,7 +12,7 @@ namespace bbm
     Player(GameState& gameState, const PlayerConfig& playerConfig);
     Player(GameState& gameState, const PlayerConfig& playerConfig,
 	   glm::vec2 position, int power, int nbBombs, int bBombsBonus,
-	   float speed, bool alive, bool slow,bool dark, BombType typeBomb,
+	   float speed, bool alive, bool slow, bool dark, BombType typeBomb,
 	   PlayerState state, int score);
     ~Player();
 

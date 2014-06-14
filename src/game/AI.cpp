@@ -1,7 +1,10 @@
 #include "game/AI.hh"
-#include "lua/LuaBiche.hh"
 #include "game/GameState.hh"
+#include "game/PlayerConfig.hh"
+
 #include "entity/BombFactory.hh"
+
+#include "lua/LuaBiche.hh"
 
 namespace bbm
 {

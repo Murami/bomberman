@@ -1,8 +1,9 @@
 #ifndef GAMELOADINGSTATE_HH
-# define GAMELOADINGSTATE_HH
+#define GAMELOADINGSTATE_HH
 
-# include <string>
-# include "game/IGameState.hh"
+#include <string>
+
+#include "game/IGameState.hh"
 
 namespace bbm
 {

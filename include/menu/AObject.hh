@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Sat May 10 15:42:28 2014 Manu
-// Last update Fri Jun 13 19:43:26 2014 Manu
+// Last update Sat Jun 14 17:10:52 2014 Manu
 //
 
 #ifndef		__AOBJECT_HH__
@@ -33,6 +33,9 @@ public :
   void		rotate(const glm::vec3&, float);
   void		scale(const glm::vec3&);
   glm::mat4	getTransformation();
+
+public :
+  void		setPosition(const glm::vec3&);
 
 };
 

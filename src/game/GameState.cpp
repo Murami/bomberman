@@ -3,14 +3,19 @@
 #include <stdexcept>
 #include <iostream>
 #include <utility>
+
 #include <SDL.h>
-#include "PauseState.hh"
-#include "game/Tile.hh"
+
+#include "menu/PauseState.hh"
+
+#include "game/GameManager.hh"
 #include "game/GameState.hh"
 #include "game/GameOverState.hh"
-#include "game/GameManager.hh"
+#include "game/Tile.hh"
+#include "game/PlayerConfig.hh"
 
 #include "events/Input.hh"
+#include "events/InputConfig.hh"
 #include "events/IEventListener.hh"
 
 #include "graphic/Camera.hh"
@@ -34,11 +39,14 @@
 #include "entity/RandomBonus.hh"
 #include "entity/WaterBonus.hh"
 #include "entity/EntityFactory.hh"
+
 #include "serializer/ISerializedNode.hh"
 #include "serializer/JSONSerializer.hh"
 #include "serializer/Serializer.hh"
 #include "serializer/SerializerException.hh"
+
 #include "sound/SoundManager.hh"
+#include "hud/HUD.hh"
 
 namespace bbm
 {
@@ -50,6 +58,7 @@ namespace bbm
   {
     // SoundManager::getInstance()->play("bomberTheme");
     this->_flush = true;
+    this->_printHud = false;
   }
 
   GameState::~GameState()
@@ -66,16 +75,17 @@ namespace bbm
     _gameboxes.resize(x * y, NULL);
     for (posx = 1; posx < x - 1; posx++)
       {
-	for(posy = 1; posy < y - 1; posy++)
-	  {
-	    if (_tilemap.getTileType(posx, posy) != Tile::Spawn &&
-		_tilemap.getTileType(posx + 1, posy) != Tile::Spawn &&
-		_tilemap.getTileType(posx - 1, posy) != Tile::Spawn &&
-		_tilemap.getTileType(posx, posy + 1) != Tile::Spawn &&
-		_tilemap.getTileType(posx, posy - 1) != Tile::Spawn &&
-		std::rand() % 2 == 1)
-	      addEntity(new GameBox(glm::vec2(posx, posy), 0, *this));
-	  }
+    	for(posy = 1; posy < y - 1; posy++)
+    	  {
+    	    if (_tilemap.getTileType(posx, posy) != Tile::Spawn &&
+    		_tilemap.getTileType(posx + 1, posy) != Tile::Spawn &&
+    		_tilemap.getTileType(posx - 1, posy) != Tile::Spawn &&
+    		_tilemap.getTileType(posx, posy + 1) != Tile::Spawn &&
+    		_tilemap.getTileType(posx, posy - 1) != Tile::Spawn &&
+		_tilemap.getTileType(posx, posy) != Tile::Wall &&
+    		std::rand() % 2 == 1)
+    	      addEntity(new GameBox(glm::vec2(posx, posy), 0, *this));
+    	  }
       }
   }
 
@@ -111,13 +121,14 @@ namespace bbm
 
   void			GameState::pack(ISerializedNode & current) const
   {
-    std::list<AEntity*>::const_iterator	itEntities;
-    std::list<Player*>::const_iterator	itPlayers;
-    std::list<AI*>::const_iterator	itAIs;
-    ISerializedNode*			entityListNode;
-    ISerializedNode*			playerListNode;
-    ISerializedNode*			AIListNode;
-    int					i;
+    std::list<AEntity*>::const_iterator		itEntities;
+    std::list<Player*>::const_iterator		itPlayers;
+    std::vector<AEntity*>::const_iterator	itGameBoxes;
+    std::list<AI*>::const_iterator		itAIs;
+    ISerializedNode*				entityListNode;
+    ISerializedNode*				playerListNode;
+    ISerializedNode*				AIListNode;
+    int						i;
 
     current.add("mapsize", _mapsize);
     entityListNode = current.add("entity");
@@ -129,12 +140,22 @@ namespace bbm
 	    std::stringstream	ss;
 
 	    ss << i;
-	    std::cout << "type = " << (*itEntities)->getType() << std::endl;
 	    entityListNode->add(ss.str(), *(*itEntities));
 	    i++;
 	  }
       }
-    std::cout << "test1" << std::endl;
+    for (itGameBoxes = _gameboxes.begin();
+	 itGameBoxes != _gameboxes.end(); ++itGameBoxes)
+      {
+	if ((*itGameBoxes) != NULL)
+	  {
+	    std::stringstream	ss;
+
+	    ss << i;
+	    entityListNode->add(ss.str(), *(*itGameBoxes));
+	    i++;
+	  }
+      }
     playerListNode = current.add("players");
     for (i = 0, itPlayers = _players.begin();
 	 itPlayers != _players.end(); ++itPlayers)
@@ -145,7 +166,6 @@ namespace bbm
 	playerListNode->add(ss.str(), *(*itPlayers));
 	i++;
       }
-    std::cout << "test2" << std::endl;
     AIListNode = current.add("AIs");
     for (i = 0, itAIs = _AIs.begin(); itAIs != _AIs.end(); ++itAIs)
       {
@@ -156,7 +176,6 @@ namespace bbm
 	AIListNode->add(ss.str(), *(*itAIs));
 	i++;
       }
-    std::cout << "test3" << std::endl;
   }
 
   void			GameState::unpack(const ISerializedNode & current)
@@ -279,6 +298,9 @@ namespace bbm
     glEnable(GL_SCISSOR_TEST);
     glEnable(GL_DEPTH_TEST);
 
+    this->_hud = new HUD();
+    this->_hud->initialize();
+
     std::vector<PlayerConfig>::iterator it;
 
     for(it = _config->playersConfigs.begin();
@@ -337,10 +359,11 @@ namespace bbm
 	Transform		camera = Camera(glm::vec3(currPlayer.getPosition().x, currPlayer.getPosition().y - 2, 10),
 						glm::vec3(currPlayer.getPosition().x, currPlayer.getPosition().y, 0),
 						glm::vec3(0, 0, 1));
-	RenderState		stateSky(projection, cameraSky);
-	RenderState		state(projection, camera, Transform());
 
 	splitScreen(context, projection, itPlayersCamera);
+	RenderState		stateSky(projection, cameraSky);
+	RenderState		state(projection, camera);
+
 	_tilemap.draw(context, state, glm::vec2((*itPlayersCamera)->getPosition().x, (*itPlayersCamera)->getPosition().y));
 	drawEntity(context, state, itPlayersCamera);
 	drawGameBoxes(context, state, itPlayersCamera);
@@ -348,6 +371,8 @@ namespace bbm
 	drawAI(context, state);
 	glDisable(GL_CULL_FACE);
 	context.draw(_skybox, stateSky);
+	if (this->_printHud)
+	  this->_hud->draw(context, stateSky);
 	glEnable(GL_CULL_FACE);
       }
     if (this->_flush)
@@ -432,7 +457,7 @@ namespace bbm
     EntitiesIt			entitiesIt;
 
     for (entitiesIt = _entities.begin(); entitiesIt != _entities.end(); entitiesIt++)
-      if (std::abs((*entitiesIt)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 15 &&
+      if (std::abs((*entitiesIt)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 25 &&
 	  std::abs((*entitiesIt)->getPosition().y - (*itPlayersCamera)->getPosition().y) < 10)
 	context.draw(*(*entitiesIt), state);
   }
@@ -447,7 +472,7 @@ namespace bbm
 
   void				GameState::drawGameBoxes(Screen & context, RenderState & state, PlayerIt itPlayersCamera)
   {
-    for (int x = -20; x < 20; x++)
+    for (int x = -25; x < 25; x++)
       for (int y = -10; y < 10; y++)
 	{
 	  int	tx =  (*itPlayersCamera)->getPosition().x;
@@ -470,13 +495,15 @@ namespace bbm
     PlayerIt			itPlayers;
 
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
-      if (std::abs((*itPlayers)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 15 &&
+      if (std::abs((*itPlayers)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 25 &&
 	  std::abs((*itPlayers)->getPosition().y -(*itPlayersCamera)->getPosition().y) < 10)
 	context.draw(*(*itPlayers), state);
   }
 
   void			GameState::update(float time, const Input& input)
   {
+    if (input.getKeyDown(SDLK_TAB))
+      this->_printHud = !this->_printHud;
     if (input.getKeyDown(SDLK_ESCAPE) || input.getEvent(SDL_QUIT))
       {
 	//_manager.pop();
@@ -484,6 +511,7 @@ namespace bbm
 	_manager.push(state);
  	return;
       }
+    this->_hud->update(*(this->_players.begin()));
     updateAIPlayer(time, input);
     updateEntity(time, input);
     _skybox.update();

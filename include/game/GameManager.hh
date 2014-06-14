@@ -3,12 +3,12 @@
 
 #include <stack>
 #include <vector>
-#include "graphic/Screen.hh"
 
 namespace bbm
 {
   class	IGameState;
   class Input;
+  class Screen;
 
   class GameManager
   {
