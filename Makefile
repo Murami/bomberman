@@ -143,7 +143,7 @@ MD		=	mkdir -p
 
 ## CONSTANTS
 
-DBGBOOL		=	no
+DBGBOOL		=	yes
 
 PROFILE		=	no
 
