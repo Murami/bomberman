@@ -132,28 +132,16 @@ namespace	bbm
     try
       {
 	menu->createNewStateButton("player 1", NULL, 3,
-				   glm::vec4(0, 0, 1, 1), "keyboard gamepad1");
-	// menu->addStateToLastButton("keyboard gamepad2");
-	// menu->addStateToLastButton("keyboard gamepad3");
-	// menu->addStateToLastButton("keyboard gamepad4");
+				   glm::vec4(0, 0, 1, 1), "gamepad 1");
 	menu->createNewStateButton("player 2", NULL, 3,
 				   glm::vec4(0, 1, 1, 1), "x");
-	menu->addStateToLastButton("keyboard gamepad1");
-	// menu->addStateToLastButton("keyboard gamepad2");
-	// menu->addStateToLastButton("keyboard gamepad3");
-	// menu->addStateToLastButton("keyboard gamepad4");
+	menu->addStateToLastButton("gamepad 2");
 	menu->createNewStateButton("player 3", NULL, 3,
 				   glm::vec4(1, 0, 1, 1), "x");
-	menu->addStateToLastButton("keyboard gamepad1");
-	// menu->addStateToLastButton("keyboard gamepad2");
-	// menu->addStateToLastButton("keyboard gamepad3");
-	// menu->addStateToLastButton("keyboard gamepad4");
+	menu->addStateToLastButton("gamepad 3");
 	menu->createNewStateButton("player 4", NULL, 3,
 				   glm::vec4(1, 1, 0, 1), "x");
-	menu->addStateToLastButton("keyboard gamepad1");
-	// menu->addStateToLastButton("keyboard gamepad2");
-	// menu->addStateToLastButton("keyboard gamepad3");
-	// menu->addStateToLastButton("keyboard gamepad4");
+	menu->addStateToLastButton("gamepad 4");
 	menu->createNewButton("next",&IMenuManager::setIASelectionMenu,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setMainMenu,

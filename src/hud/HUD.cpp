@@ -1,3 +1,4 @@
+#include		"menu/LetterManager.hpp"
 #include		"menu/Letter.hh"
 #include		"graphic/Transform.hh"
 #include		"graphic/Camera.hh"
@@ -16,6 +17,8 @@ namespace		bbm
   const std::string	HUD::BOX_BOMB_PATH = "./assets/hud/BlockBomb.tga";
   const std::string	HUD::BACKGROUND_PATH = "./assets/hud/background.tga";
   const std::string	HUD::RANDOM_BOMB_PATH = "./assets/hud/RandomBomb.tga";
+  const std::string	HUD::DARK_MALUS_PATH = "./assets/hud/dark_bonus.tga";
+  const std::string	HUD::SLOW_MALUS_PATH = "./assets/hud/water_bonus.tga";
 
   HUD::HUD()
   {
@@ -53,6 +56,35 @@ namespace		bbm
     this->_bonusBombs[WATER]->scale(glm::vec3(1, 0.5f, 0.25f));
     this->_bonusBombs[MULTI]->scale(glm::vec3(1, 0.5f, 0.25f));
     this->_bonusBombs[BOX]->scale(glm::vec3(1, 0.5f, 0.25f));
+    this->_dark = new Image(DARK_MALUS_PATH);
+    this->_slow = new Image(SLOW_MALUS_PATH);
+    this->_dark->initialize();
+    this->_dark->scale(glm::vec3(1, 0.5f, 0.25f));
+    this->_dark->scale(glm::vec3(1, 0.5f, 0.5f));
+    this->_dark->translate(glm::vec3(0, 5.25f, 4.5f));
+    this->_slow->initialize();
+    this->_slow->scale(glm::vec3(1, 0.5f, 0.25f));
+    this->_slow->scale(glm::vec3(1, 0.5f, 0.5f));
+    this->_slow->translate(glm::vec3(0, 5.25f, 4.75f));
+  }
+
+  void			HUD::_createScore(const std::string& score)
+  {
+    this->_list.empty();
+    this->_list.clear();
+    for (size_t i = 0; i < score.size(); i++)
+      {
+	Letter* l = new Letter(score[i], glm::vec4(1, 1, 1, 1));
+	l->initialize();
+	this->_list.push_back(l);
+      }
+    int i = 0;
+    for (std::list<Letter*>::iterator it = this->_list.begin();
+	 it != this->_list.end(); it++)
+      {
+	(*it)->translate(glm::vec3(0, 5.25f, 3-static_cast<float>(i)/2));
+	i++;
+      }
   }
 
   void			HUD::draw(ARenderer & renderer,
@@ -81,7 +113,14 @@ namespace		bbm
     std::list<Letter*> list;
     std::stringstream ss;
     ss << this->_score;
-    std::cout << ss.str() << std::endl;
+    this->_createScore(ss.str());
+    for (std::list<Letter*>::iterator it = this->_list.begin();
+	 it != this->_list.end(); it++)
+      (*it)->draw(renderer, state);
+    if (this->_darkMalus)
+      this->_dark->draw(renderer, state);
+    if (this->_slowMalus)
+      this->_slow->draw(renderer, state);
     glEnable(GL_CULL_FACE);
     glEnable(GL_DEPTH_TEST);
   }

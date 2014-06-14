@@ -27,6 +27,9 @@ namespace	bbm
     Image*			_normalBomb;
     std::map<BombType, Image*>	_bonusBombs;
     Image*			_background;
+    std::list<Letter*>		_list;
+    Image*			_dark;
+    Image*			_slow;
 
   public :
     const static std::string	NORMAL_BOMB_PATH;
@@ -37,6 +40,11 @@ namespace	bbm
     const static std::string	BOX_BOMB_PATH;
     const static std::string	BACKGROUND_PATH;
     const static std::string	RANDOM_BOMB_PATH;
+    const static std::string	DARK_MALUS_PATH;
+    const static std::string	SLOW_MALUS_PATH;
+
+  private :
+    void			_createScore(const std::string&);
 
   public :
     void			initialize();
