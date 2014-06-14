@@ -15,7 +15,7 @@
 const float	maxSpeed = 0.005;
 const float	modelScaleFactor = 0.0020;
 const float	boxScale = 0.8;
-const float	delta = 0.8;
+const float	delta = 0.2;//0.8 wtf ?!
 const float	deltaTile = 0.2;
 
 namespace bbm

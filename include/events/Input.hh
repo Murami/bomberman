@@ -16,11 +16,11 @@ namespace bbm
   private:
     typedef std::map<int, void (Input::*)(const SDL_Event&)>::iterator	UpdateMethodsIt;
     typedef std::list<int>::iterator					EventListIt;
-    typedef std::vector<Joystick>::iterator				JoystickListIt;
+    typedef std::vector<Joystick*>::iterator				JoystickListIt;
 
     std::map<int, void (Input::*)(const SDL_Event&)>		_updateMethods;
 
-    std::vector<Joystick>	_joysticks;
+    std::vector<Joystick*>	_joysticks;
     std::list<int>		_activeKeys;
     std::list<int>		_pressedKeys;
     std::list<int>		_releasedKeys;

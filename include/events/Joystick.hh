@@ -12,6 +12,27 @@ namespace bbm
   class	Joystick
   {
   public:
+    enum PS3Pad
+      {
+	SELECT,
+	L3,
+	R3,
+	START,
+	UP,
+	RIGHT,
+	DOWN,
+	LEFT,
+	L2,
+	R2,
+	L1,
+	R1,
+	TRIANGLE,
+	CIRCLE,
+	CROSS,
+	SQUARE,
+	SONY
+      };
+
     struct	Axis
     {
       int		_lastPosition;
@@ -31,7 +52,6 @@ namespace bbm
 
   public:
     Joystick(int i);
-    Joystick(const Joystick& joystick);
     virtual ~Joystick();
 
     void		clear();
