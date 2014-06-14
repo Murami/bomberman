@@ -133,22 +133,22 @@ namespace		bbm
 	std::string bomb2Key = this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("bomb2"));
 	menu->createNewStateButton("up", NULL, 7,
 				   glm::vec4(1, 1, 1, 1), upKey);
-	this->_setBindingControlPlayer1(menu, upKey);
+	this->_setBindingControlPlayer1(menu, "");
 	menu->createNewStateButton("down", NULL, 5,
 				   glm::vec4(1, 1, 1, 1), downKey);
-	this->_setBindingControlPlayer1(menu, downKey);
+	this->_setBindingControlPlayer1(menu, "");
 	menu->createNewStateButton("left", NULL, 5,
 				   glm::vec4(1, 1, 1, 1), leftKey);
-	this->_setBindingControlPlayer1(menu, leftKey);
+	this->_setBindingControlPlayer1(menu, "");
 	menu->createNewStateButton("right", NULL, 4,
 				   glm::vec4(1, 1, 1, 1), rightKey);
-	this->_setBindingControlPlayer1(menu, rightKey);
+	this->_setBindingControlPlayer1(menu, "");
 	menu->createNewStateButton("bomb", NULL, 5,
 				   glm::vec4(1, 1, 1, 1), bombKey);
-	this->_setBindingControlPlayer1(menu, bombKey);
+	this->_setBindingControlPlayer1(menu, "");
 	menu->createNewStateButton("bomb2", NULL, 4,
 				   glm::vec4(1, 1, 1, 1), bomb2Key);
-	this->_setBindingControlPlayer1(menu, bomb2Key);
+	this->_setBindingControlPlayer1(menu, "");
 	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer1,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setOptionsControlMenu,
@@ -183,22 +183,22 @@ namespace		bbm
   	std::string bomb2Key = this->_getKeyFromSDLK(this->_inputConfigPlayer2->getKeyName("bomb2"));
   	menu->createNewStateButton("up", NULL, 7,
   				   glm::vec4(1, 1, 1, 1), upKey);
-  	this->_setBindingControlPlayer2(menu, upKey);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewStateButton("down", NULL, 5,
   				   glm::vec4(1, 1, 1, 1), downKey);
-  	this->_setBindingControlPlayer2(menu, downKey);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewStateButton("left", NULL, 5,
   				   glm::vec4(1, 1, 1, 1), leftKey);
-  	this->_setBindingControlPlayer2(menu, leftKey);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewStateButton("right", NULL, 4,
   				   glm::vec4(1, 1, 1, 1), rightKey);
-  	this->_setBindingControlPlayer2(menu, rightKey);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewStateButton("bomb", NULL, 5,
   				   glm::vec4(1, 1, 1, 1), bombKey);
-  	this->_setBindingControlPlayer2(menu, bombKey);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewStateButton("bomb2", NULL, 4,
   				   glm::vec4(1, 1, 1, 1), bomb2Key);
-  	this->_setBindingControlPlayer2(menu, bomb2Key);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer2,
   			      glm::vec4(0, 1, 0, 1));
   	menu->createNewButton("cancel", &IMenuManager::setOptionsControlMenu,
@@ -233,22 +233,22 @@ namespace		bbm
   	std::string bomb2Key = this->_getKeyFromSDLK(this->_inputConfigPlayer3->getKeyName("bomb2"));
   	menu->createNewStateButton("up", NULL, 7,
   				   glm::vec4(1, 1, 1, 1), upKey);
-  	this->_setBindingControlPlayer3(menu, upKey);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewStateButton("down", NULL, 5,
   				   glm::vec4(1, 1, 1, 1), downKey);
-  	this->_setBindingControlPlayer3(menu, downKey);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewStateButton("left", NULL, 5,
   				   glm::vec4(1, 1, 1, 1), leftKey);
-  	this->_setBindingControlPlayer3(menu, leftKey);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewStateButton("right", NULL, 4,
   				   glm::vec4(1, 1, 1, 1), rightKey);
-  	this->_setBindingControlPlayer3(menu, rightKey);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewStateButton("bomb", NULL, 5,
   				   glm::vec4(1, 1, 1, 1), bombKey);
-  	this->_setBindingControlPlayer3(menu, bombKey);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewStateButton("bomb2", NULL, 4,
   				   glm::vec4(1, 1, 1, 1), bomb2Key);
-  	this->_setBindingControlPlayer3(menu, bomb2Key);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer3,
   			      glm::vec4(0, 1, 0, 1));
   	menu->createNewButton("cancel", &IMenuManager::setOptionsControlMenu,
@@ -284,22 +284,22 @@ namespace		bbm
   	std::string bomb2Key = this->_getKeyFromSDLK(this->_inputConfigPlayer4->getKeyName("bomb2"));
   	menu->createNewStateButton("up", NULL, 7,
   				   glm::vec4(1, 1, 1, 1), upKey);
-  	this->_setBindingControlPlayer4(menu, upKey);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewStateButton("down", NULL, 5,
   				   glm::vec4(1, 1, 1, 1), downKey);
-  	this->_setBindingControlPlayer4(menu, downKey);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewStateButton("left", NULL, 5,
   				   glm::vec4(1, 1, 1, 1), leftKey);
-  	this->_setBindingControlPlayer4(menu, leftKey);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewStateButton("right", NULL, 4,
   				   glm::vec4(1, 1, 1, 1), rightKey);
-  	this->_setBindingControlPlayer4(menu, rightKey);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewStateButton("bomb", NULL, 5,
   				   glm::vec4(1, 1, 1, 1), bombKey);
-  	this->_setBindingControlPlayer4(menu, bombKey);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewStateButton("bomb2", NULL, 4,
   				   glm::vec4(1, 1, 1, 1), bomb2Key);
-  	this->_setBindingControlPlayer4(menu, bomb2Key);
+  	this->_setBindingControlPlayer1(menu, "");
   	menu->createNewButton("ok", &IMenuManager::serializeBindingPlayer4,
   			      glm::vec4(0, 1, 0, 1));
   	menu->createNewButton("cancel", &IMenuManager::setOptionsControlMenu,
@@ -433,19 +433,102 @@ namespace		bbm
   void		PauseState::_setBindingControlPlayer1(Menu* menu,
 						     const std::string& first)
   {
-    static std::list<std::string> list;
-    if (list.size() == 0)
+    if (this->_SDLInputsList.size() == 0)
       {
-  	list.push_back("up");
-  	list.push_back("down");
-  	list.push_back("left");
-  	list.push_back("right");
-  	list.push_back("space");
-  	list.push_back("rshift");
-  	list.push_back("rctrl");
+	this->_SDLInputsList.push_back("BACKSPACE");
+	this->_SDLInputsList.push_back("PAUSE");
+	this->_SDLInputsList.push_back("QUOTEDBL");
+	this->_SDLInputsList.push_back("HASH");
+	this->_SDLInputsList.push_back("DOLLAR");
+	this->_SDLInputsList.push_back("AMPERSAND");
+	this->_SDLInputsList.push_back("QUOTE");
+	this->_SDLInputsList.push_back("LEFTPAREN");
+	this->_SDLInputsList.push_back("RIGHTPAREN");
+	this->_SDLInputsList.push_back("ASTERISK");
+	this->_SDLInputsList.push_back("PLUS");
+	this->_SDLInputsList.push_back("COMMA");
+	this->_SDLInputsList.push_back("MINUS");
+	this->_SDLInputsList.push_back("PERIOD");
+	this->_SDLInputsList.push_back("SLASH");
+	this->_SDLInputsList.push_back("0");
+	this->_SDLInputsList.push_back("1");
+	this->_SDLInputsList.push_back("2");
+	this->_SDLInputsList.push_back("3");
+	this->_SDLInputsList.push_back("4");
+	this->_SDLInputsList.push_back("5");
+	this->_SDLInputsList.push_back("6");
+	this->_SDLInputsList.push_back("7");
+	this->_SDLInputsList.push_back("8");
+	this->_SDLInputsList.push_back("9");
+	this->_SDLInputsList.push_back("COLON");
+	this->_SDLInputsList.push_back("SEMICOLON");
+	this->_SDLInputsList.push_back("LESS");
+	this->_SDLInputsList.push_back("EQUALS");
+	this->_SDLInputsList.push_back("GREATER");
+	this->_SDLInputsList.push_back("QUESTION");
+	this->_SDLInputsList.push_back("AT");
+	this->_SDLInputsList.push_back("LEFTBRACKET");
+	this->_SDLInputsList.push_back("BACKSLASH");
+	this->_SDLInputsList.push_back("RIGHTBRACKET");
+	this->_SDLInputsList.push_back("CARET");
+	this->_SDLInputsList.push_back("UNDERSCORE");
+	this->_SDLInputsList.push_back("BACKQUOTE");
+	this->_SDLInputsList.push_back("a");
+	this->_SDLInputsList.push_back("b");
+	this->_SDLInputsList.push_back("c");
+	this->_SDLInputsList.push_back("d");
+	this->_SDLInputsList.push_back("e");
+	this->_SDLInputsList.push_back("f");
+	this->_SDLInputsList.push_back("g");
+	this->_SDLInputsList.push_back("h");
+	this->_SDLInputsList.push_back("i");
+	this->_SDLInputsList.push_back("j");
+	this->_SDLInputsList.push_back("k");
+	this->_SDLInputsList.push_back("l");
+	this->_SDLInputsList.push_back("m");
+	this->_SDLInputsList.push_back("n");
+	this->_SDLInputsList.push_back("o");
+	this->_SDLInputsList.push_back("p");
+	this->_SDLInputsList.push_back("q");
+	this->_SDLInputsList.push_back("r");
+	this->_SDLInputsList.push_back("s");
+	this->_SDLInputsList.push_back("t");
+	this->_SDLInputsList.push_back("u");
+	this->_SDLInputsList.push_back("v");
+	this->_SDLInputsList.push_back("w");
+	this->_SDLInputsList.push_back("x");
+	this->_SDLInputsList.push_back("y");
+	this->_SDLInputsList.push_back("z");
+	this->_SDLInputsList.push_back("DELETE");
+	this->_SDLInputsList.push_back("KP_0");
+	this->_SDLInputsList.push_back("KP_1");
+	this->_SDLInputsList.push_back("KP_2");
+	this->_SDLInputsList.push_back("KP_3");
+	this->_SDLInputsList.push_back("KP_4");
+	this->_SDLInputsList.push_back("KP_5");
+	this->_SDLInputsList.push_back("KP_6");
+	this->_SDLInputsList.push_back("KP_7");
+	this->_SDLInputsList.push_back("KP_8");
+	this->_SDLInputsList.push_back("KP_9");
+	this->_SDLInputsList.push_back("KP_DIVIDE");
+	this->_SDLInputsList.push_back("KP_MULTIPLY");
+	this->_SDLInputsList.push_back("KP_MINUS");
+	this->_SDLInputsList.push_back("KP_PLUS");
+	this->_SDLInputsList.push_back("KP_ENTER");
+	this->_SDLInputsList.push_back("UP");
+	this->_SDLInputsList.push_back("DOWN");
+	this->_SDLInputsList.push_back("RIGHT");
+	this->_SDLInputsList.push_back("LEFT");
+	this->_SDLInputsList.push_back("CAPSLOCK");
+	this->_SDLInputsList.push_back("RSHIFT");
+	this->_SDLInputsList.push_back("LSHIFT");
+	this->_SDLInputsList.push_back("RCTRL");
+	this->_SDLInputsList.push_back("LCTRL");
+	this->_SDLInputsList.push_back("RALT");
+	this->_SDLInputsList.push_back("LALT");
       }
-    for (std::list<std::string>::iterator it = list.begin();
-    	 it != list.end(); it++)
+    for (std::list<std::string>::iterator it = this->_SDLInputsList.begin();
+    	 it != this->_SDLInputsList.end(); it++)
       {
     	if ((*it) != first)
     	  menu->addStateToLastButton(*it);
@@ -455,24 +538,8 @@ namespace		bbm
   void		PauseState::_setBindingControlPlayer2(Menu* menu,
   						     const std::string& first)
   {
-    static std::list<std::string> list;
-    if (list.size() == 0)
-      {
-  	list.push_back("a");
-  	list.push_back("z");
-  	list.push_back("e");
-  	list.push_back("r");
-  	list.push_back("q");
-  	list.push_back("s");
-  	list.push_back("d");
-  	list.push_back("f");
-  	list.push_back("w");
-  	list.push_back("x");
-  	list.push_back("c");
-  	list.push_back("v");
-      }
-    for (std::list<std::string>::iterator it = list.begin();
-  	 it != list.end(); it++)
+    for (std::list<std::string>::iterator it = this->_SDLInputsList.begin();
+  	 it != this->_SDLInputsList.end(); it++)
       {
   	if ((*it) != first)
   	  menu->addStateToLastButton(*it);
@@ -482,24 +549,8 @@ namespace		bbm
   void		PauseState::_setBindingControlPlayer3(Menu* menu,
   						     const std::string& first)
   {
-    static std::list<std::string> list;
-    if (list.size() == 0)
-      {
-  	list.push_back("a");
-  	list.push_back("z");
-  	list.push_back("e");
-  	list.push_back("r");
-  	list.push_back("q");
-  	list.push_back("s");
-  	list.push_back("d");
-  	list.push_back("f");
-  	list.push_back("w");
-  	list.push_back("x");
-  	list.push_back("c");
-  	list.push_back("v");
-      }
-    for (std::list<std::string>::iterator it = list.begin();
-  	 it != list.end(); it++)
+    for (std::list<std::string>::iterator it = this->_SDLInputsList.begin();
+  	 it != this->_SDLInputsList.end(); it++)
       {
   	if ((*it) != first)
   	  menu->addStateToLastButton(*it);
@@ -509,24 +560,8 @@ namespace		bbm
   void		PauseState::_setBindingControlPlayer4(Menu* menu,
   						     const std::string& first)
   {
-    static std::list<std::string> list;
-    if (list.size() == 0)
-      {
-  	list.push_back("a");
-  	list.push_back("z");
-  	list.push_back("e");
-  	list.push_back("r");
-  	list.push_back("q");
-  	list.push_back("s");
-  	list.push_back("d");
-  	list.push_back("f");
-  	list.push_back("w");
-  	list.push_back("x");
-  	list.push_back("c");
-  	list.push_back("v");
-      }
-    for (std::list<std::string>::iterator it = list.begin();
-  	 it != list.end(); it++)
+    for (std::list<std::string>::iterator it = this->_SDLInputsList.begin();
+  	 it != this->_SDLInputsList.end(); it++)
       {
   	if ((*it) != first)
   	  menu->addStateToLastButton(*it);
