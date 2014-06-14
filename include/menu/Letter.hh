@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 13:12:48 2014 Manu
-// Last update Tue Jun 10 18:58:17 2014 Manu
+// Last update Fri Jun 13 23:14:23 2014 Manu
 //
 
 #ifndef		__LETTER_HH__
@@ -28,34 +28,31 @@ namespace	bbm
   class		Letter : public AObject
   {
   public :
-    const static	std::string	TEXTURE_PATH;
+    const static std::string	TEXTURE_PATH;
 
   private :
     char			_le;
     gdl::Geometry		_geom;
     gdl::Texture		_texture;
-    gdl::BasicShader*	_shader;
-    const glm::vec4	_color;
-    glm::vec3		_position;
-    glm::vec3		_rotation;
-    glm::vec3		_scale;
+    gdl::BasicShader*		_shader;
+    const glm::vec4		_color;
+    glm::vec3			_position;
+    glm::vec3			_rotation;
+    glm::vec3			_scale;
 
   public :
-    void		translate(const glm::vec3&);
-    void		rotate(const glm::vec3&, float);
-    void		scale(const glm::vec3&);
-    glm::mat4		getTransformation();
+    void			translate(const glm::vec3&);
+    void			rotate(const glm::vec3&, float);
+    void			scale(const glm::vec3&);
+    glm::mat4			getTransformation();
 
   public :
-    void		setColor(const glm::vec4&);
+    void			setColor(const glm::vec4&);
 
   public :
-    bool	initialize();
-    void	draw(ARenderer&, const RenderState&);
-    char	getLe() const
-    {
-      return (this->_le);
-    }
+    bool			initialize();
+    void			draw(ARenderer&, const RenderState&);
+    char			getLe() const;
 
   public :
     Letter(char, const glm::vec4&);

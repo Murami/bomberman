@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Wed Jun  4 22:38:54 2014 Manu
-// Last update Fri Jun 13 17:48:18 2014 Manu
+// Last update Fri Jun 13 18:13:55 2014 Manu
 //
 
 #include		<unistd.h>
@@ -68,12 +68,7 @@ namespace		bbm
     icone += std::string(".tga");
     if (access(icone.c_str(), F_OK) == -1)
       icone = "./saves/default.tga";
-
-    ///////////////////////////////////////////////
-    // Pourquoi l'exception n'est-elle pas threw //
-    ///////////////////////////////////////////////
-
-    else if (access(icone.c_str(), F_OK) == -1)
+    if (access(icone.c_str(), F_OK) == -1)
       throw (FileLoadingException(icone + std::string(": No such file or directory")));
     return (icone);
   }
