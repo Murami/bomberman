@@ -73,16 +73,17 @@ namespace bbm
     _gameboxes.resize(x * y, NULL);
     for (posx = 1; posx < x - 1; posx++)
       {
-	for(posy = 1; posy < y - 1; posy++)
-	  {
-	    if (_tilemap.getTileType(posx, posy) != Tile::Spawn &&
-		_tilemap.getTileType(posx + 1, posy) != Tile::Spawn &&
-		_tilemap.getTileType(posx - 1, posy) != Tile::Spawn &&
-		_tilemap.getTileType(posx, posy + 1) != Tile::Spawn &&
-		_tilemap.getTileType(posx, posy - 1) != Tile::Spawn &&
-		std::rand() % 2 == 1)
-	      addEntity(new GameBox(glm::vec2(posx, posy), 0, *this));
-	  }
+    	for(posy = 1; posy < y - 1; posy++)
+    	  {
+    	    if (_tilemap.getTileType(posx, posy) != Tile::Spawn &&
+    		_tilemap.getTileType(posx + 1, posy) != Tile::Spawn &&
+    		_tilemap.getTileType(posx - 1, posy) != Tile::Spawn &&
+    		_tilemap.getTileType(posx, posy + 1) != Tile::Spawn &&
+    		_tilemap.getTileType(posx, posy - 1) != Tile::Spawn &&
+		_tilemap.getTileType(posx, posy) != Tile::Wall &&
+    		std::rand() % 2 == 1)
+    	      addEntity(new GameBox(glm::vec2(posx, posy), 0, *this));
+    	  }
       }
   }
 
