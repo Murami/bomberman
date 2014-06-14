@@ -65,6 +65,7 @@ namespace bbm
     current.add("lastId", getLastID());
     current.add("color", _color);
     current.add("maxBomb", _maxBomb);
+    current.add("score", _score);
   }
 
   void			APlayer::unpack(const ISerializedNode & current)
@@ -95,6 +96,7 @@ namespace bbm
     setColor(_color);
     setID(id);
     setLastID(lastId);
+    current.get("score", _score);
   }
 
   void			APlayer::collideMap()

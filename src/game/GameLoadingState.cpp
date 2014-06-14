@@ -159,6 +159,7 @@ namespace bbm
     playerConfig.idPlayer = 0;
     playerConfig.id = 0;
     playerConfig.lastId = 0;
+    playerConfig.score = 0;
     if (_config->player1)
       {
 	playerConfig.inputConfig = new InputConfig;
