@@ -89,6 +89,7 @@ namespace bbm
     BombType				getBonusType() const;
     bool				isDark() const;
     bool				isSlow() const;
+    void				increaseMaxBomb();
 
     virtual const std::string&		getType() const = 0;
     virtual void			update(float time) = 0;
@@ -123,6 +124,7 @@ namespace bbm
     PlayerState				_state;
     GameState&				_gameState;
     int					_score;
+    int					_maxBomb;
   };
 };
 

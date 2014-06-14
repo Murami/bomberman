@@ -29,10 +29,16 @@ namespace bbm
     _move = glm::vec2(0, 0);
     _color = glm::vec4(1, 1, 1, 1);
     _model.setColor(_color);
+    _maxBomb = 1;
   }
 
   APlayer::~APlayer()
   {
+  }
+
+  void			APlayer::increaseMaxBomb()
+  {
+    this->_maxBomb++;
   }
 
   void			APlayer::setColor(const glm::vec4& color)
@@ -58,6 +64,7 @@ namespace bbm
     current.add("id", getID());
     current.add("lastId", getLastID());
     current.add("color", _color);
+    current.add("maxBomb", _maxBomb);
   }
 
   void			APlayer::unpack(const ISerializedNode & current)
@@ -84,6 +91,7 @@ namespace bbm
     current.get("id", id);
     current.get("lastId", lastId);
     current.get("color", _color);
+    current.get("maxBomb", _maxBomb);
     setColor(_color);
     setID(id);
     setLastID(lastId);
@@ -238,7 +246,8 @@ namespace bbm
 
   void			APlayer::addBombs()
   {
-    _nbBombs++;
+    if (_nbBombs < _maxBomb)
+      _nbBombs++;
   }
 
   int	APlayer::getBomb() const
