@@ -33,7 +33,7 @@ namespace bbm
     add_method_to_vector(methods, "goDownRight", &AI::goDownRight);
     add_method_to_vector(methods, "putBomb", &AI::putBomb);
     add_method_to_vector(methods, "haveBomb", &AI::haveBomb);
-    add_method_to_vector(methods, "getGameBoxes", &AI::getGameBoxes);
+    add_method_to_vector(methods, "getBoxes", &AI::getBoxes);
     return (methods);
   }
 
@@ -43,7 +43,7 @@ namespace bbm
     APlayer(gameState)
   {
     _type = "AI";
-    _scriptName = "scripts/easy.lua";
+    _scriptName = "scripts/medium.lua";
     // _scriptName = config.scriptName;
     _position = config.position;
     _power = config.power;
@@ -80,6 +80,7 @@ namespace bbm
     if (_alive)
       {
 	LuaBiche	script(_scriptName);
+
 	script.addObject("player", this);
 	script.run();
 	managePhysics(time);
@@ -101,6 +102,7 @@ namespace bbm
 
   int	AI::goUp(lua_State*)
   {
+    std::cout << "I'm move up " << std::endl;
     this->setMove(glm::vec2(0, 1));
     return (1);
   }
@@ -167,27 +169,45 @@ namespace bbm
     return (1);
   }
 
-  int	AI::getGameBoxes(lua_State* L)
+  int	AI::getBoxes(lua_State* L)
   {
-    std::vector<AEntity*>		tmp;
+    std::vector<AEntity*>		gameBox;
+    TileMap				tileMap;
     int					mapSize;
 
     mapSize = _gameState.getMapSize().x;
-    tmp = _gameState.getGameBoxes();
+    gameBox = _gameState.getGameBoxes();
+    tileMap = _gameState.getTileMap();
 
     lua_newtable(L);
     lua_pushstring(L, "up");
-    lua_pushboolean(L, static_cast<bool>(tmp[_position.x + (_position.y + 1) * mapSize]));
+    if (gameBox[_position.x + (_position.y + 1) * mapSize] || tileMap.getTile(_position.x, _position.y + 1))
+      lua_pushboolean(L, true);
+    else
+      lua_pushboolean(L, false);
     lua_rawset(L, -3);
+
     lua_pushstring(L, "left");
-    lua_pushboolean(L, static_cast<bool>(tmp[(_position.x - 1) + _position.y * mapSize]));
+    if (gameBox[(_position.x - 1) + _position.y * mapSize] || tileMap.getTile(_position.x - 1, _position.y))
+      lua_pushboolean(L, true);
+    else
+      lua_pushboolean(L, false);
     lua_rawset(L, -3);
+
     lua_pushstring(L, "right");
-    lua_pushboolean(L, static_cast<bool>(tmp[(_position.x + 1) + _position.y * mapSize]));
+    if (gameBox[(_position.x + 1) + _position.y * mapSize] || tileMap.getTile(_position.x + 1, _position.y))
+      lua_pushboolean(L, true);
+    else
+      lua_pushboolean(L, false);
     lua_rawset(L, -3);
+
     lua_pushstring(L, "down");
-    lua_pushboolean(L, static_cast<bool>(tmp[_position.x + (_position.y - 1) * mapSize]));
+    if (gameBox[_position.x + (_position.y - 1) * mapSize] || tileMap.getTile(_position.x, _position.y - 1))
+      lua_pushboolean(L, true);
+    else
+      lua_pushboolean(L, false);
     lua_rawset(L, -3);
+
     return (1);
   }
 
