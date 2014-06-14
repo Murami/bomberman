@@ -470,7 +470,9 @@ namespace bbm
       context.draw(*(*itAIs), state);
   }
 
-  void				GameState::drawGameBoxes(Screen & context, RenderState & state, PlayerIt itPlayersCamera)
+  void				GameState::drawGameBoxes(Screen & context,
+							 RenderState & state,
+							 PlayerIt itPlayersCamera)
   {
     for (int x = -25; x < 25; x++)
       for (int y = -10; y < 10; y++)
@@ -490,7 +492,9 @@ namespace bbm
 	}
   }
 
-  void				GameState::drawPlayer(Screen & context, RenderState & state, PlayerIt itPlayersCamera)
+  void				GameState::drawPlayer(Screen & context,
+						      RenderState & state,
+						      PlayerIt itPlayersCamera)
   {
     PlayerIt			itPlayers;
 
