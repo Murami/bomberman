@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:00 2014 Manu
-// Last update Thu Jun 12 14:14:35 2014 Manu
+// Last update Sun Jun 15 01:26:47 2014 Manu
 //
 
 #ifndef		__MENU_HH__
@@ -92,6 +92,7 @@ namespace	bbm
     void	finalize();
     void	setNextFrame();
     void	setPrevFrame();
+    void	refresh();
 
   public :
     Menu(const std::string&, IMenuManager*);

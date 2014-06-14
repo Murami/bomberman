@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 16:43:06 2014 Manu
-// Last update Thu Jun 12 21:30:49 2014 Manu
+// Last update Sun Jun 15 01:37:22 2014 Manu
 //
 
 #ifndef		__MENUSTATE_HH__
@@ -50,6 +50,7 @@ namespace	bbm
     InputConfig*			_inputConfigPlayer2;
     InputConfig*			_inputConfigPlayer3;
     InputConfig*			_inputConfigPlayer4;
+    std::list<std::string>		_SDLInputsList;
 
   private :
     bool		_initializeMainMenu();

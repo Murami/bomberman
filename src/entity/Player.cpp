@@ -33,6 +33,7 @@ namespace bbm
     _dark = config.dark;
     _typeBomb = config.typeBomb;
     _state = config.state;
+    _score = config.score;
     if (config.idPlayer)
       _idPlayer = config.idPlayer;
     else
@@ -41,9 +42,6 @@ namespace bbm
       setID(config.id);
     if (config.lastId)
       setLastID(config.lastId);
-
-    _score = 0;
-    // _score = config.score;
   }
 
   Player::~Player()

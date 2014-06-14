@@ -247,6 +247,7 @@ namespace bbm
 	playerNode->get("idPlayer", playerConfig.idPlayer);
 	playerNode->get("id", playerConfig.id);
 	playerNode->get("lastId", playerConfig.lastId);
+	playerNode->get("score", playerConfig.score);
 	playerNode->get("typeBomb", typeBomb);
 	playerNode->get("state", state);
 	playerConfig.typeBomb = static_cast<BombType>(typeBomb);

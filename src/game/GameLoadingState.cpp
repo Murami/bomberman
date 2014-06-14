@@ -159,26 +159,31 @@ namespace bbm
     playerConfig.idPlayer = 0;
     playerConfig.id = 0;
     playerConfig.lastId = 0;
+    playerConfig.score = 0;
     if (_config->player1)
       {
+	playerConfig.idGamepad = _config->player1;
 	playerConfig.inputConfig = new InputConfig;
 	playerConfig.inputConfig->load(MenuState::INPUT_CONFIG_P1);
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     if (_config->player2)
       {
+	playerConfig.idGamepad = _config->player2;
 	playerConfig.inputConfig = new InputConfig;
 	playerConfig.inputConfig->load(MenuState::INPUT_CONFIG_P2);
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     if (_config->player3)
       {
+	playerConfig.idGamepad = _config->player3;
 	playerConfig.inputConfig = new InputConfig;
 	playerConfig.inputConfig->load(MenuState::INPUT_CONFIG_P3);
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     if (_config->player4)
       {
+	playerConfig.idGamepad = _config->player4;
 	playerConfig.inputConfig = new InputConfig;
 	playerConfig.inputConfig->load(MenuState::INPUT_CONFIG_P4);
 	gameStateConfig.playersConfigs.push_back(playerConfig);

@@ -44,12 +44,12 @@ namespace		bbm
     this->_bonusBombs[WATER]->initialize();
     this->_bonusBombs[MULTI]->initialize();
     this->_bonusBombs[BOX]->initialize();
-    this->_bonusBombs[DARK]->translate(glm::vec3(0, 5.25f, 4));
-    this->_bonusBombs[RANDOM]->translate(glm::vec3(0, 5.25f, 4));
-    this->_bonusBombs[POWER]->translate(glm::vec3(0, 5.25f, 4));
-    this->_bonusBombs[WATER]->translate(glm::vec3(0, 5.25f, 4));
-    this->_bonusBombs[MULTI]->translate(glm::vec3(0, 5.25f, 4));
-    this->_bonusBombs[BOX]->translate(glm::vec3(0, 5.25f, 4));
+    this->_bonusBombs[DARK]->translate(glm::vec3(0, 5.375f, 4));
+    this->_bonusBombs[RANDOM]->translate(glm::vec3(0, 5.375f, 4));
+    this->_bonusBombs[POWER]->translate(glm::vec3(0, 5.375f, 4));
+    this->_bonusBombs[WATER]->translate(glm::vec3(0, 5.375f, 4));
+    this->_bonusBombs[MULTI]->translate(glm::vec3(0, 5.375f, 4));
+    this->_bonusBombs[BOX]->translate(glm::vec3(0, 5.375f, 4));
     this->_bonusBombs[DARK]->scale(glm::vec3(1, 0.5f, 0.25f));
     this->_bonusBombs[RANDOM]->scale(glm::vec3(1, 0.5f, 0.25f));
     this->_bonusBombs[POWER]->scale(glm::vec3(1, 0.5f, 0.25f));
