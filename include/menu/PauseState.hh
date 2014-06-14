@@ -43,60 +43,64 @@ namespace	bbm
     InputConfig*			_inputConfigPlayer4;
 
   private :
-    void		_setNewCurrentMenu(const std::string&);
-    bool		_initializePauseMainMenu();
-    bool		_initializeOptionsMenu();
-    bool		_initializeOptionControlMenu();
-    bool		_initializeOptionAudioMenu();
-    bool		_initializeControlPlayer();
-    bool		_initializeControlPlayer1();
-    bool		_initializeControlPlayer2();
-    bool		_initializeControlPlayer3();
-    bool		_initializeControlPlayer4();
-    void		_setBindingControlPlayer(Menu*, const std::string&);
-    // void		_setBindingControlPlayer2(Menu*, const std::string&);
-    // void		_setBindingControlPlayer3(Menu*, const std::string&);
-    // void		_setBindingControlPlayer4(Menu*, const std::string&);
-    const std::string&	_getKeyFromSDLK(const std::string&);
+    void			_setNewCurrentMenu(const std::string&);
+    bool			_initializePauseMainMenu();
+    bool			_initializeOptionsMenu();
+    bool			_initializeOptionControlMenu();
+    bool			_initializeOptionAudioMenu();
+    bool			_initializeControlPlayer();
+    bool			_initializeControlPlayer1();
+    bool			_initializeControlPlayer2();
+    bool			_initializeControlPlayer3();
+    bool			_initializeControlPlayer4();
+    void			_setBindingControlPlayer1(Menu*,
+							  const std::string&);
+    void			_setBindingControlPlayer2(Menu*,
+							  const std::string&);
+    void			_setBindingControlPlayer3(Menu*,
+							  const std::string&);
+    void			_setBindingControlPlayer4(Menu*,
+							  const std::string&);
+    const std::string&		_getKeyFromSDLK(const std::string&);
 
   public :
-    virtual void	initialize();
-    virtual void	release();
-    virtual void	obscuring();
-    virtual void	update(float time, const Input& input);
-    virtual void	draw(float time, Screen& context);
-    virtual void	revealing();
+    virtual void		initialize();
+    virtual void		release();
+    virtual void		obscuring();
+    virtual void		update(float time, const Input& input);
+    virtual void		draw(float time, Screen& context);
+    virtual void		revealing();
 
   public :
-    virtual void	setPlayMenu(Menu*);
-    virtual void	setOptionsMenu(Menu*);
-    virtual void	setHighScoreMenu(Menu*);
-    virtual void	exitGame(Menu*);
-    virtual void	setNewGameMenu(Menu*);
-    virtual void	setContinueGameMenu(Menu*);
-    virtual void	setLoadGameMenu(Menu*);
-    virtual void	setMainMenu(Menu*);
-    virtual void	setOptionsAudioMenu(Menu*);
-    virtual void	setOptionsControlMenu(Menu*);
-    virtual void	setNextFrame(Menu*);
-    virtual void	setPrevFrame(Menu*);
-    virtual void	setIASelectionMenu(Menu*);
-    virtual void	launchNewGame(Menu*);
-    virtual void	launchLoadedGame(Menu*);
-    virtual void	setOptionControlPlayer1(Menu*);
-    virtual void	setOptionControlPlayer2(Menu*);
-    virtual void	setOptionControlPlayer3(Menu*);
-    virtual void	setOptionControlPlayer4(Menu*);
-    virtual void	setMapParamsMenu(Menu*);
-    virtual void	serializeBindingPlayer1(Menu*);
-    virtual void	serializeBindingPlayer2(Menu*);
-    virtual void	serializeBindingPlayer3(Menu*);
-    virtual void	serializeBindingPlayer4(Menu*);
-    virtual void	serializeAudioSettings(Menu*);
+    virtual void		setPlayMenu(Menu*);
+    virtual void		setOptionsMenu(Menu*);
+    virtual void		setHighScoreMenu(Menu*);
+    virtual void		exitGame(Menu*);
+    virtual void		setNewGameMenu(Menu*);
+    virtual void		setContinueGameMenu(Menu*);
+    virtual void		setLoadGameMenu(Menu*);
+    virtual void		setMainMenu(Menu*);
+    virtual void		setOptionsAudioMenu(Menu*);
+    virtual void		setOptionsControlMenu(Menu*);
+    virtual void		setNextFrame(Menu*);
+    virtual void		setPrevFrame(Menu*);
+    virtual void		setIASelectionMenu(Menu*);
+    virtual void		launchNewGame(Menu*);
+    virtual void		launchLoadedGame(Menu*);
+    virtual void		setOptionControlPlayer1(Menu*);
+    virtual void		setOptionControlPlayer2(Menu*);
+    virtual void		setOptionControlPlayer3(Menu*);
+    virtual void		setOptionControlPlayer4(Menu*);
+    virtual void		setMapParamsMenu(Menu*);
+    virtual void		serializeBindingPlayer1(Menu*);
+    virtual void		serializeBindingPlayer2(Menu*);
+    virtual void		serializeBindingPlayer3(Menu*);
+    virtual void		serializeBindingPlayer4(Menu*);
+    virtual void		serializeAudioSettings(Menu*);
 
   public :
-    virtual void	resumeGame(Menu*);
-    virtual void	saveGame(Menu*);
+    virtual void		resumeGame(Menu*);
+    virtual void	       	saveGame(Menu*);
 
   public :
     PauseState(GameManager&, GameState&);

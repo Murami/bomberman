@@ -23,6 +23,7 @@ namespace bbm
   class IDrawable;
   class IEventListener;
   class Player;
+  class HUD;
 
   class	GameState : public IGameState, public ISerializable
   {
@@ -87,6 +88,8 @@ namespace bbm
     std::string			_tilemapName;
     GameManager&		_manager;
     GameStateConfig*		_config;
+    HUD*			_hud;
+    bool			_printHud;
   };
 };
 

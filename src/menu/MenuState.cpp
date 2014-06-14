@@ -133,27 +133,27 @@ namespace	bbm
       {
 	menu->createNewStateButton("player 1", NULL, 3,
 				   glm::vec4(0, 0, 1, 1), "keyboard gamepad1");
-	menu->addStateToLastButton("keyboard gamepad2");
-	menu->addStateToLastButton("keyboard gamepad3");
-	menu->addStateToLastButton("keyboard gamepad4");
+	// menu->addStateToLastButton("keyboard gamepad2");
+	// menu->addStateToLastButton("keyboard gamepad3");
+	// menu->addStateToLastButton("keyboard gamepad4");
 	menu->createNewStateButton("player 2", NULL, 3,
 				   glm::vec4(0, 1, 1, 1), "x");
 	menu->addStateToLastButton("keyboard gamepad1");
-	menu->addStateToLastButton("keyboard gamepad2");
-	menu->addStateToLastButton("keyboard gamepad3");
-	menu->addStateToLastButton("keyboard gamepad4");
+	// menu->addStateToLastButton("keyboard gamepad2");
+	// menu->addStateToLastButton("keyboard gamepad3");
+	// menu->addStateToLastButton("keyboard gamepad4");
 	menu->createNewStateButton("player 3", NULL, 3,
 				   glm::vec4(1, 0, 1, 1), "x");
 	menu->addStateToLastButton("keyboard gamepad1");
-	menu->addStateToLastButton("keyboard gamepad2");
-	menu->addStateToLastButton("keyboard gamepad3");
-	menu->addStateToLastButton("keyboard gamepad4");
+	// menu->addStateToLastButton("keyboard gamepad2");
+	// menu->addStateToLastButton("keyboard gamepad3");
+	// menu->addStateToLastButton("keyboard gamepad4");
 	menu->createNewStateButton("player 4", NULL, 3,
 				   glm::vec4(1, 1, 0, 1), "x");
 	menu->addStateToLastButton("keyboard gamepad1");
-	menu->addStateToLastButton("keyboard gamepad2");
-	menu->addStateToLastButton("keyboard gamepad3");
-	menu->addStateToLastButton("keyboard gamepad4");
+	// menu->addStateToLastButton("keyboard gamepad2");
+	// menu->addStateToLastButton("keyboard gamepad3");
+	// menu->addStateToLastButton("keyboard gamepad4");
 	menu->createNewButton("next",&IMenuManager::setIASelectionMenu,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setMainMenu,
@@ -216,8 +216,8 @@ namespace	bbm
       {
 	menu->createNewButton("new", &IMenuManager::setMapParamsMenu,
 			      glm::vec4(1, 1, 1, 1), true);
-	menu->createNewButton("continue", &IMenuManager::setContinueGameMenu,
-			      glm::vec4(1, 1, 1, 1), true);
+	// menu->createNewButton("continue", &IMenuManager::setContinueGameMenu,
+	// 		      glm::vec4(1, 1, 1, 1), true);
 	menu->createNewButton("load", &IMenuManager::setLoadGameMenu,
 			      glm::vec4(1, 1, 1, 1), true);
 	menu->createNewButton("back", &IMenuManager::setMainMenu,
