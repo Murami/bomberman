@@ -2,6 +2,7 @@
 #define CAMERA_HH
 
 #include <glm/glm.hpp>
+
 #include "graphic/Transform.hh"
 
 namespace bbm

@@ -235,7 +235,7 @@ namespace bbm
 
     for (int y = -10; y < 10; y++)
       {
-    	for (int x = -20; x < 20; x++)
+    	for (int x = -25; x < 25; x++)
     	  {
 	    try
 	      {

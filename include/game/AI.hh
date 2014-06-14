@@ -2,12 +2,13 @@
 #define AI_HH
 
 #include "game/APlayer.hh"
-#include "game/PlayerConfig.hh"
+
 #include "lua/ILuaHeir.hh"
-#include "lua/LuaBiche.hh"
 
 namespace bbm
 {
+  class PlayerConfig;
+
   class	AI : public APlayer, public ILuaHeir<AI>
   {
   public:

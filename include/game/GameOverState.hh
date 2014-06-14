@@ -3,6 +3,7 @@
 
 # include <string>
 # include <map>
+
 # include "game/IGameState.hh"
 
 namespace bbm

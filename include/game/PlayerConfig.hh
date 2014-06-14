@@ -5,6 +5,8 @@
 
 namespace bbm
 {
+  class InputConfig;
+
   struct PlayerConfig
   {
     InputConfig*	inputConfig;

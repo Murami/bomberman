@@ -3,12 +3,10 @@
 
 #include "entity/Marvin.hh"
 #include "entity/AEntity.hh"
-#include "events/InputConfig.hh"
-#include "events/IEventListener.hh"
+
 #include "graphic/IDrawable.hh"
-#include "graphic/Model.hh"
 #include "graphic/Transformable.hh"
-#include "game/Wall.hh"
+#include "graphic/Model.hh"
 
 namespace bbm
 {

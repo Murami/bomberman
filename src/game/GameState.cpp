@@ -3,14 +3,19 @@
 #include <stdexcept>
 #include <iostream>
 #include <utility>
+
 #include <SDL.h>
-#include "PauseState.hh"
-#include "game/Tile.hh"
+
+#include "menu/PauseState.hh"
+
+#include "game/GameManager.hh"
 #include "game/GameState.hh"
 #include "game/GameOverState.hh"
-#include "game/GameManager.hh"
+#include "game/Tile.hh"
+#include "game/PlayerConfig.hh"
 
 #include "events/Input.hh"
+#include "events/InputConfig.hh"
 #include "events/IEventListener.hh"
 
 #include "graphic/Camera.hh"
@@ -34,10 +39,12 @@
 #include "entity/RandomBonus.hh"
 #include "entity/WaterBonus.hh"
 #include "entity/EntityFactory.hh"
+
 #include "serializer/ISerializedNode.hh"
 #include "serializer/JSONSerializer.hh"
 #include "serializer/Serializer.hh"
 #include "serializer/SerializerException.hh"
+
 #include "sound/SoundManager.hh"
 
 namespace bbm
@@ -337,10 +344,11 @@ namespace bbm
 	Transform		camera = Camera(glm::vec3(currPlayer.getPosition().x, currPlayer.getPosition().y - 2, 10),
 						glm::vec3(currPlayer.getPosition().x, currPlayer.getPosition().y, 0),
 						glm::vec3(0, 0, 1));
-	RenderState		stateSky(projection, cameraSky);
-	RenderState		state(projection, camera, Transform());
 
 	splitScreen(context, projection, itPlayersCamera);
+	RenderState		stateSky(projection, cameraSky);
+	RenderState		state(projection, camera);
+
 	_tilemap.draw(context, state, glm::vec2((*itPlayersCamera)->getPosition().x, (*itPlayersCamera)->getPosition().y));
 	drawEntity(context, state, itPlayersCamera);
 	drawGameBoxes(context, state, itPlayersCamera);
@@ -432,7 +440,7 @@ namespace bbm
     EntitiesIt			entitiesIt;
 
     for (entitiesIt = _entities.begin(); entitiesIt != _entities.end(); entitiesIt++)
-      if (std::abs((*entitiesIt)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 15 &&
+      if (std::abs((*entitiesIt)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 25 &&
 	  std::abs((*entitiesIt)->getPosition().y - (*itPlayersCamera)->getPosition().y) < 10)
 	context.draw(*(*entitiesIt), state);
   }
@@ -447,7 +455,7 @@ namespace bbm
 
   void				GameState::drawGameBoxes(Screen & context, RenderState & state, PlayerIt itPlayersCamera)
   {
-    for (int x = -20; x < 20; x++)
+    for (int x = -25; x < 25; x++)
       for (int y = -10; y < 10; y++)
 	{
 	  int	tx =  (*itPlayersCamera)->getPosition().x;
@@ -470,7 +478,7 @@ namespace bbm
     PlayerIt			itPlayers;
 
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
-      if (std::abs((*itPlayers)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 15 &&
+      if (std::abs((*itPlayers)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 25 &&
 	  std::abs((*itPlayers)->getPosition().y -(*itPlayersCamera)->getPosition().y) < 10)
 	context.draw(*(*itPlayers), state);
   }

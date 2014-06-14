@@ -1,6 +1,12 @@
 #include		<ctime>
+
+#include		"menu/PauseState.hh"
+
 #include		"game/GameManager.hh"
-#include		"PauseState.hh"
+
+#include		"events/InputConfig.hh"
+
+#include		"graphic/Screen.hh"
 
 namespace		bbm
 {

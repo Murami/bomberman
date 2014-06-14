@@ -11,9 +11,9 @@ namespace bbm
   private:
     glm::vec3		_position;
     glm::vec3		_scale;
-    float		_roll;	//x-axis rotation
-    float		_pitch;	//y-axis rotation
-    float		_yaw;	//z-axis rotation
+    float		_roll;
+    float		_pitch;
+    float		_yaw;
 
     mutable Transform	_transform;
     mutable bool	_transformNeedUpdate;

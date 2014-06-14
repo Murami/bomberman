@@ -2,6 +2,7 @@
 #define SCREEN_HH
 
 #include <SdlContext.hh>
+
 #include "ARenderer.hh"
 
 namespace bbm

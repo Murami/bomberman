@@ -1,8 +1,13 @@
 #include <iostream>
 #include <exception>
 #include <stdexcept>
+
 #include "events/Input.hh"
+#include "events/InputConfig.hh"
+
 #include "game/GameState.hh"
+#include "game/PlayerConfig.hh"
+
 #include "entity/BombFactory.hh"
 
 const float	maxSpeed = 0.005;
@@ -85,7 +90,8 @@ namespace bbm
 	if (_nbBombs != 0)
 	  {
 	    _nbBombs--;
-	    _gameState.addEntity(BombFactory::getInstance()->create(FIRE, glm::vec2(_position.x, _position.y), _gameState, getID()));
+	    _gameState.addEntity(BombFactory::getInstance()->create(FIRE, glm::vec2(_position.x, _position.y),
+								    _gameState, getID()));
 	  }
       }
     if (input.getKeyDown(_playerConfig.inputConfig->getKey("bomb2")))
@@ -93,7 +99,8 @@ namespace bbm
 	if (_nbBombsBonus != 0 && _typeBomb != FIRE)
 	  {
 	    if (_typeBomb == RANDOM)
-	      _gameState.addEntity(BombFactory::getInstance()->createRandom(glm::vec2(_position.x, _position.y), _gameState, getID()));
+	      _gameState.addEntity(BombFactory::getInstance()->createRandom(glm::vec2(_position.x, _position.y),
+									    _gameState, getID()));
 	    else
 	      _gameState.addEntity(BombFactory::getInstance()->create(_typeBomb, glm::vec2(_position.x, _position.y),
 								      _gameState, getID()));

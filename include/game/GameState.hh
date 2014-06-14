@@ -3,12 +3,16 @@
 
 #include <list>
 #include <map>
+
+#include "menu/Skybox.hh"
+
 #include "game/IGameState.hh"
 #include "game/TileMap.hh"
-#include "graphic/Transform.hh"
-#include "entity/Player.hh"
 #include "game/AI.hh"
-#include "menu/Skybox.hh"
+#include "entity/Player.hh"
+
+#include "graphic/Transform.hh"
+
 #include "serializer/ISerializable.hh"
 
 namespace bbm
