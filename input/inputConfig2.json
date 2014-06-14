@@ -14,7 +14,7 @@
       },
       "3" : {
          "action" : "left",
-         "key" : "SDLK_q"
+         "key" : "SDLK_a"
       },
       "4" : {
          "action" : "right",
@@ -22,7 +22,7 @@
       },
       "5" : {
          "action" : "up",
-         "key" : "SDLK_z"
+         "key" : "SDLK_w"
       }
    }
 }

@@ -180,7 +180,6 @@ namespace bbm
 
   void			GameState::unpack(const ISerializedNode & current)
   {
-
     PlayerConfig	playerConfig;
     ISerializedNode*	entityListNode;
     ISerializedNode*	playersListNode;
@@ -298,8 +297,18 @@ namespace bbm
     glEnable(GL_SCISSOR_TEST);
     glEnable(GL_DEPTH_TEST);
 
-    this->_hud = new HUD();
-    this->_hud->initialize();
+    HUD* hud = new HUD();
+    hud->initialize();
+    this->_huds.push_back(hud);
+    hud = new HUD();
+    hud->initialize();
+    this->_huds.push_back(hud);
+    hud = new HUD();
+    hud->initialize();
+    this->_huds.push_back(hud);
+    hud = new HUD();
+    hud->initialize();
+    this->_huds.push_back(hud);
 
     std::vector<PlayerConfig>::iterator it;
 
@@ -372,7 +381,10 @@ namespace bbm
 	glDisable(GL_CULL_FACE);
 	context.draw(_skybox, stateSky);
 	if (this->_printHud)
-	  this->_hud->draw(context, stateSky);
+	  {
+	    size_t i = std::distance(this->_players.begin(), itPlayersCamera);
+	    this->_huds[i]->draw(context, stateSky);
+	  }
 	glEnable(GL_CULL_FACE);
       }
     if (this->_flush)
@@ -515,7 +527,13 @@ namespace bbm
 	_manager.push(state);
  	return;
       }
-    this->_hud->update(*(this->_players.begin()));
+    size_t i = 0;
+    for (std::list<Player*>::iterator it = this->_players.begin();
+	 it != this->_players.end(); it++)
+      {
+	this->_huds[i]->update(*it);
+	i++;
+      }
     updateAIPlayer(time, input);
     updateEntity(time, input);
     _skybox.update();

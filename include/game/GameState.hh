@@ -1,15 +1,16 @@
 #ifndef GAMESTATE_HH
-#define GAMESTATE_HH
+# define GAMESTATE_HH
 
-#include <list>
-#include <map>
+# include <vector>
+# include <list>
+# include <map>
 
-#include "menu/Skybox.hh"
+# include "menu/Skybox.hh"
 
-#include "game/IGameState.hh"
-#include "game/TileMap.hh"
-#include "game/AI.hh"
-#include "entity/Player.hh"
+# include "game/IGameState.hh"
+# include "game/TileMap.hh"
+# include "game/AI.hh"
+# include "entity/Player.hh"
 
 #include "graphic/Transform.hh"
 
@@ -81,6 +82,7 @@ namespace bbm
     bool			_flush;
     std::list<AEntity*>		_entities;
     std::list<Player*>		_players;
+    std::vector<HUD*>		_huds;
     std::list<AI*>		_AIs;
     std::vector<AEntity*>	_gameboxes;
     glm::ivec2			_mapsize;
@@ -88,7 +90,6 @@ namespace bbm
     std::string			_tilemapName;
     GameManager&		_manager;
     GameStateConfig*		_config;
-    HUD*			_hud;
     bool			_printHud;
   };
 };
