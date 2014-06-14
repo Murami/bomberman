@@ -1,6 +1,12 @@
 #include		<ctime>
+
+#include		"menu/PauseState.hh"
+
 #include		"game/GameManager.hh"
-#include		"PauseState.hh"
+
+#include		"events/InputConfig.hh"
+
+#include		"graphic/Screen.hh"
 
 namespace		bbm
 {
@@ -608,9 +614,9 @@ namespace		bbm
     struct tm		tstruct;
     char		buf[80];
     tstruct = *localtime(&now);
-    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
+    strftime(buf, sizeof(buf), "%d_%m_%Y-%X", &tstruct);
     ss << buf;
-    _gameState.save("save_" + ss.str());
+    _gameState.save(ss.str());
     this->_manager.pop();
     this->_manager.pop();
   }

@@ -16,6 +16,7 @@ namespace bbm
   {
     _texture = NULL;
     _shader = NULL;
+    _geometry.setColor(glm::vec4(1, 1, 1, 1));
     _needBuild = false;
   }
 
@@ -109,6 +110,6 @@ namespace bbm
     current.get("primitive", _primitiveName);
     setTexture(_textureName);
     setShader(_shaderName);
-    _primitive = bbm::IDrawable::primitives.at(_primitiveName);
+    _primitive = GL_QUADS;
   }
 };

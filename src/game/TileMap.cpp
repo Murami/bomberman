@@ -34,15 +34,15 @@ namespace bbm
 
     _size = glm::ivec2(x, y);
     _tiles.resize(_size.x * _size.y, NULL);
-    _object.initialize("ground", "default", "GL_QUADS");
+    _object.initialize("ground", "default2", "GL_QUADS");
     _object.pushVertex(glm::vec3(0, 0, 0));
     _object.pushVertex(glm::vec3(x, 0, 0));
     _object.pushVertex(glm::vec3(x, y, 0));
     _object.pushVertex(glm::vec3(0, y, 0));
     _object.pushUv(glm::vec2(0, 0));
-    _object.pushUv(glm::vec2(x / 8, 0));
-    _object.pushUv(glm::vec2(x / 8, y / 8));
-    _object.pushUv(glm::vec2(0, y / 8));
+    _object.pushUv(glm::vec2(x, 0));
+    _object.pushUv(glm::vec2(x, y));
+    _object.pushUv(glm::vec2(0, y));
     _object.build();
 
     for (i = 0; i < x; i++)
@@ -93,14 +93,15 @@ namespace bbm
 	throw SerializerException("Deserializer TileMap Error : " + std::string(ex.what()));
       }
 
+    _object.initialize("ground", "default2", "GL_QUADS");
     _object.pushVertex(glm::vec3(0, 0, 0));
     _object.pushVertex(glm::vec3(_size.x, 0, 0));
     _object.pushVertex(glm::vec3(_size.x, _size.y, 0));
     _object.pushVertex(glm::vec3(0, _size.y, 0));
     _object.pushUv(glm::vec2(0, 0));
-    _object.pushUv(glm::vec2(_size.x / 25, 0));
-    _object.pushUv(glm::vec2(_size.x / 25, _size.y / 25));
-    _object.pushUv(glm::vec2(0, _size.y / 25));
+    _object.pushUv(glm::vec2(_size.x, 0));
+    _object.pushUv(glm::vec2(_size.x, _size.y));
+    _object.pushUv(glm::vec2(0, _size.y));
     _object.build();
   }
 
@@ -160,7 +161,7 @@ namespace bbm
     ISerializedNode*		tileNode;
 
     current.get("size", _size);
-    current.get("ground", _object);
+    // current.get("ground", _object);
     _tiles.resize(_size.x * _size.y, NULL);
     vectorNode = current.get("tiles");
     size = vectorNode->size();
@@ -235,7 +236,7 @@ namespace bbm
 
     for (int y = -10; y < 10; y++)
       {
-    	for (int x = -20; x < 20; x++)
+    	for (int x = -25; x < 25; x++)
     	  {
 	    try
 	      {

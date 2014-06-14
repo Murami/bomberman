@@ -2,7 +2,11 @@
 #define GAME_HH
 
 #include <SdlContext.hh>
+
+#include "graphic/Screen.hh"
+
 #include "events/Input.hh"
+
 #include "game/GameManager.hh"
 
 namespace bbm

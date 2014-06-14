@@ -143,9 +143,9 @@ MD		=	mkdir -p
 
 ## CONSTANTS
 
-DBGBOOL		=	yes
+DBGBOOL		=	no
 
-PROFILE		=	yes
+PROFILE		=	no
 
 DBG		=	-g3		\
 			-ggdb

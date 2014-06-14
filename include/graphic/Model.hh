@@ -2,11 +2,13 @@
 #define MODEL_HH
 
 # include	<string>
+
 # include	<Model.hh>
-# include	"graphic/ShaderManager.hh"
-# include	"BasicShader.hh"
+# include	<BasicShader.hh>
+
 # include	"graphic/IDrawable.hh"
 # include	"graphic/Transformable.hh"
+# include	"graphic/ShaderManager.hh"
 
 namespace bbm
 {

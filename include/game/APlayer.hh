@@ -9,6 +9,12 @@
 # include "graphic/Model.hh"
 # include "graphic/Transformable.hh"
 # include "game/Wall.hh"
+#include "entity/Marvin.hh"
+#include "entity/AEntity.hh"
+
+#include "graphic/IDrawable.hh"
+#include "graphic/Transformable.hh"
+#include "graphic/Model.hh"
 
 namespace bbm
 {
