@@ -29,7 +29,7 @@ namespace bbm
   {
   }
 
-  void			PowerBomb::initialize()
+  void					PowerBomb::initialize()
   {
     _type = "PowerBomb";
     _model.setRoll(90);
@@ -37,27 +37,36 @@ namespace bbm
     _model.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
   }
 
-  bool			PowerBomb::addExplode(float x, float y)
+  bool					PowerBomb::addExplode(float x, float y)
   {
-    std::list<AEntity*>::iterator it;
+    std::list<AEntity*>::iterator	it;
+    glm::ivec2				mapsize = _gameState.getMapSize();
+    std::vector<AEntity*>		map = _gameState.getGameBoxes();
+    AEntity*				tmp;
+    float				delta = 0.01;
 
     if (_gameState.getTileMap().collide(_pos.x + x + 0.5, _pos.y + y + 0.5))
       return (false);
-
-    _gameState.addEntity(new PowerBombExplode(glm::vec2(_pos.x + x, _pos.y + y), _gameState, _idPlayer));
-    for (it = _gameState.getEntities().begin(); it != _gameState.getEntities().end(); it++)
+    _gameState.addEntity(new PowerBombExplode(glm::vec2(_pos.x + x, _pos.y + y),
+					      _gameState, _idPlayer));
+    tmp = map[_pos.x + x + (_pos.y + y) * mapsize.x];
+    if (tmp != NULL)
       {
-	if ((*it)->getType() == "GameBox" && (*it)->collide(glm::vec3(_pos.x + x + 0.5, _pos.y + y + 0.5, 0)))
+	if (tmp->collide(glm::vec3(_pos.x + x + 1 - delta, _pos.y + y + delta, 0)) ||
+	    tmp->collide(glm::vec3(_pos.x + x + delta, _pos.y + y + 1 - delta, 0)) ||
+	    tmp->collide(glm::vec3(_pos.x + x + 0.5, _pos.y + y + 0.5, 0)) ||
+	    tmp->collide(glm::vec3(_pos.x + x + 1 - delta, _pos.y + y + 1 - delta, 0)) ||
+	    tmp->collide(glm::vec3(_pos.x + x + 1 - delta, _pos.y + y + delta, 0)))
 	  return (false);
       }
     return (true);
   }
 
-  void			PowerBomb::update(float time)
+  void					PowerBomb::update(float time)
   {
-    APlayer&	player =  _gameState.getPlayer(_idPlayer);
-    glm::vec2	playerPosition = player.getPosition();
-    float	delta = player.getDelta();
+    APlayer&				player =  _gameState.getPlayer(_idPlayer);
+    glm::vec2				playerPosition = player.getPosition();
+    float				delta = player.getDelta();
 
     if (_anim <= 2)
       {
@@ -91,22 +100,22 @@ namespace bbm
       }
   }
 
-  void			PowerBomb::draw(ARenderer& renderer, const RenderState& renderState)
+  void					PowerBomb::draw(ARenderer& renderer, const RenderState& renderState)
   {
     renderer.draw(_model, renderState);
   }
 
-  bool			PowerBomb::expired() const
+  bool					PowerBomb::expired() const
   {
     return (_used);
   }
 
-  const std::string &	PowerBomb::getType() const
+  const std::string &			PowerBomb::getType() const
   {
     return (_type);
   }
 
-  bool			PowerBomb::collide(const glm::vec3 & pos)
+  bool					PowerBomb::collide(const glm::vec3 & pos)
   {
     if (pos.x < _pos.x + 1 - delta && pos.x >= _pos.x + delta &&
     	pos.y < _pos.y + 1 - delta && pos.y  >= _pos.y + delta)
@@ -114,7 +123,7 @@ namespace bbm
     return (false);
   }
 
-  void			PowerBomb::interact(AEntity * entity)
+  void					PowerBomb::interact(AEntity * entity)
   {
     if (entity->getType() == "PowerBombExplode" || entity->getType() == "FireBombExplode")
       _lifespan = 0;

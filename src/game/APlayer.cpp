@@ -124,6 +124,32 @@ namespace bbm
       }
   }
 
+  void				APlayer::collideGameBoxes()
+  {
+    glm::ivec2			mapsize = _gameState.getMapSize();
+    std::vector<AEntity*>	_map = _gameState.getGameBoxes();
+    int				posx = _position.x;
+    int				posy = _position.y;
+    AEntity*			tmp;
+
+    for (int x = -1; x != 2; x++)
+      for (int y = -1; y != 2; y++)
+	{
+	  if (posx + x >= 0 && posy + y >= 0)
+	    {
+	      tmp = _map[posx + x + (posy + y) * mapsize.x];
+	      if (tmp != NULL)
+		{
+		  if (tmp->collide(glm::vec3(_position.x +_move.x + 1 - delta, _position.y + _move.y + delta, 0)) ||
+		      tmp->collide(glm::vec3(_position.x +_move.x + delta, _position.y + _move.y + 1 - delta, 0)) ||
+		      tmp->collide(glm::vec3(_position.x +_move.x + 1 - delta, _position.y + _move.y + 1 - delta, 0)) ||
+		      tmp->collide(glm::vec3(_position.x +_move.x + delta, _position.y + _move.y + delta, 0)))
+		    tmp->interact(this);
+		}
+	    }
+	}
+  }
+
   void			APlayer::manageModel(float time)
   {
     _model.update(time);
@@ -157,6 +183,7 @@ namespace bbm
       glm::normalize(_move);
     _move *= _speed * time;
     collideEntity();
+    collideGameBoxes();
     collideMap();
     _position += _move;
     _model.setPosition(glm::vec3(_position.x + 0.5, _position.y + 0.5, 0));

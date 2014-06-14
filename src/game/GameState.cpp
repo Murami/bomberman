@@ -325,134 +325,154 @@ namespace bbm
   {
     (void) time;
     Transform		cameraSky = Camera(glm::vec3(10, 0, -10), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
-    PlayerIt		itPlayersCamera;
     Transform		projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
+    PlayerIt		itPlayersCamera;
 
     context.split(glm::ivec2(0, 0), glm::ivec2(context.getSize().x, context.getSize().y));
     context.clear();
+
     for (itPlayersCamera = _players.begin(); itPlayersCamera != _players.end(); itPlayersCamera++)
       {
-	Player&		currPlayer = *(*itPlayersCamera);
-	Transform	camera = Camera(glm::vec3(currPlayer.getPosition().x, currPlayer.getPosition().y - 2, 10),
-					glm::vec3(currPlayer.getPosition().x, currPlayer.getPosition().y, 0),
-					glm::vec3(0, 0, 1));
-	/// SPLIT SCREEN
-	if (_players.size() == 2)
-	  {
-	    if (std::distance(_players.begin(), itPlayersCamera) == 0)
-	      {
-		context.split(glm::ivec2(0, context.getSize().y / 2),
-			      glm::ivec2(context.getSize().x, context.getSize().y / 2));
-		projection = ProjectionPerspective(60, context.getSize().x / (context.getSize().y / 2), 1, 1000);
-	      }
-
-	    if (std::distance(_players.begin(), itPlayersCamera) == 1)
-	      {
-		context.split(glm::ivec2(0, 0),
-			      glm::ivec2(context.getSize().x, context.getSize().y / 2));
-		projection = ProjectionPerspective(60, context.getSize().x / (context.getSize().y / 2), 1, 1000);
-	      }
-	  }
-	else if (_players.size() == 3)
-	  {
-	    if (std::distance(_players.begin(), itPlayersCamera) == 0)
-	      {
-		context.split(glm::ivec2(0, context.getSize().y / 2),
-			      glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
-		projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
-	      }
-
-	    if (std::distance(_players.begin(), itPlayersCamera) == 1)
-	      {
-		context.split(glm::ivec2(context.getSize().x / 2, context.getSize().y / 2),
-			      glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
-		projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
-	      }
-
-	    if (std::distance(_players.begin(), itPlayersCamera) == 2)
-	      {
-		context.split(glm::ivec2(0, 0),
-			      glm::ivec2(context.getSize().x, context.getSize().y / 2));
-		projection = ProjectionPerspective(60, context.getSize().x / (context.getSize().y / 2), 1, 1000);
-	      }
-	  }
-	else if (_players.size() == 4)
-	  {
-	    if (std::distance(_players.begin(), itPlayersCamera) == 0)
-	      {
-		context.split(glm::ivec2(0, context.getSize().y / 2),
-			      glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
-		projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
-	      }
-
-	    if (std::distance(_players.begin(), itPlayersCamera) == 1)
-	      {
-		context.split(glm::ivec2(context.getSize().x / 2, context.getSize().y / 2),
-			      glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
-		projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
-	      }
-
-	    if (std::distance(_players.begin(), itPlayersCamera) == 2)
-	      {
-		context.split(glm::ivec2(0, 0),
-			      glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
-		projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
-	      }
-
-	    if (std::distance(_players.begin(), itPlayersCamera) == 3)
-	      {
-		context.split(glm::ivec2(context.getSize().x / 2, 0),
-			      glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
-		projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
-	      }
-	  }
+	Player&			currPlayer = *(*itPlayersCamera);
+	Transform		camera = Camera(glm::vec3(currPlayer.getPosition().x, currPlayer.getPosition().y - 2, 10),
+						glm::vec3(currPlayer.getPosition().x, currPlayer.getPosition().y, 0),
+						glm::vec3(0, 0, 1));
 	RenderState		stateSky(projection, cameraSky);
 	RenderState		state(projection, camera, Transform());
 
+	splitScreen(context, projection, itPlayersCamera);
 	_tilemap.draw(context, state, glm::vec2((*itPlayersCamera)->getPosition().x, (*itPlayersCamera)->getPosition().y));
-
-	//draw entities
-	EntitiesIt		entitiesIt;
-	for (entitiesIt = _entities.begin(); entitiesIt != _entities.end(); entitiesIt++)
-	  if (std::abs((*entitiesIt)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 15 &&
-	      std::abs((*entitiesIt)->getPosition().y - (*itPlayersCamera)->getPosition().y) < 10)
-	    context.draw(*(*entitiesIt), state);
-
-	//draw gameboxes
-	for (int x = -5; x < 5; x++)
-	  for (int y = -5; y < 5; y++)
-	    {
-	      int	tx =  (*itPlayersCamera)->getPosition().x;
-	      int	ty =  (*itPlayersCamera)->getPosition().y;
-
-	      if (x + tx >= 0 && x + tx < _mapsize.x &&
-	      	  y + ty >= 0 && y + ty < _mapsize.y &&
-	      	  _gameboxes[x + tx + (y + ty) * _mapsize.x] != NULL)
-	      	context.draw(*_gameboxes[x + tx + (y + ty) * _mapsize.x], state);
-	      std::cout << _mapsize.x << " " << _mapsize.y << std::endl;
-	      // if (_gameboxes[x + y * _mapsize.x])
-	      // 	context.draw(*_gameboxes[x + y * _mapsize.x], state);
-	    }
-
-
-	//draw players
-	PlayerIt	itPlayers;
-	for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
-	  if (std::abs((*itPlayers)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 15 &&
-	      std::abs((*itPlayers)->getPosition().y -(*itPlayersCamera)->getPosition().y) < 10)
-	    context.draw(*(*itPlayers), state);
-
-	//draw AI
-	std::list<AI*>::iterator	itAIs;
-	for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
-	  context.draw(*(*itAIs), state);
-
+	drawEntity(context, state, itPlayersCamera);
+	drawGameBoxes(context, state, itPlayersCamera);
+	drawPlayer(context, state, itPlayersCamera);
+	drawAI(context, state);
 	glDisable(GL_CULL_FACE);
 	context.draw(_skybox, stateSky);
 	glEnable(GL_CULL_FACE);
       }
     if (this->_flush)
       context.flush();
+  }
+
+  void				GameState::splitScreen(Screen& context, Transform& projection, PlayerIt itPlayersCamera)
+  {
+    if (_players.size() == 2)
+      {
+	if (std::distance(_players.begin(), itPlayersCamera) == 0)
+	  {
+	    context.split(glm::ivec2(0, context.getSize().y / 2),
+			  glm::ivec2(context.getSize().x, context.getSize().y / 2));
+	    projection = ProjectionPerspective(60, context.getSize().x / (context.getSize().y / 2), 1, 1000);
+	  }
+
+	if (std::distance(_players.begin(), itPlayersCamera) == 1)
+	  {
+	    context.split(glm::ivec2(0, 0),
+			  glm::ivec2(context.getSize().x, context.getSize().y / 2));
+	    projection = ProjectionPerspective(60, context.getSize().x / (context.getSize().y / 2), 1, 1000);
+	  }
+      }
+    else if (_players.size() == 3)
+      {
+	if (std::distance(_players.begin(), itPlayersCamera) == 0)
+	  {
+	    context.split(glm::ivec2(0, context.getSize().y / 2),
+			  glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
+	    projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
+	  }
+
+	if (std::distance(_players.begin(), itPlayersCamera) == 1)
+	  {
+	    context.split(glm::ivec2(context.getSize().x / 2, context.getSize().y / 2),
+			  glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
+	    projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
+	  }
+
+	if (std::distance(_players.begin(), itPlayersCamera) == 2)
+	  {
+	    context.split(glm::ivec2(0, 0),
+			  glm::ivec2(context.getSize().x, context.getSize().y / 2));
+	    projection = ProjectionPerspective(60, context.getSize().x / (context.getSize().y / 2), 1, 1000);
+	  }
+      }
+    else if (_players.size() == 4)
+      {
+	if (std::distance(_players.begin(), itPlayersCamera) == 0)
+	  {
+	    context.split(glm::ivec2(0, context.getSize().y / 2),
+			  glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
+	    projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
+	  }
+
+	if (std::distance(_players.begin(), itPlayersCamera) == 1)
+	  {
+	    context.split(glm::ivec2(context.getSize().x / 2, context.getSize().y / 2),
+			  glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
+	    projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
+	  }
+
+	if (std::distance(_players.begin(), itPlayersCamera) == 2)
+	  {
+	    context.split(glm::ivec2(0, 0),
+			  glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
+	    projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
+	  }
+
+	if (std::distance(_players.begin(), itPlayersCamera) == 3)
+	  {
+	    context.split(glm::ivec2(context.getSize().x / 2, 0),
+			  glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
+	    projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
+	  }
+      }
+  }
+
+  void				GameState::drawEntity(Screen & context, RenderState & state, PlayerIt itPlayersCamera)
+  {
+    EntitiesIt			entitiesIt;
+
+    for (entitiesIt = _entities.begin(); entitiesIt != _entities.end(); entitiesIt++)
+      if (std::abs((*entitiesIt)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 15 &&
+	  std::abs((*entitiesIt)->getPosition().y - (*itPlayersCamera)->getPosition().y) < 10)
+	context.draw(*(*entitiesIt), state);
+  }
+
+  void				GameState::drawAI(Screen & context, RenderState & state)
+  {
+    std::list<AI*>::iterator	itAIs;
+
+    for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
+      context.draw(*(*itAIs), state);
+  }
+
+  void				GameState::drawGameBoxes(Screen & context, RenderState & state, PlayerIt itPlayersCamera)
+  {
+    for (int x = -20; x < 20; x++)
+      for (int y = -10; y < 10; y++)
+	{
+	  int	tx =  (*itPlayersCamera)->getPosition().x;
+	  int	ty =  (*itPlayersCamera)->getPosition().y;
+
+	  if (x + tx >= 0 && x + tx < _mapsize.x &&
+	      y + ty >= 0 && y + ty < _mapsize.y &&
+	      _gameboxes[x + tx + (y + ty) * _mapsize.x] != NULL)
+	    {
+	      if (_gameboxes[x + tx + (y + ty) * _mapsize.x]->expired() == true)
+		_gameboxes[x + tx + (y + ty) *_mapsize.x] = NULL;
+	      else
+		context.draw(*_gameboxes[x + tx + (y + ty) * _mapsize.x], state);
+	    }
+	}
+  }
+
+  void				GameState::drawPlayer(Screen & context, RenderState & state, PlayerIt itPlayersCamera)
+  {
+    PlayerIt			itPlayers;
+
+    for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
+      if (std::abs((*itPlayers)->getPosition().x - (*itPlayersCamera)->getPosition().x) < 15 &&
+	  std::abs((*itPlayers)->getPosition().y -(*itPlayersCamera)->getPosition().y) < 10)
+	context.draw(*(*itPlayers), state);
   }
 
   void			GameState::update(float time, const Input& input)
@@ -483,28 +503,28 @@ namespace bbm
       if ((*itAIs)->isDead())
 	nbAi++;
 
-    if (nbPlayer == 0 && nbAi == 0)
-      {
-    	std::cout << "DRAW" << std::endl;
-    	_manager.pop();
-    	_manager.push(new GameOverState(_manager, "draw"));
-      }
-    else if (nbPlayer == 1 && nbAi == 0)
-      {
-    	for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
-    	  if ((*itPlayers)->isDead())
-    	    {
-    	      _manager.pop();
-    	      _manager.push(new GameOverState(_manager, "player1"));
-    	      std::cout << "player numero ? won the game with " << (*itPlayers)->getScore() << "points" << std::endl;
-    	    }
-      }
-    else if (nbPlayer == 0 && nbAi != 0)
-      {
-    	std::cout << "AI won the game !" << std::endl;
-    	_manager.pop();
-    	_manager.push(new GameOverState(_manager, "ia"));
-      }
+    // if (nbPlayer == 0 && nbAi == 0)
+    //   {
+    // 	std::cout << "DRAW" << std::endl;
+    // 	_manager.pop();
+    // 	_manager.push(new GameOverState(_manager, "draw"));
+    //   }
+    // else if (nbPlayer == 1 && nbAi == 0)
+    //   {
+    // 	for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
+    // 	  if ((*itPlayers)->isDead())
+    // 	    {
+    // 	      _manager.pop();
+    // 	      _manager.push(new GameOverState(_manager, "player1"));
+    // 	      std::cout << "player numero ? won the game with " << (*itPlayers)->getScore() << "points" << std::endl;
+    // 	    }
+    //   }
+    // else if (nbPlayer == 0 && nbAi != 0)
+    //   {
+    // 	std::cout << "AI won the game !" << std::endl;
+    // 	_manager.pop();
+    // 	_manager.push(new GameOverState(_manager, "ia"));
+    //   }
 
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
       if ((*itPlayers)->isDead())
@@ -570,22 +590,32 @@ namespace bbm
     throw (std::runtime_error("player not found"));
   }
 
-  std::list<Player*>&	GameState::getPlayerList()
+  const glm::ivec2&	       	GameState::getMapSize() const
   {
-    return (this->_players);
+    return (_mapsize);
   }
 
-  std::list<AI*>&	GameState::getAIList()
+  std::vector<AEntity*>&	GameState::getGameBoxes()
   {
-    return (this->_AIs);
+    return (_gameboxes);
   }
 
-  std::list<AEntity*>&	GameState::getEntities()
+  std::list<Player*>&		GameState::getPlayerList()
+  {
+    return (_players);
+  }
+
+  std::list<AI*>&		GameState::getAIList()
+  {
+    return (_AIs);
+  }
+
+  std::list<AEntity*>&		GameState::getEntities()
   {
     return (_entities);
   }
 
-  TileMap&		GameState::getTileMap()
+  TileMap&			GameState::getTileMap()
   {
     return (_tilemap);
   }

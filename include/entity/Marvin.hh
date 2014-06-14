@@ -16,15 +16,19 @@ namespace bbm
     void	update(float time);
     void	pause();
     void	play();
-    void	draw(ARenderer& renderer, const RenderState& renderState);
 
     static void	initialize();
     static void release();
+
+  protected:
+    void	draw(ARenderer& renderer, const RenderState& renderState);
+
+
   private:
-    glm::vec4				_color;
     bool				_pause;
-    gdl::BasicShader*			_shader;
     float				_elapsedTime;
+    glm::vec4				_color;
+    gdl::BasicShader*			_shader;
     static std::vector<gdl::Model*>	_animations;
   };
 };

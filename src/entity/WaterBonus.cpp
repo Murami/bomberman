@@ -19,8 +19,8 @@ namespace bbm
   {
     _anim = 0;
     _pos = pos;
-    _type = "WaterBonus";
     _used = false;
+    _type = "WaterBonus";
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
     _wall.setPosition(glm::vec3(_pos.x + translate, _pos.y + translate, 0));
   }
@@ -29,16 +29,16 @@ namespace bbm
   {
   }
 
-  void		WaterBonus::initialize()
+  void			WaterBonus::initialize()
   {
-    _type = "WaterBonus";
     _anim = 0;
     _used = false;
+    _type = "WaterBonus";
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
     _wall.setPosition(glm::vec3(_pos.x + translate, _pos.y + translate, 0));
   }
 
-  void		WaterBonus::update(float time)
+  void			WaterBonus::update(float time)
   {
     (void)time;
     if (_anim <= 2)
@@ -55,12 +55,12 @@ namespace bbm
       }
   }
 
-  bool		WaterBonus::expired() const
+  bool			WaterBonus::expired() const
   {
     return (_used);
   }
 
-  void		WaterBonus::draw(ARenderer& render, const RenderState& renderState)
+  void			WaterBonus::draw(ARenderer& render, const RenderState& renderState)
   {
     render.draw(_wall, renderState);
   }

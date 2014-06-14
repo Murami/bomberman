@@ -17,15 +17,13 @@ namespace bbm
     SpeedBonus(const glm::vec2& pos);
     ~SpeedBonus();
 
+    void		initialize();
     void		update(float time);
-    bool		expired() const;
-    const std::string &	getType() const;
     void		interact(AEntity *);
     bool		collide(const glm::vec3&);
-
+    bool		expired() const;
     const glm::vec2&	getPosition() const;
-
-    void		initialize();
+    const std::string&	getType() const;
 
   protected:
     void		draw(ARenderer& render, const RenderState& renderState);

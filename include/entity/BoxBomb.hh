@@ -21,12 +21,11 @@ namespace bbm
     ~BoxBomb();
 
     void		update(float time);
-    bool		expired() const;
-    const std::string &	getType() const;
+    void		initialize();
     void		interact(AEntity *);
     bool		collide(const glm::vec3&);
-
-    void		initialize();
+    bool		expired() const;
+    const std::string &	getType() const;
 
   protected:
     void		draw(ARenderer& renderer, const RenderState& renderState);

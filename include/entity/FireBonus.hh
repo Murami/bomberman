@@ -17,16 +17,16 @@ namespace bbm
     FireBonus(const glm::vec2& pos);
     ~FireBonus();
 
+    void		initialize();
     void		update(float time);
-    bool		expired() const;
-    void		draw(ARenderer& render, const RenderState& renderState);
-    const std::string &	getType() const;
     void		interact(AEntity *);
+    bool		expired() const;
     bool		collide(const glm::vec3&);
-
+    const std::string &	getType() const;
     const glm::vec2&	getPosition() const;
 
-    void		initialize();
+  protected:
+    void		draw(ARenderer& render, const RenderState& renderState);
 
   private:
     float		_anim;

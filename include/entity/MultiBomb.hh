@@ -20,13 +20,12 @@ namespace bbm
     MultiBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer);
     ~MultiBomb();
 
+    void		interact(AEntity *);
+    void		initialize();
     void		update(float time);
+    bool		collide(const glm::vec3&);
     bool		expired() const;
     const std::string &	getType() const;
-    void		interact(AEntity *);
-    bool		collide(const glm::vec3&);
-
-    void		initialize();
 
   protected:
     void		draw(ARenderer& renderer, const RenderState& renderState);

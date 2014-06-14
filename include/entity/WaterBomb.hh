@@ -20,13 +20,12 @@ namespace bbm
     WaterBomb(const glm::vec2& position, GameState& gameState, unsigned int idPlayer);
     ~WaterBomb();
 
+    void		initialize();
     void		update(float time);
-    bool		expired() const;
-    const std::string &	getType() const;
     void		interact(AEntity *);
     bool		collide(const glm::vec3&);
-
-    void		initialize();
+    bool		expired() const;
+    const std::string &	getType() const;
 
   protected:
     void		draw(ARenderer& renderer, const RenderState& renderState);

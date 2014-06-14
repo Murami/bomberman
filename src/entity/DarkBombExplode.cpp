@@ -25,33 +25,34 @@ namespace bbm
   {
   }
 
-  void			DarkBombExplode::initialize()
+  void					DarkBombExplode::initialize()
   {
     _type = "DarkBombExplode";
     _wall.setPosition(glm::vec3(_pos.x, _pos.y, 0));
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
   }
 
-  void			DarkBombExplode::update(float time)
+  void					DarkBombExplode::update(float time)
   {
     _lifespan -= time;
     collideEntity();
+    collideGameBoxes();
   }
 
-  void			DarkBombExplode::draw(ARenderer& renderer,
-					      const RenderState& renderState)
+  void					DarkBombExplode::draw(ARenderer& renderer,
+							      const RenderState& renderState)
   {
     renderer.draw(_wall, renderState);
   }
 
-  bool			DarkBombExplode::expired() const
+  bool					DarkBombExplode::expired() const
   {
     return (_lifespan <= 0);
   }
 
-  void			DarkBombExplode::collideEntity()
+  void					DarkBombExplode::collideEntity()
   {
-    std::list<AEntity*>::iterator it;
+    std::list<AEntity*>::iterator	it;
 
     for (it = _gameState.getEntities().begin(); it != _gameState.getEntities().end(); it++)
       {
@@ -65,12 +66,31 @@ namespace bbm
       }
   }
 
-  const std::string &	DarkBombExplode::getType() const
+  void					DarkBombExplode::collideGameBoxes()
+  {
+    glm::ivec2				mapsize = _gameState.getMapSize();
+    std::vector<AEntity*>		map = _gameState.getGameBoxes();
+    AEntity*				tmp;
+    float				delta = 0.01;
+
+    tmp = map[_pos.x + _pos.y * mapsize.x];
+    if (tmp != NULL)
+      {
+	if (tmp->collide(glm::vec3(_pos.x + 1 - delta, _pos.y + delta, 0)) ||
+	    tmp->collide(glm::vec3(_pos.x + delta, _pos.y + 1 - delta, 0)) ||
+	    tmp->collide(glm::vec3(_pos.x + 0.5, _pos.y + 0.5, 0)) ||
+	    tmp->collide(glm::vec3(_pos.x + 1 - delta, _pos.y + 1 - delta, 0)) ||
+	    tmp->collide(glm::vec3(_pos.x + 1 - delta, _pos.y + delta, 0)))
+	  tmp->interact(this);
+      }
+  }
+
+  const std::string &			DarkBombExplode::getType() const
   {
     return (_type);
   }
 
-  bool			DarkBombExplode::collide(const glm::vec3 & pos)
+  bool					DarkBombExplode::collide(const glm::vec3 & pos)
   {
     if (pos.x < _pos.x + 1 && pos.x >= _pos.x &&
     	pos.y < _pos.y + 1 && pos.y  >= _pos.y)
@@ -78,7 +98,7 @@ namespace bbm
     return (false);
   }
 
-  void			DarkBombExplode::interact(AEntity * entity)
+  void					DarkBombExplode::interact(AEntity * entity)
   {
     if (entity->getType() == "Player" || entity->getType() == "AI")
       {

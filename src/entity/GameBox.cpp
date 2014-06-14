@@ -67,13 +67,14 @@ namespace bbm
 
   void			GameBox::interact(AEntity *entity)
   {
+    std::cout << "interact avec " << entity->getType() << std::endl;
     if (entity->getType() == "Player" ||
 	entity->getType() == "AI")
       {
 	APlayer*	player = dynamic_cast<APlayer*>(entity);
-	glm::vec2 playerMove = player->getMove();
-	glm::vec2 playerPosition = player->getPosition();
-	float delta = player->getDelta();
+	glm::vec2	playerMove = player->getMove();
+	glm::vec2	playerPosition = player->getPosition();
+	float		delta = player->getDelta();
 
 	if (collide(glm::vec3(playerPosition.x + playerMove.x + 1 - delta, playerPosition.y  + 1 - delta, 0)) ||
 	    collide(glm::vec3(playerPosition.x + playerMove.x + 1 - delta, playerPosition.y  + delta, 0)) ||
@@ -104,7 +105,8 @@ namespace bbm
       {
 	if (_used == false)
 	  {
-	    AEntity *bonus;
+	    AEntity*				bonus;
+
 	    dynamic_cast<ABombExplode*>(entity)->setLifeSpan(0);
 	    bonus = BonusFactory::getInstance()->createRandom(_pos);
 	    if (bonus != NULL)

@@ -36,12 +36,12 @@ namespace bbm
     _wall.setPosition(glm::vec3(_pos.x - translate + 1, _pos.y + translate, 0));
   }
 
-  void		BoxBonus::initialize()
+  void			BoxBonus::initialize()
   {
 
   }
 
-  void		BoxBonus::update(float time)
+  void			BoxBonus::update(float time)
   {
     (void)time;
     if (_anim <= 2)
@@ -58,12 +58,12 @@ namespace bbm
       }
   }
 
-  bool		BoxBonus::expired() const
+  bool			BoxBonus::expired() const
   {
     return (_used);
   }
 
-  void		BoxBonus::draw(ARenderer& render, const RenderState& renderState)
+  void			BoxBonus::draw(ARenderer& render, const RenderState& renderState)
   {
     render.draw(_wall, renderState);
   }

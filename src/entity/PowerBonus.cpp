@@ -19,9 +19,9 @@ namespace bbm
   {
     _anim = 0;
     _pos = pos;
-    _type = "PowerBonus";
     _used = false;
     _wall.yaw(90);
+    _type = "PowerBonus";
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
     _wall.setPosition(glm::vec3(_pos.x - translate + 1, _pos.y + translate, 0));
   }
@@ -30,17 +30,17 @@ namespace bbm
   {
   }
 
-  void		PowerBonus::initialize()
+  void			PowerBonus::initialize()
   {
-    _type = "PowerBonus";
     _anim = 0;
     _used = false;
     _wall.yaw(90);
+    _type = "PowerBonus";
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
     _wall.setPosition(glm::vec3(_pos.x - translate + 1, _pos.y + translate, 0));
   }
 
-  void		PowerBonus::update(float time)
+  void			PowerBonus::update(float time)
   {
     (void)time;
     if (_anim <= 2)
@@ -57,12 +57,12 @@ namespace bbm
       }
   }
 
-  bool		PowerBonus::expired() const
+  bool			PowerBonus::expired() const
   {
     return (_used);
   }
 
-  void		PowerBonus::draw(ARenderer& render, const RenderState& renderState)
+  void			PowerBonus::draw(ARenderer& render, const RenderState& renderState)
   {
     render.draw(_wall, renderState);
   }

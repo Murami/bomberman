@@ -19,9 +19,9 @@ namespace bbm
   {
     _anim = 0;
     _pos = pos;
-    _type = "SpeedBonus";
     _used = false;
     _wall.yaw(90);
+    _type = "SpeedBonus";
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
     _wall.setPosition(glm::vec3(_pos.x + 1 - translate, _pos.y + translate, 0));
   }
@@ -32,10 +32,10 @@ namespace bbm
 
   void			SpeedBonus::initialize()
   {
-    _type = "SpeedBonus";
     _anim = 0;
     _used = false;
     _wall.yaw(90);
+    _type = "SpeedBonus";
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
     _wall.setPosition(glm::vec3(_pos.x + 1 - translate, _pos.y + translate, 0));
   }

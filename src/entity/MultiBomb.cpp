@@ -40,13 +40,22 @@ namespace bbm
   bool			MultiBomb::addExplode(float x, float y)
   {
     std::list<AEntity*>::iterator it;
+    glm::ivec2				mapsize = _gameState.getMapSize();
+    std::vector<AEntity*>		map = _gameState.getGameBoxes();
+    AEntity*				tmp;
+    float				delta = 0.01;
+
 
     if (_gameState.getTileMap().collide(_pos.x + x + 0.5, _pos.y + y + 0.5))
       return (false);
-
-    for (it = _gameState.getEntities().begin(); it != _gameState.getEntities().end(); it++)
+    tmp = map[_pos.x + x + (_pos.y + y) * mapsize.x];
+    if (tmp != NULL)
       {
-	if ((*it)->getType() == "GameBox" && (*it)->collide(glm::vec3(_pos.x + x + 0.5, _pos.y + y + 0.5, 0)))
+	if (tmp->collide(glm::vec3(_pos.x + x + 1 - delta, _pos.y + y + delta, 0)) ||
+	    tmp->collide(glm::vec3(_pos.x + x + delta, _pos.y + y + 1 - delta, 0)) ||
+	    tmp->collide(glm::vec3(_pos.x + x + 0.5, _pos.y + y + 0.5, 0)) ||
+	    tmp->collide(glm::vec3(_pos.x + x + 1 - delta, _pos.y + y + 1 - delta, 0)) ||
+	    tmp->collide(glm::vec3(_pos.x + x + 1 - delta, _pos.y + y + delta, 0)))
 	  return (false);
       }
     _gameState.addEntity(new FireBomb(glm::vec2(_pos.x + x, _pos.y + y), _gameState, _idPlayer));

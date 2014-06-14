@@ -17,16 +17,15 @@ namespace bbm
     WaterBombExplode(const glm::vec2& position, GameState& gameState);
     ~WaterBombExplode();
 
-    void			update(float time);
-    bool			expired() const;
-    const std::string &		getType() const;
+    void			initialize();
     void			interact(AEntity *);
     void			collideEntity();
+    void			collideGameBoxes();
     void			setLifespan(float);
+    void			update(float time);
     bool			collide(const glm::vec3&);
-
-
-    void			initialize();
+    bool			expired() const;
+    const std::string &		getType() const;
 
   protected:
     void			draw(ARenderer& renderer, const RenderState& renderState);

@@ -17,15 +17,15 @@ namespace bbm
     FireBombExplode(const glm::vec2& position, GameState& gameState, unsigned int id);
     ~FireBombExplode();
 
+    void			initialize();
     void			update(float time);
-    bool			expired() const;
-    const std::string &		getType() const;
     void			interact(AEntity *);
     void			collideEntity();
+    void			collideGameBoxes();
     void			setLifespan(float);
+    bool			expired() const;
     bool			collide(const glm::vec3&);
-
-    void			initialize();
+    const std::string &		getType() const;
 
   protected:
     void			draw(ARenderer& renderer, const RenderState& renderState);

@@ -21,7 +21,7 @@ namespace bbm
 
   }
 
-  void		ABombExplode::setLifeSpan(float time)
+  void			ABombExplode::setLifeSpan(float time)
   {
     _lifespan = time;
   }

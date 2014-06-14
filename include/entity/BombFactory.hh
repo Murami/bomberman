@@ -41,7 +41,6 @@ namespace bbm
     AEntity*					createMultiBomb(const glm::vec2 &,
 								GameState&,  unsigned int);
 
-
   public:
     static BombFactory*				_instance;
     static std::map<BombType, FactoryMethod>	_map;

@@ -18,15 +18,16 @@ namespace bbm
     ~WaterBonus();
 
     void		update(float time);
-    bool		expired() const;
-    void		draw(ARenderer& render, const RenderState& renderState);
-    const std::string &	getType() const;
-    void		interact(AEntity *);
-    bool		collide(const glm::vec3&);
-
-    const glm::vec2&	getPosition() const;
-
     void		initialize();
+    void		interact(AEntity *);
+    bool		expired() const;
+    bool		collide(const glm::vec3&);
+    const glm::vec2&	getPosition() const;
+    const std::string&	getType() const;
+
+  protected:
+    void		draw(ARenderer& render, const RenderState& renderState);
+
 
   private:
     float		_anim;

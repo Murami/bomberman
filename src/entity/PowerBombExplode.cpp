@@ -45,6 +45,7 @@ namespace bbm
   {
     _lifespan -= time;
     collideEntity();
+    collideGameBoxes();
   }
 
   void			PowerBombExplode::draw(ARenderer& renderer,
@@ -56,6 +57,25 @@ namespace bbm
   bool			PowerBombExplode::expired() const
   {
     return (_lifespan <= 0);
+  }
+
+  void				PowerBombExplode::collideGameBoxes()
+  {
+    glm::ivec2				mapsize = _gameState.getMapSize();
+    std::vector<AEntity*>		map = _gameState.getGameBoxes();
+    AEntity*				tmp;
+    float				delta = 0.01;
+
+    tmp = map[_pos.x + _pos.y * mapsize.x];
+    if (tmp != NULL)
+      {
+	if (tmp->collide(glm::vec3(_pos.x + 1 - delta, _pos.y + delta, 0)) ||
+	    tmp->collide(glm::vec3(_pos.x + delta, _pos.y + 1 - delta, 0)) ||
+	    tmp->collide(glm::vec3(_pos.x + 0.5, _pos.y + 0.5, 0)) ||
+	    tmp->collide(glm::vec3(_pos.x + 1 - delta, _pos.y + 1 - delta, 0)) ||
+	    tmp->collide(glm::vec3(_pos.x + 1 - delta, _pos.y + delta, 0)))
+	  tmp->interact(this);
+      }
   }
 
   void			PowerBombExplode::collideEntity()
