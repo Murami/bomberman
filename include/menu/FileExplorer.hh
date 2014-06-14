@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Wed Jun  4 22:38:50 2014 Manu
-// Last update Fri Jun 13 00:28:52 2014 Manu
+// Last update Fri Jun 13 23:12:41 2014 Manu
 //
 
 #ifndef		__FILEEXPLORER_HH__
@@ -40,15 +40,15 @@ namespace	bbm
     const static std::string	SAVE_PATH;
 
   public :
-    const std::string&	getCurrentFile();
-    const std::string&	getCurrentTexture();
+    const std::string&		getCurrentFile();
+    const std::string&		getCurrentTexture();
 
   public :
-    void		exploreSaves();
+    void			exploreSaves();
 
   public :
-    void		next();
-    void		prev();
+    void			next();
+    void			prev();
 
   public :
     FileExplorer(const std::string&);

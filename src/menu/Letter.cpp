@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 13:12:51 2014 Manu
-// Last update Thu Jun 12 21:17:31 2014 Manu
+// Last update Fri Jun 13 23:14:42 2014 Manu
 //
 
 #include		"LetterManager.hpp"
@@ -22,6 +22,11 @@ namespace	bbm
 						    _scale(1, 1, 1)
   {
     this->_le = le;
+  }
+
+  char		Letter::getLe() const
+  {
+    return (this->_le);
   }
 
   bool		Letter::initialize()

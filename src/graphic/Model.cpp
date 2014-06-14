@@ -1,3 +1,4 @@
+#include <iostream>
 #include <exception>
 #include <stdexcept>
 #include "graphic/Model.hh"
@@ -52,7 +53,6 @@ namespace bbm
     if (_model != NULL)
       {
 	RenderState	newState = renderState;
-
 	newState.transform *= getTransform();
 	renderer.draw(*_model, _shader, newState, _elapsedTime, glm::vec4(1, 1, 1, 1));
       }

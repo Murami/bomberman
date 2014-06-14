@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 11:51:04 2014 Manu
-// Last update Wed Jun 11 14:56:52 2014 Manu
+// Last update Fri Jun 13 23:12:10 2014 Manu
 //
 
 #ifndef		__ABUTTON_HH__
@@ -47,7 +47,7 @@ namespace	bbm
     virtual void	prevState() = 0;
 
   public :
-    bool	useCallback() const;
+    bool		useCallback() const;
     const std::string&	getType() const;
 
   public :

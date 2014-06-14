@@ -1,3 +1,4 @@
+#include		<stdexcept>
 #include		"FileExplorer.hh"
 #include		"events/Input.hh"
 #include		"game/GameManager.hh"
@@ -7,7 +8,6 @@
 #include		"graphic/ProjectionPerspective.hh"
 #include		"MenuState.hh"
 #include		"PauseState.hh"
-
 #include		"serializer/ISerializedNode.hh"
 #include		"serializer/JSONSerializer.hh"
 #include		"serializer/Serializer.hh"
@@ -179,18 +179,18 @@ namespace	bbm
       {
 	menu->createNewStateButton("map width", NULL, 4,
 				   glm::vec4(1, 1, 1, 1), "20");
-	menu->addStateToLastButton("25");
 	menu->addStateToLastButton("50");
+	menu->addStateToLastButton("75");
 	menu->addStateToLastButton("100");
+	menu->addStateToLastButton("150");
 	menu->addStateToLastButton("200");
-	menu->addStateToLastButton("500");
 	menu->createNewStateButton("map height", NULL, 3,
 				   glm::vec4(1, 1, 1, 1), "20");
-	menu->addStateToLastButton("25");
 	menu->addStateToLastButton("50");
+	menu->addStateToLastButton("75");
 	menu->addStateToLastButton("100");
+	menu->addStateToLastButton("150");
 	menu->addStateToLastButton("200");
-	menu->addStateToLastButton("500");
 	menu->createNewButton("next", &IMenuManager::setNewGameMenu,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setPlayMenu,
@@ -694,6 +694,7 @@ namespace	bbm
 	  }
 	it++;
       }
+    throw (std::runtime_error(std::string("Error initializing ") + name));
     std::cerr << "Setting new menu : \'" << name << "\' : not found"
 	      << std::endl;
   }
@@ -710,9 +711,6 @@ namespace	bbm
       {
 	std::cerr << "Error initializing Skybox : " << e.what() << std::endl;
       }
-
-    // il faut throw des exceptions afin de ne pas lancer le menu si une initialization a fail
-
     if (!this->_initializeMainMenu())
       std::cerr << "Error initializing main menu" << std::endl;
     if (!this->_initializePlayMenu())

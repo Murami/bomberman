@@ -7,6 +7,7 @@
 #include "graphic/TextureManager.hh"
 #include "menu/MenuState.hh"
 #include "menu/PauseState.hh"
+#include "menu/IntroState.hh"
 #include "sound/SoundManager.hh"
 
 namespace bbm
@@ -28,6 +29,8 @@ namespace bbm
   {
     FrameManager	frame(60);
     IGameState*		state = new MenuState(_manager);
+    _manager.push(state);
+    state = new IntroState(_manager);
     // IGameState*		state = new PauseState(_manager, NULL);
 
     _manager.push(state);

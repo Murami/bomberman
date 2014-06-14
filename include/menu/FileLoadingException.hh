@@ -16,7 +16,7 @@ namespace	bbm
     virtual ~FileLoadingException() throw();
 
   public :
-    const char*	what() const throw();
+    const char*		what() const throw();
   };
 }
 

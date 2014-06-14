@@ -83,6 +83,8 @@ SRC		=	main				\
 			menu/FileLoadingException	\
 			menu/PauseState			\
 			menu/OpendirException		\
+			menu/IntroState			\
+			menu/IntroMarvin		\
 			sound/SoundManager		\
 			lua/LuaBiche
 

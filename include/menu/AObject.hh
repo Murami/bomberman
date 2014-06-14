@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Sat May 10 15:42:28 2014 Manu
-// Last update Fri Jun  6 14:14:24 2014 Manu
+// Last update Fri Jun 13 19:43:26 2014 Manu
 //
 
 #ifndef		__AOBJECT_HH__
@@ -27,11 +27,6 @@ protected :
 public :
   AObject();
   virtual ~AObject();
-
-// public :
-//   virtual bool	initialize() = 0;
-//   virtual void	update(const gdl::Clock&, gdl::Input&) = 0;
-//   virtual void	draw(gdl::AShader&, const gdl::Clock&) = 0;
 
 public :
   void		translate(const glm::vec3&);
