@@ -283,8 +283,11 @@ namespace bbm
 
   void			GameState::initialize()
   {
-    SerializableVector<glm::ivec2>::iterator	itSpawn;
-    std::vector<glm::vec4>			colors;
+    SerializableVector<glm::ivec2>::iterator				itSpawn;
+    std::vector<glm::vec4>						colors;
+    std::vector<SerializableVector<glm::ivec2>::iterator>		spawnUsed;
+    std::vector<SerializableVector<glm::ivec2>::iterator>::iterator	itSpawnUsed;
+    bool								valid;
 
     colors.resize(4);
     colors[0] = glm::vec4(0.8, 0.2, 0.2, 1);
@@ -309,20 +312,38 @@ namespace bbm
 	if (_config->load == false)
 	  {
 	    itSpawn = _tilemap.getSpawns().begin();
-	    itSpawn += rand() % _tilemap.getSpawns().size();
+	    valid = false;
+	    while (valid == false)
+	      {
+		itSpawn += rand() % _tilemap.getSpawns().size();
+		valid = true;
+		for (itSpawnUsed = spawnUsed.begin(); itSpawnUsed != spawnUsed.end(); ++itSpawnUsed)
+		  if (itSpawn == *itSpawnUsed)
+		    valid = false;
+	      }
 	    (*it).position = glm::vec2(itSpawn->x, itSpawn->y);
+	    spawnUsed.push_back(itSpawn);
 	  }
 	Player*	p = new Player(*this, *it);
 	p->setColor(colors[std::distance(_config->playersConfigs.begin(), it)]);
     	_players.push_back(p);
       }
+
     for(it = _config->AIConfigs.begin();
     	it != _config->AIConfigs.end(); ++it)
       {
 	if (_config->load == false)
 	  {
 	    itSpawn = _tilemap.getSpawns().begin();
-	    itSpawn += rand() % _tilemap.getSpawns().size();
+	    valid = false;
+	    while (valid == false)
+	      {
+		itSpawn += rand() % _tilemap.getSpawns().size();
+		valid = true;
+		for (itSpawnUsed = spawnUsed.begin(); itSpawnUsed != spawnUsed.end(); ++itSpawnUsed)
+		  if (itSpawn == *itSpawnUsed)
+		    valid = false;
+	      }
 	    (*it).position = glm::vec2(itSpawn->x, itSpawn->y);
 	  }
 	_AIs.push_back(new AI(*this, *it));
@@ -470,7 +491,9 @@ namespace bbm
       context.draw(*(*itAIs), state);
   }
 
-  void				GameState::drawGameBoxes(Screen & context, RenderState & state, PlayerIt itPlayersCamera)
+  void				GameState::drawGameBoxes(Screen & context,
+							 RenderState & state,
+							 PlayerIt itPlayersCamera)
   {
     for (int x = -25; x < 25; x++)
       for (int y = -10; y < 10; y++)
@@ -490,7 +513,9 @@ namespace bbm
 	}
   }
 
-  void				GameState::drawPlayer(Screen & context, RenderState & state, PlayerIt itPlayersCamera)
+  void				GameState::drawPlayer(Screen & context,
+						      RenderState & state,
+						      PlayerIt itPlayersCamera)
   {
     PlayerIt			itPlayers;
 

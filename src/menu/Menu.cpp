@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:03 2014 Manu
-// Last update Sat Jun 14 03:08:33 2014 Manu
+// Last update Sat Jun 14 19:38:43 2014 Manu
 //
 
 #include		"FileExplorer.hh"
@@ -179,7 +179,7 @@ namespace	bbm
   void		Menu::createFrame()
   {
     this->_frame = new Frame(glm::vec4(0.5f, 0.5f, 0.5f, 1));
-    this->_frame->scale(glm::vec3(1.0f, 10.0f, 12.0f));
+    this->_frame->scale(glm::vec3(1.0f, 10.0f, 13.5f));
     this->_frame->translate(glm::vec3(0, -5, -10));
     this->_frame->initialize();
   }

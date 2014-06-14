@@ -102,7 +102,7 @@ namespace bbm
     void				updateState();
     void				collideMap();
     void				collideEntity();
-    void				collideGameBoxes();
+    bool				collideGameBoxes();
     void				managePhysics(float time);
     void				manageModel(float time);
     void				pack(ISerializedNode & current) const;
