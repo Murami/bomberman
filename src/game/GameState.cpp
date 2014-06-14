@@ -71,6 +71,8 @@ namespace bbm
     _tilemap.randomize(x, y);
     _mapsize = glm::ivec2(x, y);
     _gameboxes.resize(x * y, NULL);
+    _warning.resize(x * y, NULL);
+    _bonus.resize(x * y, NULL);
     for (posx = 1; posx < x - 1; posx++)
       {
 	for(posy = 1; posy < y - 1; posy++)
@@ -186,6 +188,8 @@ namespace bbm
 
     current.get("mapsize", _mapsize);
     _gameboxes.resize(_mapsize.x * _mapsize.y, NULL);
+    _warning.resize(_mapsize.x * _mapsize.y, NULL);
+    _bonus.resize(_mapsize.x * _mapsize.y, NULL);
     entityListNode = current.get("entity");
     size = entityListNode->size();
     for (index = 0; index < size; index++)
@@ -487,7 +491,6 @@ namespace bbm
   {
     if (input.getKeyDown(SDLK_ESCAPE) || input.getEvent(SDL_QUIT))
       {
-	//_manager.pop();
 	PauseState* state = new PauseState(_manager, *this);
 	_manager.push(state);
  	return;
@@ -558,17 +561,71 @@ namespace bbm
     while (it != _entities.end())
       {
     	if ((*it)->expired())
-    	  it = _entities.erase(it);
+	  {
+
+	    if ((*it)->getType() == "BombBonus" ||
+		(*it)->getType() == "BoxBonus" ||
+		(*it)->getType() == "DarkBonus" ||
+		(*it)->getType() == "FireBonus" ||
+		(*it)->getType() == "MultiBombBonus" ||
+		(*it)->getType() == "PowerBonus" ||
+		(*it)->getType() == "RandomBonus" ||
+		(*it)->getType() == "SpeedBonus" ||
+		(*it)->getType() == "WaterBonus")
+	      {
+		int	x = (*it)->getPosition().x;
+		int	y = (*it)->getPosition().y;
+
+		if (x >= 0 && x < _mapsize.x && y >= 0 && y < _mapsize.y)
+		  _bonus[x + y * _mapsize.x] = NULL;
+	      }
+	    else
+	      {
+		int	x = (*it)->getPosition().x;
+		int	y = (*it)->getPosition().y;
+
+		if (x >= 0 && x < _mapsize.x && y >= 0 && y < _mapsize.y)
+		  _warning[x + y * _mapsize.x] = NULL;
+	      }
+	    delete (*it);
+	    it = _entities.erase(it);
+	  }
     	else
     	  it++;
       }
   }
 
-
   void			GameState::addEntity(AEntity* entity)
   {
+
     if (entity->getType() != "GameBox")
-      _entities.push_back(entity);
+      {
+	if (entity->getType() == "BombBonus" ||
+	    entity->getType() == "BoxBonus" ||
+	    entity->getType() == "DarkBonus" ||
+	    entity->getType() == "FireBonus" ||
+	    entity->getType() == "MultiBombBonus" ||
+	    entity->getType() == "PowerBonus" ||
+	    entity->getType() == "RandomBonus" ||
+	    entity->getType() == "SpeedBonus" ||
+	    entity->getType() == "WaterBonus")
+	  {
+	    int	x = entity->getPosition().x;
+	    int	y = entity->getPosition().y;
+
+	    if (x >= 0 && x < _mapsize.x && y >= 0 && y < _mapsize.y)
+	      _bonus[x + y * _mapsize.x] = entity;
+	  }
+	else
+	  {
+	    int	x = entity->getPosition().x;
+	    int	y = entity->getPosition().y;
+
+	    if (x >= 0 && x < _mapsize.x && y >= 0 && y < _mapsize.y)
+	      _warning[x + y * _mapsize.x] = entity;
+	  }
+	  _entities.push_back(entity);
+      }
     else
       {
 	int	x = entity->getPosition().x;

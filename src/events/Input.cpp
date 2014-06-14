@@ -16,6 +16,8 @@ namespace bbm
     _updateMethods[SDL_JOYAXISMOTION] = &Input::onAxisMotion;
     _updateMethods[SDL_JOYBUTTONDOWN] = &Input::onPressedButton;
     _updateMethods[SDL_JOYBUTTONUP] = &Input::onReleasedButton;
+    for (int i = 0; i < SDL_NumJoysticks(); i++)
+      _joysticks.push_back(Joystick(i));
   }
 
   Input::~Input()

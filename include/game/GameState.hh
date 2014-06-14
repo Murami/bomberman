@@ -82,6 +82,8 @@ namespace bbm
     std::list<Player*>		_players;
     std::list<AI*>		_AIs;
     std::vector<AEntity*>	_gameboxes;
+    std::vector<AEntity*>	_warning;
+    std::vector<AEntity*>	_bonus;
     glm::ivec2			_mapsize;
     TileMap			_tilemap;
     std::string			_tilemapName;

@@ -3,8 +3,24 @@
 
 namespace bbm
 {
-  Joystick::Joystick()
+  Joystick::Joystick(int i)
   {
+    _joystickSDL = SDL_JoystickOpen(i);
+    _axes.resize(SDL_JoystickNumAxes(_joystickSDL));
+    for (int i = 0; i < SDL_JoystickNumAxes(_joystickSDL); i++)
+      {
+	_axes[i]._lastPosition = 0;
+	_axes[i]._position = 0;
+      }
+  }
+
+  Joystick::Joystick(const Joystick& joystick)
+  {
+    _activeButtons = joystick._activeButtons;
+    _pressedButtons = joystick._pressedButtons;
+    _releasedButtons = joystick._releasedButtons;
+    _axes = joystick._axes;
+    _joystickSDL = joystick._joystickSDL;
   }
 
   Joystick::~Joystick()
