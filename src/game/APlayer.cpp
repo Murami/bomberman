@@ -26,10 +26,18 @@ namespace bbm
     _model.setScale(glm::vec3(modelScaleFactor, modelScaleFactor, modelScaleFactor));
     _model.setRoll(90);
     _move = glm::vec2(0, 0);
+    _color = glm::vec4(1, 1, 1, 1);
+    _model.setColor(_color);
   }
 
   APlayer::~APlayer()
   {
+  }
+
+  void			APlayer::setColor(const glm::vec4& color)
+  {
+    _color = color;
+    _model.setColor(_color);
   }
 
   void			APlayer::pack(ISerializedNode & current) const
@@ -48,6 +56,7 @@ namespace bbm
     current.add("idPlayer", _idPlayer);
     current.add("id", getID());
     current.add("lastId", getLastID());
+    current.add("color", _color);
   }
 
   void			APlayer::unpack(const ISerializedNode & current)
@@ -73,6 +82,8 @@ namespace bbm
     current.get("idPlayer", _idPlayer);
     current.get("id", id);
     current.get("lastId", lastId);
+    current.get("color", _color);
+    setColor(_color);
     setID(id);
     setLastID(lastId);
   }

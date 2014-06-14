@@ -92,7 +92,7 @@ namespace	bbm
 
     s.transform = state.transform * this->getTransformation();
     glAlphaFunc(GL_GREATER, 0.9f);
-    r.draw(this->_geom, &this->_texture, this->_shader, s, GL_QUADS);
+    r.draw(this->_geom, &this->_texture, this->_shader, s, GL_QUADS, glm::vec4(1, 1, 1, 1));
   }
 
   Letter::~Letter()

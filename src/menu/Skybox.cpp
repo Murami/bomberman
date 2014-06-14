@@ -101,7 +101,7 @@ namespace	bbm
     RenderState s(state);
 
     s.transform = state.transform * this->getTransformation();
-    r.draw(this->_geom, &this->_texture, this->_shader, s, GL_QUADS);
+    r.draw(this->_geom, &this->_texture, this->_shader, s, GL_QUADS, glm::vec4(1, 1, 1, 1));
   }
 
   Skybox::~Skybox()

@@ -86,7 +86,7 @@ namespace		bbm
 
     s.transform = state.transform * this->getTransformation();
     glAlphaFunc(GL_GREATER, 0.9f);
-    renderer.draw(this->_geom, &this->_texture, this->_shader, s, GL_QUADS);
+    renderer.draw(this->_geom, &this->_texture, this->_shader, s, GL_QUADS, glm::vec4(1, 1, 1, 1));
     this->_icone->draw(renderer, state);
     for (std::list<Letter*>::iterator it = this->_title.begin();
 	 it != this->_title.end(); it++)

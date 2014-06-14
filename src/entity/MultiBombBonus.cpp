@@ -84,16 +84,16 @@ namespace bbm
 
   void			MultiBombBonus::interact(AEntity *entity)
   {
-    if (entity->getType() == "Player")
+    if (entity->getType() == "Player" || entity->getType() == "AI")
       {
 	if (_used == false)
 	  {
-	    dynamic_cast<Player*>(entity)->setTypeBomb(MULTI);
-	    dynamic_cast<Player*>(entity)->addScore(100);
+	    dynamic_cast<APlayer*>(entity)->setTypeBomb(MULTI);
+	    dynamic_cast<APlayer*>(entity)->addScore(100);
 	  }
 	_used = true;
       }
-    if (entity->getType() == "FireBombExplode")
+    if (entity->getType() == "FireBombExplode" || entity->getType() == "PowerBombExplode")
       {
 	_used = true;
       }

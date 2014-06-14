@@ -57,6 +57,7 @@ namespace bbm
     APlayer(GameState& gameState);
     ~APlayer();
 
+    void				setColor(const glm::vec4& color);
     int					getScore() const;
     bool				expired() const;
     void				setMove(const glm::vec2 &);
@@ -95,7 +96,9 @@ namespace bbm
     void				manageModel(float time);
     void				pack(ISerializedNode & current) const;
     void				unpack(const ISerializedNode & current);
+
   protected:
+    glm::vec4				_color;
     glm::vec2				_position;
     glm::vec2				_move;
     int				       	_power;

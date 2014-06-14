@@ -14,14 +14,19 @@ namespace bbm
     AI(GameState& gameState, const PlayerConfig& config);
     ~AI();
 
+    void		initialize();
     void		update(float time);
     const std::string&	getType() const;
-    void		initialize();
 
+    int	getIdPlayer(lua_State*);
     int	goUp(lua_State*);
     int	goLeft(lua_State*);
     int	goRight(lua_State*);
     int	goDown(lua_State*);
+    int	goUpLeft(lua_State*);
+    int	goUpRight(lua_State*);
+    int	goDownLeft(lua_State*);
+    int	goDownRight(lua_State*);
     int	putBomb(lua_State*);
     int	haveBomb(lua_State*);
 

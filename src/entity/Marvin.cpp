@@ -15,10 +15,16 @@ namespace bbm
     _elapsedTime = 0;
     _pause = true;
     _shader = ShaderManager::getInstance()->getShader("default");
+    _color = glm::vec4(1, 1, 1, 1);
   }
 
   Marvin::~Marvin()
   {
+  }
+
+  void	Marvin::setColor(const glm::vec4& color)
+  {
+    _color = color;
   }
 
   void	Marvin::initialize()
@@ -67,6 +73,6 @@ namespace bbm
     int		elapsedTimeInt = _elapsedTime;
 
     newState.transform *= getTransform();
-    renderer.draw(*_animations[elapsedTimeInt % (54 - 38)], _shader, newState, 0);
+    renderer.draw(*_animations[elapsedTimeInt % (54 - 38)], _shader, newState, 0, _color);
   }
 };

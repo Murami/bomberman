@@ -36,7 +36,7 @@ namespace bbm
 
   void	 Screen::draw(gdl::Geometry& geometry, gdl::Texture* texture,
 		      gdl::BasicShader* shader, const RenderState& renderState,
-		      int primitive)
+		      int primitive, const glm::vec4& color)
   {
     if (texture && shader)
       {
@@ -45,17 +45,20 @@ namespace bbm
 	shader->bind();
 	shader->setUniform("view", renderState.camera.getMatrix());
 	shader->setUniform("projection", renderState.projection.getMatrix());
+	shader->setUniform("color", color);
 	geometry.draw(*shader, renderState.transform.getMatrix(), primitive);
       }
   }
 
-  void	Screen::draw(gdl::Model& model, gdl::BasicShader* shader, const RenderState& renderState, float time)
+  void	Screen::draw(gdl::Model& model, gdl::BasicShader* shader, const RenderState& renderState, float time,
+		     const glm::vec4& color)
   {
     if (shader)
       {
 	shader->bind();
 	shader->setUniform("view", renderState.camera.getMatrix());
 	shader->setUniform("projection", renderState.projection.getMatrix());
+	shader->setUniform("color", color);
 	model.draw(*shader, renderState.transform.getMatrix(), time);
       }
   }
