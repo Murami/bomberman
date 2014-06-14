@@ -48,7 +48,7 @@ namespace bbm
     _manager(manager),
     _config(config)
   {
-    // SoundManager::getInstance()->play("FaFTheme");
+    // SoundManager::getInstance()->play("bomberTheme");
     this->_flush = true;
   }
 

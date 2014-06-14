@@ -29,6 +29,7 @@ namespace bbm
     int	goDownRight(lua_State*);
     int	putBomb(lua_State*);
     int	haveBomb(lua_State*);
+    int	getGameBoxes(lua_State*);
 
     std::string						getClassName() const;
     const std::vector<ILuaHeir<AI>::t_MethodPtr>&	getMethodPtr() const;

@@ -30,6 +30,7 @@ namespace bbm
     add_method_to_vector(methods, "goDownRight", &AI::goDownRight);
     add_method_to_vector(methods, "putBomb", &AI::putBomb);
     add_method_to_vector(methods, "haveBomb", &AI::haveBomb);
+    add_method_to_vector(methods, "getGameBoxes", &AI::getGameBoxes);
     return (methods);
   }
 
@@ -76,7 +77,6 @@ namespace bbm
     if (_alive)
       {
 	LuaBiche	script(_scriptName);
-
 	script.addObject("player", this);
 	script.run();
 	managePhysics(time);
@@ -161,6 +161,30 @@ namespace bbm
     if (this->getBomb() <= 0)
       b = false;
     lua_pushboolean(L, (int)b);
+    return (1);
+  }
+
+  int	AI::getGameBoxes(lua_State* L)
+  {
+    std::vector<AEntity*>		tmp;
+    int					mapSize;
+
+    mapSize = _gameState.getMapSize().x;
+    tmp = _gameState.getGameBoxes();
+
+    lua_newtable(L);
+    lua_pushstring(L, "up");
+    lua_pushboolean(L, static_cast<bool>(tmp[_position.x + (_position.y + 1) * mapSize]));
+    lua_rawset(L, -3);
+    lua_pushstring(L, "left");
+    lua_pushboolean(L, static_cast<bool>(tmp[(_position.x - 1) + _position.y * mapSize]));
+    lua_rawset(L, -3);
+    lua_pushstring(L, "right");
+    lua_pushboolean(L, static_cast<bool>(tmp[(_position.x + 1) + _position.y * mapSize]));
+    lua_rawset(L, -3);
+    lua_pushstring(L, "down");
+    lua_pushboolean(L, static_cast<bool>(tmp[_position.x + (_position.y - 1) * mapSize]));
+    lua_rawset(L, -3);
     return (1);
   }
 

@@ -35,7 +35,6 @@ namespace bbm
 
     _manager.push(state);
 
-    SoundManager::getInstance()->play("banzai");
     frame.start();
     while (_manager.top())
       {
