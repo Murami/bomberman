@@ -89,6 +89,7 @@ namespace bbm
 	if (_used == false)
 	  {
 	    dynamic_cast<APlayer*>(entity)->addScore(100);
+	    dynamic_cast<APlayer*>(entity)->increaseMaxBomb();
 	    dynamic_cast<APlayer*>(entity)->addBombs();
 	  }
 	_used = true;

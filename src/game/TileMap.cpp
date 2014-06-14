@@ -31,52 +31,75 @@ namespace bbm
     int		i;
     int		posx;
     int		posy;
+    bool	valid;
 
     _size = glm::ivec2(x, y);
     _tiles.resize(_size.x * _size.y, NULL);
-    _object.initialize("ground", "default", "GL_QUADS");
+    _object.initialize("ground", "default2", "GL_QUADS");
     _object.pushVertex(glm::vec3(0, 0, 0));
     _object.pushVertex(glm::vec3(x, 0, 0));
     _object.pushVertex(glm::vec3(x, y, 0));
     _object.pushVertex(glm::vec3(0, y, 0));
     _object.pushUv(glm::vec2(0, 0));
-    _object.pushUv(glm::vec2(x / 8, 0));
-    _object.pushUv(glm::vec2(x / 8, y / 8));
-    _object.pushUv(glm::vec2(0, y / 8));
+    _object.pushUv(glm::vec2(x, 0));
+    _object.pushUv(glm::vec2(x, y));
+    _object.pushUv(glm::vec2(0, y));
     _object.build();
 
-    for (i = 0; i < x; i++)
+
+    for (posx = 0; posx < x; posx++)
       {
-	tile = new Tile(true, "wall", "default", Tile::Wall);
-	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
-	setTile(i, 0, tile);
+	for (posy = 0; posy < y; posy++)
+	  {
+	    if (posx == 0 || posy == 0 || posx == x - 1 || posy == y - 1 || (posx % 2 == 0 && posy % 2 == 0))
+	      {
+		tile = new Tile(true, "wall", "default", Tile::Wall);
+		tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
+		setTile(posx, posy, tile);
+	      }
+	  }
       }
-    for (i = 0; i < x; i++)
-      {
-	tile = new Tile(true, "wall", "default", Tile::Wall);
-	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
-	setTile(i, y - 1, tile);
-      }
-    for (i = 0; i < y; i++)
-      {
-	tile = new Tile(true, "wall", "default", Tile::Wall);
-	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
-	setTile(0, i, tile);
-      }
-    for (i = 0; i < y; i++)
-      {
-	tile = new Tile(true, "wall", "default", Tile::Wall);
-	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
-	setTile(x - 1, i, tile);
-      }
+
+    // for (i = 0; i < x; i++)
+    //   {
+    // 	tile = new Tile(true, "wall", "default", Tile::Wall);
+    // 	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
+    // 	setTile(i, 0, tile);
+    //   }
+    // for (i = 0; i < x; i++)
+    //   {
+    // 	tile = new Tile(true, "wall", "default", Tile::Wall);
+    // 	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
+    // 	setTile(i, y - 1, tile);
+    //   }
+    // for (i = 0; i < y; i++)
+    //   {
+    // 	tile = new Tile(true, "wall", "default", Tile::Wall);
+    // 	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
+    // 	setTile(0, i, tile);
+    //   }
+    // for (i = 0; i < y; i++)
+    //   {
+    // 	tile = new Tile(true, "wall", "default", Tile::Wall);
+    // 	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
+    // 	setTile(x - 1, i, tile);
+    //   }
     for (i = 0; i < (x * y) / (((x * y) / 10) * 2); i++)
       {
-	posx = (std::rand() % (x - 2)) + 1;
-	posy = (std::rand() % (y - 2)) + 1;
-	tile = new Tile(false, "", "", Tile::Spawn);
-	tile->setDrawable(NULL);
-	_spawns.push_back(glm::ivec2(posx, posy));
-	setTile(posx, posy, tile);
+	valid = false;
+	while (valid == false)
+	  {
+	    posx = (std::rand() % (x - 2)) + 1;
+	    posy = (std::rand() % (y - 2)) + 1;
+	    if (getTileType(posx, posy) == Tile::Void)
+	      {
+		tile = new Tile(false, "", "", Tile::Spawn);
+		tile->setDrawable(NULL);
+		_spawns.push_back(glm::ivec2(posx, posy));
+		setTile(posx, posy, tile);
+		valid = true;
+	      }
+	  }
       }
   }
 
@@ -93,14 +116,15 @@ namespace bbm
 	throw SerializerException("Deserializer TileMap Error : " + std::string(ex.what()));
       }
 
+    _object.initialize("ground", "default2", "GL_QUADS");
     _object.pushVertex(glm::vec3(0, 0, 0));
     _object.pushVertex(glm::vec3(_size.x, 0, 0));
     _object.pushVertex(glm::vec3(_size.x, _size.y, 0));
     _object.pushVertex(glm::vec3(0, _size.y, 0));
     _object.pushUv(glm::vec2(0, 0));
-    _object.pushUv(glm::vec2(_size.x / 25, 0));
-    _object.pushUv(glm::vec2(_size.x / 25, _size.y / 25));
-    _object.pushUv(glm::vec2(0, _size.y / 25));
+    _object.pushUv(glm::vec2(_size.x, 0));
+    _object.pushUv(glm::vec2(_size.x, _size.y));
+    _object.pushUv(glm::vec2(0, _size.y));
     _object.build();
   }
 
@@ -160,7 +184,7 @@ namespace bbm
     ISerializedNode*		tileNode;
 
     current.get("size", _size);
-    current.get("ground", _object);
+    // current.get("ground", _object);
     _tiles.resize(_size.x * _size.y, NULL);
     vectorNode = current.get("tiles");
     size = vectorNode->size();

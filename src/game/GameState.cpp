@@ -46,6 +46,7 @@
 #include "serializer/SerializerException.hh"
 
 #include "sound/SoundManager.hh"
+#include "hud/HUD.hh"
 
 namespace bbm
 {
@@ -57,6 +58,7 @@ namespace bbm
   {
     // SoundManager::getInstance()->play("FaFTheme");
     this->_flush = true;
+    this->_printHud = false;
   }
 
   GameState::~GameState()
@@ -75,16 +77,17 @@ namespace bbm
     _bonus.resize(x * y, NULL);
     for (posx = 1; posx < x - 1; posx++)
       {
-	for(posy = 1; posy < y - 1; posy++)
-	  {
-	    if (_tilemap.getTileType(posx, posy) != Tile::Spawn &&
-		_tilemap.getTileType(posx + 1, posy) != Tile::Spawn &&
-		_tilemap.getTileType(posx - 1, posy) != Tile::Spawn &&
-		_tilemap.getTileType(posx, posy + 1) != Tile::Spawn &&
-		_tilemap.getTileType(posx, posy - 1) != Tile::Spawn &&
-		std::rand() % 2 == 1)
-	      addEntity(new GameBox(glm::vec2(posx, posy), 0, *this));
-	  }
+    	for(posy = 1; posy < y - 1; posy++)
+    	  {
+    	    if (_tilemap.getTileType(posx, posy) != Tile::Spawn &&
+    		_tilemap.getTileType(posx + 1, posy) != Tile::Spawn &&
+    		_tilemap.getTileType(posx - 1, posy) != Tile::Spawn &&
+    		_tilemap.getTileType(posx, posy + 1) != Tile::Spawn &&
+    		_tilemap.getTileType(posx, posy - 1) != Tile::Spawn &&
+		_tilemap.getTileType(posx, posy) != Tile::Wall &&
+    		std::rand() % 2 == 1)
+    	      addEntity(new GameBox(glm::vec2(posx, posy), 0, *this));
+    	  }
       }
   }
 
@@ -120,13 +123,14 @@ namespace bbm
 
   void			GameState::pack(ISerializedNode & current) const
   {
-    std::list<AEntity*>::const_iterator	itEntities;
-    std::list<Player*>::const_iterator	itPlayers;
-    std::list<AI*>::const_iterator	itAIs;
-    ISerializedNode*			entityListNode;
-    ISerializedNode*			playerListNode;
-    ISerializedNode*			AIListNode;
-    int					i;
+    std::list<AEntity*>::const_iterator		itEntities;
+    std::list<Player*>::const_iterator		itPlayers;
+    std::vector<AEntity*>::const_iterator	itGameBoxes;
+    std::list<AI*>::const_iterator		itAIs;
+    ISerializedNode*				entityListNode;
+    ISerializedNode*				playerListNode;
+    ISerializedNode*				AIListNode;
+    int						i;
 
     current.add("mapsize", _mapsize);
     entityListNode = current.add("entity");
@@ -138,12 +142,22 @@ namespace bbm
 	    std::stringstream	ss;
 
 	    ss << i;
-	    std::cout << "type = " << (*itEntities)->getType() << std::endl;
 	    entityListNode->add(ss.str(), *(*itEntities));
 	    i++;
 	  }
       }
-    std::cout << "test1" << std::endl;
+    for (itGameBoxes = _gameboxes.begin();
+	 itGameBoxes != _gameboxes.end(); ++itGameBoxes)
+      {
+	if ((*itGameBoxes) != NULL)
+	  {
+	    std::stringstream	ss;
+
+	    ss << i;
+	    entityListNode->add(ss.str(), *(*itGameBoxes));
+	    i++;
+	  }
+      }
     playerListNode = current.add("players");
     for (i = 0, itPlayers = _players.begin();
 	 itPlayers != _players.end(); ++itPlayers)
@@ -154,7 +168,6 @@ namespace bbm
 	playerListNode->add(ss.str(), *(*itPlayers));
 	i++;
       }
-    std::cout << "test2" << std::endl;
     AIListNode = current.add("AIs");
     for (i = 0, itAIs = _AIs.begin(); itAIs != _AIs.end(); ++itAIs)
       {
@@ -165,7 +178,6 @@ namespace bbm
 	AIListNode->add(ss.str(), *(*itAIs));
 	i++;
       }
-    std::cout << "test3" << std::endl;
   }
 
   void			GameState::unpack(const ISerializedNode & current)
@@ -275,8 +287,11 @@ namespace bbm
 
   void			GameState::initialize()
   {
-    SerializableVector<glm::ivec2>::iterator	itSpawn;
-    std::vector<glm::vec4>			colors;
+    SerializableVector<glm::ivec2>::iterator				itSpawn;
+    std::vector<glm::vec4>						colors;
+    std::vector<SerializableVector<glm::ivec2>::iterator>		spawnUsed;
+    std::vector<SerializableVector<glm::ivec2>::iterator>::iterator	itSpawnUsed;
+    bool								valid;
 
     colors.resize(4);
     colors[0] = glm::vec4(0.8, 0.2, 0.2, 1);
@@ -290,6 +305,9 @@ namespace bbm
     glEnable(GL_SCISSOR_TEST);
     glEnable(GL_DEPTH_TEST);
 
+    this->_hud = new HUD();
+    this->_hud->initialize();
+
     std::vector<PlayerConfig>::iterator it;
 
     for(it = _config->playersConfigs.begin();
@@ -298,20 +316,38 @@ namespace bbm
 	if (_config->load == false)
 	  {
 	    itSpawn = _tilemap.getSpawns().begin();
-	    itSpawn += rand() % _tilemap.getSpawns().size();
+	    valid = false;
+	    while (valid == false)
+	      {
+		itSpawn += rand() % _tilemap.getSpawns().size();
+		valid = true;
+		for (itSpawnUsed = spawnUsed.begin(); itSpawnUsed != spawnUsed.end(); ++itSpawnUsed)
+		  if (itSpawn == *itSpawnUsed)
+		    valid = false;
+	      }
 	    (*it).position = glm::vec2(itSpawn->x, itSpawn->y);
+	    spawnUsed.push_back(itSpawn);
 	  }
 	Player*	p = new Player(*this, *it);
 	p->setColor(colors[std::distance(_config->playersConfigs.begin(), it)]);
     	_players.push_back(p);
       }
+
     for(it = _config->AIConfigs.begin();
     	it != _config->AIConfigs.end(); ++it)
       {
 	if (_config->load == false)
 	  {
 	    itSpawn = _tilemap.getSpawns().begin();
-	    itSpawn += rand() % _tilemap.getSpawns().size();
+	    valid = false;
+	    while (valid == false)
+	      {
+		itSpawn += rand() % _tilemap.getSpawns().size();
+		valid = true;
+		for (itSpawnUsed = spawnUsed.begin(); itSpawnUsed != spawnUsed.end(); ++itSpawnUsed)
+		  if (itSpawn == *itSpawnUsed)
+		    valid = false;
+	      }
 	    (*it).position = glm::vec2(itSpawn->x, itSpawn->y);
 	  }
 	_AIs.push_back(new AI(*this, *it));
@@ -360,6 +396,8 @@ namespace bbm
 	drawAI(context, state);
 	glDisable(GL_CULL_FACE);
 	context.draw(_skybox, stateSky);
+	if (this->_printHud)
+	  this->_hud->draw(context, stateSky);
 	glEnable(GL_CULL_FACE);
       }
     if (this->_flush)
@@ -457,7 +495,9 @@ namespace bbm
       context.draw(*(*itAIs), state);
   }
 
-  void				GameState::drawGameBoxes(Screen & context, RenderState & state, PlayerIt itPlayersCamera)
+  void				GameState::drawGameBoxes(Screen & context,
+							 RenderState & state,
+							 PlayerIt itPlayersCamera)
   {
     for (int x = -25; x < 25; x++)
       for (int y = -10; y < 10; y++)
@@ -477,7 +517,9 @@ namespace bbm
 	}
   }
 
-  void				GameState::drawPlayer(Screen & context, RenderState & state, PlayerIt itPlayersCamera)
+  void				GameState::drawPlayer(Screen & context,
+						      RenderState & state,
+						      PlayerIt itPlayersCamera)
   {
     PlayerIt			itPlayers;
 
@@ -489,12 +531,15 @@ namespace bbm
 
   void			GameState::update(float time, const Input& input)
   {
+    if (input.getKeyDown(SDLK_TAB))
+      this->_printHud = !this->_printHud;
     if (input.getKeyDown(SDLK_ESCAPE) || input.getEvent(SDL_QUIT))
       {
 	PauseState* state = new PauseState(_manager, *this);
 	_manager.push(state);
  	return;
       }
+    this->_hud->update(*(this->_players.begin()));
     updateAIPlayer(time, input);
     updateEntity(time, input);
     _skybox.update();

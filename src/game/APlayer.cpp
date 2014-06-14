@@ -10,6 +10,7 @@
 #include "graphic/RenderState.hh"
 #include "graphic/ARenderer.hh"
 #include "game/GameState.hh"
+#include "hud/HUD.hh"
 
 const float	maxSpeed = 0.005;
 const float	modelScaleFactor = 0.0020;
@@ -28,10 +29,16 @@ namespace bbm
     _move = glm::vec2(0, 0);
     _color = glm::vec4(1, 1, 1, 1);
     _model.setColor(_color);
+    _maxBomb = 1;
   }
 
   APlayer::~APlayer()
   {
+  }
+
+  void			APlayer::increaseMaxBomb()
+  {
+    this->_maxBomb++;
   }
 
   void			APlayer::setColor(const glm::vec4& color)
@@ -57,6 +64,7 @@ namespace bbm
     current.add("id", getID());
     current.add("lastId", getLastID());
     current.add("color", _color);
+    current.add("maxBomb", _maxBomb);
   }
 
   void			APlayer::unpack(const ISerializedNode & current)
@@ -83,6 +91,7 @@ namespace bbm
     current.get("id", id);
     current.get("lastId", lastId);
     current.get("color", _color);
+    current.get("maxBomb", _maxBomb);
     setColor(_color);
     setID(id);
     setLastID(lastId);
@@ -124,7 +133,7 @@ namespace bbm
       }
   }
 
-  void				APlayer::collideGameBoxes()
+  bool				APlayer::collideGameBoxes()
   {
     glm::ivec2			mapsize = _gameState.getMapSize();
     std::vector<AEntity*>	_map = _gameState.getGameBoxes();
@@ -144,10 +153,14 @@ namespace bbm
 		      tmp->collide(glm::vec3(_position.x +_move.x + delta, _position.y + _move.y + 1 - delta, 0)) ||
 		      tmp->collide(glm::vec3(_position.x +_move.x + 1 - delta, _position.y + _move.y + 1 - delta, 0)) ||
 		      tmp->collide(glm::vec3(_position.x +_move.x + delta, _position.y + _move.y + delta, 0)))
-		    tmp->interact(this);
+		    {
+		      tmp->interact(this);
+		      return (true);
+		    }
 		}
 	    }
 	}
+    return (false);
   }
 
   void			APlayer::manageModel(float time)
@@ -195,12 +208,28 @@ namespace bbm
     return (false);
   }
 
+  bool			APlayer::isDark() const
+  {
+    return (this->_dark);
+  }
+
+  bool			APlayer::isSlow() const
+  {
+    return (this->_slow);
+  }
+
+  BombType		APlayer::getBonusType() const
+  {
+    return (this->_typeBomb);
+  }
+
   bool			APlayer::isDead() const
   {
     return (_alive);
   }
 
-  void			APlayer::draw(ARenderer& renderer, const RenderState& renderState)
+  void			APlayer::draw(ARenderer& renderer,
+				      const RenderState& renderState)
   {
     if (_alive)
       renderer.draw(_model, renderState);
@@ -221,7 +250,8 @@ namespace bbm
 
   void			APlayer::addBombs()
   {
-    _nbBombs++;
+    if (_nbBombs < _maxBomb)
+      _nbBombs++;
   }
 
   int	APlayer::getBomb() const
@@ -248,7 +278,7 @@ namespace bbm
       }
     else
       {
-	_speed +=  0.005 / 10;
+	_speed +=  0.005 / 2;
 	if (_speed > maxSpeed)
 	  _speed = maxSpeed;
       }

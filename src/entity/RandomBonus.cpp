@@ -28,18 +28,17 @@ namespace bbm
 
   RandomBonus::~RandomBonus()
   {
+  }
+
+
+  void		RandomBonus::initialize()
+  {
     _type = "RandomBonus";
     _anim = 0;
     _used = false;
     _wall.yaw(90);
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
     _wall.setPosition(glm::vec3(_pos.x - translate + 1, _pos.y + translate, 0));
-  }
-
-
-  void		RandomBonus::initialize()
-  {
-
   }
 
   void		RandomBonus::update(float time)
