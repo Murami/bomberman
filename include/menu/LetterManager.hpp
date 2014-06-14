@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Wed Jun  4 09:46:06 2014 Manu
-// Last update Fri Jun 13 18:03:39 2014 Manu
+// Last update Sat Jun 14 18:17:24 2014 Manu
 //
 
 #ifndef		__LETTERMANAGER_HPP__
@@ -30,6 +30,7 @@ namespace	bbm
     gdl::Texture*	    		_space;
     gdl::Texture*			_slash;
     gdl::Texture*			_underscore;
+    gdl::Texture*			_twoDots;
 
   public :
     static LetterManager*		_instance;
@@ -45,19 +46,37 @@ namespace	bbm
     {
       if (c == ' ')
 	return (this->_space);
-      else if (c >= '0' && c <= '9')
-	return (this->_numbers[c]);
-      else if (c >= 'a' && c <= 'z')
-	return (this->_alphabet[c]);
       else if (c == '_')
 	return (this->_underscore);
       else if (c == '/')
 	return (this->_slash);
+      else if (c == ':')
+	return (this->_twoDots);
+      else if (c >= '0' && c <= '9')
+	return (this->_numbers[c]);
+      else if (c >= 'a' && c <= 'z')
+	return (this->_alphabet[c]);
       return (NULL);
     }
 
   public : LetterManager()
     {
+      this->_slash = new gdl::Texture();
+      if (!this->_slash->load(Letter::TEXTURE_PATH +
+			      std::string("letter_slash.tga")))
+	throw (FileLoadingException("letter_slash.tga"));
+      this->_underscore = new gdl::Texture();
+      if (!this->_underscore->load(Letter::TEXTURE_PATH +
+				   std::string("letter_underscore.tga")))
+	throw (FileLoadingException("letter_underscore.tga"));
+      this->_space = new gdl::Texture();
+      if (!this->_space->load(Letter::TEXTURE_PATH +
+			      std::string("letter_space.tga")))
+	throw (FileLoadingException("letter_space.tga"));
+      this->_twoDots = new gdl::Texture();
+      if (!this->_twoDots->load(Letter::TEXTURE_PATH +
+				std::string("letter_twodots.tga")))
+	throw (FileLoadingException("Letter_twodots.tga"));
       for (char cpt = 'a'; cpt <= 'z'; cpt++)
 	{
 	  this->_alphabet[cpt] = new gdl::Texture();
@@ -76,18 +95,6 @@ namespace	bbm
 	  if (!this->_numbers[cpt]->load(path))
 	    throw (FileLoadingException(path));
 	}
-      this->_slash = new gdl::Texture();
-      if (!this->_slash->load(Letter::TEXTURE_PATH +
-			      std::string("letter_slash.tga")))
-	throw (FileLoadingException("letter_slash.tga"));
-      this->_underscore = new gdl::Texture();
-      if (!this->_slash->load(Letter::TEXTURE_PATH +
-			      std::string("_.tga")))
-	throw (FileLoadingException("_.tga"));
-      this->_space = new gdl::Texture();
-      if (!this->_space->load(Letter::TEXTURE_PATH +
-			      std::string("letter_space.tga")))
-	throw (FileLoadingException("letter_space.tga"));
     }
 
   public : ~LetterManager()

@@ -5,13 +5,18 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Sat May 10 15:42:32 2014 Manu
-// Last update Wed Jun  4 10:42:52 2014 Manu
+// Last update Sat Jun 14 17:11:14 2014 Manu
 //
 
 #include	"AObject.hh"
 
 AObject::AObject() : _position(0, 0, 0), _rotation(0, 0, 0), _scale(1, 1, 1)
 {
+}
+
+void		AObject::setPosition(const glm::vec3& pos)
+{
+  this->_position = pos;
 }
 
 void		AObject::translate(const glm::vec3& v)

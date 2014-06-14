@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri Jun  6 14:00:02 2014 Manu
-// Last update Thu Jun 12 11:02:57 2014 Manu
+// Last update Sat Jun 14 17:08:49 2014 Manu
 //
 
 #ifndef		__IMAGE_HH__
@@ -42,7 +42,7 @@ namespace	bbm
     void		draw(ARenderer&, const RenderState&);
 
   public :
-    Image(const std::string&);
+    Image(const std::string & pathname);
     ~Image();
   };
 }

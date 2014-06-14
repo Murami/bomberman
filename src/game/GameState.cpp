@@ -39,6 +39,7 @@
 #include "serializer/Serializer.hh"
 #include "serializer/SerializerException.hh"
 #include "sound/SoundManager.hh"
+#include "hud/HUD.hh"
 
 namespace bbm
 {
@@ -50,6 +51,7 @@ namespace bbm
   {
     // SoundManager::getInstance()->play("FaFTheme");
     this->_flush = true;
+    this->_printHud = false;
   }
 
   GameState::~GameState()
@@ -279,6 +281,9 @@ namespace bbm
     glEnable(GL_SCISSOR_TEST);
     glEnable(GL_DEPTH_TEST);
 
+    this->_hud = new HUD();
+    this->_hud->initialize();
+
     std::vector<PlayerConfig>::iterator it;
 
     for(it = _config->playersConfigs.begin();
@@ -348,6 +353,8 @@ namespace bbm
 	drawAI(context, state);
 	glDisable(GL_CULL_FACE);
 	context.draw(_skybox, stateSky);
+	if (this->_printHud)
+	  this->_hud->draw(context, stateSky);
 	glEnable(GL_CULL_FACE);
       }
     if (this->_flush)
@@ -477,6 +484,8 @@ namespace bbm
 
   void			GameState::update(float time, const Input& input)
   {
+    if (input.getKeyDown(SDLK_TAB))
+      this->_printHud = !this->_printHud;
     if (input.getKeyDown(SDLK_ESCAPE) || input.getEvent(SDL_QUIT))
       {
 	//_manager.pop();
@@ -484,6 +493,7 @@ namespace bbm
 	_manager.push(state);
  	return;
       }
+    this->_hud->update(*(this->_players.begin()));
     updateAIPlayer(time, input);
     updateEntity(time, input);
     _skybox.update();

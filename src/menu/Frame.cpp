@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 02:47:32 2014 Manu
-// Last update Fri Jun 13 15:13:08 2014 Manu
+// Last update Sat Jun 14 03:10:09 2014 Manu
 // Last update Fri Jun 13 05:56:55 2014 Desabre Quentin
 //
 
@@ -55,8 +55,8 @@ namespace		bbm
   {
     this->_icone = new Image(this->_explorer->getCurrentTexture());
     this->_icone->initialize();
-    this->_icone->scale(glm::vec3(2, 3, 2));
-    this->_icone->translate(glm::vec3(0.01f, 0.2f, -2));
+    this->_icone->scale(glm::vec3(0, 3, 4));
+    this->_icone->translate(glm::vec3(0.01f, 0.2f, -4));
   }
 
   void		Frame::_createTitle()

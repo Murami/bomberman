@@ -1,8 +1,8 @@
 #ifndef PLAYER_HH
-#define PLAYER_HH
+# define PLAYER_HH
 
-#include "game/APlayer.hh"
-#include "game/PlayerConfig.hh"
+# include "game/APlayer.hh"
+# include "game/PlayerConfig.hh"
 
 namespace bbm
 {

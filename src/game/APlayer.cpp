@@ -10,6 +10,7 @@
 #include "graphic/RenderState.hh"
 #include "graphic/ARenderer.hh"
 #include "game/GameState.hh"
+#include "hud/HUD.hh"
 
 const float	maxSpeed = 0.005;
 const float	modelScaleFactor = 0.0020;
@@ -195,12 +196,28 @@ namespace bbm
     return (false);
   }
 
+  bool			APlayer::isDark() const
+  {
+    return (this->_dark);
+  }
+
+  bool			APlayer::isSlow() const
+  {
+    return (this->_slow);
+  }
+
+  BombType		APlayer::getBonusType() const
+  {
+    return (this->_typeBomb);
+  }
+
   bool			APlayer::isDead() const
   {
     return (_alive);
   }
 
-  void			APlayer::draw(ARenderer& renderer, const RenderState& renderState)
+  void			APlayer::draw(ARenderer& renderer,
+				      const RenderState& renderState)
   {
     if (_alive)
       renderer.draw(_model, renderState);

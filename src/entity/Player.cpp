@@ -47,7 +47,6 @@ namespace bbm
 
   void			Player::initialize()
   {
-
   }
 
   PlayerConfig&		Player::getPlayerConfig()
