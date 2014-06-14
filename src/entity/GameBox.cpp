@@ -112,6 +112,7 @@ namespace bbm
 	    if (bonus != NULL)
 	      _gameState.addEntity(bonus);
 	    _used = true;
+	    // box must d
 	  }
       }
   }

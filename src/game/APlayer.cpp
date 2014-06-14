@@ -133,7 +133,7 @@ namespace bbm
       }
   }
 
-  void				APlayer::collideGameBoxes()
+  bool				APlayer::collideGameBoxes()
   {
     glm::ivec2			mapsize = _gameState.getMapSize();
     std::vector<AEntity*>	_map = _gameState.getGameBoxes();
@@ -153,10 +153,14 @@ namespace bbm
 		      tmp->collide(glm::vec3(_position.x +_move.x + delta, _position.y + _move.y + 1 - delta, 0)) ||
 		      tmp->collide(glm::vec3(_position.x +_move.x + 1 - delta, _position.y + _move.y + 1 - delta, 0)) ||
 		      tmp->collide(glm::vec3(_position.x +_move.x + delta, _position.y + _move.y + delta, 0)))
-		    tmp->interact(this);
+		    {
+		      tmp->interact(this);
+		      return (true);
+		    }
 		}
 	    }
 	}
+    return (false);
   }
 
   void			APlayer::manageModel(float time)
@@ -274,7 +278,7 @@ namespace bbm
       }
     else
       {
-	_speed +=  0.005 / 10;
+	_speed +=  0.005 / 2;
 	if (_speed > maxSpeed)
 	  _speed = maxSpeed;
       }
