@@ -118,13 +118,14 @@ namespace bbm
 
   void			GameState::pack(ISerializedNode & current) const
   {
-    std::list<AEntity*>::const_iterator	itEntities;
-    std::list<Player*>::const_iterator	itPlayers;
-    std::list<AI*>::const_iterator	itAIs;
-    ISerializedNode*			entityListNode;
-    ISerializedNode*			playerListNode;
-    ISerializedNode*			AIListNode;
-    int					i;
+    std::list<AEntity*>::const_iterator		itEntities;
+    std::list<Player*>::const_iterator		itPlayers;
+    std::vector<AEntity*>::const_iterator	itGameBoxes;
+    std::list<AI*>::const_iterator		itAIs;
+    ISerializedNode*				entityListNode;
+    ISerializedNode*				playerListNode;
+    ISerializedNode*				AIListNode;
+    int						i;
 
     current.add("mapsize", _mapsize);
     entityListNode = current.add("entity");
@@ -136,12 +137,22 @@ namespace bbm
 	    std::stringstream	ss;
 
 	    ss << i;
-	    std::cout << "type = " << (*itEntities)->getType() << std::endl;
 	    entityListNode->add(ss.str(), *(*itEntities));
 	    i++;
 	  }
       }
-    std::cout << "test1" << std::endl;
+    for (itGameBoxes = _gameboxes.begin();
+	 itGameBoxes != _gameboxes.end(); ++itGameBoxes)
+      {
+	if ((*itGameBoxes) != NULL)
+	  {
+	    std::stringstream	ss;
+
+	    ss << i;
+	    entityListNode->add(ss.str(), *(*itGameBoxes));
+	    i++;
+	  }
+      }
     playerListNode = current.add("players");
     for (i = 0, itPlayers = _players.begin();
 	 itPlayers != _players.end(); ++itPlayers)
@@ -152,7 +163,6 @@ namespace bbm
 	playerListNode->add(ss.str(), *(*itPlayers));
 	i++;
       }
-    std::cout << "test2" << std::endl;
     AIListNode = current.add("AIs");
     for (i = 0, itAIs = _AIs.begin(); itAIs != _AIs.end(); ++itAIs)
       {
@@ -163,7 +173,6 @@ namespace bbm
 	AIListNode->add(ss.str(), *(*itAIs));
 	i++;
       }
-    std::cout << "test3" << std::endl;
   }
 
   void			GameState::unpack(const ISerializedNode & current)
