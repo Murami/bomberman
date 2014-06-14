@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Wed Jun  4 09:46:06 2014 Manu
-// Last update Sat Jun 14 18:17:24 2014 Manu
+// Last update Sat Jun 14 19:30:07 2014 Manu
 //
 
 #ifndef		__LETTERMANAGER_HPP__
@@ -31,6 +31,7 @@ namespace	bbm
     gdl::Texture*			_slash;
     gdl::Texture*			_underscore;
     gdl::Texture*			_twoDots;
+    gdl::Texture*			_dash;
 
   public :
     static LetterManager*		_instance;
@@ -52,6 +53,8 @@ namespace	bbm
 	return (this->_slash);
       else if (c == ':')
 	return (this->_twoDots);
+      else if (c == '-')
+	return (this->_dash);
       else if (c >= '0' && c <= '9')
 	return (this->_numbers[c]);
       else if (c >= 'a' && c <= 'z')
@@ -77,6 +80,10 @@ namespace	bbm
       if (!this->_twoDots->load(Letter::TEXTURE_PATH +
 				std::string("letter_twodots.tga")))
 	throw (FileLoadingException("Letter_twodots.tga"));
+      this->_dash = new gdl::Texture();
+      if (!this->_dash->load(Letter::TEXTURE_PATH +
+			     std::string("letter_dash.tga")))
+	throw (FileLoadingException("Letter_dash.tga"));
       for (char cpt = 'a'; cpt <= 'z'; cpt++)
 	{
 	  this->_alphabet[cpt] = new gdl::Texture();
