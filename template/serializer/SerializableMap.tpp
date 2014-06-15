@@ -5,10 +5,8 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Sun Jun 15 13:24:30 2014 Manu
-// Last update Sun Jun 15 13:24:30 2014 Manu
+// Last update Sun Jun 15 13:28:19 2014 otoshigami
 //
-
-//PAIR
 
 template<typename FirstType, typename SecondType>
 SerializablePair<FirstType, SecondType>::SerializablePair()
@@ -48,8 +46,6 @@ void	SerializablePair<FirstType, SecondType>::unpack(const ISerializedNode & cur
   current.get("first", this->first);
   current.get("second", this->second);
 }
-
-//MAP
 
 template<typename IndexType, typename ValueType>
 SerializableMap<IndexType, ValueType>::SerializableMap()

@@ -5,8 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 02:47:32 2014 Manu
-// Last update Sun Jun 15 12:02:25 2014 Manu
-// Last update Fri Jun 13 05:56:55 2014 Desabre Quentin
+// Last update Sun Jun 15 13:11:47 2014 otoshigami
 //
 
 #include		"graphic/ARenderer.hh"

@@ -121,8 +121,6 @@ ISerializedNode*	JsonNode::add(const std::string& index)
   return (new JsonNode(_current[index]));
 }
 
-//GET
-
 void			JsonNode::get(const std::string& index, ISerializable& serializable) const
 {
   try

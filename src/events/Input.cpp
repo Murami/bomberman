@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:29:59 2014 otoshigami
-// Last update Sun Jun 15 08:30:00 2014 otoshigami
+// Last update Sun Jun 15 13:09:22 2014 otoshigami
 //
 
 #include <iostream>
@@ -43,15 +43,6 @@ namespace bbm
     UpdateMethodsIt	it;
 
     this->clear();
-    // SDL_PumpEvents();
-    // while (SDL_PeepEvents(&event, 1, SDL_GETEVENT, (SDL_EVENTMASK(SDL_KEYDOWN) | SDL_EVENTMASK(SDL_JOYBUTTONDOWN))))
-    //   {
-    // 	if ((it = _updateMethods.find(event.type)) != _updateMethods.end())
-    // 	  {
-    // 	    ((*this).*(it->second))(event);
-    // 	    return;
-    // 	  }
-    //   }
     while (SDL_PollEvent(&event))
       {
     	if ((it = _updateMethods.find(event.type)) != _updateMethods.end())

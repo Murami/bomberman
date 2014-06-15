@@ -1,12 +1,11 @@
 //
-// Marvin.cpp for  in /home/desabr_q/Desktop/bomber/cpp_bomberman
+// Marvin.cpp for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
 //
-// Made by quentin desabre
-// Login   <desabr_q@epitech.net>
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
 //
-// Started on  Sun Jun 15 08:30:41 2014 quentin desabre
-// Last update Sun Jun 15 11:08:05 2014 Manu
-// Last update Sun Jun 15 09:03:26 2014 Desabre Quentin
+// Started on  Sun Jun 15 13:10:40 2014 otoshigami
+// Last update Sun Jun 15 13:10:42 2014 otoshigami
 //
 
 #include "graphic/Utils.hh"

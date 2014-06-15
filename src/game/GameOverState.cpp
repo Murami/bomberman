@@ -5,15 +5,17 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:40 2014 otoshigami
-// Last update Sun Jun 15 12:27:54 2014 Manu
+// Last update Sun Jun 15 13:27:39 2014 otoshigami
 //
 
 #include <sstream>
 #include <string>
+
 #include "game/GameOverState.hh"
 #include "game/GameManager.hh"
 #include "game/GameState.hh"
 #include "game/HighScore.hh"
+
 #include "graphic/ShaderManager.hh"
 #include "graphic/TextureManager.hh"
 #include "graphic/ModelManager.hh"
@@ -22,13 +24,18 @@
 #include "graphic/RenderState.hh"
 #include "graphic/ProjectionPerspective.hh"
 #include "graphic/Screen.hh"
+
 #include "serializer/ISerializedNode.hh"
 #include "serializer/JSONSerializer.hh"
 #include "serializer/Serializer.hh"
 #include "serializer/SerializerException.hh"
+
 #include "sound/SoundManager.hh"
+
 #include "events/Input.hh"
+
 #include "MenuState.hh"
+
 #include "menu/Letter.hh"
 
 const float scaleFactor = 1.0;

@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:29:40 2014 otoshigami
-// Last update Sun Jun 15 08:29:42 2014 otoshigami
+// Last update Sun Jun 15 13:10:07 2014 otoshigami
 //
 
 #include "game/Wall.hh"
@@ -40,7 +40,7 @@ namespace bbm
   void		Wall::initialize()
   {
     _geometry = new gdl::Geometry();
-    //BOTTOM SIDE
+
     _geometry->pushVertex(glm::vec3(0, 0, 0));
     _geometry->pushVertex(glm::vec3(0, 1, 0));
     _geometry->pushVertex(glm::vec3(1, 1, 0));
@@ -51,7 +51,6 @@ namespace bbm
     _geometry->pushUv(glm::vec2(1, 1));
     _geometry->pushUv(glm::vec2(1, 0));
 
-    //TOP SIDE
     _geometry->pushVertex(glm::vec3(0, 0, 1));
     _geometry->pushVertex(glm::vec3(1, 0, 1));
     _geometry->pushVertex(glm::vec3(1, 1, 1));
@@ -62,7 +61,6 @@ namespace bbm
     _geometry->pushUv(glm::vec2(1, 1));
     _geometry->pushUv(glm::vec2(1, 0));
 
-    //NORTH SIDE
     _geometry->pushVertex(glm::vec3(0, 1, 0));
     _geometry->pushVertex(glm::vec3(0, 1, 1));
     _geometry->pushVertex(glm::vec3(1, 1, 1));
@@ -73,7 +71,6 @@ namespace bbm
     _geometry->pushUv(glm::vec2(1, 1));
     _geometry->pushUv(glm::vec2(1, 0));
 
-    //SOUTH SIDE
     _geometry->pushVertex(glm::vec3(0, 0, 0));
     _geometry->pushVertex(glm::vec3(1, 0, 0));
     _geometry->pushVertex(glm::vec3(1, 0, 1));
@@ -84,7 +81,6 @@ namespace bbm
     _geometry->pushUv(glm::vec2(1, 1));
     _geometry->pushUv(glm::vec2(1, 0));
 
-    //EAST SIDE
     _geometry->pushVertex(glm::vec3(1, 0, 0));
     _geometry->pushVertex(glm::vec3(1, 1, 0));
     _geometry->pushVertex(glm::vec3(1, 1, 1));
@@ -95,7 +91,6 @@ namespace bbm
     _geometry->pushUv(glm::vec2(1, 1));
     _geometry->pushUv(glm::vec2(1, 0));
 
-    //WEST SIDE
     _geometry->pushVertex(glm::vec3(0, 0, 0));
     _geometry->pushVertex(glm::vec3(0, 0, 1));
     _geometry->pushVertex(glm::vec3(0, 1, 1));

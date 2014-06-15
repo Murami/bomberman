@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:31:21 2014 otoshigami
-// Last update Sun Jun 15 08:31:22 2014 otoshigami
+// Last update Sun Jun 15 13:11:36 2014 otoshigami
 //
 
 #include <iostream>
@@ -40,7 +40,6 @@ namespace bbm
 
   Screen::~Screen()
   {
-    // _context.stop();
   }
 
   void	 Screen::draw(gdl::Geometry& geometry, gdl::Texture* texture,
