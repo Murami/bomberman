@@ -1,3 +1,12 @@
+//
+// RegClass.tpp for bomberman in /home/bichon_b/rendu/cpp_bomberman
+//
+// Made by bichon_b
+// Login   <bichon_b@epitech.net>
+//
+// Started on  Sun Jun 15 08:26:08 2014 bichon_b
+// Last update Sun Jun 15 08:26:08 2014 bichon_b
+//
 
 template <typename T>
 void	LuaBiche::RegClass<T>::registry(lua_State* lua, T* obj)

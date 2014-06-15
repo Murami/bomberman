@@ -21,14 +21,15 @@ namespace bbm
 {
   WaterBombExplode::WaterBombExplode(GameState & gameState): ABombExplode(gameState), _wall("water", "default")
   {
-
+    SoundManager::getInstance()->playSound("aquaBomb");
   }
 
   WaterBombExplode::WaterBombExplode(const glm::vec2& position, GameState& gameState) :
     ABombExplode(position, gameState),
     _wall("water", "default")
   {
-    SoundManager::getInstance()->play("aquaBomb");
+    if (SoundManager::getInstance()->soundPlaying())
+      SoundManager::getInstance()->playSound("aquaBomb");
     _type = "WaterBombExplode";
     _wall.setPosition(glm::vec3(_pos.x, _pos.y, 0));
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
@@ -40,7 +41,6 @@ namespace bbm
 
   void			WaterBombExplode::initialize()
   {
-    SoundManager::getInstance()->play("aquaBomb");
     _type = "WaterBombExplode";
     _wall.setPosition(glm::vec3(_pos.x, _pos.y, 0));
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));

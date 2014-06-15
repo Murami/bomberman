@@ -1,5 +1,0 @@
--- tester les danger
--- bouger en consequence
--- si aucun danger, viser les bonus les plus proches
--- si aucun bonus, viser les joueurs les plyus proches
--- poser une bombes pres d'un joueur (attention au cas ou il est encerclés par des murs)

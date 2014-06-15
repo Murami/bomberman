@@ -6,7 +6,7 @@
       },
       "1" : {
          "action" : "BOMB2",
-         "key" : "SDLK_RSHIFT"
+         "key" : "SDLK_RCTRL"
       },
       "10" : {
          "action" : "right",

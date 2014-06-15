@@ -67,6 +67,7 @@ namespace bbm
     current.add("color", _color);
     current.add("maxBomb", _maxBomb);
     current.add("score", _score);
+    current.add("IALevel", _scriptName);
   }
 
   void			APlayer::unpack(const ISerializedNode & current)
@@ -98,6 +99,7 @@ namespace bbm
     setID(id);
     setLastID(lastId);
     current.get("score", _score);
+    current.get("IALevel", _scriptName);
   }
 
   void			APlayer::collideMap()
@@ -375,7 +377,7 @@ namespace bbm
 
   void	APlayer::die()
   {
-    SoundManager::getInstance()->play("scream");
+    SoundManager::getInstance()->playSound("scream");
     _alive = false;
   }
 

@@ -12,8 +12,9 @@ namespace		bbm
   const std::string	PauseState::INPUT_CONFIG_P3 = "./input/inputConfig3.json";
   const std::string	PauseState::INPUT_CONFIG_P4 = "./input/inputConfig4.json";
 
-  PauseState::PauseState(GameManager& manager, GameState& gameState) :
-    _manager(manager), _gameState(gameState)
+  PauseState::PauseState(GameManager& manager, GameState& gameState,
+			 GameLoadingState::GameConfig* gameConfig) :
+    _manager(manager), _gameState(gameState), _config(gameConfig)
   {
     glEnable(GL_BLEND);
     glEnable(GL_ALPHA_TEST);
@@ -321,7 +322,11 @@ namespace		bbm
     try
       {
 	menu->createNewToggleButton("sound", NULL);
+	dynamic_cast<ToggleButton*>((*(menu->getButtons().begin())))->setChecked(SoundManager::getInstance()->soundPlaying());
 	menu->createNewToggleButton("music", NULL);
+	std::list<AButton*>::const_iterator it = menu->getButtons().begin();
+	it++;
+	dynamic_cast<ToggleButton*>(*it)->setChecked(SoundManager::getInstance()->musicPlaying());
 	menu->createNewButton("ok", &IMenuManager::serializeAudioSettings,
 			      glm::vec4(0, 1, 0, 1), true);
 	menu->createNewButton("cancel", &IMenuManager::setOptionsMenu,
@@ -367,7 +372,6 @@ namespace		bbm
 
   void		PauseState::initialize()
   {
-    memset(&this->_config, 0, sizeof(this->_config));
     std::vector<InputConfig*> configs;
     std::list<Player*>::iterator it;
     std::list<Player*> players = this->_gameState.getPlayerList();
@@ -434,6 +438,7 @@ namespace		bbm
       {
 	this->_SDLInputsList.push_back("BACKSPACE");
 	this->_SDLInputsList.push_back("PAUSE");
+	this->_SDLInputsList.push_back("SPACE");
 	this->_SDLInputsList.push_back("QUOTEDBL");
 	this->_SDLInputsList.push_back("HASH");
 	this->_SDLInputsList.push_back("DOLLAR");
@@ -511,7 +516,6 @@ namespace		bbm
 	this->_SDLInputsList.push_back("KP_MULTIPLY");
 	this->_SDLInputsList.push_back("KP_MINUS");
 	this->_SDLInputsList.push_back("KP_PLUS");
-	this->_SDLInputsList.push_back("KP_ENTER");
 	this->_SDLInputsList.push_back("UP");
 	this->_SDLInputsList.push_back("DOWN");
 	this->_SDLInputsList.push_back("RIGHT");
@@ -660,6 +664,7 @@ namespace		bbm
     this->_inputConfigPlayer3->load(INPUT_CONFIG_P3);
     this->_inputConfigPlayer4->load(INPUT_CONFIG_P4);
     this->_manager.pop();
+    delete (this);
   }
 
   void		PauseState::setPlayMenu(Menu*)
@@ -678,7 +683,7 @@ namespace		bbm
   void		PauseState::exitGame(Menu*)
   {
     SoundManager::getInstance()->stop("theme");
-    SoundManager::getInstance()->play("menu");
+    SoundManager::getInstance()->playMusic("menu");
     this->_manager.pop();
     this->_manager.pop();
   }
@@ -847,9 +852,24 @@ namespace		bbm
 	if (s)
 	  {
 	    if (i == 0)
-	      this->_config.sound = s->isChecked();
+	      {
+		this->_config->sound = s->isChecked();
+		if (s->isChecked())
+		  SoundManager::getInstance()->enableSounds();
+		else
+		  SoundManager::getInstance()->disableSounds();
+	      }
 	    else
-	      this->_config.music = s->isChecked();
+	      {
+		this->_config->music = s->isChecked();
+		if (this->_config->music)
+		  SoundManager::getInstance()->playMusic("theme");
+		else
+		  {
+		    SoundManager::getInstance()->disableMusics();
+		    SoundManager::getInstance()->stop("theme");
+		  }
+	      }
 	    i++;
 	  }
       	it++;
@@ -859,5 +879,9 @@ namespace		bbm
 
   PauseState::~PauseState()
   {
+    delete (this->_skybox);
+    for (std::list<Menu*>::iterator it = this->_menuList.begin();
+	 it != this->_menuList.end(); it++)
+      delete (*it);
   }
 }

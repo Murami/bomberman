@@ -21,6 +21,7 @@ namespace bbm
 {
   PowerBombExplode::PowerBombExplode(GameState& gameState) : ABombExplode(gameState), _wall("fire2", "default")
   {
+    SoundManager::getInstance()->playSound("bigBomb");
   }
 
   PowerBombExplode::PowerBombExplode(const glm::vec2& position, GameState& gameState,
@@ -28,7 +29,8 @@ namespace bbm
     ABombExplode(position, gameState),
     _wall("fire2", "default")
   {
-    SoundManager::getInstance()->play("bigBomb");
+    if (SoundManager::getInstance()->soundPlaying())
+      SoundManager::getInstance()->playSound("bigBomb");
 
     _lifespan = 500;
     _idPlayer = idPlayer;
@@ -43,8 +45,6 @@ namespace bbm
 
   void			PowerBombExplode::initialize()
   {
-    SoundManager::getInstance()->play("bigBomb");
-
     _lifespan = 500;
     _type = "PowerBombExplode";
     _wall.setPosition(glm::vec3(_pos.x, _pos.y, 0));
@@ -119,18 +119,11 @@ namespace bbm
 
   void			PowerBombExplode::interact(AEntity * entity)
   {
-    if (entity->getType() == "Player")
+    if (entity->getType() == "Player" || entity->getType() == "AI")
       {
 	if (dynamic_cast<APlayer*>(entity)->isDead())
 	  {
 	    _gameState.getPlayer(_idPlayer).addScore(1000);
-	    dynamic_cast<APlayer*>(entity)->die();
-	  }
-      }
-    if (entity->getType() == "AI")
-      {
-	if (dynamic_cast<APlayer*>(entity)->isDead())
-	  {
 	    dynamic_cast<APlayer*>(entity)->die();
 	  }
       }

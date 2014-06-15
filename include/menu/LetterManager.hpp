@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Wed Jun  4 09:46:06 2014 Manu
-// Last update Sat Jun 14 19:30:07 2014 Manu
+// Last update Sun Jun 15 07:49:24 2014 Manu
 //
 
 #ifndef		__LETTERMANAGER_HPP__
@@ -19,7 +19,6 @@
 
 namespace	bbm
 {
-
   class		Letter;
 
   class		LetterManager

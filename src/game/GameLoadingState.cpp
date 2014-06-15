@@ -157,6 +157,7 @@ namespace bbm
     playerConfig.id = 0;
     playerConfig.lastId = 0;
     playerConfig.score = 0;
+    playerConfig.IALevel = "";
     if (_config->player1)
       {
 	playerConfig.idGamepad = _config->player1;
@@ -188,10 +189,11 @@ namespace bbm
     for (int i = 0; i < _config->numberIA; i++)
       {
 	playerConfig.inputConfig = NULL;
+	playerConfig.IALevel = "scripts/" + *(_config->level) + ".lua";
 	gameStateConfig.AIConfigs.push_back(playerConfig);
       }
     gameStateConfig.load = false;
-    state = new GameState(_manager, &gameStateConfig);
+    state = new GameState(_manager, &gameStateConfig, this->_config);
     state->randomize(_config->mapSizeX, _config->mapSizeY);
     _manager.push(state);
   }
@@ -202,7 +204,7 @@ namespace bbm
     GameState::GameStateConfig	gameStateConfig;
 
     gameStateConfig.load = true;
-    state = new GameState(_manager, &gameStateConfig);
+    state = new GameState(_manager, &gameStateConfig, this->_config);
     state->load(*(_config->fileToLoad));
     _manager.push(state);
   }
@@ -243,7 +245,8 @@ namespace bbm
     else if (input.getKeyDown(SDLK_SPACE))
       {
 	SoundManager::getInstance()->stop("wait");
-	SoundManager::getInstance()->play("theme");
+	if (SoundManager::getInstance()->musicPlaying())
+	  SoundManager::getInstance()->playMusic("theme");
 	if (_config->newGame == true)
 	  newGameState();
 	else

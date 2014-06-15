@@ -44,6 +44,7 @@ namespace bbm
     _typeBomb = config.typeBomb;
     _state = config.state;
     _score = config.score;
+    _scriptName = "";
     if (config.idPlayer)
       _idPlayer = config.idPlayer;
     else

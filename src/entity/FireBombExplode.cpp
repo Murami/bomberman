@@ -21,13 +21,15 @@ namespace bbm
 {
   FireBombExplode::FireBombExplode(GameState& gameState) : ABombExplode(gameState), _wall("fire", "default")
   {
+    SoundManager::getInstance()->playSound("bomb");
   }
 
   FireBombExplode::FireBombExplode(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABombExplode(position, gameState),
     _wall("fire", "default")
   {
-    SoundManager::getInstance()->play("bomb");
+    if (SoundManager::getInstance()->soundPlaying())
+      SoundManager::getInstance()->playSound("bomb");
 
     _lifespan = 500;
     _idPlayer = idPlayer;
@@ -42,8 +44,6 @@ namespace bbm
 
   void					FireBombExplode::initialize()
   {
-    SoundManager::getInstance()->play("bomb");
-
     _lifespan = 500;
     _type = "FireBombExplode";
     _wall.setPosition(glm::vec3(_pos.x, _pos.y, 0));
@@ -119,18 +119,11 @@ namespace bbm
 
   void					FireBombExplode::interact(AEntity * entity)
   {
-    if (entity->getType() == "Player")
+    if (entity->getType() == "Player" || entity->getType() == "AI")
       {
 	if (dynamic_cast<APlayer*>(entity)->isDead())
 	  {
 	    _gameState.getPlayer(_idPlayer).addScore(1000);
-	    dynamic_cast<APlayer*>(entity)->die();
-	  }
-      }
-    if (entity->getType() == "AI")
-      {
-	if (dynamic_cast<APlayer*>(entity)->isDead())
-	  {
 	    dynamic_cast<APlayer*>(entity)->die();
 	  }
       }

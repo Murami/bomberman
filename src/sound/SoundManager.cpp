@@ -1,3 +1,13 @@
+//
+// SoundManager.cpp for bomberman in /home/bichon_b/rendu/cpp_bomberman
+//
+// Made by bichon_b
+// Login   <bichon_b@epitech.net>
+//
+// Started on  Sun Jun 15 08:25:25 2014 bichon_b
+// Last update Sun Jun 15 08:25:25 2014 bichon_b
+//
+
 #include "sound/SoundManager.hh"
 #include <iostream>
 
@@ -11,6 +21,16 @@ namespace bbm
     FMOD_System_Init(_system, 32, FMOD_INIT_NORMAL, NULL);
   }
 
+  bool	SoundManager::musicPlaying() const
+  {
+    return (this->_music);
+  }
+
+  bool	SoundManager::soundPlaying() const
+  {
+    return (this->_sound);
+  }
+
   SoundManager::~SoundManager()
   {
     unsigned int	i;
@@ -18,6 +38,9 @@ namespace bbm
     for (i = 0; i < _sounds.size(); i++)
       FMOD_Sound_Release(_sounds[0]);
     _sounds.clear();
+    for (i = 0; i < _musics.size(); i++)
+      FMOD_Sound_Release(_musics[0]);
+    _musics.clear();
     _channels.clear();
     FMOD_System_Close(_system);
     FMOD_System_Release(_system);
@@ -47,10 +70,14 @@ namespace bbm
 	return ;
       }
     FMOD_Sound_SetLoopCount(tmp, -1);
-    _sounds[name] = tmp;
+    _musics[name] = tmp;
   }
 
-  void	SoundManager::play(std::string const& name)
+  ////////////////////////////
+  // faire la gestion des booleens pour jouer ou non la musique
+  ////////////////////////////
+
+  void	SoundManager::playSound(std::string const& name)
   {
     FMOD_BOOL	stat;
 
@@ -66,6 +93,52 @@ namespace bbm
 	    return ;
 	  }
       }
+  }
+
+  void	SoundManager::playMusic(std::string const& name)
+  {
+    FMOD_BOOL	stat;
+
+    FMOD_Channel_GetPaused(_channels[name], &stat);
+    if (stat == 1)
+      FMOD_Channel_SetPaused(_channels[name], 0);
+    else
+      {
+	_channels[name] = NULL;
+	if (FMOD_System_PlaySound(_system, FMOD_CHANNEL_FREE, _musics[name], false, &_channels[name]) != FMOD_OK)
+	  {
+	    std::cerr << "Error : can't play " << name << std::endl;
+	    return ;
+	  }
+      }
+  }
+
+  void	SoundManager::disableSounds()
+  {
+    std::map<std::string, FMOD_SOUND*>::iterator	it;
+
+    for (it = _sounds.begin(); it != _sounds.end(); it++)
+      this->stop(it->first);
+    _sound = false;
+  }
+
+  void	SoundManager::enableSounds()
+  {
+    _sound = true;
+  }
+
+  void	SoundManager::disableMusics()
+  {
+    std::map<std::string, FMOD_SOUND*>::iterator	it;
+
+    for (it = _musics.begin(); it != _musics.end(); it++)
+      this->stop(it->first);
+    _music = false;
+  }
+
+  void	SoundManager::enableMusics()
+  {
+    _music = true;
   }
 
   void	SoundManager::pause(std::string const& name)

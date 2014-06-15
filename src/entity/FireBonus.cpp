@@ -95,7 +95,10 @@ namespace bbm
     if (entity->getType() == "Player" || entity->getType() == "AI")
       {
 	if (_used == false)
-	  dynamic_cast<APlayer*>(entity)->addPower();
+	  {
+	    dynamic_cast<APlayer*>(entity)->addPower();
+	    dynamic_cast<APlayer*>(entity)->addScore(100);
+	  }
 	_used = true;
       }
     if (entity->getType() == "FireBombExplode" || entity->getType() == "PowerBombExplode")

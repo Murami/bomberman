@@ -141,22 +141,22 @@ namespace	bbm
 	menu->addStateToLastButton("gamepad 4");
 	menu->createNewStateButton("player 2", NULL, 3,
 				   glm::vec4(0, 1, 1, 1), "x");
-	menu->addStateToLastButton("gamepad 1");
 	menu->addStateToLastButton("gamepad 2");
 	menu->addStateToLastButton("gamepad 3");
 	menu->addStateToLastButton("gamepad 4");
+	menu->addStateToLastButton("gamepad 1");
 	menu->createNewStateButton("player 3", NULL, 3,
 				   glm::vec4(1, 0, 1, 1), "x");
-	menu->addStateToLastButton("gamepad 1");
-	menu->addStateToLastButton("gamepad 2");
 	menu->addStateToLastButton("gamepad 3");
 	menu->addStateToLastButton("gamepad 4");
+	menu->addStateToLastButton("gamepad 1");
+	menu->addStateToLastButton("gamepad 2");
 	menu->createNewStateButton("player 4", NULL, 3,
 				   glm::vec4(1, 1, 0, 1), "x");
+	menu->addStateToLastButton("gamepad 4");
 	menu->addStateToLastButton("gamepad 1");
 	menu->addStateToLastButton("gamepad 2");
 	menu->addStateToLastButton("gamepad 3");
-	menu->addStateToLastButton("gamepad 4");
 	menu->createNewButton("next",&IMenuManager::setIASelectionMenu,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setMainMenu,
@@ -246,6 +246,7 @@ namespace	bbm
       {
 	this->_SDLInputsList.push_back("BACKSPACE");
 	this->_SDLInputsList.push_back("PAUSE");
+	this->_SDLInputsList.push_back("SPACE");
 	this->_SDLInputsList.push_back("QUOTEDBL");
 	this->_SDLInputsList.push_back("HASH");
 	this->_SDLInputsList.push_back("DOLLAR");
@@ -323,7 +324,6 @@ namespace	bbm
 	this->_SDLInputsList.push_back("KP_MULTIPLY");
 	this->_SDLInputsList.push_back("KP_MINUS");
 	this->_SDLInputsList.push_back("KP_PLUS");
-	this->_SDLInputsList.push_back("KP_ENTER");
 	this->_SDLInputsList.push_back("UP");
 	this->_SDLInputsList.push_back("DOWN");
 	this->_SDLInputsList.push_back("RIGHT");
@@ -399,27 +399,27 @@ namespace	bbm
       }
     try
       {
-	menu->createNewStateButton("UP", NULL, 7,
+	menu->createNewStateButton("up", NULL, 7,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("up")));
 	this->_setBindingControlPlayer1(menu, "");
-	menu->createNewStateButton("DOWN", NULL, 5,
+	menu->createNewStateButton("down", NULL, 5,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("down")));
 	this->_setBindingControlPlayer1(menu, "");
-	menu->createNewStateButton("LEFT", NULL, 5,
+	menu->createNewStateButton("left", NULL, 5,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("left")));
 	this->_setBindingControlPlayer1(menu, "");
-	menu->createNewStateButton("RIGHT", NULL, 4,
+	menu->createNewStateButton("right", NULL, 4,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("right")));
 	this->_setBindingControlPlayer1(menu, "");
-	menu->createNewStateButton("BOMB", NULL, 5,
+	menu->createNewStateButton("bomb", NULL, 5,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("bomb")));
 	this->_setBindingControlPlayer1(menu, "");
-	menu->createNewStateButton("BOMB2", NULL, 4,
+	menu->createNewStateButton("bomb2", NULL, 4,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("bomb2")));
 	this->_setBindingControlPlayer1(menu, "");
@@ -633,8 +633,8 @@ namespace	bbm
       return (false);
     try
       {
-	menu->createNewToggleButton("sound", &IMenuManager::setMainMenu);
-	menu->createNewToggleButton("music", &IMenuManager::setMainMenu);
+	menu->createNewToggleButton("sound", NULL);
+	menu->createNewToggleButton("music", NULL);
 	menu->createNewButton("ok", &IMenuManager::serializeAudioSettings,
 			      glm::vec4(0, 1, 0, 1), true);
 	menu->createNewButton("cancel", &IMenuManager::setOptionsMenu,
@@ -731,6 +731,7 @@ namespace	bbm
 
   void		MenuState::initialize()
   {
+    Letter::create();
     memset(&this->_config, 0, sizeof(this->_config));
     this->_initializeInputConfig();
     SoundManager::getInstance()->stop("theme");
@@ -797,9 +798,27 @@ namespace	bbm
 	if (s)
 	  {
 	    if (i == 0)
-	      this->_config.sound = s->isChecked();
+	      {
+		this->_config.sound = s->isChecked();
+		if (s->isChecked())
+		  SoundManager::getInstance()->enableSounds();
+		else
+		  SoundManager::getInstance()->disableSounds();
+	      }
 	    else
-	      this->_config.music = s->isChecked();
+	      {
+		this->_config.music = s->isChecked();
+		if (this->_config.music)
+		  {
+		    SoundManager::getInstance()->playMusic("menu");
+		    SoundManager::getInstance()->enableMusics();
+		  }
+		else
+		  {
+		    SoundManager::getInstance()->stop("menu");
+		    SoundManager::getInstance()->disableMusics();
+		  }
+	      }
 	    i++;
 	  }
       	it++;
@@ -976,8 +995,10 @@ namespace	bbm
     std::string tmp2;
     size_t pos = tmp.find(".save");
 
+    this->_config.newGame = false;
     SoundManager::getInstance()->stop("menu");
-    SoundManager::getInstance()->play("wait");
+    if (SoundManager::getInstance()->musicPlaying())
+      SoundManager::getInstance()->playMusic("wait");
     for (size_t i = 0; i < pos; i++)
       tmp2 += tmp[i];
     this->_config.fileToLoad = new std::string(tmp2);
@@ -993,7 +1014,8 @@ namespace	bbm
     StateButton*	nbIAButton = dynamic_cast<StateButton*>(*it);
 
     SoundManager::getInstance()->stop("menu");
-    SoundManager::getInstance()->play("wait");
+    if (SoundManager::getInstance()->musicPlaying())
+      SoundManager::getInstance()->playMusic("wait");
     if (nbIAButton)
       {
 	std::stringstream ss;
@@ -1004,21 +1026,11 @@ namespace	bbm
     StateButton*	level = dynamic_cast<StateButton*>(*it);
     if (level)
       {
-	std::string lvl = level->getState();
-	if (lvl == "easy")
-	  this->_config.level = 0;
-	else if (lvl == "medium")
-	  this->_config.level = 1;
-	else
-	  this->_config.level = 2;
+	this->_config.level = new std::string(level->getState());
       }
     this->_config.newGame = true;
     GameLoadingState*	state = new GameLoadingState(this->_manager,
     						     &this->_config);
-    std::cout << this->_config.player1 << std::endl
-	      << this->_config.player2 << std::endl
-	      << this->_config.player3 << std::endl
-	      << this->_config.player4 << std::endl << std::endl;
     this->_manager.push(state);
   }
 
@@ -1035,15 +1047,16 @@ namespace	bbm
     std::stringstream ss;
     ss.clear();
     ss << s->getState();
-    ss >> this->_config.mapSizeX;
+    if (this->_config.mapSizeX == 0)
+      ss >> this->_config.mapSizeX;
     it++;
     StateButton* s2 = dynamic_cast<StateButton*>(*it);
     std::stringstream ss2;
     ss2.clear();
     ss2 << s2->getState();
     ss2.clear();
-    ss2 >> this->_config.mapSizeY;
-    std::cout << "Sending map size : x = " << this->_config.mapSizeX << " y = " << this->_config.mapSizeY << std::endl;
+    if (this->_config.mapSizeY == 0)
+      ss2 >> this->_config.mapSizeY;
     this->_setNewCurrentMenu("playerselection");
   }
 
@@ -1126,5 +1139,6 @@ namespace	bbm
       delete (this->_inputConfigPlayer3);
     if (this->_inputConfigPlayer4)
       delete (this->_inputConfigPlayer4);
+    Letter::release();
   }
 }
