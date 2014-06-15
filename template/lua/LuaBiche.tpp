@@ -1,3 +1,12 @@
+//
+// LuaBiche.tpp for bomberman in /home/bichon_b/rendu/cpp_bomberman
+//
+// Made by bichon_b
+// Login   <bichon_b@epitech.net>
+//
+// Started on  Sun Jun 15 08:25:56 2014 bichon_b
+// Last update Sun Jun 15 08:25:56 2014 bichon_b
+//
 
 template <typename T>
 void	LuaBiche::addVar(std::string const& name, T begin, T const& end)
