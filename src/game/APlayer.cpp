@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:27:52 2014 otoshigami
-// Last update Sun Jun 15 12:58:11 2014 otoshigami
+// Last update Sun Jun 15 13:34:50 2014 otoshigami
 //
 
 #include "game/APlayer.hh"
@@ -134,7 +134,7 @@ namespace bbm
       }
     catch (const std::runtime_error &e)
       {
-	std::cout << e.what() << std::endl;
+	std::cerr << e.what() << std::endl;
       }
   }
 

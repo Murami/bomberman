@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:23 2014 otoshigami
-// Last update Sun Jun 15 08:28:24 2014 otoshigami
+// Last update Sun Jun 15 13:35:39 2014 otoshigami
 //
 
 #include <string>
@@ -49,7 +49,7 @@ namespace bbm
       {
 	TextureManager::getInstance()->delTexture("load");
 	TextureManager::getInstance()->delTexture("load2");
-	std::cout << e.what() << std::endl;
+	std::cerr << e.what() << std::endl;
 	_manager.pop();
 	return;
       }
@@ -148,7 +148,6 @@ namespace bbm
 
   void			GameLoadingState::newGameState()
   {
-    std::cout << "new" << std::endl;
     GameState*			state;
     PlayerConfig		playerConfig;
     GameState::GameStateConfig	gameStateConfig;
@@ -252,7 +251,7 @@ namespace bbm
 	  }
 	catch (const std::exception& e)
 	  {
-	    std::cout << e.what() << std::endl;
+	    std::cerr << e.what() << std::endl;
 	    _manager.pop();
 	  }
 	_finish = true;

@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:29:30 2014 otoshigami
-// Last update Sun Jun 15 13:08:52 2014 otoshigami
+// Last update Sun Jun 15 13:36:29 2014 otoshigami
 //
 
 #include <iostream>
@@ -56,7 +56,6 @@ namespace bbm
     _object.pushUv(glm::vec2(0, y));
     _object.build();
 
-    std::cout << x << "  " << y << std::endl;
     for (posx = 0; posx < x; posx++)
       {
 	for (posy = 0; posy < y; posy++)

@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:29:54 2014 otoshigami
-// Last update Sun Jun 15 08:29:55 2014 otoshigami
+// Last update Sun Jun 15 13:31:15 2014 otoshigami
 //
 
 #include <SDL.h>
@@ -219,7 +219,6 @@ namespace bbm
     std::string		key;
 
     inputMapNode = current.get("input");
-    std::cout << "test" << std::endl;
     size = inputMapNode->size();
     for (index = 0; index < size; index++)
       {
