@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Sun Jun 15 11:48:18 2014 Manu
-// Last update Sun Jun 15 19:55:45 2014 Manu
+// Last update Sun Jun 15 20:33:08 2014 Manu
 //
 
 #include		<stdexcept>
@@ -34,7 +34,8 @@ namespace	bbm
 
   MenuState::MenuState(GameManager& manager) : _manager(manager)
   {
-    SoundManager::getInstance()->addSound("drop", "assets/sound/drop_bomb.aif");
+    SoundManager::getInstance()->addMusic("defeat", "assets/sound/defeat.mp3");
+    SoundManager::getInstance()->addMusic("victory", "assets/sound/victory.mp3");
     SoundManager::getInstance()->addSound("pick", "assets/sound/pick_bonus.aiff");
     SoundManager::getInstance()->addSound("box", "assets/sound/bomb_box.mp3");
     SoundManager::getInstance()->addSound("multi", "assets/sound/multi.mp3");
@@ -1016,6 +1017,8 @@ namespace	bbm
     std::string tmp2;
     size_t pos = tmp.find(".save");
 
+    if (tmp == "no save")
+      return ;
     this->_config.newGame = false;
     SoundManager::getInstance()->stop("menu");
     if (SoundManager::getInstance()->musicPlaying())
