@@ -984,6 +984,7 @@ namespace	bbm
     std::string tmp2;
     size_t pos = tmp.find(".save");
 
+    this->_config.newGame = false;
     SoundManager::getInstance()->stop("menu");
     if (this->_config.music)
       SoundManager::getInstance()->play("wait");
