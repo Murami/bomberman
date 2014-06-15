@@ -5,7 +5,7 @@
 // Login   <bichon_b@epitech.net>
 //
 // Started on  Sun Jun 15 08:33:55 2014 bichon_b
-// Last update Sun Jun 15 09:44:01 2014 bichon_b
+// Last update Sun Jun 15 10:07:06 2014 bichon_b
 //
 
 #include "game/AI.hh"
@@ -44,6 +44,7 @@ namespace bbm
     add_method_to_vector(methods, "getActualDirection", &AI::getActualDirection);
     add_method_to_vector(methods, "setIdle", &AI::setIdle);
     add_method_to_vector(methods, "getDanger", &AI::getDanger);
+    add_method_to_vector(methods, "prayer", &AI::prayer);
     return (methods);
   }
 
@@ -203,9 +204,16 @@ namespace bbm
     return (1);
   }
 
+  int	AI::prayer(lua_State*)
+  {
+    std::cout << "I'M GONNA DIE !!!" << std::endl;
+    return (1);
+  }
+
   int	AI::getBoxes(lua_State* L)
   {
     lua_newtable(L);
+
 
     this->setMove(glm::vec2(0, 0.4));
     lua_pushstring(L, "up");
@@ -240,14 +248,25 @@ namespace bbm
     lua_rawset(L, -3);
 
     this->setMove(glm::vec2(0, 0));
-fg    return (1);
+    return (1);
   }
 
   int	AI::getDanger(lua_State* L)
   {
     lua_newtable(L);
 
-    this->setMove(glm::vec2(0, 0.4));
+    this->setMove(glm::vec2(0, 0));
+    lua_pushstring(L, "self");
+    if (this->collideWarning())
+      {
+	std::cout << " danger self ";
+	lua_pushboolean(L, true);
+      }
+    else
+      lua_pushboolean(L, false);
+    lua_rawset(L, -3);
+
+    this->setMove(glm::vec2(0, 1));
     lua_pushstring(L, "up");
     if (this->collideWarning())
       {
@@ -258,7 +277,7 @@ fg    return (1);
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
 
-    this->setMove(glm::vec2(-0.4, 0));
+    this->setMove(glm::vec2(-1, 0));
     lua_pushstring(L, "left");
     if (this->collideWarning())
       {
@@ -269,7 +288,7 @@ fg    return (1);
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
 
-    this->setMove(glm::vec2(0.4, 0));
+    this->setMove(glm::vec2(1, 0));
     lua_pushstring(L, "right");
     if (this->collideWarning())
       {
@@ -280,7 +299,7 @@ fg    return (1);
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
 
-    this->setMove(glm::vec2(0, -0.4));
+    this->setMove(glm::vec2(0, -1));
     lua_pushstring(L, "down");
     if (this->collideWarning())
       {

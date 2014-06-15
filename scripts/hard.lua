@@ -108,21 +108,19 @@ function core ()
 end
 
 function isAnyDanger ()
-   if dangers["up"] then
-      print("*up*")
-      player:goDown()
-   end
-   if dangers["down"] then
-      print("*down*")
-      player:goUp()
-   end
-   if dangers["left"] then
-      print("*left*")
-      player:goRight()
-   end
-   if dangers["right"] then
-      print("*right*")
-      player:goLeft()
+   print("danger are here : " .. tostring(dangers["self"]) .. " " .. tostring(dangers["up"]) .. " " .. tostring(dangers["left"]) .. " " .. tostring(dangers["right"]) .. " " .. tostring(dangers["down"]) .. " ")
+   if dangers["self"] then
+      if not dangers["left"] and not boxes["left"] then
+	 move["left"]()
+      elseif not dangers["right"] and not boxes["right"] then
+	 move["right"]()
+      elseif not dangers["down"] and not boxes["down"] then
+	 move["down"]()
+      elseif not dangers["up"] and not boxes["up"] then
+	 move["up"]()
+      else
+	 player:prayer()
+      end
    end
 end
 
