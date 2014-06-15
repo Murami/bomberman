@@ -1,3 +1,13 @@
+//
+// SoundManager.cpp for bomberman in /home/bichon_b/rendu/cpp_bomberman
+//
+// Made by bichon_b
+// Login   <bichon_b@epitech.net>
+//
+// Started on  Sun Jun 15 08:25:25 2014 bichon_b
+// Last update Sun Jun 15 08:25:25 2014 bichon_b
+//
+
 #include "sound/SoundManager.hh"
 #include <iostream>
 

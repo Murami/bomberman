@@ -18,7 +18,8 @@ namespace bbm
     ABombExplode(position, gameState),
     _wall("fire", "default")
   {
-    SoundManager::getInstance()->playSound("bomb");
+    if (SoundManager::getInstance()->soundPlaying())
+      SoundManager::getInstance()->playSound("bomb");
 
     _lifespan = 500;
     _idPlayer = idPlayer;

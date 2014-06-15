@@ -153,6 +153,10 @@ namespace	bbm
 	menu->addStateToLastButton("gamepad 2");
 	menu->createNewStateButton("player 4", NULL, 3,
 				   glm::vec4(1, 1, 0, 1), "x");
+	menu->addStateToLastButton("gamepad 4");
+	menu->addStateToLastButton("gamepad 1");
+	menu->addStateToLastButton("gamepad 2");
+	menu->addStateToLastButton("gamepad 3");
 	menu->createNewButton("next",&IMenuManager::setIASelectionMenu,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setMainMenu,
@@ -727,6 +731,7 @@ namespace	bbm
 
   void		MenuState::initialize()
   {
+    Letter::create();
     memset(&this->_config, 0, sizeof(this->_config));
     this->_initializeInputConfig();
     SoundManager::getInstance()->stop("theme");
@@ -1042,15 +1047,16 @@ namespace	bbm
     std::stringstream ss;
     ss.clear();
     ss << s->getState();
-    ss >> this->_config.mapSizeX;
+    if (this->_config.mapSizeX == 0)
+      ss >> this->_config.mapSizeX;
     it++;
     StateButton* s2 = dynamic_cast<StateButton*>(*it);
     std::stringstream ss2;
     ss2.clear();
     ss2 << s2->getState();
     ss2.clear();
-    ss2 >> this->_config.mapSizeY;
-    std::cout << "Sending map size : x = " << this->_config.mapSizeX << " y = " << this->_config.mapSizeY << std::endl;
+    if (this->_config.mapSizeY == 0)
+      ss2 >> this->_config.mapSizeY;
     this->_setNewCurrentMenu("playerselection");
   }
 
@@ -1133,5 +1139,6 @@ namespace	bbm
       delete (this->_inputConfigPlayer3);
     if (this->_inputConfigPlayer4)
       delete (this->_inputConfigPlayer4);
+    Letter::release();
   }
 }
