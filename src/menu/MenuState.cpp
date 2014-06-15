@@ -1014,7 +1014,9 @@ namespace	bbm
     it++;
     StateButton*	level = dynamic_cast<StateButton*>(*it);
     if (level)
-      this->_config.level = level->getState();
+      {
+	this->_config.level = new std::string(level->getState());
+      }
     this->_config.newGame = true;
     GameLoadingState*	state = new GameLoadingState(this->_manager,
     						     &this->_config);

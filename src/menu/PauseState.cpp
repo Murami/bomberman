@@ -664,6 +664,7 @@ namespace		bbm
     this->_inputConfigPlayer3->load(INPUT_CONFIG_P3);
     this->_inputConfigPlayer4->load(INPUT_CONFIG_P4);
     this->_manager.pop();
+    delete (this);
   }
 
   void		PauseState::setPlayMenu(Menu*)
@@ -869,5 +870,17 @@ namespace		bbm
 
   PauseState::~PauseState()
   {
+    if (this->_inputConfigPlayer1)
+      delete (this->_inputConfigPlayer1);
+    if (this->_inputConfigPlayer2)
+      delete (this->_inputConfigPlayer2);
+    if (this->_inputConfigPlayer3)
+      delete (this->_inputConfigPlayer3);
+    if (this->_inputConfigPlayer4)
+      delete (this->_inputConfigPlayer4);
+    delete (this->_skybox);
+    for (std::list<Menu*>::iterator it = this->_menuList.begin();
+	 it != this->_menuList.end(); it++)
+      delete (*it);
   }
 }
