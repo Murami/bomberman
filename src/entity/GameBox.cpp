@@ -5,7 +5,7 @@
 // Login   <desabr_q@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:45 2014 quentin desabre
-// Last update Sun Jun 15 09:14:21 2014 Desabre Quentin
+// Last update Sun Jun 15 13:10:24 2014 otoshigami
 //
 
 #include <iostream>
@@ -121,7 +121,6 @@ namespace bbm
 	    if (bonus != NULL)
 	      _gameState.addEntity(bonus);
 	    _used = true;
-	    // box must d
 	  }
       }
   }

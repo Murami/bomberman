@@ -1,5 +1,3 @@
-//PAIR
-
 template<typename FirstType, typename SecondType>
 SerializablePair<FirstType, SecondType>::SerializablePair()
 {
@@ -38,8 +36,6 @@ void	SerializablePair<FirstType, SecondType>::unpack(const ISerializedNode & cur
   current.get("first", this->first);
   current.get("second", this->second);
 }
-
-//MAP
 
 template<typename IndexType, typename ValueType>
 SerializableMap<IndexType, ValueType>::SerializableMap()

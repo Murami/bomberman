@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:46 2014 otoshigami
-// Last update Sun Jun 15 12:00:01 2014 bichon_b
+// Last update Sun Jun 15 13:01:54 2014 otoshigami
 //
 
 #include <iterator>
@@ -219,7 +219,6 @@ namespace bbm
 
     	ss << index;
     	entityNode = entityListNode->get(ss.str());
-	std::cout << "index = " << ss.str()<< std::endl;
     	entityNode->get("type", type);
     	entity = factory.create(type, *this);
     	if (entity != NULL)
@@ -353,7 +352,6 @@ namespace bbm
 	  {
 	    itSpawn = _tilemap.getSpawns().begin();
 	    itSpawn += rand() % _tilemap.getSpawns().size();
-	    std::cout << "spawn" << itSpawn->x << " " << itSpawn->y << std::endl;
 	    (*it).position = glm::vec2(itSpawn->x, itSpawn->y);
 	  }
 	_AIs.push_back(new AI(*this, *it));
@@ -410,6 +408,7 @@ namespace bbm
 						glm::vec3(0, 0, 1));
 
 	splitScreen(context, projection, itPlayersCamera);
+
 	RenderState		stateSky(projection, cameraSky);
 	RenderState		state(projection, camera);
 
@@ -442,7 +441,7 @@ namespace bbm
 	    projection = ProjectionPerspective(60, context.getSize().x / (context.getSize().y / 2), 1, 1000);
 	  }
 
-	if (std::distance(_players.begin(), itPlayersCamera) == 1)
+	else if (std::distance(_players.begin(), itPlayersCamera) == 1)
 	  {
 	    context.split(glm::ivec2(0, 0),
 			  glm::ivec2(context.getSize().x, context.getSize().y / 2));
@@ -458,14 +457,14 @@ namespace bbm
 	    projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
 	  }
 
-	if (std::distance(_players.begin(), itPlayersCamera) == 1)
+	else if (std::distance(_players.begin(), itPlayersCamera) == 1)
 	  {
 	    context.split(glm::ivec2(context.getSize().x / 2, context.getSize().y / 2),
 			  glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
 	    projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
 	  }
 
-	if (std::distance(_players.begin(), itPlayersCamera) == 2)
+	else if (std::distance(_players.begin(), itPlayersCamera) == 2)
 	  {
 	    context.split(glm::ivec2(0, 0),
 			  glm::ivec2(context.getSize().x, context.getSize().y / 2));
@@ -481,21 +480,21 @@ namespace bbm
 	    projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
 	  }
 
-	if (std::distance(_players.begin(), itPlayersCamera) == 1)
+	else if (std::distance(_players.begin(), itPlayersCamera) == 1)
 	  {
 	    context.split(glm::ivec2(context.getSize().x / 2, context.getSize().y / 2),
 			  glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
 	    projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
 	  }
 
-	if (std::distance(_players.begin(), itPlayersCamera) == 2)
+	else if (std::distance(_players.begin(), itPlayersCamera) == 2)
 	  {
 	    context.split(glm::ivec2(0, 0),
 			  glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));
 	    projection = ProjectionPerspective(60, context.getSize().x / context.getSize().y, 1, 1000);
 	  }
 
-	if (std::distance(_players.begin(), itPlayersCamera) == 3)
+	else if (std::distance(_players.begin(), itPlayersCamera) == 3)
 	  {
 	    context.split(glm::ivec2(context.getSize().x / 2, 0),
 			  glm::ivec2(context.getSize().x / 2, context.getSize().y / 2));

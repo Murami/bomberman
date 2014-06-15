@@ -12,8 +12,6 @@ JsonNode::~JsonNode()
 
 }
 
-//ADD
-
 void			JsonNode::add(const std::string& index, const ISerializable& serializable)
 {
   JsonNode node(_current[index]);
@@ -112,8 +110,6 @@ ISerializedNode*	JsonNode::add(const std::string& index)
   _current[index] = Json::Value();
   return (new JsonNode(_current[index]));
 }
-
-//GET
 
 void			JsonNode::get(const std::string& index, ISerializable& serializable) const
 {

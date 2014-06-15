@@ -5,23 +5,23 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:35:59 2014 otoshigami
-// Last update Sun Jun 15 09:26:04 2014 bichon_b
+// Last update Sun Jun 15 12:55:00 2014 otoshigami
 //
 
 #ifndef APLAYER_HH
-# define APLAYER_HH
+#define APLAYER_HH
 
-# include "entity/Marvin.hh"
-# include "entity/AEntity.hh"
-# include "events/InputConfig.hh"
-# include "events/IEventListener.hh"
-# include "graphic/IDrawable.hh"
-# include "graphic/Model.hh"
-# include "graphic/Transformable.hh"
-# include "game/Wall.hh"
 #include "entity/Marvin.hh"
 #include "entity/AEntity.hh"
 
+#include "events/InputConfig.hh"
+#include "events/IEventListener.hh"
+
+#include "game/Wall.hh"
+
+#include "graphic/IDrawable.hh"
+#include "graphic/Model.hh"
+#include "graphic/Transformable.hh"
 #include "graphic/IDrawable.hh"
 #include "graphic/Transformable.hh"
 #include "graphic/Model.hh"
