@@ -46,61 +46,75 @@ local move = {
 
 if boxes["up"] and boxes["down"] and boxes["left"] and boxes["right"] then
    player:setIdle()
-elseif direction == "idle" then
-   if not boxes["up"] then
-      move["up"]()
-   elseif not boxes["down"] then
-      move["down"]()
-   elseif not boxes["left"] then
-      move["left"]()
-   elseif not boxes["right"] then
-      move["right"]()
-   end
-else
+   return
+end
 
-   if not boxes[otherDirection1] and not boxes[otherDirection2] then
-      if n >= 1 and n <= 4 then
-	 move[otherDirection1]()
-      elseif n >= 7 or n <= 10 then
-	 move[otherDirection2]()
-      else
-	 if boxes[direction] then
-	    if n >= 1 and n <= 5 then
+function core ()
+   if direction == "idle" then
+      if not boxes["up"] then
+	 move["up"]()
+      elseif not boxes["down"] then
+	 move["down"]()
+      elseif not boxes["left"] then
+	 move["left"]()
+      elseif not boxes["right"] then
+	 move["right"]()
+      end
+   else
+
+      if not boxes[otherDirection1] and not boxes[otherDirection2] then
+	 if n >= 1 and n <= 4 then
+	    move[otherDirection1]()
+	 elseif n >= 7 or n <= 10 then
+	    move[otherDirection2]()
+	 else
+	    if boxes[direction] then
+	       if n >= 1 and n <= 5 then
+		  move[otherDirection2]()
+	       else
+		  move[otherDirection1]()
+	       end
+	    else
+	       move[direction]()
+	    end
+	 end
+      elseif not boxes[otherDirection2] then
+	 if n >= 4 and n <= 6 then
+	    if not boxes[direction] then
+	       move[direction]()
+	    else
 	       move[otherDirection2]()
+	    end
+	 else
+	    move[otherDirection2]()
+	 end
+      elseif not boxes[otherDirection1] then
+	 if n >= 4 and n <= 6 then
+	    if not boxes[direction] then
+	       move[direction]()
 	    else
 	       move[otherDirection1]()
 	    end
 	 else
-	    move[direction]()
-	 end
-      end
-   elseif not boxes[otherDirection2] then
-      if n >= 4 and n <= 6 then
-	 if not boxes[direction] then
-	    move[direction]()
-	 else
-	    move[otherDirection2]()
-	 end
-      else
-	 move[otherDirection2]()
-      end
-   elseif not boxes[otherDirection1] then
-      if n >= 4 and n <= 6 then
-	 if not boxes[direction] then
-	    move[direction]()
-	 else
 	    move[otherDirection1]()
 	 end
       else
-	 move[otherDirection1]()
+	 if boxes[direction] then
+	    move[reverseDirection]()
+	 else
+	    move[direction]()
+	 end
       end
-   else
-      if boxes[direction] then
-	 move[reverseDirection]()
-      else
-	 move[direction]()
-      end
-   end
 
+   end
 end
 
+if n == 10 then
+   if player:haveBomb() then
+      player:putBomb()
+   else
+      core()
+   end
+else
+   core()
+end
