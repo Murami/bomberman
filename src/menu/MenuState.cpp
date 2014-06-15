@@ -153,6 +153,10 @@ namespace	bbm
 	menu->addStateToLastButton("gamepad 2");
 	menu->createNewStateButton("player 4", NULL, 3,
 				   glm::vec4(1, 1, 0, 1), "x");
+	menu->addStateToLastButton("gamepad 4");
+	menu->addStateToLastButton("gamepad 1");
+	menu->addStateToLastButton("gamepad 2");
+	menu->addStateToLastButton("gamepad 3");
 	menu->createNewButton("next",&IMenuManager::setIASelectionMenu,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setMainMenu,
@@ -727,6 +731,7 @@ namespace	bbm
 
   void		MenuState::initialize()
   {
+    Letter::create();
     memset(&this->_config, 0, sizeof(this->_config));
     this->_initializeInputConfig();
     SoundManager::getInstance()->stop("theme");
@@ -1133,5 +1138,6 @@ namespace	bbm
       delete (this->_inputConfigPlayer3);
     if (this->_inputConfigPlayer4)
       delete (this->_inputConfigPlayer4);
+    Letter::release();
   }
 }

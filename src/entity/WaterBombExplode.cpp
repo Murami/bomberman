@@ -18,7 +18,8 @@ namespace bbm
     ABombExplode(position, gameState),
     _wall("water", "default")
   {
-    SoundManager::getInstance()->playSound("aquaBomb");
+    if (SoundManager::getInstance()->soundPlaying())
+      SoundManager::getInstance()->playSound("aquaBomb");
     _type = "WaterBombExplode";
     _wall.setPosition(glm::vec3(_pos.x, _pos.y, 0));
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));

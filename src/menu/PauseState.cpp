@@ -852,14 +852,23 @@ namespace		bbm
 	if (s)
 	  {
 	    if (i == 0)
-	      this->_config->sound = s->isChecked();
+	      {
+		this->_config->sound = s->isChecked();
+		if (s->isChecked())
+		  SoundManager::getInstance()->enableSounds();
+		else
+		  SoundManager::getInstance()->disableSounds();
+	      }
 	    else
 	      {
 		this->_config->music = s->isChecked();
 		if (this->_config->music)
 		  SoundManager::getInstance()->playMusic("theme");
 		else
-		  SoundManager::getInstance()->stop("theme");
+		  {
+		    SoundManager::getInstance()->disableMusics();
+		    SoundManager::getInstance()->stop("theme");
+		  }
 	      }
 	    i++;
 	  }

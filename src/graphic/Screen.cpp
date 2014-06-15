@@ -10,7 +10,6 @@ namespace bbm
   {
     SDL_DisplayMode	current;
 
-
     SDL_Init(SDL_INIT_VIDEO);
     if (SDL_GetCurrentDisplayMode(0, &current) == 0)
       {
