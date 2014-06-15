@@ -5,7 +5,7 @@
 // Login   <bichon_b@epitech.net>
 //
 // Started on  Sun Jun 15 08:25:25 2014 bichon_b
-// Last update Sun Jun 15 08:25:25 2014 bichon_b
+// Last update Sun Jun 15 08:58:32 2014 bichon_b
 //
 
 #include "sound/SoundManager.hh"
@@ -132,7 +132,7 @@ namespace bbm
     std::map<std::string, FMOD_SOUND*>::iterator	it;
 
     for (it = _musics.begin(); it != _musics.end(); it++)
-      this->stop(it->first);
+      this->pause(it->first);
     _music = false;
   }
 
