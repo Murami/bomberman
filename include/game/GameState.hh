@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:36:23 2014 otoshigami
-// Last update Sun Jun 15 11:30:00 2014 bichon_b
+// Last update Sun Jun 15 12:55:37 2014 otoshigami
 //
 
 #ifndef GAMESTATE_HH
@@ -20,10 +20,12 @@
 # include "game/IGameState.hh"
 # include "game/TileMap.hh"
 # include "game/AI.hh"
+# include "game/GameLoadingState.hh"
+
 # include "entity/Player.hh"
 
 # include "graphic/Transform.hh"
-# include "game/GameLoadingState.hh"
+
 # include "serializer/ISerializable.hh"
 
 namespace bbm

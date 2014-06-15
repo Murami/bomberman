@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Mon Jun  2 13:10:45 2014 Manu
-// Last update Fri Jun 13 06:00:13 2014 Desabre Quentin
+// Last update Sun Jun 15 13:40:42 2014 Manu
 //
 
 #include		"graphic/RenderState.hh"
@@ -15,7 +15,7 @@
 namespace	bbm
 {
 
-  const std::string Skybox::VIOLENTDAYS = "assets/menu/images/interstellar.tga";
+  const std::string Skybox::VIOLENTDAYS = "assets/menu/images/hitech.tga";
 
   Skybox::Skybox() : _position(0, 0, 0), _rotation(0, 0, 0), _scale(1, 1, 1)
   {
@@ -27,6 +27,7 @@ namespace	bbm
       throw (FileLoadingException(std::string("Error while loading ") +
 				  VIOLENTDAYS));
     this->_shader = ShaderManager::getInstance()->getShader("default");
+    this->_geom.setColor(glm::vec4(0.635f, 0.635f, 0.635f, 1));
     this->_geom.pushVertex(glm::vec3(-10, 10, -10));
     this->_geom.pushVertex(glm::vec3(-10, 10, 10));
     this->_geom.pushVertex(glm::vec3(-10, -10, 10));

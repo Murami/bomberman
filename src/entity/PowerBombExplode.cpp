@@ -5,7 +5,7 @@
 // Login   <desabr_q@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:13 2014 quentin desabre
-// Last update Sun Jun 15 09:36:00 2014 Desabre Quentin
+// Last update Sun Jun 15 13:17:16 2014 Manu
 //
 
 #include "entity/PowerBombExplode.hh"
@@ -13,7 +13,6 @@
 #include "graphic/ARenderer.hh"
 #include "graphic/RenderState.hh"
 #include "game/GameState.hh"
-#include "sound/SoundManager.hh"
 
 const float	scaleFactor = 1;
 
@@ -21,7 +20,6 @@ namespace bbm
 {
   PowerBombExplode::PowerBombExplode(GameState& gameState) : ABombExplode(gameState), _wall("fire2", "default")
   {
-    SoundManager::getInstance()->playSound("bigBomb");
   }
 
   PowerBombExplode::PowerBombExplode(const glm::vec2& position, GameState& gameState,
@@ -29,9 +27,6 @@ namespace bbm
     ABombExplode(position, gameState),
     _wall("fire2", "default")
   {
-    if (SoundManager::getInstance()->soundPlaying())
-      SoundManager::getInstance()->playSound("bigBomb");
-
     _lifespan = 500;
     _idPlayer = idPlayer;
     _type = "PowerBombExplode";

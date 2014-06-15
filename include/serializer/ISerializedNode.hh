@@ -5,7 +5,7 @@
 // Login   <pinon_a@epitech.net>
 //
 // Started on  Wed May 21 15:37:24 2014 pinon
-// Last update Thu Jun 12 19:52:39 2014 pinon
+// Last update Sun Jun 15 13:13:15 2014 otoshigami
 //
 
 #ifndef		ISERIALIZEDNODE_HH
@@ -19,8 +19,6 @@ class ISerializedNode
 {
 public:
   ~ISerializedNode() {};
-
-  //ADD
 
   virtual void			add(const std::string& index, const ISerializable& value) = 0;
   virtual void                  add(const std::string& index, const glm::ivec2& value) = 0;
@@ -37,8 +35,6 @@ public:
   virtual void			add(const std::string& index, float value) = 0;
   virtual ISerializedNode*	add(const std::string& index) = 0;
 
-  //GET
-
   virtual void			get(const std::string& index, ISerializable& value) const = 0;
   virtual void                  get(const std::string& index, glm::ivec2& value) const = 0;
   virtual void                  get(const std::string& index, glm::ivec3& value) const = 0;
@@ -53,8 +49,6 @@ public:
   virtual void			get(const std::string& index, float& value) const = 0;
   virtual void			get(const std::string& index, bool& value) const = 0;
   virtual ISerializedNode*	get(const std::string& index) const = 0;
-
-  //UTILS
 
   virtual int			size() const = 0;
 };

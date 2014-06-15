@@ -1,3 +1,13 @@
+//
+// HUD.cpp for bomberman in /home/manu/rendu/cpp_bomberman
+//
+// Made by Manu
+// Login   <manu@epitech.net>
+//
+// Started on  Sun Jun 15 13:19:20 2014 Manu
+// Last update Sun Jun 15 13:19:21 2014 Manu
+//
+
 #include		"menu/LetterManager.hpp"
 #include		"menu/Letter.hh"
 #include		"graphic/Transform.hh"

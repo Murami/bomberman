@@ -1,3 +1,13 @@
+//
+// SerializableVector.tpp for bomberman  in /home/manu/rendu/cpp_bomberman/template/serializer
+//
+// Made by Manu
+// Login   <manu@epitech.net>
+//
+// Started on  Sun Jun 15 13:24:26 2014 Manu
+// Last update Sun Jun 15 13:24:26 2014 Manu
+//
+
 template<typename ValueType>
 SerializableVector<ValueType>::SerializableVector()
 {

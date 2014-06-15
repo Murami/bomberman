@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:38:07 2014 otoshigami
-// Last update Sun Jun 15 08:38:07 2014 otoshigami
+// Last update Sun Jun 15 12:56:15 2014 otoshigami
 //
 
 #ifndef TIMER_HH
@@ -24,10 +24,7 @@ namespace bbm
     Timer();
     ~Timer();
 
-    // Resets the timer
     void		reset();
-
-    // Returns the time elapsed since the last reset in millisecond
     unsigned int	getElapsedTime();
   };
 };

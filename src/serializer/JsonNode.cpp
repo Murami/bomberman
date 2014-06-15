@@ -1,3 +1,13 @@
+//
+// JsonNode.cpp for bomberman in /home/manu/rendu/cpp_bomberman/src/serializer
+//
+// Made by Manu
+// Login   <manu@epitech.net>
+//
+// Started on  Sun Jun 15 13:20:57 2014 Manu
+// Last update Sun Jun 15 13:20:59 2014 Manu
+//
+
 #include <string>
 #include <iostream>
 #include "serializer/JsonNode.hh"
@@ -11,8 +21,6 @@ JsonNode::~JsonNode()
 {
 
 }
-
-//ADD
 
 void			JsonNode::add(const std::string& index, const ISerializable& serializable)
 {
@@ -112,8 +120,6 @@ ISerializedNode*	JsonNode::add(const std::string& index)
   _current[index] = Json::Value();
   return (new JsonNode(_current[index]));
 }
-
-//GET
 
 void			JsonNode::get(const std::string& index, ISerializable& serializable) const
 {

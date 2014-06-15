@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:16 2014 otoshigami
-// Last update Sun Jun 15 08:28:18 2014 otoshigami
+// Last update Sun Jun 15 12:58:27 2014 otoshigami
 //
 
 #include <ctime>
@@ -22,7 +22,6 @@
 
 namespace bbm
 {
-  /// !! FICHIER DE CONFIG POUR LA RESOLUTION
   Game::Game() :
     _screen("Bomberman")
   {

@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:29:30 2014 otoshigami
-// Last update Sun Jun 15 08:29:31 2014 otoshigami
+// Last update Sun Jun 15 13:08:52 2014 otoshigami
 //
 
 #include <iostream>
@@ -71,30 +71,6 @@ namespace bbm
 	  }
       }
 
-    // for (i = 0; i < x; i++)
-    //   {
-    // 	tile = new Tile(true, "wall", "default", Tile::Wall);
-    // 	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
-    // 	setTile(i, 0, tile);
-    //   }
-    // for (i = 0; i < x; i++)
-    //   {
-    // 	tile = new Tile(true, "wall", "default", Tile::Wall);
-    // 	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
-    // 	setTile(i, y - 1, tile);
-    //   }
-    // for (i = 0; i < y; i++)
-    //   {
-    // 	tile = new Tile(true, "wall", "default", Tile::Wall);
-    // 	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
-    // 	setTile(0, i, tile);
-    //   }
-    // for (i = 0; i < y; i++)
-    //   {
-    // 	tile = new Tile(true, "wall", "default", Tile::Wall);
-    // 	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
-    // 	setTile(x - 1, i, tile);
-    //   }
     for (i = 0; i < (x * y) * 0.05; i++)
       {
 	valid = false;
@@ -199,7 +175,6 @@ namespace bbm
     ISerializedNode*		tileNode;
 
     current.get("size", _size);
-    // current.get("ground", _object);
     _tiles.resize(_size.x * _size.y, NULL);
     vectorNode = current.get("tiles");
     size = vectorNode->size();

@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:38:38 2014 otoshigami
-// Last update Sun Jun 15 08:38:39 2014 otoshigami
+// Last update Sun Jun 15 12:53:30 2014 otoshigami
 //
 
 #ifndef INPUT_WITH_JOYSTICK_HH
@@ -20,7 +20,6 @@
 
 namespace bbm
 {
-  // Handle the inputs for joystick
   class	Input
   {
   private:

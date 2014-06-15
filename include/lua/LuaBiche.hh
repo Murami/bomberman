@@ -5,7 +5,7 @@
 // Login   <bichon_b@epitech.net>
 //
 // Started on  Sun Jun 15 08:25:46 2014 bichon_b
-// Last update Sun Jun 15 08:25:46 2014 bichon_b
+// Last update Sun Jun 15 13:13:46 2014 otoshigami
 //
 
 #ifndef _LUABICHE_HH_
@@ -18,8 +18,6 @@
 
 class	LuaBiche
 {
-
-  /* nested class pour enregistrer les object en lua */
   template <typename T>
   class RegClass
   {
@@ -49,7 +47,6 @@ public:
   template <typename T>
   void	addVar(std::string const& name, T begin, T const& end);
 
-  // void	addObject(std::string const& name, ILuaObject *object);
   template <typename T>
   void	addObject(std::string const& name, T *object);
 
@@ -58,7 +55,6 @@ public:
   static int	push(lua_State*, ILuaHeir<T>*);
 
 private:
-  /* on pousse sur la stack des données de différents types pour y avoir accès en Lua */
   void	pushOnStack(std::string const& value);
   void	pushOnStack(bool  value);
   void	pushOnStack(int value);
@@ -72,7 +68,6 @@ private:
   lua_State	*_lua;
 };
 
-/* implementation des methodes templates */
 # include "lua/LuaBiche.tpp"
 # include "lua/RegClass.tpp"
 

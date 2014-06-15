@@ -5,10 +5,11 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:27:52 2014 otoshigami
-// Last update Sun Jun 15 15:18:23 2014 bichon_b
+// Last update Sun Jun 15 15:19:14 2014 bichon_b
 //
 
 #include "game/APlayer.hh"
+
 #include "entity/BombFactory.hh"
 #include "entity/Player.hh"
 #include "entity/BoxBomb.hh"
@@ -17,10 +18,14 @@
 #include "entity/DarkBomb.hh"
 #include "entity/WaterBomb.hh"
 #include "entity/MultiBomb.hh"
+
 #include "graphic/RenderState.hh"
 #include "graphic/ARenderer.hh"
+
 #include "game/GameState.hh"
+
 #include "sound/SoundManager.hh"
+
 #include "hud/HUD.hh"
 
 const float	maxSpeed = 0.005;
@@ -130,7 +135,6 @@ namespace bbm
     catch (const std::runtime_error &e)
       {
 	std::cout << e.what() << std::endl;
-	// set spawn;
       }
   }
 
@@ -266,7 +270,6 @@ std::cout << "je test en " << pos / mapSize.x << ", " << i << std::endl;
     _model.setPosition(glm::vec3(_position.x + 0.5, _position.y + 0.5, 0));
   }
 
-  //ATENTION AU REFERENCE VERS LE PLAYER !
   bool			APlayer::expired() const
   {
     return (false);
@@ -333,6 +336,7 @@ std::cout << "je test en " << pos / mapSize.x << ", " << i << std::endl;
     _power++;
 
   }
+
   void			APlayer::addSpeed()
   {
     if (_slow == true)

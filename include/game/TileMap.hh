@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:38:02 2014 otoshigami
-// Last update Sun Jun 15 08:38:03 2014 otoshigami
+// Last update Sun Jun 15 12:56:05 2014 otoshigami
 //
 
 #ifndef TILEMAP_HH
@@ -14,9 +14,12 @@
 #include <vector>
 #include <string>
 #include <glm/glm.hpp>
+
 #include "game/Tile.hh"
+
 #include "graphic/IDrawable.hh"
 #include "graphic/Object.hh"
+
 #include "serializer/ISerializable.hh"
 #include "serializer/SerializableVector.hh"
 

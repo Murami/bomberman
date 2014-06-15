@@ -5,7 +5,7 @@
 // Login   <desabr_q@epitech.net>
 //
 // Started on  Sun Jun 15 08:31:14 2014 quentin desabre
-// Last update Sun Jun 15 08:31:14 2014 Desabre Quentin
+// Last update Sun Jun 15 13:16:31 2014 Manu
 //
 
 #include "entity/WaterBombExplode.hh"
@@ -13,7 +13,6 @@
 #include "graphic/ARenderer.hh"
 #include "graphic/RenderState.hh"
 #include "game/GameState.hh"
-#include "sound/SoundManager.hh"
 
 const float	scaleFactor = 1;
 
@@ -21,15 +20,12 @@ namespace bbm
 {
   WaterBombExplode::WaterBombExplode(GameState & gameState): ABombExplode(gameState), _wall("water", "default")
   {
-    SoundManager::getInstance()->playSound("aquaBomb");
   }
 
   WaterBombExplode::WaterBombExplode(const glm::vec2& position, GameState& gameState) :
     ABombExplode(position, gameState),
     _wall("water", "default")
   {
-    if (SoundManager::getInstance()->soundPlaying())
-      SoundManager::getInstance()->playSound("aquaBomb");
     _type = "WaterBombExplode";
     _wall.setPosition(glm::vec3(_pos.x, _pos.y, 0));
     _wall.setScale(glm::vec3(scaleFactor, scaleFactor, scaleFactor));
