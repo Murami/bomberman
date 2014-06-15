@@ -213,7 +213,7 @@ namespace bbm
   bool		TileMap::collide(int x, int y)
   {
     if (x >= _size.x || x < 0 || y < 0 || y >= _size.y)
-      throw (std::runtime_error("out of bounds"));
+      return (true);
 
     Tile*	tile = _tiles[x + y * _size.x];
     if (tile)
