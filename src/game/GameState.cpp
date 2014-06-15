@@ -5,8 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:46 2014 otoshigami
-// Last update Sun Jun 15 11:05:28 2014 Manu
-// Last update Sun Jun 15 10:05:59 2014 otoshigami
+// Last update Sun Jun 15 12:00:01 2014 bichon_b
 //
 
 #include <iterator>

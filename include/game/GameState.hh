@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:36:23 2014 otoshigami
-// Last update Sun Jun 15 09:22:45 2014 bichon_b
+// Last update Sun Jun 15 11:30:00 2014 bichon_b
 //
 
 #ifndef GAMESTATE_HH

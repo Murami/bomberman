@@ -5,7 +5,7 @@
 // Login   <desabr_q@epitech.net>
 //
 // Started on  Sun Jun 15 08:33:39 2014 quentin desabre
-// Last update Sun Jun 15 08:33:39 2014 Desabre Quentin
+// Last update Sun Jun 15 11:02:55 2014 bichon_b
 //
 
 #ifndef AENTITY_HH
@@ -32,6 +32,7 @@ namespace bbm
     void			setLastID(unsigned int id);
     void			pack(ISerializedNode & current) const;
     void			unpack(const ISerializedNode & current);
+    unsigned int		getIDPlayer() const;
 
     virtual void		update(float time) = 0;
     virtual void		interact(AEntity *) = 0;
