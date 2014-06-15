@@ -134,6 +134,7 @@ namespace bbm
     GameState&				_gameState;
     int					_score;
     int					_maxBomb;
+    std::string				_scriptName;
   };
 };
 

@@ -141,22 +141,22 @@ namespace	bbm
 	menu->addStateToLastButton("gamepad 4");
 	menu->createNewStateButton("player 2", NULL, 3,
 				   glm::vec4(0, 1, 1, 1), "x");
-	menu->addStateToLastButton("gamepad 1");
 	menu->addStateToLastButton("gamepad 2");
 	menu->addStateToLastButton("gamepad 3");
 	menu->addStateToLastButton("gamepad 4");
+	menu->addStateToLastButton("gamepad 1");
 	menu->createNewStateButton("player 3", NULL, 3,
 				   glm::vec4(1, 0, 1, 1), "x");
-	menu->addStateToLastButton("gamepad 1");
-	menu->addStateToLastButton("gamepad 2");
 	menu->addStateToLastButton("gamepad 3");
 	menu->addStateToLastButton("gamepad 4");
+	menu->addStateToLastButton("gamepad 1");
+	menu->addStateToLastButton("gamepad 2");
 	menu->createNewStateButton("player 4", NULL, 3,
 				   glm::vec4(1, 1, 0, 1), "x");
+	menu->addStateToLastButton("gamepad 4");
 	menu->addStateToLastButton("gamepad 1");
 	menu->addStateToLastButton("gamepad 2");
 	menu->addStateToLastButton("gamepad 3");
-	menu->addStateToLastButton("gamepad 4");
 	menu->createNewButton("next",&IMenuManager::setIASelectionMenu,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setMainMenu,
@@ -731,6 +731,7 @@ namespace	bbm
 
   void		MenuState::initialize()
   {
+    Letter::create();
     memset(&this->_config, 0, sizeof(this->_config));
     this->_initializeInputConfig();
     SoundManager::getInstance()->stop("theme");
@@ -799,14 +800,24 @@ namespace	bbm
 	    if (i == 0)
 	      {
 		this->_config.sound = s->isChecked();
+		if (s->isChecked())
+		  SoundManager::getInstance()->enableSounds();
+		else
+		  SoundManager::getInstance()->disableSounds();
 	      }
 	    else
 	      {
 		this->_config.music = s->isChecked();
 		if (this->_config.music)
-		  SoundManager::getInstance()->play("menu");
+		  {
+		    SoundManager::getInstance()->playMusic("menu");
+		    SoundManager::getInstance()->enableMusics();
+		  }
 		else
-		  SoundManager::getInstance()->stop("menu");
+		  {
+		    SoundManager::getInstance()->stop("menu");
+		    SoundManager::getInstance()->disableMusics();
+		  }
 	      }
 	    i++;
 	  }
@@ -986,8 +997,8 @@ namespace	bbm
 
     this->_config.newGame = false;
     SoundManager::getInstance()->stop("menu");
-    if (this->_config.music)
-      SoundManager::getInstance()->play("wait");
+    if (SoundManager::getInstance()->musicPlaying())
+      SoundManager::getInstance()->playMusic("wait");
     for (size_t i = 0; i < pos; i++)
       tmp2 += tmp[i];
     this->_config.fileToLoad = new std::string(tmp2);
@@ -1003,8 +1014,8 @@ namespace	bbm
     StateButton*	nbIAButton = dynamic_cast<StateButton*>(*it);
 
     SoundManager::getInstance()->stop("menu");
-    if (this->_config.music)
-      SoundManager::getInstance()->play("wait");
+    if (SoundManager::getInstance()->musicPlaying())
+      SoundManager::getInstance()->playMusic("wait");
     if (nbIAButton)
       {
 	std::stringstream ss;
@@ -1015,13 +1026,7 @@ namespace	bbm
     StateButton*	level = dynamic_cast<StateButton*>(*it);
     if (level)
       {
-	std::string lvl = level->getState();
-	if (lvl == "easy")
-	  this->_config.level = 0;
-	else if (lvl == "medium")
-	  this->_config.level = 1;
-	else
-	  this->_config.level = 2;
+	this->_config.level = new std::string(level->getState());
       }
     this->_config.newGame = true;
     GameLoadingState*	state = new GameLoadingState(this->_manager,
@@ -1042,15 +1047,16 @@ namespace	bbm
     std::stringstream ss;
     ss.clear();
     ss << s->getState();
-    ss >> this->_config.mapSizeX;
+    if (this->_config.mapSizeX == 0)
+      ss >> this->_config.mapSizeX;
     it++;
     StateButton* s2 = dynamic_cast<StateButton*>(*it);
     std::stringstream ss2;
     ss2.clear();
     ss2 << s2->getState();
     ss2.clear();
-    ss2 >> this->_config.mapSizeY;
-    std::cout << "Sending map size : x = " << this->_config.mapSizeX << " y = " << this->_config.mapSizeY << std::endl;
+    if (this->_config.mapSizeY == 0)
+      ss2 >> this->_config.mapSizeY;
     this->_setNewCurrentMenu("playerselection");
   }
 
@@ -1133,5 +1139,6 @@ namespace	bbm
       delete (this->_inputConfigPlayer3);
     if (this->_inputConfigPlayer4)
       delete (this->_inputConfigPlayer4);
+    Letter::release();
   }
 }

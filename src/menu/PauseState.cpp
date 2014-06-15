@@ -322,11 +322,11 @@ namespace		bbm
     try
       {
 	menu->createNewToggleButton("sound", NULL);
-	dynamic_cast<ToggleButton*>((*(menu->getButtons().begin())))->setChecked(!this->_config->sound);
+	dynamic_cast<ToggleButton*>((*(menu->getButtons().begin())))->setChecked(SoundManager::getInstance()->soundPlaying());
 	menu->createNewToggleButton("music", NULL);
 	std::list<AButton*>::const_iterator it = menu->getButtons().begin();
 	it++;
-	dynamic_cast<ToggleButton*>(*it)->setChecked(!this->_config->music);
+	dynamic_cast<ToggleButton*>(*it)->setChecked(SoundManager::getInstance()->musicPlaying());
 	menu->createNewButton("ok", &IMenuManager::serializeAudioSettings,
 			      glm::vec4(0, 1, 0, 1), true);
 	menu->createNewButton("cancel", &IMenuManager::setOptionsMenu,
@@ -664,6 +664,7 @@ namespace		bbm
     this->_inputConfigPlayer3->load(INPUT_CONFIG_P3);
     this->_inputConfigPlayer4->load(INPUT_CONFIG_P4);
     this->_manager.pop();
+    delete (this);
   }
 
   void		PauseState::setPlayMenu(Menu*)
@@ -682,7 +683,7 @@ namespace		bbm
   void		PauseState::exitGame(Menu*)
   {
     SoundManager::getInstance()->stop("theme");
-    SoundManager::getInstance()->play("menu");
+    SoundManager::getInstance()->playMusic("menu");
     this->_manager.pop();
     this->_manager.pop();
   }
@@ -851,14 +852,23 @@ namespace		bbm
 	if (s)
 	  {
 	    if (i == 0)
-	      this->_config->sound = s->isChecked();
+	      {
+		this->_config->sound = s->isChecked();
+		if (s->isChecked())
+		  SoundManager::getInstance()->enableSounds();
+		else
+		  SoundManager::getInstance()->disableSounds();
+	      }
 	    else
 	      {
 		this->_config->music = s->isChecked();
 		if (this->_config->music)
-		  SoundManager::getInstance()->play("theme");
+		  SoundManager::getInstance()->playMusic("theme");
 		else
-		  SoundManager::getInstance()->stop("theme");
+		  {
+		    SoundManager::getInstance()->disableMusics();
+		    SoundManager::getInstance()->stop("theme");
+		  }
 	      }
 	    i++;
 	  }
@@ -869,5 +879,9 @@ namespace		bbm
 
   PauseState::~PauseState()
   {
+    delete (this->_skybox);
+    for (std::list<Menu*>::iterator it = this->_menuList.begin();
+	 it != this->_menuList.end(); it++)
+      delete (*it);
   }
 }

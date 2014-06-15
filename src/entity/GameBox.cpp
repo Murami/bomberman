@@ -67,7 +67,6 @@ namespace bbm
 
   void			GameBox::interact(AEntity *entity)
   {
-    std::cout << "interact avec " << entity->getType() << std::endl;
     if (entity->getType() == "Player" ||
 	entity->getType() == "AI")
       {

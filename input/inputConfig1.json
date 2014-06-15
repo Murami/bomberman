@@ -34,7 +34,7 @@
       },
       "6" : {
          "action" : "bomb",
-         "key" : "SDLK_LSHIFT"
+         "key" : "SDLK_SPACE"
       },
       "7" : {
          "action" : "bomb2",

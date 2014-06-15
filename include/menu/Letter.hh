@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 13:12:48 2014 Manu
-// Last update Fri Jun 13 23:14:23 2014 Manu
+// Last update Sun Jun 15 08:09:14 2014 Manu
 //
 
 #ifndef		__LETTER_HH__
@@ -32,8 +32,8 @@ namespace	bbm
 
   private :
     char			_le;
-    gdl::Geometry		_geom;
-    gdl::Texture		_texture;
+    static gdl::Geometry*	_geom;
+    gdl::Texture*		_texture;
     gdl::BasicShader*		_shader;
     const glm::vec4		_color;
     glm::vec3			_position;
@@ -47,12 +47,11 @@ namespace	bbm
     glm::mat4			getTransformation();
 
   public :
-    void			setColor(const glm::vec4&);
-
-  public :
     bool			initialize();
+    static void			release();
     void			draw(ARenderer&, const RenderState&);
     char			getLe() const;
+    static void			create();
 
   public :
     Letter(char, const glm::vec4&);

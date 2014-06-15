@@ -167,7 +167,7 @@ namespace bbm
     playerConfig.id = 0;
     playerConfig.lastId = 0;
     playerConfig.score = 0;
-    std::cout << _config->player1 << " " << _config->player2 << " " << _config->player3 << " " << _config->player4 << std::endl;
+    playerConfig.IALevel = "";
     if (_config->player1)
       {
 	playerConfig.idGamepad = _config->player1;
@@ -199,6 +199,7 @@ namespace bbm
     for (int i = 0; i < _config->numberIA; i++)
       {
 	playerConfig.inputConfig = NULL;
+	playerConfig.IALevel = "scripts/" + *(_config->level) + ".lua";
 	gameStateConfig.AIConfigs.push_back(playerConfig);
       }
     gameStateConfig.load = false;
@@ -259,7 +260,8 @@ namespace bbm
     else if (input.getKeyDown(SDLK_SPACE))
       {
 	SoundManager::getInstance()->stop("wait");
-	SoundManager::getInstance()->play("theme");
+	if (SoundManager::getInstance()->musicPlaying())
+	  SoundManager::getInstance()->playMusic("theme");
 	if (_config->newGame == true)
 	  newGameState();
 	else

@@ -64,8 +64,8 @@ namespace bbm
 		       GameStateConfig* config, GameLoadingState::GameConfig* gameConfig) :
     _tilemap(),
     _manager(manager),
-    _config(config),
-    _gameConfig(gameConfig)
+    _gameConfig(gameConfig),
+    _config(config)
   {
     this->_flush = true;
     this->_printHud = false;
@@ -260,6 +260,7 @@ namespace bbm
 	playerNode->get("score", playerConfig.score);
 	playerNode->get("typeBomb", typeBomb);
 	playerNode->get("state", state);
+	playerNode->get("IALevel", playerConfig.IALevel);
 	playerConfig.typeBomb = static_cast<BombType>(typeBomb);
 	playerConfig.state = static_cast<PlayerState>(state);
 	_config->playersConfigs.push_back(playerConfig);
@@ -289,6 +290,7 @@ namespace bbm
 	AINode->get("lastId", playerConfig.lastId);
 	AINode->get("typeBomb", typeBomb);
 	AINode->get("state", state);
+	AINode->get("IALevel", playerConfig.IALevel);
 	playerConfig.typeBomb = static_cast<BombType>(typeBomb);
 	playerConfig.state = static_cast<PlayerState>(state);
 	_config->AIConfigs.push_back(playerConfig);
@@ -350,7 +352,8 @@ namespace bbm
 	if (_config->load == false)
 	  {
 	    itSpawn = _tilemap.getSpawns().begin();
-	    itSpawn += rand() % (_tilemap.getSpawns().size() - 1);
+	    itSpawn += rand() % _tilemap.getSpawns().size();
+	    std::cout << "spawn" << itSpawn->x << " " << itSpawn->y << std::endl;
 	    (*it).position = glm::vec2(itSpawn->x, itSpawn->y);
 	  }
 	_AIs.push_back(new AI(*this, *it));
