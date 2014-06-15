@@ -2,11 +2,11 @@
    "input" : {
       "0" : {
          "action" : "bomb",
-         "key" : "SDLK_e"
+         "key" : "SDLK_RALT"
       },
       "1" : {
          "action" : "bomb2",
-         "key" : "SDLK_r"
+         "key" : "SDLK_LALT"
       },
       "2" : {
          "action" : "down",

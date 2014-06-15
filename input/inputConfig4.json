@@ -2,27 +2,27 @@
    "input" : {
       "0" : {
          "action" : "bomb",
-         "key" : "SDLK_y"
+         "key" : "SDLK_e"
       },
       "1" : {
          "action" : "bomb2",
-         "key" : "SDLK_i"
+         "key" : "SDLK_r"
       },
       "2" : {
          "action" : "down",
-         "key" : "SDLK_j"
+         "key" : "SDLK_s"
       },
       "3" : {
          "action" : "left",
-         "key" : "SDLK_h"
+         "key" : "SDLK_a"
       },
       "4" : {
          "action" : "right",
-         "key" : "SDLK_k"
+         "key" : "SDLK_d"
       },
       "5" : {
          "action" : "up",
-         "key" : "SDLK_u"
+         "key" : "SDLK_w"
       }
    }
 }
