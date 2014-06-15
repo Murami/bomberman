@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:36:23 2014 otoshigami
-// Last update Sun Jun 15 08:36:23 2014 otoshigami
+// Last update Sun Jun 15 09:22:45 2014 bichon_b
 //
 
 #ifndef GAMESTATE_HH
@@ -72,6 +72,7 @@ namespace bbm
 
     std::list<AEntity*>&	getEntities();
     std::vector<AEntity*>&	getGameBoxes();
+    std::vector<AEntity*>&	getWarning();
     const glm::ivec2&		getMapSize() const;
     APlayer&			getPlayer(unsigned int id);
 

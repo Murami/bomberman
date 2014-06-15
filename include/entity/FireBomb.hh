@@ -1,3 +1,13 @@
+//
+// FireBomb.hh for  in /home/desabr_q/Desktop/bomber/cpp_bomberman
+//
+// Made by quentin desabre
+// Login   <desabr_q@epitech.net>
+//
+// Started on  Sun Jun 15 08:33:05 2014 quentin desabre
+// Last update Sun Jun 15 08:33:06 2014 Desabre Quentin
+//
+
 #ifndef FIREBOMB_HH
 #define FIREBOMB_HH
 

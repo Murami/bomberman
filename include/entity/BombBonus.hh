@@ -1,3 +1,13 @@
+//
+// BombBonus.hh for  in /home/desabr_q/Desktop/bomber/cpp_bomberman
+//
+// Made by quentin desabre
+// Login   <desabr_q@epitech.net>
+//
+// Started on  Sun Jun 15 08:33:30 2014 quentin desabre
+// Last update Sun Jun 15 08:33:30 2014 Desabre Quentin
+//
+
 #ifndef BOMBBONUS_HH
 #define BOMBBONUS_HH
 

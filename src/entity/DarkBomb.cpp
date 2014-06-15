@@ -1,3 +1,13 @@
+//
+// DarkBomb.cpp for  in /home/desabr_q/Desktop/bomber/cpp_bomberman
+//
+// Made by quentin desabre
+// Login   <desabr_q@epitech.net>
+//
+// Started on  Sun Jun 15 08:30:27 2014 quentin desabre
+// Last update Sun Jun 15 08:30:27 2014 Desabre Quentin
+//
+
 #include "graphic/RenderState.hh"
 #include "graphic/ARenderer.hh"
 #include "graphic/Utils.hh"

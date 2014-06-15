@@ -1,3 +1,13 @@
+//
+// GameBox.cpp for  in /home/desabr_q/Desktop/bomber/cpp_bomberman
+//
+// Made by quentin desabre
+// Login   <desabr_q@epitech.net>
+//
+// Started on  Sun Jun 15 08:28:45 2014 quentin desabre
+// Last update Sun Jun 15 09:14:21 2014 Desabre Quentin
+//
+
 #include <iostream>
 #include <string>
 #include "entity/BonusFactory.hh"
@@ -60,7 +70,7 @@ namespace bbm
   bool			GameBox::collide(const glm::vec3 & pos)
   {
     if (pos.x  < _pos.x + 1 && (pos.x) > _pos.x &&
-        pos.y < _pos.y + 1 && pos.y  > _pos.y)
+        pos.y < _pos.y + 1 && pos.y  > _pos.y && _used == false)
       return (true);
     return (false);
   }

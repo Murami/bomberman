@@ -1,3 +1,13 @@
+//
+// PowerBombExplode.cpp for  in /home/desabr_q/Desktop/bomber/cpp_bomberman
+//
+// Made by quentin desabre
+// Login   <desabr_q@epitech.net>
+//
+// Started on  Sun Jun 15 08:28:13 2014 quentin desabre
+// Last update Sun Jun 15 09:36:00 2014 Desabre Quentin
+//
+
 #include "entity/PowerBombExplode.hh"
 #include "graphic/Utils.hh"
 #include "graphic/ARenderer.hh"
@@ -62,7 +72,7 @@ namespace bbm
   void				PowerBombExplode::collideGameBoxes()
   {
     glm::ivec2				mapsize = _gameState.getMapSize();
-    std::vector<AEntity*>		map = _gameState.getGameBoxes();
+    std::vector<AEntity*>&		map = _gameState.getGameBoxes();
     AEntity*				tmp;
     float				delta = 0.01;
 

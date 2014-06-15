@@ -633,8 +633,8 @@ namespace	bbm
       return (false);
     try
       {
-	menu->createNewToggleButton("sound", NULL);
-	menu->createNewToggleButton("music", NULL);
+	menu->createNewToggleButton("sound", NULL, glm::vec4(1, 1, 1, 1), true);
+	menu->createNewToggleButton("music", NULL, glm::vec4(1, 1, 1, 1), true);
 	menu->createNewButton("ok", &IMenuManager::serializeAudioSettings,
 			      glm::vec4(0, 1, 0, 1), true);
 	menu->createNewButton("cancel", &IMenuManager::setOptionsMenu,

@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:46 2014 otoshigami
-// Last update Sun Jun 15 08:28:48 2014 otoshigami
+// Last update Sun Jun 15 09:25:04 2014 bichon_b
 //
 
 #include <iterator>
@@ -752,6 +752,11 @@ namespace bbm
   std::vector<AEntity*>&	GameState::getGameBoxes()
   {
     return (_gameboxes);
+  }
+
+  std::vector<AEntity*>&	GameState::getWarning()
+  {
+    return (_warning);
   }
 
   std::list<Player*>&		GameState::getPlayerList()

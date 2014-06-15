@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:35:53 2014 otoshigami
-// Last update Sun Jun 15 08:35:54 2014 otoshigami
+// Last update Sun Jun 15 09:27:07 2014 bichon_b
 //
 
 #ifndef AI_HH
@@ -44,6 +44,7 @@ namespace bbm
     int		getBoxes(lua_State*);
     int		getActualDirection(lua_State*);
     int		setIdle(lua_State*);
+    int		getDanger(lua_State*);
 
     std::string						getClassName() const;
     const std::vector<ILuaHeir<AI>::t_MethodPtr>&	getMethodPtr() const;
