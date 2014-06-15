@@ -109,6 +109,7 @@ end
 
 function isAnyDanger ()
    print("danger are here : " .. tostring(dangers["self"]) .. " " .. tostring(dangers["up"]) .. " " .. tostring(dangers["left"]) .. " " .. tostring(dangers["right"]) .. " " .. tostring(dangers["down"]) .. " ")
+
    if dangers["self"] then
       if not dangers["left"] and not boxes["left"] then
 	 move["left"]()

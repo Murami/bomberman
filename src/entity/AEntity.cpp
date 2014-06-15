@@ -5,7 +5,7 @@
 // Login   <desabr_q@epitech.net>
 //
 // Started on  Sun Jun 15 08:30:06 2014 quentin desabre
-// Last update Sun Jun 15 08:30:07 2014 Desabre Quentin
+// Last update Sun Jun 15 11:04:04 2014 bichon_b
 //
 
 #include "entity/AEntity.hh"
@@ -73,5 +73,10 @@ namespace bbm
     current.get("idPlayer", _idPlayer);
     current.get("id", _id);
     current.get("lastId", _lastInstanceID);
+  }
+
+  unsigned int	AEntity::getIDPlayer() const
+  {
+    return (_idPlayer);
   }
 };
