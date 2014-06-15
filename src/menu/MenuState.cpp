@@ -23,12 +23,8 @@ namespace	bbm
 
   MenuState::MenuState(GameManager& manager) : _manager(manager)
   {
-<<<<<<< HEAD
-
     SoundManager::getInstance()->addMusic("menu", "assets/sound/heart_of_courage.mp3");
     SoundManager::getInstance()->addMusic("wait", "assets/sound/wait.mp3");
-=======
->>>>>>> 25520e999d8b9fed7a85e7837d4d59a24f7c80e4
     glEnable(GL_BLEND);
     glEnable(GL_ALPHA_TEST);
     glEnable(GL_DEPTH_TEST);
