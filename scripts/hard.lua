@@ -4,6 +4,7 @@ local n = (math.random(1, 10) * player:getIdPlayer()) % 10 + 1
 local tmp = {"idle", "left", "right", "down", "up"}
 local direction = tmp[player:getActualDirection() + 1]
 local boxes = player:getBoxes ()
+local dangers = player:getDanger ()
 
 local reverseDirection = "idle"
 local otherDirection1 = "idle"
@@ -106,6 +107,19 @@ function core ()
    end
 end
 
+function isAnyDanger ()
+   if dangers["up"] then
+      player:goDown()
+   elseif dangers["down"] then
+      player:goUp()
+   elseif dangers["left"] then
+      player:goRight()
+   elseif dangers["right"] then
+      player:goLeft()
+   end
+end
+
+isAnyDanger()
 if n == 10 then
    if player:haveBomb() then
       player:putBomb()

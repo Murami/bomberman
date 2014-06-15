@@ -5,7 +5,7 @@
 // Login   <bichon_b@epitech.net>
 //
 // Started on  Sun Jun 15 08:33:55 2014 bichon_b
-// Last update Sun Jun 15 09:17:50 2014 bichon_b
+// Last update Sun Jun 15 09:31:57 2014 bichon_b
 //
 
 #include "game/AI.hh"
@@ -43,6 +43,7 @@ namespace bbm
     add_method_to_vector(methods, "getBoxes", &AI::getBoxes);
     add_method_to_vector(methods, "getActualDirection", &AI::getActualDirection);
     add_method_to_vector(methods, "setIdle", &AI::setIdle);
+    add_method_to_vector(methods, "getDanger", &AI::getDanger);
     return (methods);
   }
 
@@ -206,7 +207,7 @@ namespace bbm
   {
     lua_newtable(L);
 
-    this->setMove(glm::vec2(0, 0.3));
+    this->setMove(glm::vec2(0, 0.4));
     lua_pushstring(L, "up");
     if (this->collideGameBoxes() || this->testCollideMap())
       lua_pushboolean(L, true);
@@ -214,7 +215,7 @@ namespace bbm
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
 
-    this->setMove(glm::vec2(-0.3, 0));
+    this->setMove(glm::vec2(-0.4, 0));
     lua_pushstring(L, "left");
     if (this->collideGameBoxes() || this->testCollideMap())
       lua_pushboolean(L, true);
@@ -222,7 +223,7 @@ namespace bbm
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
 
-    this->setMove(glm::vec2(0.3, 0));
+    this->setMove(glm::vec2(0.4, 0));
     lua_pushstring(L, "right");
     if (this->collideGameBoxes() || this->testCollideMap())
       lua_pushboolean(L, true);
@@ -230,9 +231,50 @@ namespace bbm
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
 
-    this->setMove(glm::vec2(0, -0.3));
+    this->setMove(glm::vec2(0, -0.4));
     lua_pushstring(L, "down");
     if (this->collideGameBoxes() || this->testCollideMap())
+      lua_pushboolean(L, true);
+    else
+      lua_pushboolean(L, false);
+    lua_rawset(L, -3);
+
+    this->setMove(glm::vec2(0, 0));
+    std::cout << std::endl;
+    return (1);
+  }
+
+  int	AI::getDanger(lua_State* L)
+  {
+    lua_newtable(L);
+
+    this->setMove(glm::vec2(0, 0.4));
+    lua_pushstring(L, "up");
+    if (this->collideWarning())
+      lua_pushboolean(L, true);
+    else
+      lua_pushboolean(L, false);
+    lua_rawset(L, -3);
+
+    this->setMove(glm::vec2(-0.4, 0));
+    lua_pushstring(L, "left");
+    if (this->collideWarning())
+      lua_pushboolean(L, true);
+    else
+      lua_pushboolean(L, false);
+    lua_rawset(L, -3);
+
+    this->setMove(glm::vec2(0.4, 0));
+    lua_pushstring(L, "right");
+    if (this->collideWarning())
+      lua_pushboolean(L, true);
+    else
+      lua_pushboolean(L, false);
+    lua_rawset(L, -3);
+
+    this->setMove(glm::vec2(0, -0.4));
+    lua_pushstring(L, "down");
+    if (this->collideWarning())
       lua_pushboolean(L, true);
     else
       lua_pushboolean(L, false);
