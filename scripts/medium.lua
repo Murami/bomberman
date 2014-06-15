@@ -46,11 +46,11 @@ local move = {
 
 if boxes["up"] and boxes["down"] and boxes["left"] and boxes["right"] then
    player:setIdle()
-   return
-end
+   -- return
+-- end
 
-function core ()
-   if direction == "idle" then
+-- function core ()
+elseif direction == "idle" then
       if not boxes["up"] then
 	 move["up"]()
       elseif not boxes["down"] then
@@ -107,14 +107,14 @@ function core ()
       end
 
    end
-end
+-- end
 
-if n == 10 then
-   if player:haveBomb() then
-      player:putBomb()
-   else
-      core()
-   end
-else
-   core()
-end
+-- if n == 10 then
+--    if player:haveBomb() then
+--       player:putBomb()
+--    else
+--       core()
+--    end
+-- else
+--    core()
+-- end

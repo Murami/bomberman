@@ -24,11 +24,11 @@ namespace bbm
       int		player3;
       int		player4;
       int		numberIA;
-      int		level;
       bool		music;
       bool		sound;
       bool		newGame;
       std::string*	fileToLoad;
+      std::string*	level;
     };
 
   public:

@@ -42,8 +42,7 @@ namespace bbm
     APlayer(gameState)
   {
     _type = "AI";
-    _scriptName = "scripts/medium.lua";
-    _scriptName = config.IALevel;
+    _scriptName = "scripts/" + *(config.IALevel) + ".lua";
     std::cout << "IA level = " << _scriptName << std::endl;
     _position = config.position;
     _power = config.power;

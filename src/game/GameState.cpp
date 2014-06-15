@@ -54,8 +54,8 @@ namespace bbm
 		       GameStateConfig* config, GameLoadingState::GameConfig* gameConfig) :
     _tilemap(),
     _manager(manager),
-    _config(config),
-    _gameConfig(gameConfig)
+    _gameConfig(gameConfig),
+    _config(config)
   {
     this->_flush = true;
     this->_printHud = false;
