@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:38:11 2014 otoshigami
-// Last update Sun Jun 15 08:38:12 2014 otoshigami
+// Last update Sun Jun 15 13:22:24 2014 Manu
 //
 
 #ifndef WALL_HH

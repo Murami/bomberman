@@ -1,3 +1,13 @@
+//
+// HUD.hh for bomberman in /home/manu/rendu/cpp_bomberman
+//
+// Made by Manu
+// Login   <manu@epitech.net>
+//
+// Started on  Sun Jun 15 13:19:30 2014 Manu
+// Last update Sun Jun 15 13:19:31 2014 Manu
+//
+
 #ifndef		__HUD_HH__
 # define	__HUD_HH__
 

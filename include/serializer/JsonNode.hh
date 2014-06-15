@@ -1,3 +1,13 @@
+//
+// JsonNode.hh for bomberman in /home/manu/rendu/cpp_bomberman/include/serializer
+//
+// Made by Manu
+// Login   <manu@epitech.net>
+//
+// Started on  Sun Jun 15 13:22:59 2014 Manu
+// Last update Sun Jun 15 13:23:00 2014 Manu
+//
+
 #ifndef JSON_NODE_HH
 #define JSON_NODE_HH
 

@@ -5,7 +5,7 @@
 // Login   <desabr_q@epitech.net>
 //
 // Started on  Sun Jun 15 08:30:32 2014 quentin desabre
-// Last update Sun Jun 15 11:00:00 2014 bichon_b
+// Last update Sun Jun 15 13:13:23 2014 Manu
 //
 
 #include "graphic/RenderState.hh"
@@ -14,6 +14,7 @@
 #include "game/GameState.hh"
 #include "entity/FireBombExplode.hh"
 #include "entity/FireBomb.hh"
+#include "sound/SoundManager.hh"
 
 const float delta = 1 - 0.8;
 const float translate = 0;
@@ -98,6 +99,8 @@ namespace bbm
     _lifespan -= time;
     if (_lifespan <= 0)
       {
+	if (SoundManager::getInstance()->soundPlaying())
+	  SoundManager::getInstance()->playSound("bomb");
 	_used = true;
 	_gameState.getPlayer(_idPlayer).addBombs();
 	_gameState.addEntity(new FireBombExplode(glm::vec2(_pos.x, _pos.y), _gameState, _idPlayer));

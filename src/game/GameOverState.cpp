@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:40 2014 otoshigami
-// Last update Sun Jun 15 12:59:08 2014 otoshigami
+// Last update Sun Jun 15 13:27:39 2014 otoshigami
 //
 
 #include <sstream>
@@ -143,6 +143,8 @@ namespace bbm
     if (input.getKeyDown(SDLK_SPACE))
       {
 	saveHighScore();
+	if (SoundManager::getInstance()->musicPlaying())
+	  SoundManager::getInstance()->playMusic("menu");
 	_manager.pop();
       }
   }
