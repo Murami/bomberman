@@ -54,6 +54,7 @@ namespace bbm
 
   bool	Joystick::getButtonDown(unsigned int button) const
   {
+    std::cout << "button down" << std::endl;
     if (std::find(_pressedButtons.begin(), _pressedButtons.end(), button) != _pressedButtons.end())
       return (true);
     return (false);

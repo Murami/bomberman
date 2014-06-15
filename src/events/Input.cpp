@@ -7,6 +7,8 @@ namespace bbm
 {
   Input::Input()
   {
+    SDL_EventState(SDL_JOYAXISMOTION, SDL_IGNORE);
+    SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
     _updateMethods[SDL_KEYDOWN] = &Input::onPressedKey;
     _updateMethods[SDL_KEYUP] = &Input::onReleasedKey;
     _updateMethods[SDL_MOUSEBUTTONDOWN] = &Input::onPressedMouseButton;
@@ -31,13 +33,22 @@ namespace bbm
     UpdateMethodsIt	it;
 
     this->clear();
+    // SDL_PumpEvents();
+    // while (SDL_PeepEvents(&event, 1, SDL_GETEVENT, (SDL_EVENTMASK(SDL_KEYDOWN) | SDL_EVENTMASK(SDL_JOYBUTTONDOWN))))
+    //   {
+    // 	if ((it = _updateMethods.find(event.type)) != _updateMethods.end())
+    // 	  {
+    // 	    ((*this).*(it->second))(event);
+    // 	    return;
+    // 	  }
+    //   }
     while (SDL_PollEvent(&event))
       {
-	if ((it = _updateMethods.find(event.type)) != _updateMethods.end())
-	  {
-	    ((*this).*(it->second))(event);
-	    return;
-	  }
+    	if ((it = _updateMethods.find(event.type)) != _updateMethods.end())
+    	  {
+    	    ((*this).*(it->second))(event);
+    	    return;
+    	  }
       }
     this->onUnknownEvent(event);
   }
