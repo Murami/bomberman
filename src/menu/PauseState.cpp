@@ -683,7 +683,7 @@ namespace		bbm
   void		PauseState::exitGame(Menu*)
   {
     SoundManager::getInstance()->stop("theme");
-    SoundManager::getInstance()->play("menu");
+    SoundManager::getInstance()->playMusic("menu");
     this->_manager.pop();
     this->_manager.pop();
   }
@@ -857,7 +857,7 @@ namespace		bbm
 	      {
 		this->_config->music = s->isChecked();
 		if (this->_config->music)
-		  SoundManager::getInstance()->play("theme");
+		  SoundManager::getInstance()->playMusic("theme");
 		else
 		  SoundManager::getInstance()->stop("theme");
 	      }

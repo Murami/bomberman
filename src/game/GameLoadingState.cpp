@@ -244,7 +244,7 @@ namespace bbm
     else if (input.getKeyDown(SDLK_SPACE))
       {
 	SoundManager::getInstance()->stop("wait");
-	SoundManager::getInstance()->play("theme");
+	SoundManager::getInstance()->playMusic("theme");
 	if (_config->newGame == true)
 	  newGameState();
 	else

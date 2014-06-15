@@ -20,7 +20,14 @@ namespace bbm
     void	addSound(std::string const& name, std::string const& path);
 
     // play a sound, if the sound doesn't exists, do nothing
-    void	play(std::string const& name);
+    void	playSound(std::string const& name);
+    void	playMusic(std::string const& name);
+
+    // enable and disable sounds or musics
+    void	enableSounds();
+    void	disableSounds();
+    void	enableMusics();
+    void	disableMusics();
 
     // baisse le volume compris entre 0 et 100
     void	volume(std::string const& name, int volume);
@@ -39,6 +46,7 @@ namespace bbm
   private:
     static SoundManager*			_instance;
     std::map<std::string, FMOD_SOUND*>		_sounds;
+    std::map<std::string, FMOD_SOUND*>		_musics;
     std::map<std::string, FMOD_CHANNEL*>	_channels;
     FMOD_SYSTEM*				_system;
     bool					_music;

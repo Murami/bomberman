@@ -804,7 +804,7 @@ namespace	bbm
 	      {
 		this->_config.music = s->isChecked();
 		if (this->_config.music)
-		  SoundManager::getInstance()->play("menu");
+		  SoundManager::getInstance()->playMusic("menu");
 		else
 		  SoundManager::getInstance()->stop("menu");
 	      }
@@ -987,7 +987,7 @@ namespace	bbm
     this->_config.newGame = false;
     SoundManager::getInstance()->stop("menu");
     if (this->_config.music)
-      SoundManager::getInstance()->play("wait");
+      SoundManager::getInstance()->playMusic("wait");
     for (size_t i = 0; i < pos; i++)
       tmp2 += tmp[i];
     this->_config.fileToLoad = new std::string(tmp2);
@@ -1004,7 +1004,7 @@ namespace	bbm
 
     SoundManager::getInstance()->stop("menu");
     if (this->_config.music)
-      SoundManager::getInstance()->play("wait");
+      SoundManager::getInstance()->playMusic("wait");
     if (nbIAButton)
       {
 	std::stringstream ss;

@@ -18,6 +18,9 @@ namespace bbm
     for (i = 0; i < _sounds.size(); i++)
       FMOD_Sound_Release(_sounds[0]);
     _sounds.clear();
+    for (i = 0; i < _musics.size(); i++)
+      FMOD_Sound_Release(_musics[0]);
+    _musics.clear();
     _channels.clear();
     FMOD_System_Close(_system);
     FMOD_System_Release(_system);
@@ -57,14 +60,14 @@ namespace bbm
 	return ;
       }
     FMOD_Sound_SetLoopCount(tmp, -1);
-    _sounds[name] = tmp;
+    _musics[name] = tmp;
   }
 
   ////////////////////////////
   // faire la gestion des booleens pour jouer ou non la musique
   ////////////////////////////
 
-  void	SoundManager::play(std::string const& name)
+  void	SoundManager::playSound(std::string const& name)
   {
     FMOD_BOOL	stat;
 
@@ -80,6 +83,52 @@ namespace bbm
 	    return ;
 	  }
       }
+  }
+
+  void	SoundManager::playMusic(std::string const& name)
+  {
+    FMOD_BOOL	stat;
+
+    FMOD_Channel_GetPaused(_channels[name], &stat);
+    if (stat == 1)
+      FMOD_Channel_SetPaused(_channels[name], 0);
+    else
+      {
+	_channels[name] = NULL;
+	if (FMOD_System_PlaySound(_system, FMOD_CHANNEL_FREE, _musics[name], false, &_channels[name]) != FMOD_OK)
+	  {
+	    std::cerr << "Error : can't play " << name << std::endl;
+	    return ;
+	  }
+      }
+  }
+
+  void	SoundManager::disableSounds()
+  {
+    std::map<std::string, FMOD_SOUND*>::iterator	it;
+
+    for (it = _sounds.begin(); it != _sounds.end(); it++)
+      this->stop(it->first);
+    _sound = false;
+  }
+
+  void	SoundManager::enableSounds()
+  {
+    _sound = true;
+  }
+
+  void	SoundManager::disableMusics()
+  {
+    std::map<std::string, FMOD_SOUND*>::iterator	it;
+
+    for (it = _musics.begin(); it != _musics.end(); it++)
+      this->stop(it->first);
+    _music = false;
+  }
+
+  void	SoundManager::enableMusics()
+  {
+    _music = true;
   }
 
   void	SoundManager::pause(std::string const& name)
