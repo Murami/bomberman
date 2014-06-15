@@ -343,6 +343,7 @@ namespace bbm
 	  {
 	    itSpawn = _tilemap.getSpawns().begin();
 	    itSpawn += rand() % _tilemap.getSpawns().size();
+	    std::cout << "spawn" << itSpawn->x << " " << itSpawn->y << std::endl;
 	    (*it).position = glm::vec2(itSpawn->x, itSpawn->y);
 	  }
 	_AIs.push_back(new AI(*this, *it));
