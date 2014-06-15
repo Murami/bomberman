@@ -31,12 +31,10 @@ namespace bbm
   int	Game::run()
   {
     FrameManager	frame(60);
-    IGameState*		state = new MenuState(_manager);
-    _manager.push(state);
-    state = new IntroState(_manager);
-    // IGameState*		state = new PauseState(_manager, NULL);
-
-    _manager.push(state);
+    IGameState*		introState = new IntroState(_manager);
+    IGameState*		menuState = new MenuState(_manager);
+    _manager.push(menuState);
+    _manager.push(introState);
 
     frame.start();
     while (_manager.top())
@@ -48,7 +46,8 @@ namespace bbm
 	frame.update();
       }
 
-    delete state;
+    delete introState;
+    delete menuState;
     return (0);
   }
 };

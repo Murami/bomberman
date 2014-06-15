@@ -23,7 +23,6 @@ namespace	bbm
 
   MenuState::MenuState(GameManager& manager) : _manager(manager)
   {
-    SoundManager::getInstance()->addMusic("menu", "assets/sound/heart_of_courage.mp3");
     glEnable(GL_BLEND);
     glEnable(GL_ALPHA_TEST);
     glEnable(GL_DEPTH_TEST);
@@ -733,7 +732,6 @@ namespace	bbm
     memset(&this->_config, 0, sizeof(this->_config));
     this->_initializeInputConfig();
     SoundManager::getInstance()->stop("theme");
-    SoundManager::getInstance()->play("menu");
     try
       {
 	this->_skybox.initialize();
@@ -1109,7 +1107,6 @@ namespace	bbm
   MenuState::~MenuState()
   {
     SoundManager::getInstance()->stop("menu");
-    delete (this->_currentMenu);
     for (std::list<Menu*>::iterator it = this->_menuList.begin();
     	 it != this->_menuList.end(); it++)
       delete (*it);
