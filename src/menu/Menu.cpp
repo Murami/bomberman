@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:03 2014 Manu
-// Last update Sun Jun 15 09:11:58 2014 Manu
+// Last update Sun Jun 15 11:32:19 2014 Manu
 //
 
 #include		"sound/SoundManager.hh"
@@ -13,6 +13,7 @@
 #include		"Frame.hh"
 #include		"graphic/ModelManager.hh"
 #include		"Menu.hh"
+#include		"game/HighScore.hh"
 
 namespace	bbm
 {
@@ -43,19 +44,23 @@ namespace	bbm
     this->_selector->setScale(glm::vec3(0.5f, 0.75f, 0.75f));
     this->_selector->move(glm::vec3(0, 0, 7.0f));
     if (this->_buttons.size())
-      this->_selector->move(glm::vec3(0, (static_cast<float>(this->_buttons.
+      this->_selector->move(glm::vec3(0, -(this->_strings.size() / 2) + (static_cast<float>(this->_buttons.
 							     size()) / 2), 0));
     return (true);
   }
 
   void		Menu::refresh()
   {
+    static bool	ref = false;
     ToggleButton* sound = dynamic_cast<ToggleButton*>(*(this->_buttons.begin()));
     if (sound)
       sound->setChecked(SoundManager::getInstance()->soundPlaying());
-    ToggleButton* music = dynamic_cast<ToggleButton*>((*(this->_buttons.begin()) + 1));
-    if (music)
-      music->setChecked(SoundManager::getInstance()->musicPlaying());
+    if (this->_buttons.size() > 1)
+      {
+	ToggleButton* music = dynamic_cast<ToggleButton*>((*(this->_buttons.begin()) + 1));
+	if (music)
+	  music->setChecked(SoundManager::getInstance()->musicPlaying());
+      }
     if (this->_frame)
       {
 	delete (this->_frame);
@@ -64,19 +69,59 @@ namespace	bbm
 	this->_frame->translate(glm::vec3(0, -5, -10));
 	this->_frame->initialize();
       }
+    if (this->_title == "highscores")
+      {
+	this->_strings.empty();
+	this->_strings.clear();
+	HighScore hs;
+	hs.load("HighScores");
+	for (std::vector<int>::const_iterator it = hs.getScores().begin();
+	     it != hs.getScores().end(); it++)
+	  {
+	    std::stringstream ss;
+	    ss << *it;
+	    this->createNewString(ss.str());
+	  }
+	size_t k = this->_buttons.size();
+	for (size_t i = 0; i < this->_strings.size(); i++)
+	  {
+	    for (size_t j = 0; j < this->_strings[i].size(); j++)
+	      {
+		this->_strings[i][j]->translate(glm::vec3(0, -(this->_strings.size() / 2) + (static_cast<float>(this->_buttons.size()) / 2) +
+							  k, 6 - static_cast<float>(j) / 2));
+	      }
+	    k++;
+	  }
+	if (!ref)
+	  {
+	    this->_selector->move(glm::vec3(0, -(this->_strings.size() / 2) + (static_cast<float>(this->_buttons.size()) / 2), 0));
+	    (*(this->_buttons.begin()))->translateButton(glm::vec3(0, -(this->_strings.size() / 2) + (static_cast<float>(this->_buttons.size()) / 2) - 0.5f, 0));
+	    ref = true;
+	  }
+      }
   }
 
   void		Menu::finalize()
   {
     int		i = 0;
     int		size = this->_buttons.size();
-    this->_selector->move(glm::vec3(0, (static_cast<float>(size) / 2), 0));
+    this->_selector->move(glm::vec3(0, -this->_strings.size() + (static_cast<float>(size) / 2), 0));
     for (std::list<AButton*>::iterator it = this->_buttons.begin();
 	 it != this->_buttons.end(); it++)
       {
-	(*it)->translateButton(glm::vec3(0, (static_cast<float>(size) / 2) -
+	(*it)->translateButton(glm::vec3(0, -(this->_strings.size()/2) + (static_cast<float>(size) / 2) -
 					 i, 0));
 	i++;
+      }
+    size_t k = i;
+    for (size_t i = 0; i < this->_strings.size(); i++)
+      {
+	for (size_t j = 0; j < this->_strings[i].size(); j++)
+	  {
+	    this->_strings[i][j]->translate(glm::vec3(0, -(this->_strings.size() / 2) + (static_cast<float>(size) / 2) +
+						      k, 6 - static_cast<float>(j) / 2));
+	  }
+	k++;
       }
   }
 
@@ -162,6 +207,18 @@ namespace	bbm
     this->_selector->pitch(1.0f);
   }
 
+  void		Menu::createNewString(const std::string& str)
+  {
+    std::vector<Letter*> v;
+    for (size_t i = 0; i < str.size(); i++)
+      {
+	Letter* l = new Letter(str[i], glm::vec4(1, 1, 1, 1));
+	l->initialize();
+	v.push_back(l);
+      }
+    this->_strings.push_back(v);
+  }
+
   void		Menu::createNewStateButton(const std::string& label,
 					   void (IMenuManager::*func)(Menu*),
 					   size_t spaces,
@@ -213,6 +270,9 @@ namespace	bbm
     glEnable(GL_DEPTH_TEST);
     glAlphaFunc(GL_GREATER, 0.25f);
     r.draw(*this->_selector, s);
+    for (size_t i = 0; i < this->_strings.size(); i++)
+      for (size_t j = 0; j < this->_strings[i].size(); j++)
+	this->_strings[i][j]->draw(r, s);
     if (this->_frame != NULL)
       {
 	this->_frame->draw(r, s);

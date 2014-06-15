@@ -13,6 +13,7 @@
 #include		"serializer/Serializer.hh"
 #include		"serializer/SerializerException.hh"
 #include		"sound/SoundManager.hh"
+#include		"game/HighScore.hh"
 
 namespace	bbm
 {
@@ -64,6 +65,7 @@ namespace	bbm
     if (!menu->initialize())
       return (false);
     try
+
       {
 	menu->createNewButton("next", &IMenuManager::setNextFrame,
 			      glm::vec4(1, 1, 1, 1), false);
@@ -694,6 +696,7 @@ namespace	bbm
 		  << e.what() << ": Not found" << std::endl;
       }
     menu->finalize();
+    menu->refresh();
     this->_menuList.push_back(menu);
     return (true);
   }
@@ -981,6 +984,7 @@ namespace	bbm
   void		MenuState::setHighScoreMenu(Menu*)
   {
     this->_setNewCurrentMenu("highscores");
+    this->_currentMenu->refresh();
   }
 
   void		MenuState::exitGame(Menu*)

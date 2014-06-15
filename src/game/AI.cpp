@@ -5,7 +5,7 @@
 // Login   <bichon_b@epitech.net>
 //
 // Started on  Sun Jun 15 08:33:55 2014 bichon_b
-// Last update Sun Jun 15 10:15:58 2014 bichon_b
+// Last update Sun Jun 15 11:06:23 2014 Manu
 //
 
 #include "game/AI.hh"
@@ -213,7 +213,6 @@ namespace bbm
   int	AI::getBoxes(lua_State* L)
   {
     lua_newtable(L);
-
 
     this->setMove(glm::vec2(0, 0.4));
     lua_pushstring(L, "up");

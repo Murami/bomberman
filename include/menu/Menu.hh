@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:00 2014 Manu
-// Last update Sun Jun 15 01:26:47 2014 Manu
+// Last update Sun Jun 15 10:38:38 2014 Manu
 //
 
 #ifndef		__MENU_HH__
@@ -24,7 +24,6 @@
 
 namespace	bbm
 {
-
   class		Button;
   class		MenuManager;
   class		ARenderer;
@@ -47,6 +46,7 @@ namespace	bbm
     Selector*					_selector;
     Frame*					_frame;
     std::list<Letter*>				_titleLetters;
+    std::vector<std::vector<Letter*> >		_strings;
 
   private :
     void	_handleKeyDown(const Input&);
@@ -87,6 +87,7 @@ namespace	bbm
 				     glm::vec4(1, 1, 1, 1),
 				     const std::string& def = "default");
     void	addStateToLastButton(const std::string&);
+    void	createNewString(const std::string&);
     void	removeStateFromLastButton(const std::string&);
     void	createFrame();
     void	finalize();

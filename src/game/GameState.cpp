@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:46 2014 otoshigami
-// Last update Sun Jun 15 11:29:35 2014 bichon_b
+// Last update Sun Jun 15 12:00:01 2014 bichon_b
 //
 
 #include <iterator>
@@ -610,9 +610,9 @@ namespace bbm
     	  if ((*itPlayers)->isDead())
     	    {
 	      std::stringstream ss;
+	      ss << idPlayer;
 	      GameOverState*	state = new GameOverState(_manager, "player" + ss.str(), (*itPlayers)->getScore());
 
-	      ss << idPlayer;
 	      _manager.pop();
     	      _manager.push(state);
 	      return (false);
