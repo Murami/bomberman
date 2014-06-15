@@ -47,7 +47,7 @@ namespace		bbm
   {
     if (input.getKeyDown(SDLK_ESCAPE) || input.getKeyDown(SDLK_SPACE))
       {
-	SoundManager::getInstance()->play("menu");
+	SoundManager::getInstance()->playMusic("menu");
 	this->_manager.pop();
       }
     this->_marvin->update(time);

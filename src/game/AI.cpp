@@ -68,7 +68,7 @@ namespace bbm
 
   AI::~AI()
   {
-    SoundManager::getInstance()->play("scream");
+    SoundManager::getInstance()->playSound("scream");
   }
 
   void	AI::initialize()

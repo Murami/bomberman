@@ -11,13 +11,14 @@ namespace bbm
 {
   FireBombExplode::FireBombExplode(GameState& gameState) : ABombExplode(gameState), _wall("fire", "default")
   {
+    SoundManager::getInstance()->playSound("bomb");
   }
 
   FireBombExplode::FireBombExplode(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABombExplode(position, gameState),
     _wall("fire", "default")
   {
-    SoundManager::getInstance()->play("bomb");
+    SoundManager::getInstance()->playSound("bomb");
 
     _lifespan = 500;
     _idPlayer = idPlayer;
@@ -32,8 +33,6 @@ namespace bbm
 
   void					FireBombExplode::initialize()
   {
-    SoundManager::getInstance()->play("bomb");
-
     _lifespan = 500;
     _type = "FireBombExplode";
     _wall.setPosition(glm::vec3(_pos.x, _pos.y, 0));

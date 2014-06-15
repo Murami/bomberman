@@ -372,7 +372,7 @@ namespace bbm
 
   void	APlayer::die()
   {
-    SoundManager::getInstance()->play("scream");
+    SoundManager::getInstance()->playSound("scream");
     _alive = false;
   }
 
