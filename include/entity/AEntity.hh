@@ -1,3 +1,13 @@
+//
+// AEntity.hh for  in /home/desabr_q/Desktop/bomber/cpp_bomberman
+//
+// Made by quentin desabre
+// Login   <desabr_q@epitech.net>
+//
+// Started on  Sun Jun 15 08:33:39 2014 quentin desabre
+// Last update Sun Jun 15 08:33:39 2014 Desabre Quentin
+//
+
 #ifndef AENTITY_HH
 #define AENTITY_HH
 

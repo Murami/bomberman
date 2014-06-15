@@ -1,3 +1,13 @@
+//
+// PlayerConfig.hh for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:37:03 2014 otoshigami
+// Last update Sun Jun 15 08:37:04 2014 otoshigami
+//
+
 #ifndef PLAYER_CONFIG_HH
 #define PLAYER_CONFIG_HH
 

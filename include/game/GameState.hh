@@ -1,3 +1,13 @@
+//
+// GameState.hh for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:36:23 2014 otoshigami
+// Last update Sun Jun 15 08:36:23 2014 otoshigami
+//
+
 #ifndef GAMESTATE_HH
 # define GAMESTATE_HH
 
@@ -49,7 +59,7 @@ namespace bbm
     void			revealing();
     void			release();
     void			update(float time, const Input& input);
-    void			updateAIPlayer(float time, const Input& input);
+    bool			updateAIPlayer(float time, const Input& input);
     void			updateEntity(float time, const Input& input);
     void			draw(float time, Screen& context);
 

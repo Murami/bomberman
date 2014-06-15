@@ -1,3 +1,13 @@
+//
+// Timer.hh for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:38:07 2014 otoshigami
+// Last update Sun Jun 15 08:38:07 2014 otoshigami
+//
+
 #ifndef TIMER_HH
 #define TIMER_HH
 

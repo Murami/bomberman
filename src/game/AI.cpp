@@ -83,6 +83,11 @@ namespace bbm
 
 	script.addObject("player", this);
 	script.run();
+	if (_dark)
+	  {
+	    _move.x = -_move.x;
+	    _move.y = -_move.y;
+	  }
 	updateState();
 	managePhysics(time);
 	manageModel(time);
@@ -102,7 +107,7 @@ namespace bbm
 
   bool	AI::testCollideMap()
   {
-    float	deltaTile = 0.2;
+    float	deltaTile = 0.3;
 
     try
       {
@@ -191,37 +196,56 @@ namespace bbm
   {
     lua_newtable(L);
 
-    this->setMove(glm::vec2(0, 0.4));
+<<<<<<< HEAD
+    this->setMove(glm::vec2(0, 0.5));
+=======
+    this->setMove(glm::vec2(0, 0.3));
+>>>>>>> 88d6478ced00e95c87432cd7096b666493700550
     lua_pushstring(L, "up");
     if (this->collideGameBoxes() || this->testCollideMap())
+      {
+	std::cout << " *up* ";
       lua_pushboolean(L, true);
+      }
     else
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
 
-    this->setMove(glm::vec2(-0.4, 0));
+    this->setMove(glm::vec2(-0.3, 0));
     lua_pushstring(L, "left");
     if (this->collideGameBoxes() || this->testCollideMap())
+      {
+	std::cout << " *left* ";
       lua_pushboolean(L, true);
+      }
     else
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
 
-    this->setMove(glm::vec2(0.4, 0));
+    this->setMove(glm::vec2(0.3, 0));
     lua_pushstring(L, "right");
     if (this->collideGameBoxes() || this->testCollideMap())
+      {
+	std::cout << " *right* ";
       lua_pushboolean(L, true);
+      }
     else
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
 
-    this->setMove(glm::vec2(0, -0.4));
+    this->setMove(glm::vec2(0, -0.3));
     lua_pushstring(L, "down");
     if (this->collideGameBoxes() || this->testCollideMap())
+      {
+	std::cout << " *down* ";
       lua_pushboolean(L, true);
+      }
     else
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
+
+    this->setMove(glm::vec2(0, 0));
+    std::cout << std::endl;
     return (1);
   }
 

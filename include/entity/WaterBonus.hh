@@ -1,3 +1,13 @@
+//
+// WaterBonus.hh for  in /home/desabr_q/Desktop/bomber/cpp_bomberman
+//
+// Made by quentin desabre
+// Login   <desabr_q@epitech.net>
+//
+// Started on  Sun Jun 15 08:32:11 2014 quentin desabre
+// Last update Sun Jun 15 08:32:12 2014 Desabre Quentin
+//
+
 #ifndef WATERBONUS_HH
 #define WATERBONUS_HH
 

@@ -1,3 +1,13 @@
+//
+// WaterBonus.cpp for waterbonus in /home/desabr_q/Desktop/bomber/cpp_bomberman
+//
+// Made by quentin desabre
+// Login   <desabr_q@epitech.net>
+//
+// Started on  Sun Jun 15 08:27:25 2014 quentin desabre
+// Last update Sun Jun 15 08:31:16 2014 Desabre Quentin
+//
+
 #include <string>
 #include "entity/WaterBonus.hh"
 #include "entity/Player.hh"

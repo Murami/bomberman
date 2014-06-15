@@ -1,3 +1,13 @@
+//
+// GameLoadingState.cpp for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:28:23 2014 otoshigami
+// Last update Sun Jun 15 08:28:24 2014 otoshigami
+//
+
 #include <string>
 
 #include "menu/MenuState.hh"
@@ -217,6 +227,11 @@ namespace bbm
   {
     Marvin::release();
     Wall::release();
+    TextureManager::getInstance()->delTexture("load");
+    TextureManager::getInstance()->delTexture("load2");
+    delete (_loading);
+    delete (_loadingFinished);
+    delete (this);
   }
 
   void			GameLoadingState::obscuring()

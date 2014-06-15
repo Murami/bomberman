@@ -1,3 +1,13 @@
+//
+// BonusFactory.cpp for  in /home/desabr_q/Desktop/bomber/cpp_bomberman
+//
+// Made by quentin desabre
+// Login   <desabr_q@epitech.net>
+//
+// Started on  Sun Jun 15 08:29:35 2014 quentin desabre
+// Last update Sun Jun 15 08:29:36 2014 Desabre Quentin
+//
+
 #include <cstdlib>
 #include "entity/BonusFactory.hh"
 #include "entity/AEntity.hh"

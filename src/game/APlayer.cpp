@@ -1,3 +1,13 @@
+//
+// APlayer.cpp for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:27:52 2014 otoshigami
+// Last update Sun Jun 15 08:27:53 2014 otoshigami
+//
+
 #include "game/APlayer.hh"
 #include "entity/BombFactory.hh"
 #include "entity/Player.hh"
@@ -145,7 +155,9 @@ namespace bbm
     int				posx = _position.x;
     int				posy = _position.y;
     AEntity*			tmp;
+    bool			b;
 
+    b = false;
     for (int x = -1; x != 2; x++)
       for (int y = -1; y != 2; y++)
 	{
@@ -160,11 +172,12 @@ namespace bbm
 		      tmp->collide(glm::vec3(_position.x +_move.x + delta, _position.y + _move.y + delta, 0)))
 		    {
 		      tmp->interact(this);
+		      b = true;
 		    }
 		}
 	    }
 	}
-    return (false);
+    return (b);
   }
 
   void			APlayer::manageModel(float time)
