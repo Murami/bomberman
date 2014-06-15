@@ -13,6 +13,7 @@
 #include		"serializer/Serializer.hh"
 #include		"serializer/SerializerException.hh"
 #include		"sound/SoundManager.hh"
+#include		"game/HighScore.hh"
 
 namespace	bbm
 {
@@ -64,6 +65,7 @@ namespace	bbm
     if (!menu->initialize())
       return (false);
     try
+
       {
 	menu->createNewButton("next", &IMenuManager::setNextFrame,
 			      glm::vec4(1, 1, 1, 1), false);
@@ -685,6 +687,15 @@ namespace	bbm
       return (false);
     try
       {
+	HighScore hs;
+	hs.load("HighScores");
+	for (std::vector<int>::const_iterator it = hs.getScores().begin();
+	     it != hs.getScores().end(); it++)
+	  {
+	    std::stringstream ss;
+	    ss << *it;
+	    menu->createNewString(ss.str());
+	  }
 	menu->createNewButton("back", &IMenuManager::setMainMenu,
 			      glm::vec4(1, 0, 0, 1), true);
       }

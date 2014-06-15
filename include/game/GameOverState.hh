@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:36:19 2014 otoshigami
-// Last update Sun Jun 15 08:36:19 2014 otoshigami
+// Last update Sun Jun 15 10:31:29 2014 Manu
 //
 
 #ifndef GAMEOVERSTATE_HH
@@ -13,6 +13,7 @@
 
 # include <string>
 # include <map>
+# include <list>
 
 # include "game/IGameState.hh"
 
@@ -20,6 +21,7 @@ namespace bbm
 {
   class GameManager;
   class Object;
+  class Letter;
 
   class GameOverState : public IGameState
   {
@@ -37,9 +39,14 @@ namespace bbm
     void					saveHighScore();
 
   private:
-    Object*					_screenOver;
     GameManager&				_manager;
     int						_score;
+    const std::string&				_type;
+    std::list<Letter*>				_typeLetters;
+    std::list<Letter*>				_pressSpace;
+    std::list<Letter*>				_playerScore;
+    bool					_updated;
+    bool					_getNewHighScore;
   };
 };
 

@@ -5,7 +5,7 @@
 // Login   <desabr_q@epitech.net>
 //
 // Started on  Sun Jun 15 08:30:41 2014 quentin desabre
-// Last update Sun Jun 15 08:30:43 2014 Desabre Quentin
+// Last update Sun Jun 15 09:42:34 2014 Manu
 //
 
 #include "graphic/Utils.hh"
@@ -51,7 +51,7 @@ namespace bbm
 	if (_animations[i - 38]->setCurrentSubAnim("run", true) == true)
 	  std::cout << "set current = true" << std::endl;
 	std::cout << "sleep de 1" << std::endl;
-	sleep(1);
+	//sleep(1);
       }
   }
 
