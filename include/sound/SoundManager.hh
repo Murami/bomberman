@@ -40,8 +40,8 @@ namespace bbm
     static SoundManager*	getInstance();
     static void			deleteInstance();
 
-    void			music(bool);
-    void			sound(bool);
+    bool			musicPlaying() const;
+    bool			soundPlaying() const;
 
   private:
     static SoundManager*			_instance;

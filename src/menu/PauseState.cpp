@@ -322,11 +322,11 @@ namespace		bbm
     try
       {
 	menu->createNewToggleButton("sound", NULL);
-	dynamic_cast<ToggleButton*>((*(menu->getButtons().begin())))->setChecked(!this->_config->sound);
+	dynamic_cast<ToggleButton*>((*(menu->getButtons().begin())))->setChecked(SoundManager::getInstance()->soundPlaying());
 	menu->createNewToggleButton("music", NULL);
 	std::list<AButton*>::const_iterator it = menu->getButtons().begin();
 	it++;
-	dynamic_cast<ToggleButton*>(*it)->setChecked(!this->_config->music);
+	dynamic_cast<ToggleButton*>(*it)->setChecked(SoundManager::getInstance()->musicPlaying());
 	menu->createNewButton("ok", &IMenuManager::serializeAudioSettings,
 			      glm::vec4(0, 1, 0, 1), true);
 	menu->createNewButton("cancel", &IMenuManager::setOptionsMenu,
@@ -870,14 +870,6 @@ namespace		bbm
 
   PauseState::~PauseState()
   {
-    // if (this->_inputConfigPlayer1)
-    //   delete (this->_inputConfigPlayer1);
-    // if (this->_inputConfigPlayer2)
-    //   delete (this->_inputConfigPlayer2);
-    // if (this->_inputConfigPlayer3)
-    //   delete (this->_inputConfigPlayer3);
-    // if (this->_inputConfigPlayer4)
-    //   delete (this->_inputConfigPlayer4);
     delete (this->_skybox);
     for (std::list<Menu*>::iterator it = this->_menuList.begin();
 	 it != this->_menuList.end(); it++)

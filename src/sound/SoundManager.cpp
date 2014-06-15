@@ -11,6 +11,16 @@ namespace bbm
     FMOD_System_Init(_system, 32, FMOD_INIT_NORMAL, NULL);
   }
 
+  bool	SoundManager::musicPlaying() const
+  {
+    return (this->_music);
+  }
+
+  bool	SoundManager::soundPlaying() const
+  {
+    return (this->_sound);
+  }
+
   SoundManager::~SoundManager()
   {
     unsigned int	i;
@@ -24,16 +34,6 @@ namespace bbm
     _channels.clear();
     FMOD_System_Close(_system);
     FMOD_System_Release(_system);
-  }
-
-  void	SoundManager::music(bool music)
-  {
-    this->_music = music;
-  }
-
-  void	SoundManager::sound(bool sound)
-  {
-    this->_sound = sound;
   }
 
   void	SoundManager::addSound(std::string const& name, std::string const& path)
