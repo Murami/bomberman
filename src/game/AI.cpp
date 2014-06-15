@@ -42,8 +42,7 @@ namespace bbm
     APlayer(gameState)
   {
     _type = "AI";
-    _scriptName = "scripts/" + *(config.IALevel) + ".lua";
-    std::cout << "IA level = " << _scriptName << std::endl;
+    _scriptName = config.IALevel;
     _position = config.position;
     _power = config.power;
     _nbBombs = config.nbBombs;
@@ -68,7 +67,7 @@ namespace bbm
 
   AI::~AI()
   {
-    SoundManager::getInstance()->play("scream");
+    SoundManager::getInstance()->playSound("scream");
   }
 
   void	AI::initialize()

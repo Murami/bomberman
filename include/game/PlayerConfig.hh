@@ -25,7 +25,7 @@ namespace bbm
     unsigned int	lastId;
     int			score;
     int			idGamepad;
-    std::string*	IALevel;
+    std::string		IALevel;
   };
 };
 
