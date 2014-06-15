@@ -85,6 +85,11 @@ namespace bbm
 
 	script.addObject("player", this);
 	script.run();
+	if (_dark)
+	  {
+	    _move.x = -_move.x;
+	    _move.y = -_move.y;
+	  }
 	managePhysics(time);
 	updateState();
 	manageModel(time);
@@ -201,7 +206,7 @@ namespace bbm
     bool	res = false;
     lua_newtable(L);
 
-    this->setMove(glm::vec2(0, 0.2));
+    this->setMove(glm::vec2(0, 0.5));
     lua_pushstring(L, "up");
     if (this->collideGameBoxes())
       {
@@ -217,7 +222,7 @@ namespace bbm
     lua_rawset(L, -3);
 
     res = false;
-    this->setMove(glm::vec2(-0.2, 0));
+    this->setMove(glm::vec2(-0.5, 0));
     lua_pushstring(L, "left");
     if (this->collideGameBoxes())
       {
@@ -233,7 +238,7 @@ namespace bbm
     lua_rawset(L, -3);
 
     res = false;
-    this->setMove(glm::vec2(0.2, 0));
+    this->setMove(glm::vec2(0.5, 0));
     lua_pushstring(L, "right");
     if (this->collideGameBoxes())
       {
@@ -249,7 +254,7 @@ namespace bbm
     lua_rawset(L, -3);
 
     res = false;
-    this->setMove(glm::vec2(0, -0.2));
+    this->setMove(glm::vec2(0, -0.5));
     lua_pushstring(L, "down");
     if (this->collideGameBoxes())
       {
@@ -263,6 +268,7 @@ namespace bbm
       }
       lua_pushboolean(L, res);
       lua_rawset(L, -3);
+    this->setMove(glm::vec2(0, 0));
     return (1);
   }
 

@@ -77,25 +77,25 @@ end
 
 local n = ((math.random(1, 4) * player:getIdPlayer()) % 4) + 1
 
-move(n)
+--move(n)
 
--- print("enter")
+print("enter")
 
 
--- io.write(" =====>   ")
+io.write(" =====>   ")
 
--- if not boxes["up"] then
---    io.write(" *up* ");
---    player:goUp()
--- elseif not boxes["left"] then
---    io.write(" *left* ")
---    player:goLeft()
--- elseif not boxes["right"] then
---    io.write(" *right* ")
---    player:goRight()
--- elseif not boxes["down"] then
---    io.write(" *down* ")
---    player:goDown()
--- end
+if not boxes["up"] then
+   io.write(" *up* ");
+   player:goUp()
+elseif not boxes["left"] then
+   io.write(" *left* ")
+   player:goLeft()
+elseif not boxes["right"] then
+   io.write(" *right* ")
+   player:goRight()
+elseif not boxes["down"] then
+   io.write(" *down* ")
+   player:goDown()
+end
 
 print("end")

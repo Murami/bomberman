@@ -143,7 +143,9 @@ namespace bbm
     int				posx = _position.x;
     int				posy = _position.y;
     AEntity*			tmp;
+    bool			b;
 
+    b = false;
     for (int x = -1; x != 2; x++)
       for (int y = -1; y != 2; y++)
 	{
@@ -158,12 +160,12 @@ namespace bbm
 		      tmp->collide(glm::vec3(_position.x +_move.x + delta, _position.y + _move.y + delta, 0)))
 		    {
 		      tmp->interact(this);
-		      return (true);
+		      b = true;
 		    }
 		}
 	    }
 	}
-    return (false);
+    return (b);
   }
 
   void			APlayer::manageModel(float time)
