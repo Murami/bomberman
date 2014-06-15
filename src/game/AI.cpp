@@ -43,7 +43,8 @@ namespace bbm
   {
     _type = "AI";
     _scriptName = "scripts/medium.lua";
-    // _scriptName = config.scriptName;
+    _scriptName = config.IALevel;
+    std::cout << "IA level = " << _scriptName << std::endl;
     _position = config.position;
     _power = config.power;
     _nbBombs = config.nbBombs;

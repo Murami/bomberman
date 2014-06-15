@@ -189,6 +189,7 @@ namespace bbm
     for (int i = 0; i < _config->numberIA; i++)
       {
 	playerConfig.inputConfig = NULL;
+	playerConfig.IALevel = _config->level;
 	gameStateConfig.AIConfigs.push_back(playerConfig);
       }
     gameStateConfig.load = false;
