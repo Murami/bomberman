@@ -5,7 +5,7 @@
 // Login   <bichon_b@epitech.net>
 //
 // Started on  Sun Jun 15 08:33:55 2014 bichon_b
-// Last update Sun Jun 15 09:31:57 2014 bichon_b
+// Last update Sun Jun 15 09:44:01 2014 bichon_b
 //
 
 #include "game/AI.hh"
@@ -240,8 +240,7 @@ namespace bbm
     lua_rawset(L, -3);
 
     this->setMove(glm::vec2(0, 0));
-    std::cout << std::endl;
-    return (1);
+fg    return (1);
   }
 
   int	AI::getDanger(lua_State* L)
@@ -251,7 +250,10 @@ namespace bbm
     this->setMove(glm::vec2(0, 0.4));
     lua_pushstring(L, "up");
     if (this->collideWarning())
-      lua_pushboolean(L, true);
+      {
+	std::cout << " danger up ";
+	lua_pushboolean(L, true);
+      }
     else
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
@@ -259,7 +261,10 @@ namespace bbm
     this->setMove(glm::vec2(-0.4, 0));
     lua_pushstring(L, "left");
     if (this->collideWarning())
-      lua_pushboolean(L, true);
+      {
+	std::cout << " denger left ";
+	lua_pushboolean(L, true);
+      }
     else
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
@@ -267,7 +272,10 @@ namespace bbm
     this->setMove(glm::vec2(0.4, 0));
     lua_pushstring(L, "right");
     if (this->collideWarning())
-      lua_pushboolean(L, true);
+      {
+	std::cout << " danger right ";
+	lua_pushboolean(L, true);
+      }
     else
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
@@ -275,7 +283,10 @@ namespace bbm
     this->setMove(glm::vec2(0, -0.4));
     lua_pushstring(L, "down");
     if (this->collideWarning())
-      lua_pushboolean(L, true);
+      {
+	std::cout << " danger down ";
+	lua_pushboolean(L, true);
+      }
     else
       lua_pushboolean(L, false);
     lua_rawset(L, -3);

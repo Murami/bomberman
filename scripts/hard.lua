@@ -109,12 +109,19 @@ end
 
 function isAnyDanger ()
    if dangers["up"] then
+      print("*up*")
       player:goDown()
-   elseif dangers["down"] then
+   end
+   if dangers["down"] then
+      print("*down*")
       player:goUp()
-   elseif dangers["left"] then
+   end
+   if dangers["left"] then
+      print("*left*")
       player:goRight()
-   elseif dangers["right"] then
+   end
+   if dangers["right"] then
+      print("*right*")
       player:goLeft()
    end
 end
