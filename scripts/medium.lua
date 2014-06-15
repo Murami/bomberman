@@ -3,6 +3,10 @@ local number = (math.random(1, 10) * player:getIdPlayer()) % 10 + 1
 
 local boxes = player:getBoxes ()
 
+-----------------------------
+print(tostring(boxes["up"]) .. " " .. tostring(boxes["left"]) .. " " .. tostring(boxes["right"]) .. " " .. tostring(boxes["down"]))
+-----------------------------
+
 local moveMethod = {
    [1] = function ()
       if boxes["up"] then return false end
@@ -50,14 +54,14 @@ local moveMethod = {
    -- end
 }
 
-function move ()
-   math.randomseed(os.time())
-   local n = ((math.random(1, 4) * player:getIdPlayer()) % 4) + 1
+function move (n)
+
+   local m = math.random(1, 10)
 
    if boxes["up"] and boxes["down"] and boxes["left"] and boxes["right"] then
       return
-   elseif moveMethod[n]() == false then
-      move()
+   elseif not moveMethod[n]() then
+      move((n + m) % 4 + 1)
    end
 end
 
@@ -71,24 +75,27 @@ end
 --    move()
 -- end
 
--- move()
+local n = ((math.random(1, 4) * player:getIdPlayer()) % 4) + 1
 
-io.write(tostring(boxes["up"]) .. " " .. tostring(boxes["left"]) .. " " .. tostring(boxes["right"]) .. " " .. tostring(boxes["down"]))
+move(n)
 
-io.write(" =====>   ")
+-- print("enter")
 
-if not boxes["up"] then
-   io.write(" *up* ");
-   player:goUp()
-elseif not boxes["left"] then
-   io.write(" *left* ")
-   player:goLeft()
-elseif not boxes["right"] then
-   io.write(" *right* ")
-   player:goRight()
-elseif not boxes["down"] then
-   io.write(" *down* ")
-   player:goDown()
-end
 
-print("\n")
+-- io.write(" =====>   ")
+
+-- if not boxes["up"] then
+--    io.write(" *up* ");
+--    player:goUp()
+-- elseif not boxes["left"] then
+--    io.write(" *left* ")
+--    player:goLeft()
+-- elseif not boxes["right"] then
+--    io.write(" *right* ")
+--    player:goRight()
+-- elseif not boxes["down"] then
+--    io.write(" *down* ")
+--    player:goDown()
+-- end
+
+print("end")

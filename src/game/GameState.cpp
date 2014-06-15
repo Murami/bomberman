@@ -56,7 +56,6 @@ namespace bbm
     _manager(manager),
     _config(config)
   {
-    // SoundManager::getInstance()->play("bomberTheme");
     this->_flush = true;
     this->_printHud = false;
   }

@@ -8,6 +8,7 @@
 #include		"graphic/Camera.hh"
 #include		"graphic/RenderState.hh"
 #include		"graphic/ModelManager.hh"
+#include		"sound/SoundManager.hh"
 
 
 namespace		bbm

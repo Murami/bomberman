@@ -18,6 +18,7 @@ namespace bbm
     void		initialize();
     void		update(float time);
     const std::string&	getType() const;
+    bool		testCollideMap();
 
     int	getIdPlayer(lua_State*);
     int	goUp(lua_State*);

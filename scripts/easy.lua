@@ -1,8 +1,6 @@
 math.randomseed(os.time())
 local number = (math.random(1, 10) * player:getIdPlayer()) % 10 + 1
 
-local boxes = player:getGameBoxes ()
-
 local moveMethod = {
    [1] = function () player:goUp() end,
    [2] = function () player:goDown() end,

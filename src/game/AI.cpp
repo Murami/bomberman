@@ -5,6 +5,7 @@
 #include "entity/BombFactory.hh"
 
 #include "lua/LuaBiche.hh"
+#include "sound/SoundManager.hh"
 
 namespace bbm
 {
@@ -68,6 +69,7 @@ namespace bbm
 
   AI::~AI()
   {
+    SoundManager::getInstance()->play("scream");
   }
 
   void	AI::initialize()
@@ -100,9 +102,34 @@ namespace bbm
     return (1);
   }
 
+  bool	AI::testCollideMap()
+  {
+    float	deltaTile = 0.2;
+
+    try
+      {
+        if (_gameState.getTileMap().collide(_position.x + _move.x + 1 - deltaTile, _position.y  + 1 - deltaTile) ||
+            _gameState.getTileMap().collide(_position.x + _move.x + 1 - deltaTile, _position.y  + deltaTile) ||
+            _gameState.getTileMap().collide(_position.x + _move.x + deltaTile, _position.y + 1 - deltaTile) ||
+            _gameState.getTileMap().collide(_position.x + _move.x + deltaTile, _position.y + deltaTile))
+	  return (true);
+        if (_gameState.getTileMap().collide(_position.x  + 1 - deltaTile, _position.y + _move.y + 1 - deltaTile) ||
+            _gameState.getTileMap().collide(_position.x  + 1 - deltaTile, _position.y + _move.y + deltaTile) ||
+            _gameState.getTileMap().collide(_position.x  + deltaTile, _position.y + _move.y + 1 - deltaTile) ||
+            _gameState.getTileMap().collide(_position.x  + deltaTile, _position.y + _move.y + deltaTile))
+	  return (true);
+      }
+    catch (const std::runtime_error &e)
+      {
+	std::cout << e.what() << std::endl;
+        // set spawn;
+      }
+    return (false);
+  }
+
+
   int	AI::goUp(lua_State*)
   {
-    std::cout << "I'm move up " << std::endl;
     this->setMove(glm::vec2(0, 1));
     return (1);
   }
@@ -171,43 +198,71 @@ namespace bbm
 
   int	AI::getBoxes(lua_State* L)
   {
-    std::vector<AEntity*>		gameBox;
-    TileMap				tileMap;
-    int					mapSize;
-
-    mapSize = _gameState.getMapSize().x;
-    gameBox = _gameState.getGameBoxes();
-    tileMap = _gameState.getTileMap();
-
+    bool	res = false;
     lua_newtable(L);
+
+    this->setMove(glm::vec2(0, 0.2));
     lua_pushstring(L, "up");
-    if (gameBox[_position.x + (_position.y + 1) * mapSize] || tileMap.getTile(_position.x, _position.y + 1))
-      lua_pushboolean(L, true);
-    else
-      lua_pushboolean(L, false);
+    if (this->collideGameBoxes())
+      {
+	std::cout << "GAME BOX UP" << std::endl;
+	res = true;
+      }
+    if (this->testCollideMap())
+      {
+	std::cout << "MAP UP" << std::endl;
+	res = true;
+      }
+    lua_pushboolean(L, res);
     lua_rawset(L, -3);
 
+    res = false;
+    this->setMove(glm::vec2(-0.2, 0));
     lua_pushstring(L, "left");
-    if (gameBox[(_position.x - 1) + _position.y * mapSize] || tileMap.getTile(_position.x - 1, _position.y))
-      lua_pushboolean(L, true);
-    else
-      lua_pushboolean(L, false);
+    if (this->collideGameBoxes())
+      {
+	std::cout << "GAME BOX LEFT" << std::endl;
+	res = true;
+      }
+    if (this->testCollideMap())
+      {
+	std::cout << "MAP LEFT" << std::endl;
+	res = true;
+      }
+    lua_pushboolean(L, res);
     lua_rawset(L, -3);
 
+    res = false;
+    this->setMove(glm::vec2(0.2, 0));
     lua_pushstring(L, "right");
-    if (gameBox[(_position.x + 1) + _position.y * mapSize] || tileMap.getTile(_position.x + 1, _position.y))
-      lua_pushboolean(L, true);
-    else
-      lua_pushboolean(L, false);
+    if (this->collideGameBoxes())
+      {
+	std::cout << "GAME BOX RIGHT" << std::endl;
+	res = true;
+      }
+    if(this->testCollideMap())
+      {
+	std::cout << "MAP RIGHT" << std::endl;
+	res = true;
+      }
+    lua_pushboolean(L, res);
     lua_rawset(L, -3);
 
+    res = false;
+    this->setMove(glm::vec2(0, -0.2));
     lua_pushstring(L, "down");
-    if (gameBox[_position.x + (_position.y - 1) * mapSize] || tileMap.getTile(_position.x, _position.y - 1))
-      lua_pushboolean(L, true);
-    else
-      lua_pushboolean(L, false);
-    lua_rawset(L, -3);
-
+    if (this->collideGameBoxes())
+      {
+	std::cout << "GAME BOX DOWN" << std::endl;
+	res = true;
+      }
+    if (this->testCollideMap())
+      {
+	std::cout << "MAP DOWN" << std::endl;
+	res = true;
+      }
+      lua_pushboolean(L, res);
+      lua_rawset(L, -3);
     return (1);
   }
 

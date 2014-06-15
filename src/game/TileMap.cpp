@@ -46,7 +46,7 @@ namespace bbm
     _object.pushUv(glm::vec2(0, y));
     _object.build();
 
-
+    std::cout << x << "  " << y << std::endl;
     for (posx = 0; posx < x; posx++)
       {
 	for (posy = 0; posy < y; posy++)
