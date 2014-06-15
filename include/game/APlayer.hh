@@ -90,7 +90,6 @@ namespace bbm
     bool				isDark() const;
     bool				isSlow() const;
     void				increaseMaxBomb();
-
     virtual const std::string&		getType() const = 0;
     virtual void			update(float time) = 0;
     virtual void			initialize() = 0;

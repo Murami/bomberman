@@ -7,7 +7,6 @@ Serializer::Serializer(ISerializer* serializer)
 
 Serializer::~Serializer()
 {
-
 }
 
 ISerializer*	Serializer::operator->()

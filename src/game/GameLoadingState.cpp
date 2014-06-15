@@ -157,30 +157,31 @@ namespace bbm
     playerConfig.id = 0;
     playerConfig.lastId = 0;
     playerConfig.score = 0;
+    std::cout << _config->player1 << " " << _config->player2 << " " << _config->player3 << " " << _config->player4 << std::endl;
     if (_config->player1)
       {
-	playerConfig.idGamepad = _config->player1;
+	playerConfig.idGamepad = 1;
 	playerConfig.inputConfig = new InputConfig;
 	playerConfig.inputConfig->load(MenuState::INPUT_CONFIG_P1);
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     if (_config->player2)
       {
-	playerConfig.idGamepad = _config->player2;
+	playerConfig.idGamepad = 2;
 	playerConfig.inputConfig = new InputConfig;
 	playerConfig.inputConfig->load(MenuState::INPUT_CONFIG_P2);
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     if (_config->player3)
       {
-	playerConfig.idGamepad = _config->player3;
+	playerConfig.idGamepad = 3;
 	playerConfig.inputConfig = new InputConfig;
 	playerConfig.inputConfig->load(MenuState::INPUT_CONFIG_P3);
 	gameStateConfig.playersConfigs.push_back(playerConfig);
       }
     if (_config->player4)
       {
-	playerConfig.idGamepad = _config->player4;
+	playerConfig.idGamepad = 4;
 	playerConfig.inputConfig = new InputConfig;
 	playerConfig.inputConfig->load(MenuState::INPUT_CONFIG_P4);
 	gameStateConfig.playersConfigs.push_back(playerConfig);

@@ -290,7 +290,6 @@ namespace bbm
     std::vector<glm::vec4>						colors;
     std::vector<SerializableVector<glm::ivec2>::iterator>		spawnUsed;
     std::vector<SerializableVector<glm::ivec2>::iterator>::iterator	itSpawnUsed;
-    bool								valid;
 
     colors.resize(4);
     colors[0] = glm::vec4(0.8, 0.2, 0.2, 1);
@@ -325,17 +324,9 @@ namespace bbm
 	if (_config->load == false)
 	  {
 	    itSpawn = _tilemap.getSpawns().begin();
-	    valid = false;
-	    while (valid == false)
-	      {
-		itSpawn += rand() % _tilemap.getSpawns().size();
-		valid = true;
-		for (itSpawnUsed = spawnUsed.begin(); itSpawnUsed != spawnUsed.end(); ++itSpawnUsed)
-		  if (itSpawn == *itSpawnUsed)
-		    valid = false;
-	      }
+	    itSpawn += rand() % _tilemap.getSpawns().size();
 	    (*it).position = glm::vec2(itSpawn->x, itSpawn->y);
-	    spawnUsed.push_back(itSpawn);
+	    _tilemap.getSpawns().erase(itSpawn);
 	  }
 	Player*	p = new Player(*this, *it);
 	p->setColor(colors[std::distance(_config->playersConfigs.begin(), it)]);
@@ -348,15 +339,7 @@ namespace bbm
 	if (_config->load == false)
 	  {
 	    itSpawn = _tilemap.getSpawns().begin();
-	    valid = false;
-	    while (valid == false)
-	      {
-		itSpawn += rand() % _tilemap.getSpawns().size();
-		valid = true;
-		for (itSpawnUsed = spawnUsed.begin(); itSpawnUsed != spawnUsed.end(); ++itSpawnUsed)
-		  if (itSpawn == *itSpawnUsed)
-		    valid = false;
-	      }
+	    itSpawn += rand() % (_tilemap.getSpawns().size() - 1);
 	    (*it).position = glm::vec2(itSpawn->x, itSpawn->y);
 	  }
 	_AIs.push_back(new AI(*this, *it));
@@ -569,6 +552,7 @@ namespace bbm
     std::list<AI*>::iterator		itAIs;
     int					nbPlayer = 0;
     int					nbAi = 0;
+    int					idPlayer;
 
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
       if ((*itPlayers)->isDead())
@@ -577,28 +561,30 @@ namespace bbm
       if ((*itAIs)->isDead())
 	nbAi++;
 
-    // if (nbPlayer == 0 && nbAi == 0)
-    //   {
-    // 	std::cout << "DRAW" << std::endl;
-    // 	_manager.pop();
-    // 	_manager.push(new GameOverState(_manager, "draw"));
-    //   }
-    // else if (nbPlayer == 1 && nbAi == 0)
-    //   {
-    // 	for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
-    // 	  if ((*itPlayers)->isDead())
-    // 	    {
-    // 	      _manager.pop();
-    // 	      _manager.push(new GameOverState(_manager, "player1"));
-    // 	      std::cout << "player numero ? won the game with " << (*itPlayers)->getScore() << "points" << std::endl;
-    // 	    }
-    //   }
-    // else if (nbPlayer == 0 && nbAi != 0)
-    //   {
-    // 	std::cout << "AI won the game !" << std::endl;
-    // 	_manager.pop();
-    // 	_manager.push(new GameOverState(_manager, "ia"));
-    //   }
+    if (nbPlayer == 0 && nbAi == 0)
+      {
+    	std::cout << "DRAW" << std::endl;
+    	_manager.pop();
+    	_manager.push(new GameOverState(_manager, "draw", 0));
+      }
+    else if (nbPlayer == 1 && nbAi == 0)
+      {
+    	for (idPlayer = 1, itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++, idPlayer++)
+    	  if ((*itPlayers)->isDead())
+    	    {
+	      std::stringstream ss;
+	      ss << idPlayer;
+    	      _manager.pop();
+    	      _manager.push(new GameOverState(_manager, "player" + ss.str(), (*itPlayers)->getScore()));
+    	      std::cout << "player numero ? won the game with " << (*itPlayers)->getScore() << "points" << std::endl;
+    	    }
+      }
+    else if (nbPlayer == 0 && nbAi != 0)
+      {
+    	std::cout << "AI won the game !" << std::endl;
+    	_manager.pop();
+    	_manager.push(new GameOverState(_manager, "ia", 0));
+      }
 
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
       if ((*itPlayers)->isDead())

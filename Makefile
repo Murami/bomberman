@@ -34,6 +34,7 @@ SRC		=	main				\
 			game/GameLoadingState		\
 			game/APlayer			\
 			game/AI				\
+			game/HighScore			\
 			entity/BonusFactory		\
 			entity/EntityFactory		\
 			entity/BombFactory		\
