@@ -399,27 +399,27 @@ namespace	bbm
       }
     try
       {
-	menu->createNewStateButton("UP", NULL, 7,
+	menu->createNewStateButton("up", NULL, 7,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("up")));
 	this->_setBindingControlPlayer1(menu, "");
-	menu->createNewStateButton("DOWN", NULL, 5,
+	menu->createNewStateButton("down", NULL, 5,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("down")));
 	this->_setBindingControlPlayer1(menu, "");
-	menu->createNewStateButton("LEFT", NULL, 5,
+	menu->createNewStateButton("left", NULL, 5,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("left")));
 	this->_setBindingControlPlayer1(menu, "");
-	menu->createNewStateButton("RIGHT", NULL, 4,
+	menu->createNewStateButton("right", NULL, 4,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("right")));
 	this->_setBindingControlPlayer1(menu, "");
-	menu->createNewStateButton("BOMB", NULL, 5,
+	menu->createNewStateButton("bomb", NULL, 5,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("bomb")));
 	this->_setBindingControlPlayer1(menu, "");
-	menu->createNewStateButton("BOMB2", NULL, 4,
+	menu->createNewStateButton("bomb2", NULL, 4,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("bomb2")));
 	this->_setBindingControlPlayer1(menu, "");
@@ -984,6 +984,7 @@ namespace	bbm
     std::string tmp2;
     size_t pos = tmp.find(".save");
 
+    this->_config.newGame = false;
     SoundManager::getInstance()->stop("menu");
     if (this->_config.music)
       SoundManager::getInstance()->playMusic("wait");
@@ -1013,15 +1014,7 @@ namespace	bbm
     it++;
     StateButton*	level = dynamic_cast<StateButton*>(*it);
     if (level)
-      {
-	std::string lvl = level->getState();
-	if (lvl == "easy")
-	  this->_config.level = 0;
-	else if (lvl == "medium")
-	  this->_config.level = 1;
-	else
-	  this->_config.level = 2;
-      }
+      this->_config.level = level->getState();
     this->_config.newGame = true;
     GameLoadingState*	state = new GameLoadingState(this->_manager,
     						     &this->_config);

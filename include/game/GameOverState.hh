@@ -15,7 +15,7 @@ namespace bbm
   {
 
   public:
-    GameOverState(GameManager& gameManager, const std::string &);
+    GameOverState(GameManager& gameManager, const std::string &, int score);
     ~GameOverState();
 
     void					initialize();
@@ -24,10 +24,12 @@ namespace bbm
     void					update(float time, const Input& input);
     void					draw(float time, Screen& context);
     void					revealing();
+    void					saveHighScore();
 
   private:
     Object*					_screenOver;
     GameManager&				_manager;
+    int						_score;
   };
 };
 

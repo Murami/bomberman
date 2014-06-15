@@ -24,7 +24,7 @@ namespace bbm
       int		player3;
       int		player4;
       int		numberIA;
-      int		level;
+      std::string	level;
       bool		music;
       bool		sound;
       bool		newGame;
