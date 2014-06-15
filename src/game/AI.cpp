@@ -5,7 +5,7 @@
 // Login   <bichon_b@epitech.net>
 //
 // Started on  Sun Jun 15 08:33:55 2014 bichon_b
-// Last update Sun Jun 15 08:33:56 2014 bichon_b
+// Last update Sun Jun 15 08:36:41 2014 bichon_b
 //
 
 #include "game/AI.hh"
@@ -112,7 +112,7 @@ namespace bbm
 
   bool	AI::testCollideMap()
   {
-    float	deltaTile = 0.2;
+    float	deltaTile = 0.3;
 
     try
       {
@@ -201,7 +201,7 @@ namespace bbm
   {
     lua_newtable(L);
 
-    this->setMove(glm::vec2(0, 0.2));
+    this->setMove(glm::vec2(0, 0.3));
     lua_pushstring(L, "up");
     if (this->collideGameBoxes() || this->testCollideMap())
       {
@@ -212,7 +212,7 @@ namespace bbm
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
 
-    this->setMove(glm::vec2(-0.2, 0));
+    this->setMove(glm::vec2(-0.3, 0));
     lua_pushstring(L, "left");
     if (this->collideGameBoxes() || this->testCollideMap())
       {
@@ -223,7 +223,7 @@ namespace bbm
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
 
-    this->setMove(glm::vec2(0.2, 0));
+    this->setMove(glm::vec2(0.3, 0));
     lua_pushstring(L, "right");
     if (this->collideGameBoxes() || this->testCollideMap())
       {
@@ -234,7 +234,7 @@ namespace bbm
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
 
-    this->setMove(glm::vec2(0, -0.2));
+    this->setMove(glm::vec2(0, -0.3));
     lua_pushstring(L, "down");
     if (this->collideGameBoxes() || this->testCollideMap())
       {

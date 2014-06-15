@@ -39,6 +39,8 @@ local move = {
    end,
    ["right"] = function ()
       player:goRight()
+   end,
+   ["idle"] = function ()
    end
 }
 
