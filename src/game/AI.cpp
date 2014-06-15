@@ -28,13 +28,11 @@ namespace bbm
     add_method_to_vector(methods, "goLeft", &AI::goLeft);
     add_method_to_vector(methods, "goRight", &AI::goRight);
     add_method_to_vector(methods, "goDown", &AI::goDown);
-    add_method_to_vector(methods, "goUpLeft", &AI::goUpLeft);
-    add_method_to_vector(methods, "goUpRight", &AI::goUpRight);
-    add_method_to_vector(methods, "goDownLeft", &AI::goDownLeft);
-    add_method_to_vector(methods, "goDownRight", &AI::goDownRight);
     add_method_to_vector(methods, "putBomb", &AI::putBomb);
     add_method_to_vector(methods, "haveBomb", &AI::haveBomb);
     add_method_to_vector(methods, "getBoxes", &AI::getBoxes);
+    add_method_to_vector(methods, "getActualDirection", &AI::getActualDirection);
+    add_method_to_vector(methods, "setIdle", &AI::setIdle);
     return (methods);
   }
 
@@ -65,6 +63,7 @@ namespace bbm
       setID(config.id);
     if (config.lastId)
       setLastID(config.lastId);
+    _actualDirection = IDLE;
   }
 
   AI::~AI()
@@ -131,48 +130,28 @@ namespace bbm
   int	AI::goUp(lua_State*)
   {
     this->setMove(glm::vec2(0, 1));
+    _actualDirection = UP;
     return (1);
   }
 
   int	AI::goLeft(lua_State*)
   {
     this->setMove(glm::vec2(-1, 0));
+    _actualDirection = LEFT;
     return (1);
   }
 
   int	AI::goRight(lua_State*)
   {
     this->setMove(glm::vec2(1, 0));
+    _actualDirection = RIGHT;
     return (1);
   }
 
   int	AI::goDown(lua_State*)
   {
     this->setMove(glm::vec2(0, -1));
-    return (1);
-  }
-
-  int	AI::goUpLeft(lua_State*)
-  {
-    this->setMove(glm::vec2(-1, 1));
-    return (1);
-  }
-
-  int	AI::goUpRight(lua_State*)
-  {
-    this->setMove(glm::vec2(1, 1));
-    return (1);
-  }
-
-  int	AI::goDownLeft(lua_State*)
-  {
-    this->setMove(glm::vec2(-1, -1));
-    return (1);
-  }
-
-  int	AI::goDownRight(lua_State*)
-  {
-    this->setMove(glm::vec2(1, -1));
+    _actualDirection = DOWN;
     return (1);
   }
 
@@ -196,73 +175,54 @@ namespace bbm
     return (1);
   }
 
+  int	AI::getActualDirection(lua_State* L)
+  {
+    lua_pushinteger(L, _actualDirection);
+    return (1);
+  }
+
+  int	AI::setIdle(lua_State*)
+  {
+    this->setMove(glm::vec2(0, 0));
+    _actualDirection = IDLE;
+    return (1);
+  }
+
   int	AI::getBoxes(lua_State* L)
   {
-    bool	res = false;
     lua_newtable(L);
 
-    this->setMove(glm::vec2(0, 0.2));
+    this->setMove(glm::vec2(0, 0.4));
     lua_pushstring(L, "up");
-    if (this->collideGameBoxes())
-      {
-	std::cout << "GAME BOX UP" << std::endl;
-	res = true;
-      }
-    if (this->testCollideMap())
-      {
-	std::cout << "MAP UP" << std::endl;
-	res = true;
-      }
-    lua_pushboolean(L, res);
+    if (this->collideGameBoxes() || this->testCollideMap())
+      lua_pushboolean(L, true);
+    else
+      lua_pushboolean(L, false);
     lua_rawset(L, -3);
 
-    res = false;
-    this->setMove(glm::vec2(-0.2, 0));
+    this->setMove(glm::vec2(-0.4, 0));
     lua_pushstring(L, "left");
-    if (this->collideGameBoxes())
-      {
-	std::cout << "GAME BOX LEFT" << std::endl;
-	res = true;
-      }
-    if (this->testCollideMap())
-      {
-	std::cout << "MAP LEFT" << std::endl;
-	res = true;
-      }
-    lua_pushboolean(L, res);
+    if (this->collideGameBoxes() || this->testCollideMap())
+      lua_pushboolean(L, true);
+    else
+      lua_pushboolean(L, false);
     lua_rawset(L, -3);
 
-    res = false;
-    this->setMove(glm::vec2(0.2, 0));
+    this->setMove(glm::vec2(0.4, 0));
     lua_pushstring(L, "right");
-    if (this->collideGameBoxes())
-      {
-	std::cout << "GAME BOX RIGHT" << std::endl;
-	res = true;
-      }
-    if(this->testCollideMap())
-      {
-	std::cout << "MAP RIGHT" << std::endl;
-	res = true;
-      }
-    lua_pushboolean(L, res);
+    if (this->collideGameBoxes() || this->testCollideMap())
+      lua_pushboolean(L, true);
+    else
+      lua_pushboolean(L, false);
     lua_rawset(L, -3);
 
-    res = false;
-    this->setMove(glm::vec2(0, -0.2));
+    this->setMove(glm::vec2(0, -0.4));
     lua_pushstring(L, "down");
-    if (this->collideGameBoxes())
-      {
-	std::cout << "GAME BOX DOWN" << std::endl;
-	res = true;
-      }
-    if (this->testCollideMap())
-      {
-	std::cout << "MAP DOWN" << std::endl;
-	res = true;
-      }
-      lua_pushboolean(L, res);
-      lua_rawset(L, -3);
+    if (this->collideGameBoxes() || this->testCollideMap())
+      lua_pushboolean(L, true);
+    else
+      lua_pushboolean(L, false);
+    lua_rawset(L, -3);
     return (1);
   }
 
