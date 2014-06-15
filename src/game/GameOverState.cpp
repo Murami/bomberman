@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:40 2014 otoshigami
-// Last update Sun Jun 15 20:27:28 2014 Manu
+// Last update Sun Jun 15 21:02:26 2014 Manu
 //
 
 #include <sstream>
@@ -152,6 +152,8 @@ namespace bbm
 	saveHighScore();
 	SoundManager::getInstance()->disableMusics();
 	SoundManager::getInstance()->enableMusics();
+	SoundManager::getInstance()->disableSounds();
+	SoundManager::getInstance()->enableSounds();
 	if (SoundManager::getInstance()->musicPlaying())
 	  SoundManager::getInstance()->playMusic("menu");
 	_manager.pop();

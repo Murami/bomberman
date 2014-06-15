@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Sun Jun 15 11:48:18 2014 Manu
-// Last update Sun Jun 15 20:39:19 2014 Manu
+// Last update Sun Jun 15 20:58:41 2014 Manu
 //
 
 #include		<stdexcept>
@@ -711,6 +711,7 @@ namespace	bbm
       {
 	std::cerr << "In function " << __FUNCTION__ << " : "
 		  << e.what() << ": Not found" << std::endl;
+	return (false);
       }
     menu->finalize();
     menu->refresh();
@@ -762,15 +763,28 @@ namespace	bbm
     catch (FileLoadingException e)
       {
 	std::cerr << "Error initializing Skybox : " << e.what() << std::endl;
+	this->_manager.pop();
       }
     if (!this->_initializeMainMenu())
-      std::cerr << "Error initializing main menu" << std::endl;
+      {
+	std::cerr << "Error initializing main menu" << std::endl;
+	this->_manager.pop();
+      }
     if (!this->_initializePlayMenu())
-      std::cerr << "Error initializing play menu" << std::endl;
+      {
+	std::cerr << "Error initializing play menu" << std::endl;
+	this->_manager.pop();
+      }
     if (!this->_initializeOptionsMenu())
-      std::cerr << "Error initializing options menu" << std::endl;
+      {
+	std::cerr << "Error initializing options menu" << std::endl;
+	this->_manager.pop();
+      }
     if (!this->_initializeHighscoresMenu())
-      std::cerr << "Error initializing high score menu" << std::endl;
+      {
+	std::cerr << "Error initializing high score menu" << std::endl;
+	this->_manager.pop();
+      }
   }
 
   void		MenuState::release() {}
