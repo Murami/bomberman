@@ -141,22 +141,18 @@ namespace	bbm
 	menu->addStateToLastButton("gamepad 4");
 	menu->createNewStateButton("player 2", NULL, 3,
 				   glm::vec4(0, 1, 1, 1), "x");
-	menu->addStateToLastButton("gamepad 1");
 	menu->addStateToLastButton("gamepad 2");
 	menu->addStateToLastButton("gamepad 3");
 	menu->addStateToLastButton("gamepad 4");
+	menu->addStateToLastButton("gamepad 1");
 	menu->createNewStateButton("player 3", NULL, 3,
 				   glm::vec4(1, 0, 1, 1), "x");
-	menu->addStateToLastButton("gamepad 1");
-	menu->addStateToLastButton("gamepad 2");
 	menu->addStateToLastButton("gamepad 3");
 	menu->addStateToLastButton("gamepad 4");
+	menu->addStateToLastButton("gamepad 1");
+	menu->addStateToLastButton("gamepad 2");
 	menu->createNewStateButton("player 4", NULL, 3,
 				   glm::vec4(1, 1, 0, 1), "x");
-	menu->addStateToLastButton("gamepad 1");
-	menu->addStateToLastButton("gamepad 2");
-	menu->addStateToLastButton("gamepad 3");
-	menu->addStateToLastButton("gamepad 4");
 	menu->createNewButton("next",&IMenuManager::setIASelectionMenu,
 			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("cancel", &IMenuManager::setMainMenu,
@@ -799,14 +795,24 @@ namespace	bbm
 	    if (i == 0)
 	      {
 		this->_config.sound = s->isChecked();
+		if (s->isChecked())
+		  SoundManager::getInstance()->enableSounds();
+		else
+		  SoundManager::getInstance()->disableSounds();
 	      }
 	    else
 	      {
 		this->_config.music = s->isChecked();
 		if (this->_config.music)
-		  SoundManager::getInstance()->playMusic("menu");
+		  {
+		    SoundManager::getInstance()->playMusic("menu");
+		    SoundManager::getInstance()->enableMusics();
+		  }
 		else
-		  SoundManager::getInstance()->stop("menu");
+		  {
+		    SoundManager::getInstance()->stop("menu");
+		    SoundManager::getInstance()->disableMusics();
+		  }
 	      }
 	    i++;
 	  }
@@ -986,7 +992,7 @@ namespace	bbm
 
     this->_config.newGame = false;
     SoundManager::getInstance()->stop("menu");
-    if (this->_config.music)
+    if (SoundManager::getInstance()->musicPlaying())
       SoundManager::getInstance()->playMusic("wait");
     for (size_t i = 0; i < pos; i++)
       tmp2 += tmp[i];
@@ -1003,7 +1009,7 @@ namespace	bbm
     StateButton*	nbIAButton = dynamic_cast<StateButton*>(*it);
 
     SoundManager::getInstance()->stop("menu");
-    if (this->_config.music)
+    if (SoundManager::getInstance()->musicPlaying())
       SoundManager::getInstance()->playMusic("wait");
     if (nbIAButton)
       {
