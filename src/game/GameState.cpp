@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:46 2014 otoshigami
-// Last update Sun Jun 15 18:26:33 2014 bichon_b
+// Last update Sun Jun 15 20:54:19 2014 bichon_b
 //
 
 #include <iterator>
@@ -228,7 +228,7 @@ namespace bbm
     	    addEntity(entity);
     	  }
     	else
-    	  std::cout << "Serializer GameState Warning: unknown entity type"
+    	  std::cerr << "Serializer GameState Warning: unknown entity type"
 		    << std::endl;
       }
     playersListNode = current.get("players");

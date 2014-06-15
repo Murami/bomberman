@@ -5,7 +5,7 @@
 // Login   <desabr_q@epitech.net>
 //
 // Started on  Sun Jun 15 08:30:23 2014 quentin desabre
-// Last update Sun Jun 15 08:30:23 2014 Desabre Quentin
+// Last update Sun Jun 15 19:56:33 2014 Manu
 //
 
 #include "graphic/RenderState.hh"
@@ -14,6 +14,7 @@
 #include "game/GameState.hh"
 #include "entity/BoxBomb.hh"
 #include "entity/GameBox.hh"
+#include "sound/SoundManager.hh"
 
 const float delta = 1 - 0.8;
 const float translate = 0;
@@ -90,6 +91,8 @@ namespace bbm
 
     if (_lifespan <= 0)
       {
+	if (SoundManager::getInstance()->soundPlaying())
+	  SoundManager::getInstance()->playSound("box");
 	_used = true;
 	_gameState.getPlayer(_idPlayer).addBombsBonus();
 	_gameState.addEntity(new GameBox(glm::vec2(_pos.x, _pos.y), _idPlayer, _gameState));

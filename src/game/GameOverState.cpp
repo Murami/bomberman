@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:40 2014 otoshigami
-// Last update Sun Jun 15 13:27:39 2014 otoshigami
+// Last update Sun Jun 15 20:27:28 2014 Manu
 //
 
 #include <sstream>
@@ -84,6 +84,13 @@ namespace bbm
       }
     this->_updated = false;
     SoundManager::getInstance()->stop("theme");
+    if (SoundManager::getInstance()->musicPlaying())
+      {
+	if (type == "ai" || type == "draw")
+	  SoundManager::getInstance()->playMusic("defeat");
+	else
+	  SoundManager::getInstance()->playMusic("victory");
+      }
   }
 
   GameOverState::~GameOverState()
@@ -143,6 +150,8 @@ namespace bbm
     if (input.getKeyDown(SDLK_SPACE))
       {
 	saveHighScore();
+	SoundManager::getInstance()->disableMusics();
+	SoundManager::getInstance()->enableMusics();
 	if (SoundManager::getInstance()->musicPlaying())
 	  SoundManager::getInstance()->playMusic("menu");
 	_manager.pop();

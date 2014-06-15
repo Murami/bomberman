@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:31:21 2014 otoshigami
-// Last update Sun Jun 15 13:11:36 2014 otoshigami
+// Last update Sun Jun 15 13:36:43 2014 otoshigami
 //
 
 #include <iostream>
@@ -30,7 +30,7 @@ namespace bbm
       }
     else
       {
-	std::cout << SDL_GetError() << std::endl;
+	std::cerr << SDL_GetError() << std::endl;
 	_size.x = 1600;
 	_size.y = 900;
 

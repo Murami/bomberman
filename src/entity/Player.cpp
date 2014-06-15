@@ -5,7 +5,7 @@
 // Login   <desabr_q@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:32 2014 quentin desabre
-// Last update Sun Jun 15 08:28:33 2014 Desabre Quentin
+// Last update Sun Jun 15 20:02:35 2014 Manu
 //
 
 #include <iostream>
@@ -19,6 +19,7 @@
 #include "game/PlayerConfig.hh"
 
 #include "entity/BombFactory.hh"
+#include "sound/SoundManager.hh"
 
 const float	maxSpeed = 0.005;
 const float	modelScaleFactor = 0.0020;
@@ -103,6 +104,8 @@ namespace bbm
 	if (_nbBombs != 0)
 	  {
 	    _nbBombs--;
+	    if (SoundManager::getInstance()->soundPlaying())
+	      SoundManager::getInstance()->playSound("drop");
 	    _gameState.addEntity(BombFactory::getInstance()->create(FIRE, glm::vec2(_position.x, _position.y),
 								    _gameState, getID()));
 	  }
@@ -112,6 +115,8 @@ namespace bbm
       {
 	if (_nbBombsBonus != 0 && _typeBomb != FIRE)
 	  {
+	    if (SoundManager::getInstance()->soundPlaying())
+	      SoundManager::getInstance()->playSound("drop");
 	    if (_typeBomb == RANDOM)
 	      _gameState.addEntity(BombFactory::getInstance()->createRandom(glm::vec2(_position.x, _position.y),
 									    _gameState, getID()));

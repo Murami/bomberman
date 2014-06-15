@@ -5,7 +5,7 @@
 // Login   <desabr_q@epitech.net>
 //
 // Started on  Sun Jun 15 08:27:25 2014 quentin desabre
-// Last update Sun Jun 15 08:31:16 2014 Desabre Quentin
+// Last update Sun Jun 15 20:06:54 2014 Manu
 //
 
 #include <string>
@@ -14,6 +14,7 @@
 #include "graphic/ARenderer.hh"
 #include "graphic/RenderState.hh"
 #include "serializer/ISerializedNode.hh"
+#include "sound/SoundManager.hh"
 
 const float scaleFactor = 0.8;
 const float delta = 1 - 0.8;
@@ -96,6 +97,8 @@ namespace bbm
       {
 	if (_used == false)
 	  {
+	    if (SoundManager::getInstance()->soundPlaying())
+	      SoundManager::getInstance()->playSound("pick");
 	    dynamic_cast<APlayer*>(entity)->setTypeBomb(WATER);
 	    dynamic_cast<APlayer*>(entity)->addScore(100);
 	  }
