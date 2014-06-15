@@ -1,3 +1,13 @@
+//
+// AI.cpp for bomberman in /home/bichon_b/rendu/cpp_bomberman
+//
+// Made by bichon_b
+// Login   <bichon_b@epitech.net>
+//
+// Started on  Sun Jun 15 08:33:55 2014 bichon_b
+// Last update Sun Jun 15 09:17:50 2014 bichon_b
+//
+
 #include "game/AI.hh"
 #include "game/GameState.hh"
 #include "game/PlayerConfig.hh"
@@ -199,10 +209,7 @@ namespace bbm
     this->setMove(glm::vec2(0, 0.3));
     lua_pushstring(L, "up");
     if (this->collideGameBoxes() || this->testCollideMap())
-      {
-	std::cout << " *up* ";
       lua_pushboolean(L, true);
-      }
     else
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
@@ -210,10 +217,7 @@ namespace bbm
     this->setMove(glm::vec2(-0.3, 0));
     lua_pushstring(L, "left");
     if (this->collideGameBoxes() || this->testCollideMap())
-      {
-	std::cout << " *left* ";
       lua_pushboolean(L, true);
-      }
     else
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
@@ -221,10 +225,7 @@ namespace bbm
     this->setMove(glm::vec2(0.3, 0));
     lua_pushstring(L, "right");
     if (this->collideGameBoxes() || this->testCollideMap())
-      {
-	std::cout << " *right* ";
       lua_pushboolean(L, true);
-      }
     else
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
@@ -232,10 +233,7 @@ namespace bbm
     this->setMove(glm::vec2(0, -0.3));
     lua_pushstring(L, "down");
     if (this->collideGameBoxes() || this->testCollideMap())
-      {
-	std::cout << " *down* ";
       lua_pushboolean(L, true);
-      }
     else
       lua_pushboolean(L, false);
     lua_rawset(L, -3);
