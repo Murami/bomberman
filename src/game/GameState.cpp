@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:46 2014 otoshigami
-// Last update Sun Jun 15 09:25:04 2014 bichon_b
+// Last update Sun Jun 15 10:05:59 2014 otoshigami
 //
 
 #include <iterator>
@@ -537,7 +537,10 @@ namespace bbm
 	      _gameboxes[x + tx + (y + ty) * _mapsize.x] != NULL)
 	    {
 	      if (_gameboxes[x + tx + (y + ty) * _mapsize.x]->expired() == true)
-		_gameboxes[x + tx + (y + ty) *_mapsize.x] = NULL;
+		{
+		  delete (_gameboxes[x + tx + (y + ty) *_mapsize.x]);
+		  _gameboxes[x + tx + (y + ty) *_mapsize.x] = NULL;
+		}
 	      else
 		context.draw(*_gameboxes[x + tx + (y + ty) * _mapsize.x], state);
 	    }

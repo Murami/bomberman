@@ -5,7 +5,7 @@
 // Login   <bichon_b@epitech.net>
 //
 // Started on  Sun Jun 15 08:33:55 2014 bichon_b
-// Last update Sun Jun 15 09:44:01 2014 bichon_b
+// Last update Sun Jun 15 10:06:35 2014 otoshigami
 //
 
 #include "game/AI.hh"
@@ -240,7 +240,7 @@ namespace bbm
     lua_rawset(L, -3);
 
     this->setMove(glm::vec2(0, 0));
-fg    return (1);
+    return (1);
   }
 
   int	AI::getDanger(lua_State* L)
