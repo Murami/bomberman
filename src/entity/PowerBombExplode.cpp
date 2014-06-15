@@ -109,18 +109,11 @@ namespace bbm
 
   void			PowerBombExplode::interact(AEntity * entity)
   {
-    if (entity->getType() == "Player")
+    if (entity->getType() == "Player" || entity->getType() == "AI")
       {
 	if (dynamic_cast<APlayer*>(entity)->isDead())
 	  {
 	    _gameState.getPlayer(_idPlayer).addScore(1000);
-	    dynamic_cast<APlayer*>(entity)->die();
-	  }
-      }
-    if (entity->getType() == "AI")
-      {
-	if (dynamic_cast<APlayer*>(entity)->isDead())
-	  {
 	    dynamic_cast<APlayer*>(entity)->die();
 	  }
       }
