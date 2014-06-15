@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Sun Jun 15 11:48:18 2014 Manu
-// Last update Sun Jun 15 20:33:08 2014 Manu
+// Last update Sun Jun 15 20:39:19 2014 Manu
 //
 
 #include		<stdexcept>
@@ -37,6 +37,7 @@ namespace	bbm
     SoundManager::getInstance()->addMusic("defeat", "assets/sound/defeat.mp3");
     SoundManager::getInstance()->addMusic("victory", "assets/sound/victory.mp3");
     SoundManager::getInstance()->addSound("pick", "assets/sound/pick_bonus.aiff");
+    SoundManager::getInstance()->addSound("drop", "assets/sound/drop_bomb.aif");
     SoundManager::getInstance()->addSound("box", "assets/sound/bomb_box.mp3");
     SoundManager::getInstance()->addSound("multi", "assets/sound/multi.mp3");
     SoundManager::getInstance()->addSound("dark", "assets/sound/dark.mp3");
