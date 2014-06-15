@@ -1,3 +1,13 @@
+//
+// RenderState.cpp for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:31:16 2014 otoshigami
+// Last update Sun Jun 15 08:31:17 2014 otoshigami
+//
+
 #include "graphic/RenderState.hh"
 
 namespace bbm

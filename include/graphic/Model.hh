@@ -1,3 +1,13 @@
+//
+// Model.hh for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:33:51 2014 otoshigami
+// Last update Sun Jun 15 08:33:52 2014 otoshigami
+//
+
 #ifndef MODEL_HH
 #define MODEL_HH
 

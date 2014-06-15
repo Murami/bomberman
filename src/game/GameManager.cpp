@@ -1,3 +1,13 @@
+//
+// GameManager.cpp for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:28:34 2014 otoshigami
+// Last update Sun Jun 15 08:28:35 2014 otoshigami
+//
+
 #include <cstdlib>
 #include "game/GameManager.hh"
 #include "game/IGameState.hh"

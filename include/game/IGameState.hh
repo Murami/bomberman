@@ -1,3 +1,13 @@
+//
+// IGameState.hh for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:36:31 2014 otoshigami
+// Last update Sun Jun 15 08:36:32 2014 otoshigami
+//
+
 #ifndef IGAMESTATE_HH
 # define IGAMESTATE_HH
 

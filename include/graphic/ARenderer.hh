@@ -1,3 +1,13 @@
+//
+// ARenderer.hh for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:33:37 2014 otoshigami
+// Last update Sun Jun 15 08:33:38 2014 otoshigami
+//
+
 #ifndef ARENDERER_HH
 #define ARENDERER_HH
 

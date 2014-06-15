@@ -1,3 +1,13 @@
+//
+// APlayer.cpp for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:27:52 2014 otoshigami
+// Last update Sun Jun 15 08:27:53 2014 otoshigami
+//
+
 #include "game/APlayer.hh"
 #include "entity/BombFactory.hh"
 #include "entity/Player.hh"

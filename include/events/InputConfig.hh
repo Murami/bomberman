@@ -1,3 +1,13 @@
+//
+// InputConfig.hh for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:38:33 2014 otoshigami
+// Last update Sun Jun 15 08:38:34 2014 otoshigami
+//
+
 #ifndef		_INPUT_CONFIG_HH_
 # define	_INPUT_CONFIG_HH_
 

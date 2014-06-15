@@ -5,7 +5,7 @@
 // Login   <bichon_b@epitech.net>
 //
 // Started on  Sun Jun 15 08:33:55 2014 bichon_b
-// Last update Sun Jun 15 08:36:41 2014 bichon_b
+// Last update Sun Jun 15 08:46:13 2014 bichon_b
 //
 
 #include "game/AI.hh"

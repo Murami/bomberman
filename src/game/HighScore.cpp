@@ -1,3 +1,13 @@
+//
+// HighScore.cpp for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:28:55 2014 otoshigami
+// Last update Sun Jun 15 08:28:56 2014 otoshigami
+//
+
 #include "game/HighScore.hh"
 #include "serializer/ISerializedNode.hh"
 #include "serializer/JSONSerializer.hh"

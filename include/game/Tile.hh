@@ -1,3 +1,13 @@
+//
+// Tile.hh for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:37:07 2014 otoshigami
+// Last update Sun Jun 15 08:37:08 2014 otoshigami
+//
+
 #ifndef TILE_HH
 #define TILE_HH
 
