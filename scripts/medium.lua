@@ -50,16 +50,17 @@ local move = {
 -- end
 
 -- function core ()
--- elseif direction == "idle" then
---       if not boxes["up"] then
--- 	 move["up"]()
---       elseif not boxes["down"] then
--- 	 move["down"]()
---       elseif not boxes["left"] then
--- 	 move["left"]()
---       elseif not boxes["right"] then
--- 	 move["right"]()
---       end
+if direction == "idle" then
+      if not boxes["up"] then
+	 move["up"]()
+      elseif not boxes["down"] then
+	 move["down"]()
+      elseif not boxes["left"] then
+	 move["left"]()
+      elseif not boxes["right"] then
+	 move["right"]()
+      end
+end
 -- else
 
 
