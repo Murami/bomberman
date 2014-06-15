@@ -5,7 +5,7 @@
 // Login   <desabr_q@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:55 2014 quentin desabre
-// Last update Sun Jun 15 09:35:47 2014 Desabre Quentin
+// Last update Sun Jun 15 13:13:27 2014 Manu
 //
 
 #include "entity/FireBombExplode.hh"
@@ -13,7 +13,6 @@
 #include "graphic/ARenderer.hh"
 #include "graphic/RenderState.hh"
 #include "game/GameState.hh"
-#include "sound/SoundManager.hh"
 
 const float	scaleFactor = 1;
 
@@ -21,15 +20,16 @@ namespace bbm
 {
   FireBombExplode::FireBombExplode(GameState& gameState) : ABombExplode(gameState), _wall("fire", "default")
   {
-    SoundManager::getInstance()->playSound("bomb");
+    // if (SoundManager::getInstance()->soundPlaying())
+    //   SoundManager::getInstance()->playSound("bomb");
   }
 
   FireBombExplode::FireBombExplode(const glm::vec2& position, GameState& gameState, unsigned int idPlayer) :
     ABombExplode(position, gameState),
     _wall("fire", "default")
   {
-    if (SoundManager::getInstance()->soundPlaying())
-      SoundManager::getInstance()->playSound("bomb");
+    // if (SoundManager::getInstance()->soundPlaying())
+    //   SoundManager::getInstance()->playSound("bomb");
 
     _lifespan = 500;
     _idPlayer = idPlayer;

@@ -5,7 +5,7 @@
 // Login   <desabr_q@epitech.net>
 //
 // Started on  Sun Jun 15 08:27:46 2014 quentin desabre
-// Last update Sun Jun 15 08:27:48 2014 Desabre Quentin
+// Last update Sun Jun 15 13:16:22 2014 Manu
 //
 
 #include "graphic/RenderState.hh"
@@ -14,6 +14,7 @@
 #include "game/GameState.hh"
 #include "entity/WaterBombExplode.hh"
 #include "entity/WaterBomb.hh"
+#include "sound/SoundManager.hh"
 
 const float delta = 1 - 0.8;
 const float translate = 0;
@@ -104,6 +105,8 @@ namespace bbm
 	int		k;
 	int		l;
 
+	if (SoundManager::getInstance()->soundPlaying())
+	  SoundManager::getInstance()->playSound("aquaBomb");
 	_used = true;
 	_gameState.getPlayer(_idPlayer).addBombsBonus();
 	_gameState.addEntity(new WaterBombExplode(glm::vec2(_pos.x, _pos.y), _gameState));
