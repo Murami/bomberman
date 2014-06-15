@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:27:52 2014 otoshigami
-// Last update Sun Jun 15 09:09:59 2014 bichon_b
+// Last update Sun Jun 15 09:18:39 2014 bichon_b
 //
 
 #include "game/APlayer.hh"
@@ -156,9 +156,7 @@ namespace bbm
     int				posx = _position.x;
     int				posy = _position.y;
     AEntity*			tmp;
-    bool			b;
 
-    b = false;
     for (int x = -1; x != 2; x++)
       for (int y = -1; y != 2; y++)
 	{
