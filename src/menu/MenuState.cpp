@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Sun Jun 15 11:48:18 2014 Manu
-// Last update Sun Jun 15 19:50:11 2014 Manu
+// Last update Sun Jun 15 19:55:45 2014 Manu
 //
 
 #include		<stdexcept>
@@ -34,6 +34,9 @@ namespace	bbm
 
   MenuState::MenuState(GameManager& manager) : _manager(manager)
   {
+    SoundManager::getInstance()->addSound("drop", "assets/sound/drop_bomb.aif");
+    SoundManager::getInstance()->addSound("pick", "assets/sound/pick_bonus.aiff");
+    SoundManager::getInstance()->addSound("box", "assets/sound/bomb_box.mp3");
     SoundManager::getInstance()->addSound("multi", "assets/sound/multi.mp3");
     SoundManager::getInstance()->addSound("dark", "assets/sound/dark.mp3");
     SoundManager::getInstance()->addSound("power", "assets/sound/power.mp3");

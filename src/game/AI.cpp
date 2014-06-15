@@ -5,7 +5,7 @@
 // Login   <bichon_b@epitech.net>
 //
 // Started on  Sun Jun 15 08:33:55 2014 bichon_b
-// Last update Sun Jun 15 13:09:44 2014 otoshigami
+// Last update Sun Jun 15 20:03:05 2014 Manu
 //
 
 #include "game/AI.hh"
@@ -136,7 +136,7 @@ namespace bbm
       }
     catch (const std::runtime_error &e)
       {
-	std::cout << e.what() << std::endl;
+	std::cerr << e.what() << std::endl;
       }
     return (false);
   }
@@ -175,6 +175,8 @@ namespace bbm
     if (_nbBombs > 0)
       {
 	_nbBombs--;
+	if (SoundManager::getInstance()->soundPlaying())
+	  SoundManager::getInstance()->playSound("drop");
 	_gameState.addEntity(BombFactory::getInstance()->create(FIRE, glm::vec2(_position.x, _position.y), _gameState, getID()));
       }
     return (1);
@@ -205,7 +207,6 @@ namespace bbm
 
   int	AI::prayer(lua_State*)
   {
-    std::cout << "I'M GONNA DIE !!!" << std::endl;
     return (1);
   }
 

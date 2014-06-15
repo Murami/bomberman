@@ -5,7 +5,7 @@
 // Login   <bichon_b@epitech.net>
 //
 // Started on  Sun Jun 15 08:26:08 2014 bichon_b
-// Last update Sun Jun 15 08:26:08 2014 bichon_b
+// Last update Sun Jun 15 13:36:56 2014 otoshigami
 //
 
 template <typename T>
@@ -65,7 +65,6 @@ int	LuaBiche::RegClass<T>::tostring_T(lua_State* L)
   T	**tmp = static_cast<T**>(lua_touserdata(L, 1));
   T	*obj = *tmp;
 
-  std::cout << "affichage" << std::endl;
   lua_pushfstring(L, "%s", obj->getClassName().c_str());
   return (1);
 }
