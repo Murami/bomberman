@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:03 2014 Manu
-// Last update Sun Jun 15 12:09:56 2014 Manu
+// Last update Sun Jun 15 23:29:09 2014 Manu
 //
 
 #include		"sound/SoundManager.hh"
@@ -49,6 +49,33 @@ namespace	bbm
     return (true);
   }
 
+  std::vector<int>&	Menu::_sortScores(const std::vector<int>& s)
+  {
+    bool		cont = true;
+    int			tmp;
+    static std::vector<int>	scores;
+
+    scores = s;
+    if (scores.size() == 0)
+      return (scores);
+    while (cont)
+      {
+	cont = false;
+	for (size_t i = 1; i < scores.size(); i++)
+	  {
+	    if (scores[i - 1] > scores[i])
+	      {
+		cont = true;
+		tmp = scores[i];
+		scores[i] = scores[i - 1];
+		scores[i - 1] = tmp;
+		i = 1;
+	      }
+	  }
+      }
+    return (scores);
+  }
+
   void		Menu::refresh()
   {
     static bool	ref = false;
@@ -76,8 +103,13 @@ namespace	bbm
 	this->_strings.clear();
 	HighScore hs;
 	hs.load("HighScores");
-	for (std::vector<int>::const_iterator it = hs.getScores().begin();
-	     it != hs.getScores().end(); it++)
+
+
+	std::vector<int> scoreVector = this->_sortScores(hs.getScores());
+
+
+	for (std::vector<int>::const_iterator it = scoreVector.begin();
+	     it != scoreVector.end(); it++)
 	  {
 	    std::stringstream ss;
 	    ss << *it;

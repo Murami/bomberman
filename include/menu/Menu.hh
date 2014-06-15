@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:00 2014 Manu
-// Last update Sun Jun 15 10:38:38 2014 Manu
+// Last update Sun Jun 15 23:23:56 2014 Manu
 //
 
 #ifndef		__MENU_HH__
@@ -54,6 +54,7 @@ namespace	bbm
     void	_handleKeyReturn(const Input&);
     void	_handleKeyRight(const Input&);
     void	_handleKeyLeft(const Input&);
+    std::vector<int>&	_sortScores(const std::vector<int>&);
 
   public :
     const std::string&		getTitle() const;
