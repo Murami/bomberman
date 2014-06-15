@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:27:52 2014 otoshigami
-// Last update Sun Jun 15 12:37:04 2014 otoshigami
+// Last update Sun Jun 15 15:18:23 2014 bichon_b
 //
 
 #include "game/APlayer.hh"
@@ -179,35 +179,52 @@ namespace bbm
     return (b);
   }
 
-  bool				APlayer::collideWarning()
+  bool			APlayer::collideWarning()
   {
     bool			b = false;
-    glm::ivec2			mapsize = _gameState.getMapSize();
+    glm::ivec2			mapSize = _gameState.getMapSize();
     std::vector<AEntity*>&	_map = _gameState.getWarning();
-    int				posx = _position.x;
-    int				posy = _position.y;
-    AEntity*			tmp;
+    int				pos;
+    int				i;
 
-    for (int x = -1; x != 2; x++)
-      for (int y = -1; y != 2; y++)
-	{
-	  if (posx + x >= 0 && posy + y >= 0)
-	    {
-	      tmp = _map[posx + x + (posy + y) * mapsize.x];
-	      if (tmp != NULL)
-		{
-		  if (tmp->collide(glm::vec3(_position.x +_move.x + 1 - delta, _position.y + _move.y + delta, 0)) ||
-		      tmp->collide(glm::vec3(_position.x +_move.x + delta, _position.y + _move.y + 1 - delta, 0)) ||
-		      tmp->collide(glm::vec3(_position.x +_move.x + 1 - delta, _position.y + _move.y + 1 - delta, 0)) ||
-		      tmp->collide(glm::vec3(_position.x +_move.x + delta, _position.y + _move.y + delta, 0)))
-		    {
-		      b = true;
-		      tmp->interact(this);
-		    }
-		}
-	    }
-	}
+    std::cout << _position.x + _move.x + 1 - delta << ", " << _position.y + _move.y + delta << std::endl;
+    pos = (_position.x + _move.x + 1 - delta) + (_position.y + _move.y + delta) * mapSize.x;
+    std::cout << pos % mapSize.x << ", " << pos / mapSize.x - 1 << std::endl;
+
+    std::cout << std::endl;
+    for (i = pos / mapSize.x; i > 0; i--)
+      {
+	std::cout << "je test en " << i << ", " << pos % mapSize.x << std::endl;
+	if (_map[i])
+	  b = true;
+      }
+    for (i = pos / mapSize.x; i < mapSize.y - 1; i++)
+      {
+	std::cout << "je test en " << i << ", " << pos % mapSize.x << std::endl;
+	if (_map[i])
+	  b = true;
+      }
+
+    pos = (_position.x + _move.x + delta) + (_position.y + _move.y + 1 - delta) * mapSize.x;
+
+    for (i = pos % mapSize.x; i > 0; i--)
+      {
+	std::cout << "je test en " << pos / mapSize.x << ", " << i << std::endl;
+	if (_map[i])
+	  b = true;
+      }
+    for (i = pos % mapSize.x; i < mapSize.x - 1; i++)
+      {
+std::cout << "je test en " << pos / mapSize.x << ", " << i << std::endl;
+	if (_map[i])
+	  b = true;
+      }
+
     return (b);
+    // prendre la position
+    //   parcouriir en ligne et en colonne,
+    //   si detection bombe, verifier sa range,
+    //   si >= a la distance retrun true
   }
 
   void			APlayer::manageModel(float time)
