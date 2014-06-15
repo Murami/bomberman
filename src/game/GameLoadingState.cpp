@@ -192,7 +192,7 @@ namespace bbm
 	gameStateConfig.AIConfigs.push_back(playerConfig);
       }
     gameStateConfig.load = false;
-    state = new GameState(_manager, &gameStateConfig);
+    state = new GameState(_manager, &gameStateConfig, this->_config);
     state->randomize(_config->mapSizeX, _config->mapSizeY);
     _manager.push(state);
   }
@@ -203,7 +203,7 @@ namespace bbm
     GameState::GameStateConfig	gameStateConfig;
 
     gameStateConfig.load = true;
-    state = new GameState(_manager, &gameStateConfig);
+    state = new GameState(_manager, &gameStateConfig, this->_config);
     state->load(*(_config->fileToLoad));
     _manager.push(state);
   }

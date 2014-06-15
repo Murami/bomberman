@@ -12,9 +12,9 @@
 # include "game/AI.hh"
 # include "entity/Player.hh"
 
-#include "graphic/Transform.hh"
-
-#include "serializer/ISerializable.hh"
+# include "graphic/Transform.hh"
+# include "game/GameLoadingState.hh"
+# include "serializer/ISerializable.hh"
 
 namespace bbm
 {
@@ -41,7 +41,7 @@ namespace bbm
     typedef std::list<Player*>::iterator	PlayerIt;
 
   public:
-    GameState(GameManager& manager, GameStateConfig* config);
+    GameState(GameManager& manager, GameStateConfig* config, GameLoadingState::GameConfig*);
     ~GameState();
 
     void			initialize();
@@ -78,21 +78,22 @@ namespace bbm
     void			drawEntity(Screen &, RenderState & state, PlayerIt);
 
   private:
-    Skybox			_skybox;
-    bool			_flush;
-    std::list<AEntity*>		_entities;
-    std::list<Player*>		_players;
-    std::vector<HUD*>		_huds;
-    std::list<AI*>		_AIs;
-    std::vector<AEntity*>	_gameboxes;
-    std::vector<AEntity*>	_warning;
-    std::vector<AEntity*>	_bonus;
-    glm::ivec2			_mapsize;
-    TileMap			_tilemap;
-    std::string			_tilemapName;
-    GameManager&		_manager;
-    GameStateConfig*		_config;
-    bool			_printHud;
+    Skybox				_skybox;
+    bool				_flush;
+    std::list<AEntity*>			_entities;
+    std::list<Player*>			_players;
+    std::vector<HUD*>			_huds;
+    std::list<AI*>			_AIs;
+    std::vector<AEntity*>		_gameboxes;
+    std::vector<AEntity*>		_warning;
+    std::vector<AEntity*>		_bonus;
+    glm::ivec2				_mapsize;
+    TileMap				_tilemap;
+    std::string				_tilemapName;
+    GameManager&			_manager;
+    GameLoadingState::GameConfig*	_gameConfig;
+    GameStateConfig*			_config;
+    bool				_printHud;
   };
 };
 

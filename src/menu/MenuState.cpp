@@ -246,6 +246,7 @@ namespace	bbm
       {
 	this->_SDLInputsList.push_back("BACKSPACE");
 	this->_SDLInputsList.push_back("PAUSE");
+	this->_SDLInputsList.push_back("SPACE");
 	this->_SDLInputsList.push_back("QUOTEDBL");
 	this->_SDLInputsList.push_back("HASH");
 	this->_SDLInputsList.push_back("DOLLAR");
@@ -323,7 +324,6 @@ namespace	bbm
 	this->_SDLInputsList.push_back("KP_MULTIPLY");
 	this->_SDLInputsList.push_back("KP_MINUS");
 	this->_SDLInputsList.push_back("KP_PLUS");
-	this->_SDLInputsList.push_back("KP_ENTER");
 	this->_SDLInputsList.push_back("UP");
 	this->_SDLInputsList.push_back("DOWN");
 	this->_SDLInputsList.push_back("RIGHT");
@@ -399,27 +399,27 @@ namespace	bbm
       }
     try
       {
-	menu->createNewStateButton("UP", NULL, 7,
+	menu->createNewStateButton("up", NULL, 7,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("up")));
 	this->_setBindingControlPlayer1(menu, "");
-	menu->createNewStateButton("DOWN", NULL, 5,
+	menu->createNewStateButton("down", NULL, 5,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("down")));
 	this->_setBindingControlPlayer1(menu, "");
-	menu->createNewStateButton("LEFT", NULL, 5,
+	menu->createNewStateButton("left", NULL, 5,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("left")));
 	this->_setBindingControlPlayer1(menu, "");
-	menu->createNewStateButton("RIGHT", NULL, 4,
+	menu->createNewStateButton("right", NULL, 4,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("right")));
 	this->_setBindingControlPlayer1(menu, "");
-	menu->createNewStateButton("BOMB", NULL, 5,
+	menu->createNewStateButton("bomb", NULL, 5,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("bomb")));
 	this->_setBindingControlPlayer1(menu, "");
-	menu->createNewStateButton("BOMB2", NULL, 4,
+	menu->createNewStateButton("bomb2", NULL, 4,
 				   glm::vec4(1, 1, 1, 1),
 				   this->_getKeyFromSDLK(this->_inputConfigPlayer1->getKeyName("bomb2")));
 	this->_setBindingControlPlayer1(menu, "");
@@ -633,8 +633,8 @@ namespace	bbm
       return (false);
     try
       {
-	menu->createNewToggleButton("sound", &IMenuManager::setMainMenu);
-	menu->createNewToggleButton("music", &IMenuManager::setMainMenu);
+	menu->createNewToggleButton("sound", NULL);
+	menu->createNewToggleButton("music", NULL);
 	menu->createNewButton("ok", &IMenuManager::serializeAudioSettings,
 			      glm::vec4(0, 1, 0, 1), true);
 	menu->createNewButton("cancel", &IMenuManager::setOptionsMenu,
@@ -797,9 +797,17 @@ namespace	bbm
 	if (s)
 	  {
 	    if (i == 0)
-	      this->_config.sound = s->isChecked();
+	      {
+		this->_config.sound = s->isChecked();
+	      }
 	    else
-	      this->_config.music = s->isChecked();
+	      {
+		this->_config.music = s->isChecked();
+		if (this->_config.music)
+		  SoundManager::getInstance()->play("menu");
+		else
+		  SoundManager::getInstance()->stop("menu");
+	      }
 	    i++;
 	  }
       	it++;
@@ -976,8 +984,10 @@ namespace	bbm
     std::string tmp2;
     size_t pos = tmp.find(".save");
 
+    this->_config.newGame = false;
     SoundManager::getInstance()->stop("menu");
-    SoundManager::getInstance()->play("wait");
+    if (this->_config.music)
+      SoundManager::getInstance()->play("wait");
     for (size_t i = 0; i < pos; i++)
       tmp2 += tmp[i];
     this->_config.fileToLoad = new std::string(tmp2);
@@ -993,7 +1003,8 @@ namespace	bbm
     StateButton*	nbIAButton = dynamic_cast<StateButton*>(*it);
 
     SoundManager::getInstance()->stop("menu");
-    SoundManager::getInstance()->play("wait");
+    if (this->_config.music)
+      SoundManager::getInstance()->play("wait");
     if (nbIAButton)
       {
 	std::stringstream ss;
@@ -1015,10 +1026,6 @@ namespace	bbm
     this->_config.newGame = true;
     GameLoadingState*	state = new GameLoadingState(this->_manager,
     						     &this->_config);
-    std::cout << this->_config.player1 << std::endl
-	      << this->_config.player2 << std::endl
-	      << this->_config.player3 << std::endl
-	      << this->_config.player4 << std::endl << std::endl;
     this->_manager.push(state);
   }
 

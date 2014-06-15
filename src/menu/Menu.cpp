@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:03 2014 Manu
-// Last update Sun Jun 15 01:28:01 2014 Manu
+// Last update Sun Jun 15 04:13:22 2014 Manu
 //
 
 #include		"FileExplorer.hh"
@@ -184,6 +184,7 @@ namespace	bbm
   {
     AButton* button = new ToggleButton(label, color, state);
     button->initialize();
+    dynamic_cast<ToggleButton*>(button)->setChecked(true);
     this->_buttons.push_back(button);
     this->_callbacks.push_back(fPtr);
   }
