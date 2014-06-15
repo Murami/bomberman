@@ -42,23 +42,23 @@ local move = {
    end
 }
 
-if boxes["up"] and boxes["down"] and boxes["left"] and boxes["right"] then
-   player:setIdle()
+-- if boxes["up"] and boxes["down"] and boxes["left"] and boxes["right"] then
+--    player:setIdle()
    -- return
 -- end
 
 -- function core ()
-elseif direction == "idle" then
-      if not boxes["up"] then
-	 move["up"]()
-      elseif not boxes["down"] then
-	 move["down"]()
-      elseif not boxes["left"] then
-	 move["left"]()
-      elseif not boxes["right"] then
-	 move["right"]()
-      end
-else
+-- elseif direction == "idle" then
+--       if not boxes["up"] then
+-- 	 move["up"]()
+--       elseif not boxes["down"] then
+-- 	 move["down"]()
+--       elseif not boxes["left"] then
+-- 	 move["left"]()
+--       elseif not boxes["right"] then
+-- 	 move["right"]()
+--       end
+-- else
 
 
       -- if not boxes[otherDirection1] and not boxes[otherDirection2] then
@@ -98,13 +98,13 @@ else
       -- 	    move[otherDirection1]()
       -- 	 end
       -- else
-      	 -- if boxes[direction] then
-      	 --    move[reverseDirection]()
-      	 -- else
-      	 --    move[direction]()
-      	 -- end
+      	 if boxes[direction] then
+      	    move[reverseDirection]()
+      	 else
+      	    move[direction]()
+      	 end
       -- end
-end
+-- end
 
 -- end
 
