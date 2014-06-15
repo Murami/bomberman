@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:27:52 2014 otoshigami
-// Last update Sun Jun 15 08:27:53 2014 otoshigami
+// Last update Sun Jun 15 09:09:59 2014 bichon_b
 //
 
 #include "game/APlayer.hh"
@@ -150,6 +150,7 @@ namespace bbm
 
   bool				APlayer::collideGameBoxes()
   {
+    bool			b = false;
     glm::ivec2			mapsize = _gameState.getMapSize();
     std::vector<AEntity*>	_map = _gameState.getGameBoxes();
     int				posx = _position.x;
@@ -169,12 +170,13 @@ namespace bbm
 		      tmp->collide(glm::vec3(_position.x +_move.x + 1 - delta, _position.y + _move.y + 1 - delta, 0)) ||
 		      tmp->collide(glm::vec3(_position.x +_move.x + delta, _position.y + _move.y + delta, 0)))
 		    {
+		      b = true;
 		      tmp->interact(this);
 		    }
 		}
 	    }
 	}
-    return (false);
+    return (b);
   }
 
   void			APlayer::manageModel(float time)
