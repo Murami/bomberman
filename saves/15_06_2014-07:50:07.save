@@ -1,5 +1,87 @@
 {
-   "AIs" : null,
+   "AIs" : {
+      "0" : {
+         "IALevel" : "scripts/medium.lua",
+         "alive" : true,
+         "color" : {
+            "a" : 1.0,
+            "b" : 1.0,
+            "g" : 1.0,
+            "r" : 1.0
+         },
+         "dark" : false,
+         "id" : 82,
+         "idPlayer" : 82,
+         "lastId" : 85,
+         "maxBomb" : 1,
+         "nbBombs" : 1,
+         "nbBombsBonus" : 1,
+         "position" : {
+            "x" : 2.819999933242798,
+            "y" : 12.93500041961670
+         },
+         "power" : 3,
+         "score" : 0,
+         "slow" : false,
+         "speed" : 0.004999999888241291,
+         "state" : 1,
+         "typeBomb" : 0
+      },
+      "1" : {
+         "IALevel" : "scripts/medium.lua",
+         "alive" : true,
+         "color" : {
+            "a" : 1.0,
+            "b" : 1.0,
+            "g" : 1.0,
+            "r" : 1.0
+         },
+         "dark" : false,
+         "id" : 83,
+         "idPlayer" : 83,
+         "lastId" : 85,
+         "maxBomb" : 1,
+         "nbBombs" : 1,
+         "nbBombsBonus" : 1,
+         "position" : {
+            "x" : 17.0,
+            "y" : 18.27000045776367
+         },
+         "power" : 3,
+         "score" : 0,
+         "slow" : false,
+         "speed" : 0.004999999888241291,
+         "state" : 0,
+         "typeBomb" : 0
+      },
+      "2" : {
+         "IALevel" : "scripts/medium.lua",
+         "alive" : true,
+         "color" : {
+            "a" : 1.0,
+            "b" : 1.0,
+            "g" : 1.0,
+            "r" : 1.0
+         },
+         "dark" : false,
+         "id" : 84,
+         "idPlayer" : 84,
+         "lastId" : 85,
+         "maxBomb" : 1,
+         "nbBombs" : 1,
+         "nbBombsBonus" : 1,
+         "position" : {
+            "x" : 2.829999923706055,
+            "y" : 7.780000686645508
+         },
+         "power" : 3,
+         "score" : 0,
+         "slow" : false,
+         "speed" : 0.004999999888241291,
+         "state" : 3,
+         "typeBomb" : 0
+      }
+   },
    "entity" : {
       "0" : {
          "id" : 1,
@@ -12,7 +94,7 @@
          "type" : "GameBox"
       },
       "1" : {
-         "id" : 12,
+         "id" : 10,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -22,26 +104,66 @@
          "type" : "GameBox"
       },
       "10" : {
-         "id" : 25,
+         "id" : 70,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
-            "x" : 7.0,
-            "y" : 2.0
+            "x" : 16.0,
+            "y" : 1.0
          },
          "type" : "GameBox"
       },
       "11" : {
-         "id" : 51,
+         "id" : 72,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
-            "x" : 13.0,
-            "y" : 2.0
+            "x" : 17.0,
+            "y" : 1.0
          },
          "type" : "GameBox"
       },
       "12" : {
+         "id" : 77,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 18.0,
+            "y" : 1.0
+         },
+         "type" : "GameBox"
+      },
+      "13" : {
+         "id" : 2,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 1.0,
+            "y" : 2.0
+         },
+         "type" : "GameBox"
+      },
+      "14" : {
+         "id" : 44,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 11.0,
+            "y" : 2.0
+         },
+         "type" : "GameBox"
+      },
+      "15" : {
+         "id" : 65,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 15.0,
+            "y" : 2.0
+         },
+         "type" : "GameBox"
+      },
+      "16" : {
          "id" : 3,
          "idPlayer" : 0,
          "lastId" : 85,
@@ -51,7 +173,47 @@
          },
          "type" : "GameBox"
       },
-      "13" : {
+      "17" : {
+         "id" : 26,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 7.0,
+            "y" : 3.0
+         },
+         "type" : "GameBox"
+      },
+      "18" : {
+         "id" : 34,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 9.0,
+            "y" : 3.0
+         },
+         "type" : "GameBox"
+      },
+      "19" : {
+         "id" : 45,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 11.0,
+            "y" : 3.0
+         },
+         "type" : "GameBox"
+      },
+      "2" : {
+         "id" : 13,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 3.0,
+            "y" : 1.0
+         },
+         "type" : "GameBox"
+      },
+      "20" : {
          "id" : 66,
          "idPlayer" : 0,
          "lastId" : 85,
@@ -61,7 +223,7 @@
          },
          "type" : "GameBox"
       },
-      "14" : {
+      "21" : {
          "id" : 4,
          "idPlayer" : 0,
          "lastId" : 85,
@@ -71,8 +233,8 @@
          },
          "type" : "GameBox"
       },
-      "15" : {
-         "id" : 26,
+      "22" : {
+         "id" : 27,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -81,7 +243,27 @@
          },
          "type" : "GameBox"
       },
-      "16" : {
+      "23" : {
+         "id" : 35,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 9.0,
+            "y" : 4.0
+         },
+         "type" : "GameBox"
+      },
+      "24" : {
+         "id" : 46,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 11.0,
+            "y" : 4.0
+         },
+         "type" : "GameBox"
+      },
+      "25" : {
          "id" : 5,
          "idPlayer" : 0,
          "lastId" : 85,
@@ -91,8 +273,8 @@
          },
          "type" : "GameBox"
       },
-      "17" : {
-         "id" : 15,
+      "26" : {
+         "id" : 14,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -101,128 +283,98 @@
          },
          "type" : "GameBox"
       },
-      "18" : {
-         "id" : 27,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 7.0,
-            "y" : 5.0
-         },
-         "type" : "GameBox"
-      },
-      "19" : {
-         "id" : 52,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 13.0,
-            "y" : 5.0
-         },
-         "type" : "GameBox"
-      },
-      "2" : {
+      "27" : {
          "id" : 20,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
-            "x" : 5.0,
-            "y" : 1.0
-         },
-         "type" : "GameBox"
-      },
-      "20" : {
-         "id" : 67,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 15.0,
+            "x" : 4.0,
             "y" : 5.0
          },
          "type" : "GameBox"
       },
-      "21" : {
-         "id" : 73,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 16.0,
-            "y" : 5.0
-         },
-         "type" : "GameBox"
-      },
-      "22" : {
-         "id" : 6,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 1.0,
-            "y" : 6.0
-         },
-         "type" : "GameBox"
-      },
-      "23" : {
-         "id" : 53,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 13.0,
-            "y" : 6.0
-         },
-         "type" : "GameBox"
-      },
-      "24" : {
-         "id" : 68,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 15.0,
-            "y" : 6.0
-         },
-         "type" : "GameBox"
-      },
-      "25" : {
-         "id" : 75,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 17.0,
-            "y" : 6.0
-         },
-         "type" : "GameBox"
-      },
-      "26" : {
-         "id" : 7,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 1.0,
-            "y" : 7.0
-         },
-         "type" : "GameBox"
-      },
-      "27" : {
+      "28" : {
          "id" : 36,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
             "x" : 9.0,
-            "y" : 7.0
-         },
-         "type" : "GameBox"
-      },
-      "28" : {
-         "id" : 40,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 10.0,
-            "y" : 7.0
+            "y" : 5.0
          },
          "type" : "GameBox"
       },
       "29" : {
+         "id" : 41,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 10.0,
+            "y" : 5.0
+         },
+         "type" : "GameBox"
+      },
+      "3" : {
+         "id" : 19,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 4.0,
+            "y" : 1.0
+         },
+         "type" : "GameBox"
+      },
+      "30" : {
+         "id" : 47,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 11.0,
+            "y" : 5.0
+         },
+         "type" : "GameBox"
+      },
+      "31" : {
          "id" : 48,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 11.0,
+            "y" : 6.0
+         },
+         "type" : "GameBox"
+      },
+      "32" : {
+         "id" : 11,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 2.0,
+            "y" : 7.0
+         },
+         "type" : "GameBox"
+      },
+      "33" : {
+         "id" : 15,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 3.0,
+            "y" : 7.0
+         },
+         "type" : "GameBox"
+      },
+      "34" : {
+         "id" : 24,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 6.0,
+            "y" : 7.0
+         },
+         "type" : "GameBox"
+      },
+      "35" : {
+         "id" : 53,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -231,18 +383,8 @@
          },
          "type" : "GameBox"
       },
-      "3" : {
-         "id" : 22,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 6.0,
-            "y" : 1.0
-         },
-         "type" : "GameBox"
-      },
-      "30" : {
-         "id" : 54,
+      "36" : {
+         "id" : 57,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -251,8 +393,8 @@
          },
          "type" : "GameBox"
       },
-      "31" : {
-         "id" : 69,
+      "37" : {
+         "id" : 67,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -261,8 +403,8 @@
          },
          "type" : "GameBox"
       },
-      "32" : {
-         "id" : 76,
+      "38" : {
+         "id" : 73,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -271,8 +413,8 @@
          },
          "type" : "GameBox"
       },
-      "33" : {
-         "id" : 79,
+      "39" : {
+         "id" : 78,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -281,38 +423,38 @@
          },
          "type" : "GameBox"
       },
-      "34" : {
-         "id" : 37,
+      "4" : {
+         "id" : 32,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
-            "x" : 9.0,
+            "x" : 8.0,
+            "y" : 1.0
+         },
+         "type" : "GameBox"
+      },
+      "40" : {
+         "id" : 21,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 5.0,
             "y" : 8.0
          },
          "type" : "GameBox"
       },
-      "35" : {
-         "id" : 44,
+      "41" : {
+         "id" : 28,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
-            "x" : 11.0,
+            "x" : 7.0,
             "y" : 8.0
          },
          "type" : "GameBox"
       },
-      "36" : {
-         "id" : 55,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 13.0,
-            "y" : 8.0
-         },
-         "type" : "GameBox"
-      },
-      "37" : {
-         "id" : 70,
+      "42" : {
+         "id" : 68,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -321,47 +463,27 @@
          },
          "type" : "GameBox"
       },
-      "38" : {
-         "id" : 41,
+      "43" : {
+         "id" : 74,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
-            "x" : 10.0,
+            "x" : 17.0,
+            "y" : 8.0
+         },
+         "type" : "GameBox"
+      },
+      "44" : {
+         "id" : 25,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 6.0,
             "y" : 9.0
          },
          "type" : "GameBox"
       },
-      "39" : {
-         "id" : 49,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 12.0,
-            "y" : 9.0
-         },
-         "type" : "GameBox"
-      },
-      "4" : {
-         "id" : 24,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 7.0,
-            "y" : 1.0
-         },
-         "type" : "GameBox"
-      },
-      "40" : {
-         "id" : 56,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 13.0,
-            "y" : 9.0
-         },
-         "type" : "GameBox"
-      },
-      "41" : {
+      "45" : {
          "id" : 62,
          "idPlayer" : 0,
          "lastId" : 85,
@@ -371,8 +493,8 @@
          },
          "type" : "GameBox"
       },
-      "42" : {
-         "id" : 71,
+      "46" : {
+         "id" : 69,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -381,18 +503,8 @@
          },
          "type" : "GameBox"
       },
-      "43" : {
-         "id" : 77,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 17.0,
-            "y" : 9.0
-         },
-         "type" : "GameBox"
-      },
-      "44" : {
-         "id" : 80,
+      "47" : {
+         "id" : 79,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -401,68 +513,68 @@
          },
          "type" : "GameBox"
       },
-      "45" : {
-         "id" : 28,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 7.0,
-            "y" : 10.0
-         },
-         "type" : "GameBox"
-      },
-      "46" : {
-         "id" : 57,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 13.0,
-            "y" : 10.0
-         },
-         "type" : "GameBox"
-      },
-      "47" : {
+      "48" : {
          "id" : 29,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
             "x" : 7.0,
-            "y" : 11.0
-         },
-         "type" : "GameBox"
-      },
-      "48" : {
-         "id" : 63,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 14.0,
-            "y" : 11.0
+            "y" : 10.0
          },
          "type" : "GameBox"
       },
       "49" : {
-         "id" : 81,
+         "id" : 30,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
-            "x" : 18.0,
+            "x" : 7.0,
             "y" : 11.0
          },
          "type" : "GameBox"
       },
       "5" : {
-         "id" : 33,
+         "id" : 40,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
-            "x" : 8.0,
+            "x" : 10.0,
             "y" : 1.0
          },
          "type" : "GameBox"
       },
       "50" : {
-         "id" : 8,
+         "id" : 49,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 11.0,
+            "y" : 11.0
+         },
+         "type" : "GameBox"
+      },
+      "51" : {
+         "id" : 54,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 12.0,
+            "y" : 11.0
+         },
+         "type" : "GameBox"
+      },
+      "52" : {
+         "id" : 75,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 17.0,
+            "y" : 11.0
+         },
+         "type" : "GameBox"
+      },
+      "53" : {
+         "id" : 6,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -471,48 +583,8 @@
          },
          "type" : "GameBox"
       },
-      "51" : {
-         "id" : 16,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 3.0,
-            "y" : 12.0
-         },
-         "type" : "GameBox"
-      },
-      "52" : {
-         "id" : 58,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 13.0,
-            "y" : 12.0
-         },
-         "type" : "GameBox"
-      },
-      "53" : {
-         "id" : 72,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 15.0,
-            "y" : 12.0
-         },
-         "type" : "GameBox"
-      },
       "54" : {
-         "id" : 19,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 4.0,
-            "y" : 13.0
-         },
-         "type" : "GameBox"
-      },
-      "55" : {
-         "id" : 21,
+         "id" : 22,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -521,18 +593,18 @@
          },
          "type" : "GameBox"
       },
-      "56" : {
-         "id" : 42,
+      "55" : {
+         "id" : 37,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
-            "x" : 10.0,
+            "x" : 9.0,
             "y" : 13.0
          },
          "type" : "GameBox"
       },
-      "57" : {
-         "id" : 45,
+      "56" : {
+         "id" : 50,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -541,38 +613,28 @@
          },
          "type" : "GameBox"
       },
-      "58" : {
-         "id" : 64,
+      "57" : {
+         "id" : 7,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
-            "x" : 14.0,
-            "y" : 13.0
-         },
-         "type" : "GameBox"
-      },
-      "59" : {
-         "id" : 38,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 9.0,
+            "x" : 1.0,
             "y" : 14.0
          },
          "type" : "GameBox"
       },
-      "6" : {
-         "id" : 35,
+      "58" : {
+         "id" : 51,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
-            "x" : 9.0,
-            "y" : 1.0
+            "x" : 11.0,
+            "y" : 14.0
          },
          "type" : "GameBox"
       },
-      "60" : {
-         "id" : 59,
+      "59" : {
+         "id" : 58,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -581,18 +643,18 @@
          },
          "type" : "GameBox"
       },
-      "61" : {
-         "id" : 9,
+      "6" : {
+         "id" : 52,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
-            "x" : 1.0,
-            "y" : 15.0
+            "x" : 12.0,
+            "y" : 1.0
          },
          "type" : "GameBox"
       },
-      "62" : {
-         "id" : 13,
+      "60" : {
+         "id" : 12,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -601,18 +663,8 @@
          },
          "type" : "GameBox"
       },
-      "63" : {
-         "id" : 23,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 6.0,
-            "y" : 15.0
-         },
-         "type" : "GameBox"
-      },
-      "64" : {
-         "id" : 30,
+      "61" : {
+         "id" : 31,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -621,8 +673,8 @@
          },
          "type" : "GameBox"
       },
-      "65" : {
-         "id" : 34,
+      "62" : {
+         "id" : 33,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -631,8 +683,8 @@
          },
          "type" : "GameBox"
       },
-      "66" : {
-         "id" : 39,
+      "63" : {
+         "id" : 38,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -641,8 +693,18 @@
          },
          "type" : "GameBox"
       },
-      "67" : {
-         "id" : 60,
+      "64" : {
+         "id" : 42,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 10.0,
+            "y" : 15.0
+         },
+         "type" : "GameBox"
+      },
+      "65" : {
+         "id" : 59,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -651,48 +713,8 @@
          },
          "type" : "GameBox"
       },
-      "68" : {
-         "id" : 65,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 14.0,
-            "y" : 15.0
-         },
-         "type" : "GameBox"
-      },
-      "69" : {
-         "id" : 78,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 17.0,
-            "y" : 15.0
-         },
-         "type" : "GameBox"
-      },
-      "7" : {
-         "id" : 43,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 11.0,
-            "y" : 1.0
-         },
-         "type" : "GameBox"
-      },
-      "70" : {
-         "id" : 82,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 18.0,
-            "y" : 15.0
-         },
-         "type" : "GameBox"
-      },
-      "71" : {
-         "id" : 17,
+      "66" : {
+         "id" : 16,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -701,18 +723,8 @@
          },
          "type" : "GameBox"
       },
-      "72" : {
-         "id" : 31,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 7.0,
-            "y" : 16.0
-         },
-         "type" : "GameBox"
-      },
-      "73" : {
-         "id" : 10,
+      "67" : {
+         "id" : 8,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -721,28 +733,38 @@
          },
          "type" : "GameBox"
       },
-      "74" : {
-         "id" : 14,
+      "68" : {
+         "id" : 17,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
-            "x" : 2.0,
+            "x" : 3.0,
             "y" : 17.0
          },
          "type" : "GameBox"
       },
-      "75" : {
-         "id" : 46,
+      "69" : {
+         "id" : 43,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
-            "x" : 11.0,
+            "x" : 10.0,
             "y" : 17.0
          },
          "type" : "GameBox"
       },
-      "76" : {
-         "id" : 50,
+      "7" : {
+         "id" : 56,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 13.0,
+            "y" : 1.0
+         },
+         "type" : "GameBox"
+      },
+      "70" : {
+         "id" : 55,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -751,8 +773,8 @@
          },
          "type" : "GameBox"
       },
-      "77" : {
-         "id" : 61,
+      "71" : {
+         "id" : 60,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -761,8 +783,38 @@
          },
          "type" : "GameBox"
       },
-      "78" : {
-         "id" : 11,
+      "72" : {
+         "id" : 63,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 14.0,
+            "y" : 17.0
+         },
+         "type" : "GameBox"
+      },
+      "73" : {
+         "id" : 71,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 16.0,
+            "y" : 17.0
+         },
+         "type" : "GameBox"
+      },
+      "74" : {
+         "id" : 80,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 18.0,
+            "y" : 17.0
+         },
+         "type" : "GameBox"
+      },
+      "75" : {
+         "id" : 9,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
@@ -771,7 +823,7 @@
          },
          "type" : "GameBox"
       },
-      "79" : {
+      "76" : {
          "id" : 18,
          "idPlayer" : 0,
          "lastId" : 85,
@@ -781,43 +833,53 @@
          },
          "type" : "GameBox"
       },
-      "8" : {
-         "id" : 74,
+      "77" : {
+         "id" : 23,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 5.0,
+            "y" : 18.0
+         },
+         "type" : "GameBox"
+      },
+      "78" : {
+         "id" : 39,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 9.0,
+            "y" : 18.0
+         },
+         "type" : "GameBox"
+      },
+      "79" : {
+         "id" : 76,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
             "x" : 17.0,
+            "y" : 18.0
+         },
+         "type" : "GameBox"
+      },
+      "8" : {
+         "id" : 61,
+         "idPlayer" : 0,
+         "lastId" : 85,
+         "position" : {
+            "x" : 14.0,
             "y" : 1.0
          },
          "type" : "GameBox"
       },
-      "80" : {
-         "id" : 32,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 7.0,
-            "y" : 18.0
-         },
-         "type" : "GameBox"
-      },
-      "81" : {
-         "id" : 47,
-         "idPlayer" : 0,
-         "lastId" : 85,
-         "position" : {
-            "x" : 11.0,
-            "y" : 18.0
-         },
-         "type" : "GameBox"
-      },
       "9" : {
-         "id" : 2,
+         "id" : 64,
          "idPlayer" : 0,
          "lastId" : 85,
          "position" : {
-            "x" : 1.0,
-            "y" : 2.0
+            "x" : 15.0,
+            "y" : 1.0
          },
          "type" : "GameBox"
       }
@@ -828,6 +890,7 @@
    },
    "players" : {
       "0" : {
+         "IALevel" : "",
          "alive" : true,
          "color" : {
             "a" : 1.0,
@@ -836,41 +899,15 @@
             "r" : 0.8000000119209290
          },
          "dark" : false,
-         "id" : 83,
-         "idPlayer" : 83,
+         "id" : 81,
+         "idPlayer" : 81,
          "lastId" : 85,
          "maxBomb" : 1,
          "nbBombs" : 1,
          "nbBombsBonus" : 1,
          "position" : {
-            "x" : 11.0,
-            "y" : 3.0
-         },
-         "power" : 3,
-         "score" : 0,
-         "slow" : false,
-         "speed" : 0.004999999888241291,
-         "state" : 0,
-         "typeBomb" : 0
-      },
-      "1" : {
-         "alive" : true,
-         "color" : {
-            "a" : 1.0,
-            "b" : 0.2000000029802322,
-            "g" : 0.8000000119209290,
-            "r" : 0.2000000029802322
-         },
-         "dark" : false,
-         "id" : 84,
-         "idPlayer" : 84,
-         "lastId" : 85,
-         "maxBomb" : 1,
-         "nbBombs" : 1,
-         "nbBombsBonus" : 1,
-         "position" : {
-            "x" : 11.0,
-            "y" : 5.0
+            "x" : 3.0,
+            "y" : 11.0
          },
          "power" : 3,
          "score" : 0,
