@@ -1,3 +1,13 @@
+//
+// Camera.hh for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:33:41 2014 otoshigami
+// Last update Sun Jun 15 08:33:42 2014 otoshigami
+//
+
 #ifndef CAMERA_HH
 #define CAMERA_HH
 

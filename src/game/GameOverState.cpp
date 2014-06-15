@@ -1,3 +1,13 @@
+//
+// GameOverState.cpp for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:28:40 2014 otoshigami
+// Last update Sun Jun 15 08:28:41 2014 otoshigami
+//
+
 #include <string>
 #include "game/GameOverState.hh"
 #include "game/GameManager.hh"
@@ -60,6 +70,7 @@ namespace bbm
 
   void			GameOverState::release()
   {
+    delete (_screenOver);
   }
 
   void			GameOverState::obscuring()

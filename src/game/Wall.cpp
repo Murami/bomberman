@@ -1,3 +1,13 @@
+//
+// Wall.cpp for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:29:40 2014 otoshigami
+// Last update Sun Jun 15 08:29:42 2014 otoshigami
+//
+
 #include "game/Wall.hh"
 #include "graphic/ShaderManager.hh"
 #include "graphic/TextureManager.hh"

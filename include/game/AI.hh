@@ -1,3 +1,13 @@
+//
+// AI.hh for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:35:53 2014 otoshigami
+// Last update Sun Jun 15 08:35:54 2014 otoshigami
+//
+
 #ifndef AI_HH
 #define AI_HH
 

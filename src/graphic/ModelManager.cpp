@@ -1,3 +1,13 @@
+//
+// ModelManager.cpp for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:30:53 2014 otoshigami
+// Last update Sun Jun 15 08:30:54 2014 otoshigami
+//
+
 #include <exception>
 #include <stdexcept>
 #include "graphic/ModelManager.hh"

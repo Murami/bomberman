@@ -1,3 +1,13 @@
+//
+// GameState.cpp for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:28:46 2014 otoshigami
+// Last update Sun Jun 15 08:28:48 2014 otoshigami
+//
+
 #include <iterator>
 #include <exception>
 #include <stdexcept>
@@ -349,6 +359,24 @@ namespace bbm
 
   void			GameState::release()
   {
+    std::list<AEntity*>::iterator	itEntity;
+    std::list<Player*>::iterator	itPlayers;
+    std::list<AI*>::iterator		itAIs;
+    std::vector<HUD*>::iterator		itHUDs;
+    std::vector<AEntity*>::iterator	itGameboxes;
+
+    for (itEntity = _entities.begin(); itEntity != _entities.end(); itEntity++)
+      delete (*itEntity);
+    for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
+      delete (*itPlayers);
+    for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
+      delete (*itAIs);
+    for (itHUDs = _huds.begin(); itHUDs != _huds.end(); itHUDs++)
+      delete (*itHUDs);
+    for (itGameboxes = _gameboxes.begin(); itGameboxes != _gameboxes.end(); itGameboxes++)
+      if (*itGameboxes != NULL)
+	delete (*itGameboxes);
+    delete (this);
   }
 
   void			GameState::obscuring()
@@ -542,12 +570,13 @@ namespace bbm
 	this->_huds[i]->update(*it);
 	i++;
       }
-    updateAIPlayer(time, input);
+    if (!updateAIPlayer(time, input))
+      return;
     updateEntity(time, input);
     _skybox.update();
   }
 
-  void			GameState::updateAIPlayer(float time, const Input& input)
+  bool			GameState::updateAIPlayer(float time, const Input& input)
   {
     std::list<Player*>::iterator	itPlayers;
     std::list<AI*>::iterator		itAIs;
@@ -564,9 +593,10 @@ namespace bbm
 
     if (nbPlayer == 0 && nbAi == 0)
       {
-    	std::cout << "DRAW" << std::endl;
+	GameOverState*	state = new GameOverState(_manager, "draw", 0);
     	_manager.pop();
-    	_manager.push(new GameOverState(_manager, "draw", 0));
+    	_manager.push(state);
+	return (false);
       }
     else if (nbPlayer == 1 && nbAi == 0)
       {
@@ -574,17 +604,21 @@ namespace bbm
     	  if ((*itPlayers)->isDead())
     	    {
 	      std::stringstream ss;
+	      GameOverState*	state = new GameOverState(_manager, "player" + ss.str(), (*itPlayers)->getScore());
+
 	      ss << idPlayer;
-    	      _manager.pop();
-    	      _manager.push(new GameOverState(_manager, "player" + ss.str(), (*itPlayers)->getScore()));
-    	      std::cout << "player numero ? won the game with " << (*itPlayers)->getScore() << "points" << std::endl;
+	      _manager.pop();
+    	      _manager.push(state);
+	      return (false);
     	    }
       }
     else if (nbPlayer == 0 && nbAi != 0)
       {
-    	std::cout << "AI won the game !" << std::endl;
+	GameOverState*	state = new GameOverState(_manager, "ia", 0);
+
     	_manager.pop();
-    	_manager.push(new GameOverState(_manager, "ia", 0));
+    	_manager.push(state);
+	return (false);
       }
 
     for (itPlayers = _players.begin(); itPlayers != _players.end(); itPlayers++)
@@ -598,6 +632,8 @@ namespace bbm
     for (itAIs = _AIs.begin(); itAIs != _AIs.end(); itAIs++)
       if ((*itAIs)->isDead())
 	(*itAIs)->update(time);
+
+    return (true);
   }
 
   void			GameState::updateEntity(float time, const Input& input)

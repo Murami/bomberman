@@ -1,3 +1,13 @@
+//
+// ShaderManager.hh for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:34:24 2014 otoshigami
+// Last update Sun Jun 15 08:34:24 2014 otoshigami
+//
+
 #ifndef SHADERMANAGER_HH
 #define SHADERMANAGER_HH
 

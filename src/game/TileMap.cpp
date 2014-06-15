@@ -1,3 +1,13 @@
+//
+// TileMap.cpp for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:29:30 2014 otoshigami
+// Last update Sun Jun 15 08:29:31 2014 otoshigami
+//
+
 #include <iostream>
 #include <sstream>
 #include <algorithm>

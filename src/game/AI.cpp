@@ -1,3 +1,13 @@
+//
+// AI.cpp for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:27:45 2014 otoshigami
+// Last update Sun Jun 15 08:27:47 2014 otoshigami
+//
+
 #include "game/AI.hh"
 #include "game/GameState.hh"
 #include "game/PlayerConfig.hh"
