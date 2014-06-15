@@ -85,7 +85,7 @@ namespace bbm
     // 	tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
     // 	setTile(x - 1, i, tile);
     //   }
-    for (i = 0; i < (x * y) / (((x * y) / 10) * 2); i++)
+    for (i = 0; i < (x * y) * 0.05; i++)
       {
 	valid = false;
 	while (valid == false)

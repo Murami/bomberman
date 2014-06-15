@@ -157,6 +157,7 @@ namespace bbm
     playerConfig.id = 0;
     playerConfig.lastId = 0;
     playerConfig.score = 0;
+    std::cout << _config->player1 << " " << _config->player2 << " " << _config->player3 << " " << _config->player4 << std::endl;
     if (_config->player1)
       {
 	playerConfig.idGamepad = _config->player1;
@@ -191,7 +192,7 @@ namespace bbm
 	gameStateConfig.AIConfigs.push_back(playerConfig);
       }
     gameStateConfig.load = false;
-    state = new GameState(_manager, &gameStateConfig);
+    state = new GameState(_manager, &gameStateConfig, this->_config);
     state->randomize(_config->mapSizeX, _config->mapSizeY);
     _manager.push(state);
   }
@@ -202,7 +203,7 @@ namespace bbm
     GameState::GameStateConfig	gameStateConfig;
 
     gameStateConfig.load = true;
-    state = new GameState(_manager, &gameStateConfig);
+    state = new GameState(_manager, &gameStateConfig, this->_config);
     state->load(*(_config->fileToLoad));
     _manager.push(state);
   }

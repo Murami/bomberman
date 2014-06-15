@@ -6,7 +6,7 @@
       },
       "1" : {
          "action" : "BOMB2",
-         "key" : "SDLK_RSHIFT"
+         "key" : "SDLK_RCTRL"
       },
       "10" : {
          "action" : "right",
@@ -34,7 +34,7 @@
       },
       "6" : {
          "action" : "bomb",
-         "key" : "SDLK_SPACE"
+         "key" : "SDLK_LSHIFT"
       },
       "7" : {
          "action" : "bomb2",

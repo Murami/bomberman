@@ -36,7 +36,7 @@ namespace	bbm
     Menu*				_currentMenu;
     std::list<Menu*>			_menuList;
     Skybox*				_skybox;
-    GameLoadingState::GameConfig	_config;
+    GameLoadingState::GameConfig*	_config;
     InputConfig*			_inputConfigPlayer1;
     InputConfig*			_inputConfigPlayer2;
     InputConfig*			_inputConfigPlayer3;
@@ -104,7 +104,7 @@ namespace	bbm
     virtual void	       	saveGame(Menu*);
 
   public :
-    PauseState(GameManager&, GameState&);
+    PauseState(GameManager&, GameState&, GameLoadingState::GameConfig*);
     virtual ~PauseState();
   };
 }
