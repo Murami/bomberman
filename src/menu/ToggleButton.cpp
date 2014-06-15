@@ -5,9 +5,10 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 10:37:03 2014 Manu
-// Last update Wed Jun 11 03:41:03 2014 Manu
+// Last update Sun Jun 15 08:59:11 2014 Manu
 //
 
+#include		"sound/SoundManager.hh"
 #include		"ToggleButton.hh"
 
 namespace		bbm
@@ -15,9 +16,11 @@ namespace		bbm
 
   ToggleButton::ToggleButton(const std::string& label,
 			     const glm::vec4& color,
-			     bool checked) : AButton(label, color, true, "toggle")
+			     bool checked) :
+    AButton(label, color, true, "toggle")
   {
     this->_checked = checked;
+    std::cout << "CREATING TOGGLE " << label << " : " << std::boolalpha << checked << std::endl;
   }
 
   void		ToggleButton::nextState()
@@ -50,6 +53,7 @@ namespace		bbm
 	  }
 	this->_letters.push_back(l);
       }
+
     Letter* l = new Letter(' ', this->_color);
     if (!l->initialize())
       return (false);
@@ -113,6 +117,7 @@ namespace		bbm
 
   void		ToggleButton::draw(ARenderer& r, const RenderState& s)
   {
+    std::cout << "TOGGLE " << this->_label << " : " << std::boolalpha << this->_checked << std::endl;
     for (std::list<Letter*>::iterator it = this->_letters.begin();
 	 it != this->_letters.end(); it++)
       (*it)->draw(r, s);

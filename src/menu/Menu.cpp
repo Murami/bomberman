@@ -5,9 +5,10 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:03 2014 Manu
-// Last update Sun Jun 15 04:13:22 2014 Manu
+// Last update Sun Jun 15 09:11:58 2014 Manu
 //
 
+#include		"sound/SoundManager.hh"
 #include		"FileExplorer.hh"
 #include		"Frame.hh"
 #include		"graphic/ModelManager.hh"
@@ -49,6 +50,12 @@ namespace	bbm
 
   void		Menu::refresh()
   {
+    ToggleButton* sound = dynamic_cast<ToggleButton*>(*(this->_buttons.begin()));
+    if (sound)
+      sound->setChecked(SoundManager::getInstance()->soundPlaying());
+    ToggleButton* music = dynamic_cast<ToggleButton*>((*(this->_buttons.begin()) + 1));
+    if (music)
+      music->setChecked(SoundManager::getInstance()->musicPlaying());
     if (this->_frame)
       {
 	delete (this->_frame);
@@ -184,7 +191,6 @@ namespace	bbm
   {
     AButton* button = new ToggleButton(label, color, state);
     button->initialize();
-    dynamic_cast<ToggleButton*>(button)->setChecked(true);
     this->_buttons.push_back(button);
     this->_callbacks.push_back(fPtr);
   }

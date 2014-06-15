@@ -63,10 +63,6 @@ namespace bbm
     _musics[name] = tmp;
   }
 
-  ////////////////////////////
-  // faire la gestion des booleens pour jouer ou non la musique
-  ////////////////////////////
-
   void	SoundManager::playSound(std::string const& name)
   {
     FMOD_BOOL	stat;
@@ -83,6 +79,7 @@ namespace bbm
 	    return ;
 	  }
       }
+    _sound = true;
   }
 
   void	SoundManager::playMusic(std::string const& name)
@@ -101,6 +98,7 @@ namespace bbm
 	    return ;
 	  }
       }
+    _music = true;
   }
 
   void	SoundManager::disableSounds()
