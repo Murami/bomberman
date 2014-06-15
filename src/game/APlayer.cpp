@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:27:52 2014 otoshigami
-// Last update Sun Jun 15 08:27:53 2014 otoshigami
+// Last update Sun Jun 15 09:36:23 2014 Desabre Quentin
 //
 
 #include "game/APlayer.hh"
@@ -151,7 +151,7 @@ namespace bbm
   bool				APlayer::collideGameBoxes()
   {
     glm::ivec2			mapsize = _gameState.getMapSize();
-    std::vector<AEntity*>	_map = _gameState.getGameBoxes();
+    std::vector<AEntity*>&	_map = _gameState.getGameBoxes();
     int				posx = _position.x;
     int				posy = _position.y;
     AEntity*			tmp;

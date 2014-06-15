@@ -196,11 +196,7 @@ namespace bbm
   {
     lua_newtable(L);
 
-<<<<<<< HEAD
-    this->setMove(glm::vec2(0, 0.5));
-=======
     this->setMove(glm::vec2(0, 0.3));
->>>>>>> 88d6478ced00e95c87432cd7096b666493700550
     lua_pushstring(L, "up");
     if (this->collideGameBoxes() || this->testCollideMap())
       {
