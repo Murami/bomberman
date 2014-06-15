@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:30:03 2014 otoshigami
-// Last update Sun Jun 15 08:30:04 2014 otoshigami
+// Last update Sun Jun 15 19:40:27 2014 Manu
 //
 
 #include <iostream>
@@ -64,7 +64,6 @@ namespace bbm
 
   bool	Joystick::getButtonDown(unsigned int button) const
   {
-    std::cout << "button down" << std::endl;
     if (std::find(_pressedButtons.begin(), _pressedButtons.end(), button) != _pressedButtons.end())
       return (true);
     return (false);
