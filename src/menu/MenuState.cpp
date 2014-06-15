@@ -246,6 +246,7 @@ namespace	bbm
       {
 	this->_SDLInputsList.push_back("BACKSPACE");
 	this->_SDLInputsList.push_back("PAUSE");
+	this->_SDLInputsList.push_back("SPACE");
 	this->_SDLInputsList.push_back("QUOTEDBL");
 	this->_SDLInputsList.push_back("HASH");
 	this->_SDLInputsList.push_back("DOLLAR");
@@ -633,8 +634,8 @@ namespace	bbm
       return (false);
     try
       {
-	menu->createNewToggleButton("sound", &IMenuManager::setMainMenu);
-	menu->createNewToggleButton("music", &IMenuManager::setMainMenu);
+	menu->createNewToggleButton("sound", NULL);
+	menu->createNewToggleButton("music", NULL);
 	menu->createNewButton("ok", &IMenuManager::serializeAudioSettings,
 			      glm::vec4(0, 1, 0, 1), true);
 	menu->createNewButton("cancel", &IMenuManager::setOptionsMenu,
@@ -797,9 +798,17 @@ namespace	bbm
 	if (s)
 	  {
 	    if (i == 0)
-	      this->_config.sound = s->isChecked();
+	      {
+		this->_config.sound = s->isChecked();
+	      }
 	    else
-	      this->_config.music = s->isChecked();
+	      {
+		this->_config.music = s->isChecked();
+		if (this->_config.music)
+		  SoundManager::getInstance()->play("menu");
+		else
+		  SoundManager::getInstance()->stop("menu");
+	      }
 	    i++;
 	  }
       	it++;
@@ -977,7 +986,8 @@ namespace	bbm
     size_t pos = tmp.find(".save");
 
     SoundManager::getInstance()->stop("menu");
-    SoundManager::getInstance()->play("wait");
+    if (this->_config.music)
+      SoundManager::getInstance()->play("wait");
     for (size_t i = 0; i < pos; i++)
       tmp2 += tmp[i];
     this->_config.fileToLoad = new std::string(tmp2);
@@ -993,7 +1003,8 @@ namespace	bbm
     StateButton*	nbIAButton = dynamic_cast<StateButton*>(*it);
 
     SoundManager::getInstance()->stop("menu");
-    SoundManager::getInstance()->play("wait");
+    if (this->_config.music)
+      SoundManager::getInstance()->play("wait");
     if (nbIAButton)
       {
 	std::stringstream ss;
@@ -1015,10 +1026,6 @@ namespace	bbm
     this->_config.newGame = true;
     GameLoadingState*	state = new GameLoadingState(this->_manager,
     						     &this->_config);
-    std::cout << this->_config.player1 << std::endl
-	      << this->_config.player2 << std::endl
-	      << this->_config.player3 << std::endl
-	      << this->_config.player4 << std::endl << std::endl;
     this->_manager.push(state);
   }
 

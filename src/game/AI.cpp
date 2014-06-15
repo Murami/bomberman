@@ -84,8 +84,8 @@ namespace bbm
 
 	script.addObject("player", this);
 	script.run();
-	managePhysics(time);
 	updateState();
+	managePhysics(time);
 	manageModel(time);
       }
   }

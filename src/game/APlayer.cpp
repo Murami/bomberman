@@ -16,8 +16,8 @@
 const float	maxSpeed = 0.005;
 const float	modelScaleFactor = 0.0020;
 const float	boxScale = 0.8;
-const float	delta = 0.2;//0.8 wtf ?!
-const float	deltaTile = 0.2;
+const float	delta = 0.3;
+const float	deltaTile = 0.3;
 
 namespace bbm
 {
@@ -158,7 +158,6 @@ namespace bbm
 		      tmp->collide(glm::vec3(_position.x +_move.x + delta, _position.y + _move.y + delta, 0)))
 		    {
 		      tmp->interact(this);
-		      return (true);
 		    }
 		}
 	    }

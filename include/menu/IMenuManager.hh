@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Tue Jun  3 16:17:50 2014 Manu
-// Last update Thu Jun 12 17:04:17 2014 Manu
+// Last update Sun Jun 15 04:21:31 2014 Manu
 //
 
 #ifndef		__IMENUMANAGER_HH__
