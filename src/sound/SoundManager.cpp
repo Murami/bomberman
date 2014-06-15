@@ -5,7 +5,7 @@
 // Login   <bichon_b@epitech.net>
 //
 // Started on  Sun Jun 15 08:25:25 2014 bichon_b
-// Last update Sun Jun 15 08:58:32 2014 bichon_b
+// Last update Sun Jun 15 20:11:06 2014 bichon_b
 //
 
 #include "sound/SoundManager.hh"
@@ -18,7 +18,7 @@ namespace bbm
   SoundManager::SoundManager()
   {
     FMOD_System_Create(&_system);
-    FMOD_System_Init(_system, 32, FMOD_INIT_NORMAL, NULL);
+    FMOD_System_Init(_system, 512, FMOD_INIT_NORMAL, NULL);
   }
 
   bool	SoundManager::musicPlaying() const

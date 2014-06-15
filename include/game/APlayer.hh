@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:35:59 2014 otoshigami
-// Last update Sun Jun 15 12:55:00 2014 otoshigami
+// Last update Sun Jun 15 18:26:00 2014 bichon_b
 //
 
 #ifndef APLAYER_HH
@@ -103,6 +103,7 @@ namespace bbm
     virtual const std::string&		getType() const = 0;
     virtual void			update(float time) = 0;
     virtual void			initialize() = 0;
+    std::string				bombFrom();
 
   protected:
     void				draw(ARenderer& renderer, const RenderState& renderState);
@@ -113,6 +114,7 @@ namespace bbm
     void				collideEntity();
     bool				collideGameBoxes();
     bool				collideWarning();
+    bool				collidePlayer();
     void				managePhysics(float time);
     void				manageModel(float time);
     void				pack(ISerializedNode & current) const;

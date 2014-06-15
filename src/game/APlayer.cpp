@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:27:52 2014 otoshigami
-// Last update Sun Jun 15 15:19:14 2014 bichon_b
+// Last update Sun Jun 15 20:06:19 2014 bichon_b
 //
 
 #include "game/APlayer.hh"
@@ -183,52 +183,182 @@ namespace bbm
     return (b);
   }
 
-  bool			APlayer::collideWarning()
+  std::string		APlayer::bombFrom()
   {
-    bool			b = false;
     glm::ivec2			mapSize = _gameState.getMapSize();
     std::vector<AEntity*>&	_map = _gameState.getWarning();
-    int				pos;
     int				i;
+    int				x = _position.x + _move.x + 1 - delta;
+    int				y = _position.y + _move.y + delta;
+    AEntity*			tmp;
+    int				distance;
 
-    std::cout << _position.x + _move.x + 1 - delta << ", " << _position.y + _move.y + delta << std::endl;
-    pos = (_position.x + _move.x + 1 - delta) + (_position.y + _move.y + delta) * mapSize.x;
-    std::cout << pos % mapSize.x << ", " << pos / mapSize.x - 1 << std::endl;
-
-    std::cout << std::endl;
-    for (i = pos / mapSize.x; i > 0; i--)
+    distance = 1;
+    for (i = x; i > 0; i--)
       {
-	std::cout << "je test en " << i << ", " << pos % mapSize.x << std::endl;
-	if (_map[i])
-	  b = true;
-      }
-    for (i = pos / mapSize.x; i < mapSize.y - 1; i++)
-      {
-	std::cout << "je test en " << i << ", " << pos % mapSize.x << std::endl;
-	if (_map[i])
-	  b = true;
-      }
-
-    pos = (_position.x + _move.x + delta) + (_position.y + _move.y + 1 - delta) * mapSize.x;
-
-    for (i = pos % mapSize.x; i > 0; i--)
-      {
-	std::cout << "je test en " << pos / mapSize.x << ", " << i << std::endl;
-	if (_map[i])
-	  b = true;
-      }
-    for (i = pos % mapSize.x; i < mapSize.x - 1; i++)
-      {
-std::cout << "je test en " << pos / mapSize.x << ", " << i << std::endl;
-	if (_map[i])
-	  b = true;
+	tmp = _map[i + y * mapSize.x];
+	if (tmp && (tmp->getType() == "FireBomb" || tmp->getType() == "BoxBomb"
+		    || tmp->getType() == "DarkBomb" || tmp->getType() == "MultiBomb"
+		    || tmp->getType() == "PowerBomb" || tmp->getType() == "WaterBomb"))
+	  {
+	    if (distance <= _gameState.getPlayer(tmp->getIDPlayer()).getPower())
+	      return ("right");
+	  }
+	distance++;
       }
 
-    return (b);
-    // prendre la position
-    //   parcouriir en ligne et en colonne,
-    //   si detection bombe, verifier sa range,
-    //   si >= a la distance retrun true
+    distance = 0;
+    for (i = x; i < mapSize.x - 1; i++)
+      {
+	tmp = _map[i + y * mapSize.x];
+	if (tmp && (tmp->getType() == "FireBomb" || tmp->getType() == "BoxBomb"
+		    || tmp->getType() == "DarkBomb" || tmp->getType() == "MultiBomb"
+		    || tmp->getType() == "PowerBomb" || tmp->getType() == "WaterBomb"))
+	  {
+	    if (distance <= _gameState.getPlayer(tmp->getIDPlayer()).getPower())
+	      return ("left");
+	  }
+	distance++;
+      }
+
+    x = _position.x + _move.x + delta;
+    y = _position.y + _move.y + 1 - delta;
+
+    distance = 0;
+    for (i = y; i > 0; i--)
+      {
+	tmp = _map[x + i * mapSize.x];
+	if (tmp && (tmp->getType() == "FireBomb" || tmp->getType() == "BoxBomb"
+		    || tmp->getType() == "DarkBomb" || tmp->getType() == "MultiBomb"
+		    || tmp->getType() == "PowerBomb" || tmp->getType() == "WaterBomb"))
+	  {
+	    if (distance <= _gameState.getPlayer(tmp->getIDPlayer()).getPower())
+	      return ("down");
+	  }
+	distance++;
+      }
+
+    distance = 0;
+    for (i = y; i < mapSize.x - 1; i++)
+      {
+	tmp = _map[x + i * mapSize.x];
+	if (tmp && (tmp->getType() == "FireBomb" || tmp->getType() == "BoxBomb"
+		    || tmp->getType() == "DarkBomb" || tmp->getType() == "MultiBomb"
+		    || tmp->getType() == "PowerBomb" || tmp->getType() == "WaterBomb"))
+	  {
+	    if (distance <= _gameState.getPlayer(tmp->getIDPlayer()).getPower())
+	      return ("up");
+	  }
+	distance++;
+      }
+
+    return ("idle");
+  }
+
+  bool			APlayer::collideWarning()
+  {
+    glm::ivec2			mapSize = _gameState.getMapSize();
+    std::vector<AEntity*>&	_map = _gameState.getWarning();
+    int				i;
+    int				x = _position.x + _move.x + 1 - delta;
+    int				y = _position.y + _move.y + delta;
+    AEntity*			tmp;
+    int				distance;
+
+    tmp = _map[x + y * mapSize.x];
+    if (tmp && (tmp->getType() == "FireBombExplode" || tmp->getType() == "BoxBombExplode"
+		|| tmp->getType() == "DarkBombExplode" || tmp->getType() == "MultiBombExplode"
+		|| tmp->getType() == "PowerBombExplode" || tmp->getType() == "WaterBombExplode"))
+      return (true);
+
+    distance = 1;
+    for (i = x; i > 0; i--)
+      {
+	tmp = _map[i + y * mapSize.x];
+	if (tmp && (tmp->getType() == "FireBomb" || tmp->getType() == "BoxBomb"
+		    || tmp->getType() == "DarkBomb" || tmp->getType() == "MultiBomb"
+		    || tmp->getType() == "PowerBomb" || tmp->getType() == "WaterBomb"))
+	  {
+	    if (distance <= _gameState.getPlayer(tmp->getIDPlayer()).getPower())
+	      return (true);
+	  }
+	distance++;
+      }
+
+    distance = 0;
+    for (i = x; i < mapSize.x - 1; i++)
+      {
+	tmp = _map[i + y * mapSize.x];
+	if (tmp && (tmp->getType() == "FireBomb" || tmp->getType() == "BoxBomb"
+		    || tmp->getType() == "DarkBomb" || tmp->getType() == "MultiBomb"
+		    || tmp->getType() == "PowerBomb" || tmp->getType() == "WaterBomb"))
+	  {
+	    if (distance <= _gameState.getPlayer(tmp->getIDPlayer()).getPower())
+	      return (true);
+	  }
+	distance++;
+      }
+
+    x = _position.x + _move.x + delta;
+    y = _position.y + _move.y + 1 - delta;
+
+    distance = 0;
+    for (i = y; i > 0; i--)
+      {
+	tmp = _map[x + i * mapSize.x];
+	if (tmp && (tmp->getType() == "FireBomb" || tmp->getType() == "BoxBomb"
+		    || tmp->getType() == "DarkBomb" || tmp->getType() == "MultiBomb"
+		    || tmp->getType() == "PowerBomb" || tmp->getType() == "WaterBomb"))
+	  {
+	    if (distance <= _gameState.getPlayer(tmp->getIDPlayer()).getPower())
+	      return (true);
+	  }
+	distance++;
+      }
+
+    distance = 0;
+    for (i = y; i < mapSize.x - 1; i++)
+      {
+	tmp = _map[x + i * mapSize.x];
+	if (tmp && (tmp->getType() == "FireBomb" || tmp->getType() == "BoxBomb"
+		    || tmp->getType() == "DarkBomb" || tmp->getType() == "MultiBomb"
+		    || tmp->getType() == "PowerBomb" || tmp->getType() == "WaterBomb"))
+	  {
+	    if (distance <= _gameState.getPlayer(tmp->getIDPlayer()).getPower())
+	      return (true);
+	  }
+	distance++;
+      }
+
+    return (false);
+  }
+
+  bool			APlayer::collidePlayer()
+  {
+    std::list<Player*>&			players = _gameState.getPlayerList();
+    std::list<AI*>&			AIs = _gameState.getAIList();
+    std::list<Player*>::iterator        itPlayers;
+    std::list<AI*>::iterator            itAIs;
+    glm::vec2				pos = this->getPosition();
+    glm::vec2				tmp;
+
+    for (itPlayers = players.begin(); itPlayers != players.end(); itPlayers++)
+      {
+	tmp = (*itPlayers)->getPosition();
+	if (this->getID() != (*itPlayers)->getID()
+	    && tmp.x >= pos.x - 0.4 && tmp.x <= pos.x + 0.4
+	    && tmp.y >= pos.y - 0.4 && tmp.y <= pos.y + 0.4)
+	  return (true);
+      }
+    for (itAIs = AIs.begin(); itAIs != AIs.end(); itAIs++)
+      {
+	tmp = (*itAIs)->getPosition();
+	if (this->getID() != (*itAIs)->getID()
+	    && tmp.x >= pos.x - 0.4 && tmp.x <= pos.x + 0.4
+	    && tmp.y >= pos.y - 0.4 && tmp.y <= pos.y + 0.4)
+	  return (true);
+      }
+    return (false);
   }
 
   void			APlayer::manageModel(float time)

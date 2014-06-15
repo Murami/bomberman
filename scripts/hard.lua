@@ -5,6 +5,7 @@ local tmp = {"idle", "left", "right", "down", "up"}
 local direction = tmp[player:getActualDirection() + 1]
 local boxes = player:getBoxes ()
 local dangers = player:getDanger ()
+local dangerFrom = player:dangerComeFrom()
 
 local reverseDirection = "idle"
 local otherDirection1 = "idle"
@@ -45,6 +46,23 @@ local move = {
    end
 }
 
+local moveAway = {
+   ["up"] = function ()
+      player:goDown()
+   end,
+   ["down"] = function ()
+      player:goUp()
+   end,
+   ["right"] = function ()
+      player:goLeft()
+   end,
+   ["left"] = function ()
+      player:goRight()
+   end,
+   ["idle"] = function ()
+   end
+}
+
 if boxes["up"] and boxes["down"] and boxes["left"] and boxes["right"] then
    player:setIdle()
    return
@@ -61,13 +79,13 @@ function core ()
       elseif not boxes["right"] then
 	 move["right"]()
       end
-   else if not boxes[otherDirection1] and not boxes[otherDirection2] then
+   else if not boxes[otherDirection1] and not dangers[otherDirection1] and not boxes[otherDirection2] and not dangers[otherDircetion2] then
       	 if n >= 1 and n <= 4 then
       	    move[otherDirection1]()
       	 elseif n >= 7 or n <= 10 then
       	    move[otherDirection2]()
       	 else
-      	    if boxes[direction] then
+      	    if boxes[direction] or dangers[direction] then
       	       if n >= 1 and n <= 5 then
       		  move[otherDirection2]()
       	       else
@@ -77,9 +95,9 @@ function core ()
       	       move[direction]()
       	    end
 	 end
-	elseif not boxes[otherDirection2] then
+	elseif not boxes[otherDirection2] and not dangers[otherDirection2] then
 	   if n >= 4 and n <= 6 then
-	      if not boxes[direction] then
+	      if not boxes[direction] and not dangers[direction] then
 		 move[direction]()
 	      else
 		 move[otherDirection2]()
@@ -87,9 +105,9 @@ function core ()
 	   else
 	      move[otherDirection2]()
 	   end
-	elseif not boxes[otherDirection1] then
+	elseif not boxes[otherDirection1] and not dangers[otherDirection1] then
 	   if n >= 4 and n <= 6 then
-	      if not boxes[direction] then
+	      if not boxes[direction] and not dangers[direction] then
 		 move[direction]()
 	      else
 		 move[otherDirection1]()
@@ -98,8 +116,8 @@ function core ()
 	      move[otherDirection1]()
 	   end
 	else
-	   if boxes[direction] then
-	      move[reverseDirection]()
+	   if boxes[direction] or (dangers[direction] and not dangers[reverseDirection]) then
+	      moveAway[direction]()
 	   else
 	      move[direction]()
 	   end
@@ -108,9 +126,7 @@ function core ()
 end
 
 function isAnyDanger ()
-   print("danger are here : " .. tostring(dangers["self"]) .. " " .. tostring(dangers["up"]) .. " " .. tostring(dangers["left"]) .. " " .. tostring(dangers["right"]) .. " " .. tostring(dangers["down"]) .. " ")
-
-   if dangers["self"] then
+    if dangers["self"] then
       if not dangers["left"] and not boxes["left"] then
 	 move["left"]()
       elseif not dangers["right"] and not boxes["right"] then
@@ -120,14 +136,25 @@ function isAnyDanger ()
       elseif not dangers["up"] and not boxes["up"] then
 	 move["up"]()
       else
-	 player:prayer()
+	 moveAway[dangerFrom]()
       end
    end
 end
 
+function surroundByThreeWall()
+   if ((boxes["up"] or dangers["up"]) and (boxes["right"] or dangers["right"]) and (boxes["left"] or dangers["left"])) or
+      ((boxes["up"] or dangers["up"]) and (boxes["left"] or dangers["left"]) and (boxes["down"] or dangers["down"])) or
+      ((boxes["up"] or dangers["up"]) and (boxes["right"] or dangers["right"]) and (boxes["down"] or dangers["down"])) or
+      ((boxes["down"] or dangers["down"]) and (boxes["left"] or dangers["left"]) and (boxes["right"] or dangers["right"])) then
+      return (true);
+   else
+      return (false);
+   end
+end
+
 isAnyDanger()
-if n == 10 then
-   if player:haveBomb() then
+if player:samePlaceAsPlayer() then
+   if player:haveBomb() and not surroundByThreeWall() then
       player:putBomb()
    else
       core()
