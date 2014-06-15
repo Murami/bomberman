@@ -115,7 +115,7 @@ namespace bbm
     SoundManager::getInstance()->addSound("aquaBomb", "assets/sound/aqua_bomb.mp3");
     SoundManager::getInstance()->addSound("bomb", "assets/sound/Bomb_Blow.wav");
     SoundManager::getInstance()->addSound("bigBomb", "assets/sound/big_bomb.mp3");
-    SoundManager::getInstance()->addSound("scream", "assets/sound/WilhelmSceam.wav");
+    SoundManager::getInstance()->addSound("scream", "assets/sound/WilhelmScream.wav");
   }
 
   void			GameLoadingState::loadModel()
@@ -242,7 +242,7 @@ namespace bbm
       }
     else if (input.getKeyDown(SDLK_SPACE))
       {
-	SoundManager::getInstance()->stop("menu");
+	SoundManager::getInstance()->stop("wait");
 	SoundManager::getInstance()->play("theme");
 	if (_config->newGame == true)
 	  newGameState();

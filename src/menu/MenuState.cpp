@@ -23,7 +23,9 @@ namespace	bbm
 
   MenuState::MenuState(GameManager& manager) : _manager(manager)
   {
+
     SoundManager::getInstance()->addMusic("menu", "assets/sound/heart_of_courage.mp3");
+    SoundManager::getInstance()->addMusic("wait", "assets/sound/wait.mp3");
     glEnable(GL_BLEND);
     glEnable(GL_ALPHA_TEST);
     glEnable(GL_DEPTH_TEST);
@@ -975,6 +977,9 @@ namespace	bbm
     std::string tmp = explorer->getCurrentFile();
     std::string tmp2;
     size_t pos = tmp.find(".save");
+
+    SoundManager::getInstance()->stop("menu");
+    SoundManager::getInstance()->play("wait");
     for (size_t i = 0; i < pos; i++)
       tmp2 += tmp[i];
     this->_config.fileToLoad = new std::string(tmp2);
@@ -988,6 +993,9 @@ namespace	bbm
     std::list<AButton*> list = menu->getButtons();
     std::list<AButton*>::iterator it = list.begin();
     StateButton*	nbIAButton = dynamic_cast<StateButton*>(*it);
+
+    SoundManager::getInstance()->stop("menu");
+    SoundManager::getInstance()->play("wait");
     if (nbIAButton)
       {
 	std::stringstream ss;

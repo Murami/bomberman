@@ -39,7 +39,6 @@ namespace bbm
   {
     FMOD_SOUND*		tmp;
 
-    std::cout << "I add " << name << std::endl;
     if (FMOD_System_CreateSound(_system, path.c_str(),
 				FMOD_SOFTWARE | FMOD_2D | FMOD_CREATESTREAM | FMOD_LOOP_NORMAL,
 				0, &tmp) != FMOD_OK)
@@ -55,7 +54,6 @@ namespace bbm
   {
     FMOD_BOOL	stat;
 
-    std::cout << "I play " << name << std::endl;
     FMOD_Channel_GetPaused(_channels[name], &stat);
     if (stat == 1)
       FMOD_Channel_SetPaused(_channels[name], 0);
