@@ -60,7 +60,7 @@ namespace bbm
 	return ;
       }
     FMOD_Sound_SetLoopCount(tmp, -1);
-    _sounds[name] = tmp;
+    _musics[name] = tmp;
   }
 
   ////////////////////////////
