@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:27:52 2014 otoshigami
-// Last update Sun Jun 15 11:29:08 2014 bichon_b
+// Last update Sun Jun 15 12:37:04 2014 otoshigami
 //
 
 #include "game/APlayer.hh"
@@ -417,8 +417,8 @@ namespace bbm
 
   void	APlayer::die()
   {
-    // SoundManager::getInstance()->playSound("scream");
-    // _alive = false;
+    SoundManager::getInstance()->playSound("scream");
+    _alive = false;
   }
 
 };
