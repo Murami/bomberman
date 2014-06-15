@@ -342,7 +342,7 @@ namespace bbm
 	if (_config->load == false)
 	  {
 	    itSpawn = _tilemap.getSpawns().begin();
-	    itSpawn += rand() % (_tilemap.getSpawns().size() - 1);
+	    itSpawn += rand() % _tilemap.getSpawns().size();
 	    (*it).position = glm::vec2(itSpawn->x, itSpawn->y);
 	  }
 	_AIs.push_back(new AI(*this, *it));
