@@ -1,3 +1,13 @@
+//
+// IntroState.hh for bomberman in /home/manu/rendu/cpp_bomberman/include/menu
+//
+// Made by Manu
+// Login   <manu@epitech.net>
+//
+// Started on  Sun Jun 15 11:49:50 2014 Manu
+// Last update Sun Jun 15 11:49:51 2014 Manu
+//
+
 #ifndef		__INTROSTATE_HH__
 # define	__INTROSTATE_HH__
 

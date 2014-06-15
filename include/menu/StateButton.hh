@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 17:43:50 2014 Manu
-// Last update Wed Jun 11 05:03:29 2014 Manu
+// Last update Sun Jun 15 11:49:17 2014 Manu
 //
 
 #ifndef		__STATEBUTTON_HH__

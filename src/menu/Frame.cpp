@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Thu Jun  5 02:47:32 2014 Manu
-// Last update Sat Jun 14 19:39:49 2014 Manu
+// Last update Sun Jun 15 12:02:25 2014 Manu
 // Last update Fri Jun 13 05:56:55 2014 Desabre Quentin
 //
 
@@ -62,7 +62,6 @@ namespace		bbm
   void		Frame::_createTitle()
   {
     std::string fileName = this->_explorer->getCurrentFile();
-    std::cout << "current file : " << this->_explorer->getCurrentFile() << std::endl;
     for (size_t i = 0; i < fileName.size(); i++)
       {
 	if ((fileName[i] >= '0' && fileName[i] <= '9') ||

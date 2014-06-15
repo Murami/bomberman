@@ -1,3 +1,13 @@
+//
+// PauseState.cpp for bomberman in /home/manu/rendu/cpp_bomberman/src/menu
+//
+// Made by Manu
+// Login   <manu@epitech.net>
+//
+// Started on  Sun Jun 15 11:48:02 2014 Manu
+// Last update Sun Jun 15 12:16:32 2014 Manu
+//
+
 #include		<ctime>
 #include		"menu/PauseState.hh"
 #include		"game/GameManager.hh"
@@ -28,7 +38,6 @@ namespace		bbm
     if (pos != std::string::npos)
       {
 	newKey = std::string(&key[pos+1]);
-	std::cout << "Return '" << newKey << "'" << std::endl;
 	return (newKey);
       }
     return (key);
@@ -87,13 +96,13 @@ namespace		bbm
       {
 	menu->createNewButton("player 1",
 			      &IMenuManager::setOptionControlPlayer1,
-			      glm::vec4(0, 0, 1, 1));
+			      glm::vec4(1, 0, 0, 1));
 	menu->createNewButton("player 2",
 			      &IMenuManager::setOptionControlPlayer2,
-			      glm::vec4(0, 1, 1, 1));
+			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("player 3",
 			      &IMenuManager::setOptionControlPlayer3,
-			      glm::vec4(1, 0, 1, 1));
+			      glm::vec4(0, 0, 1, 1));
 	menu->createNewButton("player 4",
 			      &IMenuManager::setOptionControlPlayer4,
 			      glm::vec4(1, 1, 0, 1));
@@ -259,7 +268,6 @@ namespace		bbm
   	return (false);
       }
     menu->finalize();
-    std::cout << "pushing menu control player 3" << std::endl;
     this->_menuList.push_back(menu);
     return (this->_initializeControlPlayer4());
   }
@@ -653,6 +661,11 @@ namespace		bbm
     _gameState.save(ss.str());
     this->_manager.pop();
     this->_manager.pop();
+    if (SoundManager::getInstance()->musicPlaying())
+      {
+	SoundManager::getInstance()->stop("theme");
+	SoundManager::getInstance()->playMusic("menu");
+      }
   }
 
   void		PauseState::resumeGame(Menu*)

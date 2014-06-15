@@ -1,3 +1,13 @@
+//
+// MenuState.cpp for bomberman in /home/manu/rendu/cpp_bomberman/src/menu
+//
+// Made by Manu
+// Login   <manu@epitech.net>
+//
+// Started on  Sun Jun 15 11:48:18 2014 Manu
+// Last update Sun Jun 15 12:16:04 2014 Manu
+//
+
 #include		<stdexcept>
 #include		"FileExplorer.hh"
 #include		"events/Input.hh"
@@ -137,18 +147,18 @@ namespace	bbm
     try
       {
 	menu->createNewStateButton("player 1", NULL, 3,
-				   glm::vec4(0, 0, 1, 1), "gamepad 1");
+				   glm::vec4(1, 0, 0, 1), "gamepad 1");
 	menu->addStateToLastButton("gamepad 2");
 	menu->addStateToLastButton("gamepad 3");
 	menu->addStateToLastButton("gamepad 4");
 	menu->createNewStateButton("player 2", NULL, 3,
-				   glm::vec4(0, 1, 1, 1), "x");
+				   glm::vec4(0, 1, 0, 1), "x");
 	menu->addStateToLastButton("gamepad 2");
 	menu->addStateToLastButton("gamepad 3");
 	menu->addStateToLastButton("gamepad 4");
 	menu->addStateToLastButton("gamepad 1");
 	menu->createNewStateButton("player 3", NULL, 3,
-				   glm::vec4(1, 0, 1, 1), "x");
+				   glm::vec4(0, 0, 1, 1), "x");
 	menu->addStateToLastButton("gamepad 3");
 	menu->addStateToLastButton("gamepad 4");
 	menu->addStateToLastButton("gamepad 1");
@@ -537,7 +547,6 @@ namespace	bbm
 	return (false);
       }
     menu->finalize();
-    std::cout << "pushing menu control player 3" << std::endl;
     this->_menuList.push_back(menu);
     return (this->_initializeControlPlayer4());
   }
@@ -602,13 +611,13 @@ namespace	bbm
       {
 	menu->createNewButton("player 1",
 			      &IMenuManager::setOptionControlPlayer1,
-			      glm::vec4(0, 0, 1, 1));
+			      glm::vec4(1, 0, 0, 1));
 	menu->createNewButton("player 2",
 			      &IMenuManager::setOptionControlPlayer2,
-			      glm::vec4(0, 1, 1, 1));
+			      glm::vec4(0, 1, 0, 1));
 	menu->createNewButton("player 3",
 			      &IMenuManager::setOptionControlPlayer3,
-			      glm::vec4(1, 0, 1, 1));
+			      glm::vec4(0, 0, 1, 1));
 	menu->createNewButton("player 4",
 			      &IMenuManager::setOptionControlPlayer4,
 			      glm::vec4(1, 1, 0, 1));

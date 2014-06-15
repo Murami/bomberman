@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:40 2014 otoshigami
-// Last update Sun Jun 15 11:03:41 2014 Manu
+// Last update Sun Jun 15 11:59:22 2014 Manu
 //
 
 #include <sstream>
@@ -76,6 +76,7 @@ namespace bbm
 	  }
       }
     this->_updated = false;
+    SoundManager::getInstance()->stop("theme");
   }
 
   GameOverState::~GameOverState()

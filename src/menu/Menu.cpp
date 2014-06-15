@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:03 2014 Manu
-// Last update Sun Jun 15 11:32:19 2014 Manu
+// Last update Sun Jun 15 12:09:56 2014 Manu
 //
 
 #include		"sound/SoundManager.hh"
@@ -55,7 +55,8 @@ namespace	bbm
     ToggleButton* sound = dynamic_cast<ToggleButton*>(*(this->_buttons.begin()));
     if (sound)
       sound->setChecked(SoundManager::getInstance()->soundPlaying());
-    if (this->_buttons.size() > 1)
+    if ((*(this->_buttons.begin()))->getLabel() == "sound" ||
+	(*(this->_buttons.begin()))->getLabel() == "music")
       {
 	ToggleButton* music = dynamic_cast<ToggleButton*>((*(this->_buttons.begin()) + 1));
 	if (music)

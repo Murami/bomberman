@@ -1,3 +1,13 @@
+//
+// PauseState.hh for bomberman in /home/manu/rendu/cpp_bomberman/include/menu
+//
+// Made by Manu
+// Login   <manu@epitech.net>
+//
+// Started on  Sun Jun 15 11:49:26 2014 Manu
+// Last update Sun Jun 15 11:49:27 2014 Manu
+//
+
 #ifndef		__PAUSESTATE_HH__
 # define	__PAUSESTATE_HH__
 
