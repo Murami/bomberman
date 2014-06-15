@@ -1,3 +1,13 @@
+//
+// TileManager.cpp for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:29:10 2014 otoshigami
+// Last update Sun Jun 15 08:29:11 2014 otoshigami
+//
+
 #include <cstdlib>
 #include "game/TileManager.hh"
 

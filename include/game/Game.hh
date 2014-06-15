@@ -1,3 +1,13 @@
+//
+// Game.hh for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:36:07 2014 otoshigami
+// Last update Sun Jun 15 08:36:08 2014 otoshigami
+//
+
 #ifndef GAME_HH
 #define GAME_HH
 

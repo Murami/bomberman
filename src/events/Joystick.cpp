@@ -1,3 +1,13 @@
+//
+// Joystick.cpp for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:30:03 2014 otoshigami
+// Last update Sun Jun 15 08:30:04 2014 otoshigami
+//
+
 #include <iostream>
 #include <algorithm>
 #include "events/Joystick.hh"

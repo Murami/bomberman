@@ -1,3 +1,13 @@
+//
+// Tile.cpp for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+//
+// Made by otoshigami
+// Login   <otoshigami@epitech.net>
+//
+// Started on  Sun Jun 15 08:29:04 2014 otoshigami
+// Last update Sun Jun 15 08:29:06 2014 otoshigami
+//
+
 #include "game/Tile.hh"
 #include "graphic/ARenderer.hh"
 
