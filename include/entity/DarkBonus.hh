@@ -1,3 +1,13 @@
+//
+// DarkBonus.hh for  in /home/desabr_q/Desktop/bomber/cpp_bomberman
+//
+// Made by quentin desabre
+// Login   <desabr_q@epitech.net>
+//
+// Started on  Sun Jun 15 08:33:48 2014 quentin desabre
+// Last update Sun Jun 15 08:33:49 2014 Desabre Quentin
+//
+
 #ifndef DARKBONUS_HH
 #define DARKBONUS_HH
 

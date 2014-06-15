@@ -1,3 +1,13 @@
+//
+// DarkBombExplode.hh for  in /home/desabr_q/Desktop/bomber/cpp_bomberman
+//
+// Made by quentin desabre
+// Login   <desabr_q@epitech.net>
+//
+// Started on  Sun Jun 15 08:33:46 2014 quentin desabre
+// Last update Sun Jun 15 08:33:47 2014 Desabre Quentin
+//
+
 #ifndef DARKBOMBEXPLODE_HH
 #define DARKBOMBEXPLODE_HH
 

@@ -321,12 +321,10 @@ namespace		bbm
       return (false);
     try
       {
-	menu->createNewToggleButton("sound", NULL);
-	dynamic_cast<ToggleButton*>((*(menu->getButtons().begin())))->setChecked(SoundManager::getInstance()->soundPlaying());
-	menu->createNewToggleButton("music", NULL);
-	std::list<AButton*>::const_iterator it = menu->getButtons().begin();
-	it++;
-	dynamic_cast<ToggleButton*>(*it)->setChecked(SoundManager::getInstance()->musicPlaying());
+	menu->createNewToggleButton("sound", NULL, glm::vec4(1, 1, 1, 1),
+				    SoundManager::getInstance()->soundPlaying());
+	menu->createNewToggleButton("music", NULL, glm::vec4(1, 1, 1, 1),
+				    SoundManager::getInstance()->musicPlaying());
 	menu->createNewButton("ok", &IMenuManager::serializeAudioSettings,
 			      glm::vec4(0, 1, 0, 1), true);
 	menu->createNewButton("cancel", &IMenuManager::setOptionsMenu,

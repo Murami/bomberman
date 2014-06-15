@@ -156,7 +156,9 @@ namespace bbm
     int				posx = _position.x;
     int				posy = _position.y;
     AEntity*			tmp;
+    bool			b;
 
+    b = false;
     for (int x = -1; x != 2; x++)
       for (int y = -1; y != 2; y++)
 	{
@@ -172,6 +174,7 @@ namespace bbm
 		    {
 		      b = true;
 		      tmp->interact(this);
+		      b = true;
 		    }
 		}
 	    }

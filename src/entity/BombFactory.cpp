@@ -1,3 +1,13 @@
+//
+// BombFactory.cpp for  in /home/desabr_q/Desktop/bomber/cpp_bomberman
+//
+// Made by quentin desabre
+// Login   <desabr_q@epitech.net>
+//
+// Started on  Sun Jun 15 08:31:27 2014 quentin desabre
+// Last update Sun Jun 15 08:31:28 2014 Desabre Quentin
+//
+
 #include <cstdlib>
 #include "entity/BombFactory.hh"
 #include "entity/AEntity.hh"

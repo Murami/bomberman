@@ -1,3 +1,13 @@
+//
+// WaterBomb.hh for  in /home/desabr_q/Desktop/bomber/cpp_bomberman
+//
+// Made by quentin desabre
+// Login   <desabr_q@epitech.net>
+//
+// Started on  Sun Jun 15 08:34:08 2014 quentin desabre
+// Last update Sun Jun 15 08:34:09 2014 Desabre Quentin
+//
+
 #ifndef BOMBBOMB_HH
 #define BOMBBOMB_HH
 
