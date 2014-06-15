@@ -72,6 +72,8 @@ namespace bbm
     _tilemap.randomize(x, y);
     _mapsize = glm::ivec2(x, y);
     _gameboxes.resize(x * y, NULL);
+    _warning.resize(x * y, NULL);
+    _bonus.resize(x * y, NULL);
     for (posx = 1; posx < x - 1; posx++)
       {
     	for(posy = 1; posy < y - 1; posy++)
@@ -179,7 +181,6 @@ namespace bbm
 
   void			GameState::unpack(const ISerializedNode & current)
   {
-
     PlayerConfig	playerConfig;
     ISerializedNode*	entityListNode;
     ISerializedNode*	playersListNode;
@@ -197,6 +198,8 @@ namespace bbm
 
     current.get("mapsize", _mapsize);
     _gameboxes.resize(_mapsize.x * _mapsize.y, NULL);
+    _warning.resize(_mapsize.x * _mapsize.y, NULL);
+    _bonus.resize(_mapsize.x * _mapsize.y, NULL);
     entityListNode = current.get("entity");
     size = entityListNode->size();
     for (index = 0; index < size; index++)
@@ -243,6 +246,7 @@ namespace bbm
 	playerNode->get("idPlayer", playerConfig.idPlayer);
 	playerNode->get("id", playerConfig.id);
 	playerNode->get("lastId", playerConfig.lastId);
+	playerNode->get("score", playerConfig.score);
 	playerNode->get("typeBomb", typeBomb);
 	playerNode->get("state", state);
 	playerConfig.typeBomb = static_cast<BombType>(typeBomb);
@@ -300,8 +304,18 @@ namespace bbm
     glEnable(GL_SCISSOR_TEST);
     glEnable(GL_DEPTH_TEST);
 
-    this->_hud = new HUD();
-    this->_hud->initialize();
+    HUD* hud = new HUD();
+    hud->initialize();
+    this->_huds.push_back(hud);
+    hud = new HUD();
+    hud->initialize();
+    this->_huds.push_back(hud);
+    hud = new HUD();
+    hud->initialize();
+    this->_huds.push_back(hud);
+    hud = new HUD();
+    hud->initialize();
+    this->_huds.push_back(hud);
 
     std::vector<PlayerConfig>::iterator it;
 
@@ -392,7 +406,10 @@ namespace bbm
 	glDisable(GL_CULL_FACE);
 	context.draw(_skybox, stateSky);
 	if (this->_printHud)
-	  this->_hud->draw(context, stateSky);
+	  {
+	    size_t i = std::distance(this->_players.begin(), itPlayersCamera);
+	    this->_huds[i]->draw(context, stateSky);
+	  }
 	glEnable(GL_CULL_FACE);
       }
     if (this->_flush)
@@ -530,12 +547,17 @@ namespace bbm
       this->_printHud = !this->_printHud;
     if (input.getKeyDown(SDLK_ESCAPE) || input.getEvent(SDL_QUIT))
       {
-	//_manager.pop();
 	PauseState* state = new PauseState(_manager, *this);
 	_manager.push(state);
  	return;
       }
-    this->_hud->update(*(this->_players.begin()));
+    size_t i = 0;
+    for (std::list<Player*>::iterator it = this->_players.begin();
+	 it != this->_players.end(); it++)
+      {
+	this->_huds[i]->update(*it);
+	i++;
+      }
     updateAIPlayer(time, input);
     updateEntity(time, input);
     _skybox.update();
@@ -602,17 +624,71 @@ namespace bbm
     while (it != _entities.end())
       {
     	if ((*it)->expired())
-    	  it = _entities.erase(it);
+	  {
+
+	    if ((*it)->getType() == "BombBonus" ||
+		(*it)->getType() == "BoxBonus" ||
+		(*it)->getType() == "DarkBonus" ||
+		(*it)->getType() == "FireBonus" ||
+		(*it)->getType() == "MultiBombBonus" ||
+		(*it)->getType() == "PowerBonus" ||
+		(*it)->getType() == "RandomBonus" ||
+		(*it)->getType() == "SpeedBonus" ||
+		(*it)->getType() == "WaterBonus")
+	      {
+		int	x = (*it)->getPosition().x;
+		int	y = (*it)->getPosition().y;
+
+		if (x >= 0 && x < _mapsize.x && y >= 0 && y < _mapsize.y)
+		  _bonus[x + y * _mapsize.x] = NULL;
+	      }
+	    else
+	      {
+		int	x = (*it)->getPosition().x;
+		int	y = (*it)->getPosition().y;
+
+		if (x >= 0 && x < _mapsize.x && y >= 0 && y < _mapsize.y)
+		  _warning[x + y * _mapsize.x] = NULL;
+	      }
+	    delete (*it);
+	    it = _entities.erase(it);
+	  }
     	else
     	  it++;
       }
   }
 
-
   void			GameState::addEntity(AEntity* entity)
   {
+
     if (entity->getType() != "GameBox")
-      _entities.push_back(entity);
+      {
+	if (entity->getType() == "BombBonus" ||
+	    entity->getType() == "BoxBonus" ||
+	    entity->getType() == "DarkBonus" ||
+	    entity->getType() == "FireBonus" ||
+	    entity->getType() == "MultiBombBonus" ||
+	    entity->getType() == "PowerBonus" ||
+	    entity->getType() == "RandomBonus" ||
+	    entity->getType() == "SpeedBonus" ||
+	    entity->getType() == "WaterBonus")
+	  {
+	    int	x = entity->getPosition().x;
+	    int	y = entity->getPosition().y;
+
+	    if (x >= 0 && x < _mapsize.x && y >= 0 && y < _mapsize.y)
+	      _bonus[x + y * _mapsize.x] = entity;
+	  }
+	else
+	  {
+	    int	x = entity->getPosition().x;
+	    int	y = entity->getPosition().y;
+
+	    if (x >= 0 && x < _mapsize.x && y >= 0 && y < _mapsize.y)
+	      _warning[x + y * _mapsize.x] = entity;
+	  }
+	  _entities.push_back(entity);
+      }
     else
       {
 	int	x = entity->getPosition().x;

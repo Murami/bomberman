@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:03 2014 Manu
-// Last update Sat Jun 14 19:38:43 2014 Manu
+// Last update Sun Jun 15 01:28:01 2014 Manu
 //
 
 #include		"FileExplorer.hh"
@@ -45,6 +45,18 @@ namespace	bbm
       this->_selector->move(glm::vec3(0, (static_cast<float>(this->_buttons.
 							     size()) / 2), 0));
     return (true);
+  }
+
+  void		Menu::refresh()
+  {
+    if (this->_frame)
+      {
+	delete (this->_frame);
+	this->_frame = new Frame(glm::vec4(0.5f, 0.5f, 0.5f, 1));
+	this->_frame->scale(glm::vec3(1.0f, 10.0f, 13.5f));
+	this->_frame->translate(glm::vec3(0, -5, -10));
+	this->_frame->initialize();
+      }
   }
 
   void		Menu::finalize()

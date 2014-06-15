@@ -24,7 +24,7 @@ namespace bbm
     unsigned int	id;
     unsigned int	lastId;
     int			score;
-    int			idGamePad;
+    int			idGamepad;
   };
 };
 

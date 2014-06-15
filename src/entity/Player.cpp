@@ -33,6 +33,7 @@ namespace bbm
     _dark = config.dark;
     _typeBomb = config.typeBomb;
     _state = config.state;
+    _score = config.score;
     if (config.idPlayer)
       _idPlayer = config.idPlayer;
     else
@@ -41,9 +42,6 @@ namespace bbm
       setID(config.id);
     if (config.lastId)
       setLastID(config.lastId);
-
-    _score = 0;
-    // _score = config.score;
   }
 
   Player::~Player()
@@ -76,15 +74,20 @@ namespace bbm
     (void) time;
     _move = glm::vec2(0, 0);
 
-    if (input.getKey(_playerConfig.inputConfig->getKey("left")))
+    if (input.getKey(_playerConfig.inputConfig->getKey("left")) ||
+	input.getButton(Joystick::LEFT, _playerConfig.idGamepad - 1))
       _move += glm::vec2(-1, 0);
-    if (input.getKey(_playerConfig.inputConfig->getKey("right")))
+    if (input.getKey(_playerConfig.inputConfig->getKey("right")) ||
+	input.getButton(Joystick::RIGHT, _playerConfig.idGamepad - 1))
       _move += glm::vec2(1, 0);
-    if (input.getKey(_playerConfig.inputConfig->getKey("down")))
+    if (input.getKey(_playerConfig.inputConfig->getKey("down")) ||
+	input.getButton(Joystick::DOWN, _playerConfig.idGamepad - 1))
       _move += glm::vec2(0, -1);
-    if (input.getKey(_playerConfig.inputConfig->getKey("up")))
+    if (input.getKey(_playerConfig.inputConfig->getKey("up")) ||
+	input.getButton(Joystick::UP, _playerConfig.idGamepad - 1))
       _move += glm::vec2(0, 1);
-    if (input.getKeyDown(_playerConfig.inputConfig->getKey("bomb")))
+    if (input.getKeyDown(_playerConfig.inputConfig->getKey("bomb")) ||
+	input.getButtonDown(Joystick::CROSS, _playerConfig.idGamepad - 1))
       {
 	if (_nbBombs != 0)
 	  {
@@ -93,7 +96,8 @@ namespace bbm
 								    _gameState, getID()));
 	  }
       }
-    if (input.getKeyDown(_playerConfig.inputConfig->getKey("bomb2")))
+    if (input.getKeyDown(_playerConfig.inputConfig->getKey("bomb2")) ||
+	input.getButtonDown(Joystick::CIRCLE, _playerConfig.idGamepad - 1))
       {
 	if (_nbBombsBonus != 0 && _typeBomb != FIRE)
 	  {

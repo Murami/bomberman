@@ -7,6 +7,8 @@ namespace bbm
 {
   Input::Input()
   {
+    SDL_EventState(SDL_JOYAXISMOTION, SDL_IGNORE);
+    SDL_EventState(SDL_MOUSEMOTION, SDL_IGNORE);
     _updateMethods[SDL_KEYDOWN] = &Input::onPressedKey;
     _updateMethods[SDL_KEYUP] = &Input::onReleasedKey;
     _updateMethods[SDL_MOUSEBUTTONDOWN] = &Input::onPressedMouseButton;
@@ -16,6 +18,9 @@ namespace bbm
     _updateMethods[SDL_JOYAXISMOTION] = &Input::onAxisMotion;
     _updateMethods[SDL_JOYBUTTONDOWN] = &Input::onPressedButton;
     _updateMethods[SDL_JOYBUTTONUP] = &Input::onReleasedButton;
+    SDL_InitSubSystem(SDL_INIT_JOYSTICK);
+    for (int i = 0; i < SDL_NumJoysticks(); i++)
+      _joysticks.push_back(new Joystick(i));
   }
 
   Input::~Input()
@@ -28,13 +33,22 @@ namespace bbm
     UpdateMethodsIt	it;
 
     this->clear();
+    // SDL_PumpEvents();
+    // while (SDL_PeepEvents(&event, 1, SDL_GETEVENT, (SDL_EVENTMASK(SDL_KEYDOWN) | SDL_EVENTMASK(SDL_JOYBUTTONDOWN))))
+    //   {
+    // 	if ((it = _updateMethods.find(event.type)) != _updateMethods.end())
+    // 	  {
+    // 	    ((*this).*(it->second))(event);
+    // 	    return;
+    // 	  }
+    //   }
     while (SDL_PollEvent(&event))
       {
-	if ((it = _updateMethods.find(event.type)) != _updateMethods.end())
-	  {
-	    ((*this).*(it->second))(event);
-	    return;
-	  }
+    	if ((it = _updateMethods.find(event.type)) != _updateMethods.end())
+    	  {
+    	    ((*this).*(it->second))(event);
+    	    return;
+    	  }
       }
     this->onUnknownEvent(event);
   }
@@ -50,42 +64,42 @@ namespace bbm
     _pressedMouseButtons.clear();
     _releasedMouseButtons.clear();
     _events.clear();
-    for (it != _joysticks.begin(); it != _joysticks.end(); it++)
-      it->clear();
+    for (it = _joysticks.begin(); it != _joysticks.end(); it++)
+      (*it)->clear();
   }
 
   int		Input::getAxis(unsigned int axis, unsigned int joystick) const
   {
     if (joystick < _joysticks.size())
-      return (_joysticks.at(joystick).getAxis(axis));
+      return (_joysticks.at(joystick)->getAxis(axis));
     return (0);
   }
 
   int		Input::getAxisDelta(unsigned int axis, unsigned int joystick) const
   {
     if (joystick < _joysticks.size())
-      return (_joysticks.at(joystick).getAxisDelta(axis));
+      return (_joysticks.at(joystick)->getAxisDelta(axis));
     return (0);
   }
 
   bool		Input::getButton(unsigned int button, unsigned int joystick) const
   {
     if (joystick < _joysticks.size())
-      return (_joysticks.at(joystick).getButton(button));
+      return (_joysticks.at(joystick)->getButton(button));
     return (false);
   }
 
   bool		Input::getButtonDown(unsigned int button, unsigned int joystick) const
   {
     if (joystick < _joysticks.size())
-      return (_joysticks.at(joystick).getButtonDown(button));
+      return (_joysticks.at(joystick)->getButtonDown(button));
     return (false);
   }
 
   bool		Input::getButtonUp(unsigned int button, unsigned int joystick) const
   {
     if (joystick < _joysticks.size())
-      return (_joysticks.at(joystick).getButtonUp(button));
+      return (_joysticks.at(joystick)->getButtonUp(button));
     return (false);
   }
 
@@ -211,21 +225,21 @@ namespace bbm
   {
     if (static_cast<unsigned>(event.jaxis.which) >= _joysticks.size())
       return;
-    _joysticks[event.jaxis.which].onAxisMotion(event);
+    _joysticks[event.jaxis.which]->onAxisMotion(event);
   }
 
   void		Input::onPressedButton(const SDL_Event& event)
   {
     if (static_cast<unsigned>(event.jaxis.which) >= _joysticks.size())
       return;
-    _joysticks[event.jaxis.which].onPressedButton(event);
+    _joysticks[event.jaxis.which]->onPressedButton(event);
   }
 
   void		Input::onReleasedButton(const SDL_Event& event)
   {
     if (static_cast<unsigned>(event.jaxis.which) >= _joysticks.size())
       return;
-    _joysticks[event.jaxis.which].onReleasedButton(event);
+    _joysticks[event.jaxis.which]->onReleasedButton(event);
   }
 
   void		Input::onUnknownEvent(const SDL_Event& event)

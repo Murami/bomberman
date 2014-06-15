@@ -51,7 +51,8 @@ namespace bbm
       {
 	for (posy = 0; posy < y; posy++)
 	  {
-	    if (posx == 0 || posy == 0 || posx == x - 1 || posy == y - 1 || (posx % 2 == 0 && posy % 2 == 0))
+	    if (posx == 0 || posy == 0 || posx == x - 1 || posy == y - 1
+		|| (posx % 2 == 0 && posy % 2 == 0))
 	      {
 		tile = new Tile(true, "wall", "default", Tile::Wall);
 		tile->setDrawable(new Wall(tile->getTexture(), tile->getShader()));
@@ -91,7 +92,11 @@ namespace bbm
 	  {
 	    posx = (std::rand() % (x - 2)) + 1;
 	    posy = (std::rand() % (y - 2)) + 1;
-	    if (getTileType(posx, posy) == Tile::Void)
+	    if (getTileType(posx, posy) == Tile::Void &&
+		getTileType(posx + 1, posy) != Tile::Wall &&
+		getTileType(posx - 1, posy) != Tile::Wall &&
+		getTileType(posx, posy + 1) != Tile::Wall &&
+		getTileType(posx, posy - 1) != Tile::Wall)
 	      {
 		tile = new Tile(false, "", "", Tile::Spawn);
 		tile->setDrawable(NULL);

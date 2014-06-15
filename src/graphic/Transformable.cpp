@@ -10,6 +10,7 @@ namespace bbm
     _roll = 0;
     _pitch = 0;
     _yaw = 0;
+    _transformNeedUpdate = true;
   }
 
   Transformable::~Transformable()

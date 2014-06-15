@@ -12,6 +12,27 @@ namespace bbm
   class	Joystick
   {
   public:
+    enum PS3Pad
+      {
+	SELECT,
+	L3,
+	R3,
+	START,
+	UP,
+	RIGHT,
+	DOWN,
+	LEFT,
+	L2,
+	R2,
+	L1,
+	R1,
+	TRIANGLE,
+	CIRCLE,
+	CROSS,
+	SQUARE,
+	SONY
+      };
+
     struct	Axis
     {
       int		_lastPosition;
@@ -22,38 +43,23 @@ namespace bbm
     typedef std::vector<Axis>::iterator	AxesListIt;
     typedef std::list<int>::iterator	EventIt;
 
-
   private:
     std::list<int>	_activeButtons;
     std::list<int>	_pressedButtons;
     std::list<int>	_releasedButtons;
     std::vector<Axis>	_axes;
+    SDL_Joystick*	_joystickSDL;
 
   public:
-    Joystick();
+    Joystick(int i);
     virtual ~Joystick();
 
-    // Clears last frame inputs
     void		clear();
-
-    // Returns the axis positions for the given axis
     int			getAxis(unsigned int axis) const;
-
-    // Returns the axis delta since the last update for the given axis
     int			getAxisDelta(unsigned int axis) const;
-
-    // Returns true if the given button is actualy pressed
     bool		getButton(unsigned int button) const;
-
-    // Returns true if the given button was pressed during the last frame
     bool		getButtonDown(unsigned int button) const;
-
-    // Returns true if the given button was relaesed during the last frame
     bool		getButtonUp(unsigned int button) const;
-
-    /*
-    ** Update Methods
-    */
     void		onAxisMotion(const SDL_Event& event);
     void		onPressedButton(const SDL_Event& event);
     void		onReleasedButton(const SDL_Event& event);

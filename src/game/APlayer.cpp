@@ -15,7 +15,7 @@
 const float	maxSpeed = 0.005;
 const float	modelScaleFactor = 0.0020;
 const float	boxScale = 0.8;
-const float	delta = 0.8;
+const float	delta = 0.2;//0.8 wtf ?!
 const float	deltaTile = 0.2;
 
 namespace bbm
@@ -65,6 +65,7 @@ namespace bbm
     current.add("lastId", getLastID());
     current.add("color", _color);
     current.add("maxBomb", _maxBomb);
+    current.add("score", _score);
   }
 
   void			APlayer::unpack(const ISerializedNode & current)
@@ -95,6 +96,7 @@ namespace bbm
     setColor(_color);
     setID(id);
     setLastID(lastId);
+    current.get("score", _score);
   }
 
   void			APlayer::collideMap()

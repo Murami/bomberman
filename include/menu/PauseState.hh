@@ -41,6 +41,7 @@ namespace	bbm
     InputConfig*			_inputConfigPlayer2;
     InputConfig*			_inputConfigPlayer3;
     InputConfig*			_inputConfigPlayer4;
+    std::list<std::string>		_SDLInputsList;
 
   private :
     void			_setNewCurrentMenu(const std::string&);

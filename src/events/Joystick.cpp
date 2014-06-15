@@ -1,10 +1,20 @@
+#include <iostream>
 #include <algorithm>
 #include "events/Joystick.hh"
 
 namespace bbm
 {
-  Joystick::Joystick()
+  Joystick::Joystick(int i)
   {
+    std::cout << "Joystick " << i << " created" << std::endl;
+    _joystickSDL = SDL_JoystickOpen(i);
+    _axes.resize(SDL_JoystickNumAxes(_joystickSDL));
+    std::cout << "Axes found : " << SDL_JoystickNumAxes(_joystickSDL) << std::endl;
+    for (int i = 0; i < SDL_JoystickNumAxes(_joystickSDL); i++)
+      {
+	_axes[i]._lastPosition = 0;
+	_axes[i]._position = 0;
+      }
   }
 
   Joystick::~Joystick()
@@ -44,6 +54,7 @@ namespace bbm
 
   bool	Joystick::getButtonDown(unsigned int button) const
   {
+    std::cout << "button down" << std::endl;
     if (std::find(_pressedButtons.begin(), _pressedButtons.end(), button) != _pressedButtons.end())
       return (true);
     return (false);
@@ -74,6 +85,7 @@ namespace bbm
   {
     EventIt	it;
 
+    std::cout << "pressed button " << (int)event.jbutton.button << " !" << std::endl;
     if ((it = std::find(_activeButtons.begin(), _activeButtons.end(), event.jbutton.button)) != _activeButtons.end())
       _activeButtons.erase(it);
     if (std::find(_releasedButtons.begin(), _releasedButtons.end(), event.jbutton.button) == _releasedButtons.end())
