@@ -5,6 +5,7 @@
 #include "entity/BombFactory.hh"
 
 #include "lua/LuaBiche.hh"
+#include "sound/SoundManager.hh"
 
 namespace bbm
 {
@@ -33,6 +34,7 @@ namespace bbm
     add_method_to_vector(methods, "goDownRight", &AI::goDownRight);
     add_method_to_vector(methods, "putBomb", &AI::putBomb);
     add_method_to_vector(methods, "haveBomb", &AI::haveBomb);
+    add_method_to_vector(methods, "getBoxes", &AI::getBoxes);
     return (methods);
   }
 
@@ -42,7 +44,7 @@ namespace bbm
     APlayer(gameState)
   {
     _type = "AI";
-    _scriptName = "scripts/easy.lua";
+    _scriptName = "scripts/medium.lua";
     // _scriptName = config.scriptName;
     _position = config.position;
     _power = config.power;
@@ -67,6 +69,7 @@ namespace bbm
 
   AI::~AI()
   {
+    SoundManager::getInstance()->play("scream");
   }
 
   void	AI::initialize()
@@ -98,6 +101,32 @@ namespace bbm
     lua_pushinteger(L, _idPlayer);
     return (1);
   }
+
+  bool	AI::testCollideMap()
+  {
+    float	deltaTile = 0.2;
+
+    try
+      {
+        if (_gameState.getTileMap().collide(_position.x + _move.x + 1 - deltaTile, _position.y  + 1 - deltaTile) ||
+            _gameState.getTileMap().collide(_position.x + _move.x + 1 - deltaTile, _position.y  + deltaTile) ||
+            _gameState.getTileMap().collide(_position.x + _move.x + deltaTile, _position.y + 1 - deltaTile) ||
+            _gameState.getTileMap().collide(_position.x + _move.x + deltaTile, _position.y + deltaTile))
+	  return (true);
+        if (_gameState.getTileMap().collide(_position.x  + 1 - deltaTile, _position.y + _move.y + 1 - deltaTile) ||
+            _gameState.getTileMap().collide(_position.x  + 1 - deltaTile, _position.y + _move.y + deltaTile) ||
+            _gameState.getTileMap().collide(_position.x  + deltaTile, _position.y + _move.y + 1 - deltaTile) ||
+            _gameState.getTileMap().collide(_position.x  + deltaTile, _position.y + _move.y + deltaTile))
+	  return (true);
+      }
+    catch (const std::runtime_error &e)
+      {
+	std::cout << e.what() << std::endl;
+        // set spawn;
+      }
+    return (false);
+  }
+
 
   int	AI::goUp(lua_State*)
   {
@@ -164,6 +193,76 @@ namespace bbm
     if (this->getBomb() <= 0)
       b = false;
     lua_pushboolean(L, (int)b);
+    return (1);
+  }
+
+  int	AI::getBoxes(lua_State* L)
+  {
+    bool	res = false;
+    lua_newtable(L);
+
+    this->setMove(glm::vec2(0, 0.2));
+    lua_pushstring(L, "up");
+    if (this->collideGameBoxes())
+      {
+	std::cout << "GAME BOX UP" << std::endl;
+	res = true;
+      }
+    if (this->testCollideMap())
+      {
+	std::cout << "MAP UP" << std::endl;
+	res = true;
+      }
+    lua_pushboolean(L, res);
+    lua_rawset(L, -3);
+
+    res = false;
+    this->setMove(glm::vec2(-0.2, 0));
+    lua_pushstring(L, "left");
+    if (this->collideGameBoxes())
+      {
+	std::cout << "GAME BOX LEFT" << std::endl;
+	res = true;
+      }
+    if (this->testCollideMap())
+      {
+	std::cout << "MAP LEFT" << std::endl;
+	res = true;
+      }
+    lua_pushboolean(L, res);
+    lua_rawset(L, -3);
+
+    res = false;
+    this->setMove(glm::vec2(0.2, 0));
+    lua_pushstring(L, "right");
+    if (this->collideGameBoxes())
+      {
+	std::cout << "GAME BOX RIGHT" << std::endl;
+	res = true;
+      }
+    if(this->testCollideMap())
+      {
+	std::cout << "MAP RIGHT" << std::endl;
+	res = true;
+      }
+    lua_pushboolean(L, res);
+    lua_rawset(L, -3);
+
+    res = false;
+    this->setMove(glm::vec2(0, -0.2));
+    lua_pushstring(L, "down");
+    if (this->collideGameBoxes())
+      {
+	std::cout << "GAME BOX DOWN" << std::endl;
+	res = true;
+      }
+    if (this->testCollideMap())
+      {
+	std::cout << "MAP DOWN" << std::endl;
+	res = true;
+      }
+      lua_pushboolean(L, res);
+      lua_rawset(L, -3);
     return (1);
   }
 

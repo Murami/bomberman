@@ -1,12 +1,9 @@
 #include		<ctime>
-
 #include		"menu/PauseState.hh"
-
 #include		"game/GameManager.hh"
-
 #include		"events/InputConfig.hh"
-
 #include		"graphic/Screen.hh"
+#include		"sound/SoundManager.hh"
 
 namespace		bbm
 {
@@ -680,6 +677,8 @@ namespace		bbm
 
   void		PauseState::exitGame(Menu*)
   {
+    SoundManager::getInstance()->stop("theme");
+    SoundManager::getInstance()->play("menu");
     this->_manager.pop();
     this->_manager.pop();
   }

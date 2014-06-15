@@ -8,6 +8,7 @@
 #include		"graphic/Camera.hh"
 #include		"graphic/RenderState.hh"
 #include		"graphic/ModelManager.hh"
+#include		"sound/SoundManager.hh"
 
 
 namespace		bbm
@@ -20,6 +21,7 @@ namespace		bbm
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     this->_screen = new Image(SCREEN_PATH);
+    SoundManager::getInstance()->addMusic("menu", "assets/sound/heart_of_courage.mp3");
   }
 
   void		IntroState::initialize()
@@ -45,6 +47,7 @@ namespace		bbm
   {
     if (input.getKeyDown(SDLK_ESCAPE) || input.getKeyDown(SDLK_SPACE))
       {
+	SoundManager::getInstance()->play("menu");
 	this->_manager.pop();
       }
     this->_marvin->update(time);

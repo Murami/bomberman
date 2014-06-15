@@ -111,14 +111,11 @@ namespace bbm
 
   void			GameLoadingState::loadSound()
   {
-    SoundManager::getInstance()->addMusic("menu", "assets/sound/Turning_tables.mp3");
-    SoundManager::getInstance()->addMusic("bomberTheme", "assets/sound/bomberman_them.mp3");
-    SoundManager::getInstance()->addMusic("GoTTheme", "assets/sound/GoT_them.mp3");
-    SoundManager::getInstance()->addMusic("FaFTheme", "assets/sound/Tokio_Drift.mp3");
-    SoundManager::getInstance()->addSound("banzai", "assets/sound/banzai.mp3");
+    SoundManager::getInstance()->addMusic("theme", "assets/sound/archangel.mp3");
     SoundManager::getInstance()->addSound("aquaBomb", "assets/sound/aqua_bomb.mp3");
     SoundManager::getInstance()->addSound("bomb", "assets/sound/Bomb_Blow.wav");
     SoundManager::getInstance()->addSound("bigBomb", "assets/sound/big_bomb.mp3");
+    SoundManager::getInstance()->addSound("scream", "assets/sound/WilhelmScream.wav");
   }
 
   void			GameLoadingState::loadModel()
@@ -245,6 +242,8 @@ namespace bbm
       }
     else if (input.getKeyDown(SDLK_SPACE))
       {
+	SoundManager::getInstance()->stop("wait");
+	SoundManager::getInstance()->play("theme");
 	if (_config->newGame == true)
 	  newGameState();
 	else

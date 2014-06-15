@@ -10,6 +10,7 @@
 #include "graphic/RenderState.hh"
 #include "graphic/ARenderer.hh"
 #include "game/GameState.hh"
+#include "sound/SoundManager.hh"
 #include "hud/HUD.hh"
 
 const float	maxSpeed = 0.005;
@@ -371,6 +372,7 @@ namespace bbm
 
   void	APlayer::die()
   {
+    SoundManager::getInstance()->play("scream");
     _alive = false;
   }
 

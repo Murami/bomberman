@@ -97,6 +97,9 @@ namespace		bbm
 
     glDisable(GL_CULL_FACE);
     glDisable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glEnable(GL_ALPHA_TEST);
+    glAlphaFunc(GL_GREATER, 0.1f);
     this->_background->draw(renderer, state);
     for (int i = 0; i < this->_nbBombs; i++)
       {

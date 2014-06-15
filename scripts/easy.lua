@@ -13,9 +13,10 @@ local moveMethod = {
 }
 
 function move ()
-   local n = (math.random(1, 8) * player:getIdPlayer()) % 8 + 1
+   math.randomseed(os.time())
+   local n = ((math.random(1, 8) * player:getIdPlayer()) % 8) + 1
 
-   moveMethod[n] ()
+   moveMethod[n]()
 end
 
 if (number == 5 or number == 6) then
