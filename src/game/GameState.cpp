@@ -5,7 +5,8 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:28:46 2014 otoshigami
-// Last update Sun Jun 15 09:21:47 2014 Manu
+// Last update Sun Jun 15 11:05:28 2014 Manu
+// Last update Sun Jun 15 10:05:59 2014 otoshigami
 //
 
 #include <iterator>
@@ -537,7 +538,10 @@ namespace bbm
 	      _gameboxes[x + tx + (y + ty) * _mapsize.x] != NULL)
 	    {
 	      if (_gameboxes[x + tx + (y + ty) * _mapsize.x]->expired() == true)
-		_gameboxes[x + tx + (y + ty) *_mapsize.x] = NULL;
+		{
+		  delete (_gameboxes[x + tx + (y + ty) *_mapsize.x]);
+		  _gameboxes[x + tx + (y + ty) *_mapsize.x] = NULL;
+		}
 	      else
 		context.draw(*_gameboxes[x + tx + (y + ty) * _mapsize.x], state);
 	    }
@@ -752,6 +756,11 @@ namespace bbm
   std::vector<AEntity*>&	GameState::getGameBoxes()
   {
     return (_gameboxes);
+  }
+
+  std::vector<AEntity*>&	GameState::getWarning()
+  {
+    return (_warning);
   }
 
   std::list<Player*>&		GameState::getPlayerList()

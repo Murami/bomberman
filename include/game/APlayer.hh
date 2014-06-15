@@ -5,7 +5,7 @@
 // Login   <otoshigami@epitech.net>
 //
 // Started on  Sun Jun 15 08:35:59 2014 otoshigami
-// Last update Sun Jun 15 08:36:00 2014 otoshigami
+// Last update Sun Jun 15 09:26:04 2014 bichon_b
 //
 
 #ifndef APLAYER_HH
@@ -112,6 +112,7 @@ namespace bbm
     void				collideMap();
     void				collideEntity();
     bool				collideGameBoxes();
+    bool				collideWarning();
     void				managePhysics(float time);
     void				manageModel(float time);
     void				pack(ISerializedNode & current) const;

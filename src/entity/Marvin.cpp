@@ -5,7 +5,8 @@
 // Login   <desabr_q@epitech.net>
 //
 // Started on  Sun Jun 15 08:30:41 2014 quentin desabre
-// Last update Sun Jun 15 09:42:34 2014 Manu
+// Last update Sun Jun 15 11:08:05 2014 Manu
+// Last update Sun Jun 15 09:03:26 2014 Desabre Quentin
 //
 
 #include "graphic/Utils.hh"
@@ -44,14 +45,10 @@ namespace bbm
     for (int i = 38; i < 54; i++)
       {
 	_animations[i - 38] = new gdl::Model;
-	if (_animations[i - 38]->load("./gdl/assets/marvin.fbx") == true)
-	  std::cout << "load = true" << std::endl;
-	if (_animations[i - 38]->createSubAnim(0, "run", i, i + 1) == true)
-	  std::cout << "create sub = true" << std::endl;
-	if (_animations[i - 38]->setCurrentSubAnim("run", true) == true)
-	  std::cout << "set current = true" << std::endl;
-	std::cout << "sleep de 1" << std::endl;
-	//sleep(1);
+	_animations[i - 38]->load("./gdl/assets/marvin.fbx");
+	_animations[i - 38]->createSubAnim(0, "run", i, i + 1);
+	_animations[i - 38]->setCurrentSubAnim("run", true);
+	sleep(1);
       }
   }
 
