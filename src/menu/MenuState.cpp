@@ -1047,15 +1047,16 @@ namespace	bbm
     std::stringstream ss;
     ss.clear();
     ss << s->getState();
-    ss >> this->_config.mapSizeX;
+    if (this->_config.mapSizeX == 0)
+      ss >> this->_config.mapSizeX;
     it++;
     StateButton* s2 = dynamic_cast<StateButton*>(*it);
     std::stringstream ss2;
     ss2.clear();
     ss2 << s2->getState();
     ss2.clear();
-    ss2 >> this->_config.mapSizeY;
-    std::cout << "Sending map size : x = " << this->_config.mapSizeX << " y = " << this->_config.mapSizeY << std::endl;
+    if (this->_config.mapSizeY == 0)
+      ss2 >> this->_config.mapSizeY;
     this->_setNewCurrentMenu("playerselection");
   }
 
