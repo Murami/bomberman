@@ -687,15 +687,6 @@ namespace	bbm
       return (false);
     try
       {
-	HighScore hs;
-	hs.load("HighScores");
-	for (std::vector<int>::const_iterator it = hs.getScores().begin();
-	     it != hs.getScores().end(); it++)
-	  {
-	    std::stringstream ss;
-	    ss << *it;
-	    menu->createNewString(ss.str());
-	  }
 	menu->createNewButton("back", &IMenuManager::setMainMenu,
 			      glm::vec4(1, 0, 0, 1), true);
       }
@@ -705,6 +696,7 @@ namespace	bbm
 		  << e.what() << ": Not found" << std::endl;
       }
     menu->finalize();
+    menu->refresh();
     this->_menuList.push_back(menu);
     return (true);
   }
@@ -992,6 +984,7 @@ namespace	bbm
   void		MenuState::setHighScoreMenu(Menu*)
   {
     this->_setNewCurrentMenu("highscores");
+    this->_currentMenu->refresh();
   }
 
   void		MenuState::exitGame(Menu*)

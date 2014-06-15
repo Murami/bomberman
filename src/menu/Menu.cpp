@@ -5,7 +5,7 @@
 // Login   <manu@epitech.net>
 //
 // Started on  Fri May 30 10:53:03 2014 Manu
-// Last update Sun Jun 15 10:59:16 2014 Manu
+// Last update Sun Jun 15 11:32:19 2014 Manu
 //
 
 #include		"sound/SoundManager.hh"
@@ -13,6 +13,7 @@
 #include		"Frame.hh"
 #include		"graphic/ModelManager.hh"
 #include		"Menu.hh"
+#include		"game/HighScore.hh"
 
 namespace	bbm
 {
@@ -50,12 +51,16 @@ namespace	bbm
 
   void		Menu::refresh()
   {
+    static bool	ref = false;
     ToggleButton* sound = dynamic_cast<ToggleButton*>(*(this->_buttons.begin()));
     if (sound)
       sound->setChecked(SoundManager::getInstance()->soundPlaying());
-    ToggleButton* music = dynamic_cast<ToggleButton*>((*(this->_buttons.begin()) + 1));
-    if (music)
-      music->setChecked(SoundManager::getInstance()->musicPlaying());
+    if (this->_buttons.size() > 1)
+      {
+	ToggleButton* music = dynamic_cast<ToggleButton*>((*(this->_buttons.begin()) + 1));
+	if (music)
+	  music->setChecked(SoundManager::getInstance()->musicPlaying());
+      }
     if (this->_frame)
       {
 	delete (this->_frame);
@@ -63,6 +68,36 @@ namespace	bbm
 	this->_frame->scale(glm::vec3(1.0f, 10.0f, 13.5f));
 	this->_frame->translate(glm::vec3(0, -5, -10));
 	this->_frame->initialize();
+      }
+    if (this->_title == "highscores")
+      {
+	this->_strings.empty();
+	this->_strings.clear();
+	HighScore hs;
+	hs.load("HighScores");
+	for (std::vector<int>::const_iterator it = hs.getScores().begin();
+	     it != hs.getScores().end(); it++)
+	  {
+	    std::stringstream ss;
+	    ss << *it;
+	    this->createNewString(ss.str());
+	  }
+	size_t k = this->_buttons.size();
+	for (size_t i = 0; i < this->_strings.size(); i++)
+	  {
+	    for (size_t j = 0; j < this->_strings[i].size(); j++)
+	      {
+		this->_strings[i][j]->translate(glm::vec3(0, -(this->_strings.size() / 2) + (static_cast<float>(this->_buttons.size()) / 2) +
+							  k, 6 - static_cast<float>(j) / 2));
+	      }
+	    k++;
+	  }
+	if (!ref)
+	  {
+	    this->_selector->move(glm::vec3(0, -(this->_strings.size() / 2) + (static_cast<float>(this->_buttons.size()) / 2), 0));
+	    (*(this->_buttons.begin()))->translateButton(glm::vec3(0, -(this->_strings.size() / 2) + (static_cast<float>(this->_buttons.size()) / 2) - 0.5f, 0));
+	    ref = true;
+	  }
       }
   }
 
