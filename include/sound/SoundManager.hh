@@ -33,11 +33,16 @@ namespace bbm
     static SoundManager*	getInstance();
     static void			deleteInstance();
 
+    void			music(bool);
+    void			sound(bool);
+
   private:
     static SoundManager*			_instance;
     std::map<std::string, FMOD_SOUND*>		_sounds;
     std::map<std::string, FMOD_CHANNEL*>	_channels;
     FMOD_SYSTEM*				_system;
+    bool					_music;
+    bool					_sound;
   };
 };
 

@@ -23,6 +23,16 @@ namespace bbm
     FMOD_System_Release(_system);
   }
 
+  void	SoundManager::music(bool music)
+  {
+    this->_music = music;
+  }
+
+  void	SoundManager::sound(bool sound)
+  {
+    this->_sound = sound;
+  }
+
   void	SoundManager::addSound(std::string const& name, std::string const& path)
   {
     FMOD_SOUND*	tmp;
@@ -49,6 +59,10 @@ namespace bbm
     FMOD_Sound_SetLoopCount(tmp, -1);
     _sounds[name] = tmp;
   }
+
+  ////////////////////////////
+  // faire la gestion des booleens pour jouer ou non la musique
+  ////////////////////////////
 
   void	SoundManager::play(std::string const& name)
   {

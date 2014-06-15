@@ -12,8 +12,9 @@ namespace		bbm
   const std::string	PauseState::INPUT_CONFIG_P3 = "./input/inputConfig3.json";
   const std::string	PauseState::INPUT_CONFIG_P4 = "./input/inputConfig4.json";
 
-  PauseState::PauseState(GameManager& manager, GameState& gameState) :
-    _manager(manager), _gameState(gameState)
+  PauseState::PauseState(GameManager& manager, GameState& gameState,
+			 GameLoadingState::GameConfig* gameConfig) :
+    _manager(manager), _gameState(gameState), _config(gameConfig)
   {
     glEnable(GL_BLEND);
     glEnable(GL_ALPHA_TEST);
@@ -321,7 +322,11 @@ namespace		bbm
     try
       {
 	menu->createNewToggleButton("sound", NULL);
+	dynamic_cast<ToggleButton*>((*(menu->getButtons().begin())))->setChecked(!this->_config->sound);
 	menu->createNewToggleButton("music", NULL);
+	std::list<AButton*>::const_iterator it = menu->getButtons().begin();
+	it++;
+	dynamic_cast<ToggleButton*>(*it)->setChecked(!this->_config->music);
 	menu->createNewButton("ok", &IMenuManager::serializeAudioSettings,
 			      glm::vec4(0, 1, 0, 1), true);
 	menu->createNewButton("cancel", &IMenuManager::setOptionsMenu,
@@ -367,7 +372,6 @@ namespace		bbm
 
   void		PauseState::initialize()
   {
-    memset(&this->_config, 0, sizeof(this->_config));
     std::vector<InputConfig*> configs;
     std::list<Player*>::iterator it;
     std::list<Player*> players = this->_gameState.getPlayerList();
@@ -434,6 +438,7 @@ namespace		bbm
       {
 	this->_SDLInputsList.push_back("BACKSPACE");
 	this->_SDLInputsList.push_back("PAUSE");
+	this->_SDLInputsList.push_back("SPACE");
 	this->_SDLInputsList.push_back("QUOTEDBL");
 	this->_SDLInputsList.push_back("HASH");
 	this->_SDLInputsList.push_back("DOLLAR");
@@ -847,9 +852,15 @@ namespace		bbm
 	if (s)
 	  {
 	    if (i == 0)
-	      this->_config.sound = s->isChecked();
+	      this->_config->sound = s->isChecked();
 	    else
-	      this->_config.music = s->isChecked();
+	      {
+		this->_config->music = s->isChecked();
+		if (this->_config->music)
+		  SoundManager::getInstance()->play("theme");
+		else
+		  SoundManager::getInstance()->stop("theme");
+	      }
 	    i++;
 	  }
       	it++;

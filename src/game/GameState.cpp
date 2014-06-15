@@ -51,10 +51,11 @@
 namespace bbm
 {
   GameState::GameState(GameManager& manager,
-		       GameStateConfig* config) :
+		       GameStateConfig* config, GameLoadingState::GameConfig* gameConfig) :
     _tilemap(),
     _manager(manager),
-    _config(config)
+    _config(config),
+    _gameConfig(gameConfig)
   {
     this->_flush = true;
     this->_printHud = false;
@@ -547,7 +548,7 @@ namespace bbm
       this->_printHud = !this->_printHud;
     if (input.getKeyDown(SDLK_ESCAPE) || input.getEvent(SDL_QUIT))
       {
-	PauseState* state = new PauseState(_manager, *this);
+	PauseState* state = new PauseState(_manager, *this, this->_gameConfig);
 	_manager.push(state);
  	return;
       }
