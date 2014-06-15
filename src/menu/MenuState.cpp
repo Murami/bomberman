@@ -324,7 +324,6 @@ namespace	bbm
 	this->_SDLInputsList.push_back("KP_MULTIPLY");
 	this->_SDLInputsList.push_back("KP_MINUS");
 	this->_SDLInputsList.push_back("KP_PLUS");
-	this->_SDLInputsList.push_back("KP_ENTER");
 	this->_SDLInputsList.push_back("UP");
 	this->_SDLInputsList.push_back("DOWN");
 	this->_SDLInputsList.push_back("RIGHT");
