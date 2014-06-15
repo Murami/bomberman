@@ -1,3 +1,13 @@
+##
+## Makefile for  in /home/otoshigami/Workspace/Epitech/git/cpp_bomberman
+## 
+## Made by otoshigami
+## Login   <otoshigami@epitech.net>
+## 
+## Started on  Sun Jun 15 08:48:53 2014 otoshigami
+## Last update Sun Jun 15 08:48:54 2014 otoshigami
+##
+
 ## FILES
 
 NAME		=	bomberman
