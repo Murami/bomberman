@@ -1,3 +1,13 @@
+//
+// GameBox.cpp for  in /home/desabr_q/Desktop/bomber/cpp_bomberman
+//
+// Made by quentin desabre
+// Login   <desabr_q@epitech.net>
+//
+// Started on  Sun Jun 15 08:28:45 2014 quentin desabre
+// Last update Sun Jun 15 08:28:47 2014 Desabre Quentin
+//
+
 #include <iostream>
 #include <string>
 #include "entity/BonusFactory.hh"

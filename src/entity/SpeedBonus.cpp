@@ -1,3 +1,13 @@
+//
+// SpeedBonus.cpp for  in /home/desabr_q/Desktop/bomber/cpp_bomberman
+//
+// Made by quentin desabre
+// Login   <desabr_q@epitech.net>
+//
+// Started on  Sun Jun 15 08:31:11 2014 quentin desabre
+// Last update Sun Jun 15 08:31:12 2014 Desabre Quentin
+//
+
 #include <string>
 #include "entity/Player.hh"
 #include "entity/SpeedBonus.hh"

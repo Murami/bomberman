@@ -1,3 +1,13 @@
+//
+// ABombExplode.cpp for  in /home/desabr_q/Desktop/bomber/cpp_bomberman
+//
+// Made by quentin desabre
+// Login   <desabr_q@epitech.net>
+//
+// Started on  Sun Jun 15 08:29:44 2014 quentin desabre
+// Last update Sun Jun 15 08:29:45 2014 Desabre Quentin
+//
+
 #include "entity/ABombExplode.hh"
 #include "game/GameState.hh"
 #include "graphic/Utils.hh"

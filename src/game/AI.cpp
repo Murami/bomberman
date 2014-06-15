@@ -90,8 +90,8 @@ namespace bbm
 	    _move.x = -_move.x;
 	    _move.y = -_move.y;
 	  }
-	managePhysics(time);
 	updateState();
+	managePhysics(time);
 	manageModel(time);
       }
   }
