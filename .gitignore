@@ -1,0 +1,6 @@
+*.o
+*.a
+*~
+bomberman
+lua/lua-*/src/lua
+lua/lua-*/src/luac

@@ -42,7 +42,7 @@ LDFLAGS		=
 
 ## RUNS
 
-CC		=	g++
+CC		=	g++-4.8
 RM		=	rm -rf
 MD		=	mkdir -p
 

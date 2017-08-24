@@ -144,7 +144,7 @@ LDFLAGS		=	src/sound/libfmodex64-4.44.31.so
 
 ## RUNS
 
-CC		=	g++
+CC		=	g++-4.8
 RM		=	rm -rf
 MD		=	mkdir -p
 
@@ -204,7 +204,7 @@ ifeq ($(PROFILE), yes)
 	LDFLAGS += -pg
 endif
 
-CFLAGS		+=	$(CINC)
+CFLAGS		+=	$(CINC) -std=c++98
 LDFLAGS		+=	$(DLIB)				\
 			$(LIB)				\
 			-Wl,-rpath=./gdl/libs:./lua/libs
